@@ -1,0 +1,1 @@
+!function(n){"use strict";n(document).ready(function(){n(".exopite-sof-field").find("select.chosen").each(function(e,c){n(c).chosen({disable_search_threshold:15,width:"375px",allow_single_deselect:!0})})})}(jQuery);
