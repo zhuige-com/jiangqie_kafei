@@ -16,7 +16,9 @@ Hi，欢迎使用“酱茄小程序开源版 – 人人咖啡师”。
 
 ![后台截图1](https://raw.githubusercontent.com/longwenjunjie/jiangqie_kafei/master/screenshot/11.png)
 ![后台截图2](https://raw.githubusercontent.com/longwenjunjie/jiangqie_kafei/master/screenshot/12.png)
-![后台截图2](https://raw.githubusercontent.com/longwenjunjie/jiangqie_kafei/master/screenshot/12.png)
+![后台截图3](https://raw.githubusercontent.com/longwenjunjie/jiangqie_kafei/master/screenshot/13.png)
+![后台截图4](https://raw.githubusercontent.com/longwenjunjie/jiangqie_kafei/master/screenshot/14.png)
+![后台截图5](https://raw.githubusercontent.com/longwenjunjie/jiangqie_kafei/master/screenshot/15.png)
 
 ————————————【联系/版权】————————————
 
