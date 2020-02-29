@@ -1,12 +1,15 @@
 <?php
 
-/*
- * 酱茄小程序开源版
- * Author: 酱茄
- * Help document: https://www.jiangqie.com/docs/kaiyuan/id1
- * github: https://github.com/longwenjunjie/jiangqie_kafei
- * gitee: https://gitee.com/longwenjunj/jiangqie_kafei
- * Copyright ️ 2020 www.jiangqie.com All rights reserved.
+/**
+ *
+ * @wordpress-plugin
+ * Plugin Name:       JiangQie Mini Program API
+ * Plugin URI:        https://www.jiangqie.com/
+ * Description:       为小程序提供定制化API，让Wordpress快速变身小程序。
+ * Version:           1.0.0
+ * Author:            酱茄
+ * Author URI:        https://www.jiangqie.com/
+ * Text Domain:       jiangqie-api
  */
 
 if (!defined('WPINC')) {
