@@ -1,0 +1,27 @@
+/*
+ * 酱茄小程序开源版
+ * Author: 	酱茄
+ * Help document：https://www.jiangqie.com/docs/kaiyuan/id1
+ * License：MIT
+ * Copyright ️ 2020 www.jiangqie.com All rights reserved.
+ */
+
+.none_tip {
+    padding: 80rpx;
+    text-align: center;
+}
+
+.none_tip image {
+    height: 200rpx;
+    width: 200rpx;
+}
+
+.none_tip_text {
+    padding: 20rpx;
+}
+
+.none_tip_text text {
+    font-size: 28rpx;
+    color: #999;
+    font-weight: 200;
+}

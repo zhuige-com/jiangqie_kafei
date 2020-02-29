@@ -1,0 +1,174 @@
+/*
+ * 酱茄小程序开源版
+ * Author: 	酱茄
+ * Help document：https://www.jiangqie.com/docs/kaiyuan/id1
+ * License：MIT
+ * Copyright ️ 2020 www.jiangqie.com All rights reserved.
+ */
+@import '../../templates/poplogin/poplogin.wxss';
+
+.jiangqie-userbox {
+    /* border-bottom: 8rpx solid #F3F3F3; */
+    padding-bottom: 30rpx;
+    min-height: 410rpx;
+}
+
+.jiangqie-usersetup {
+    display: none;
+    padding-top: 40rpx;
+    height: 40rpx;
+    line-height: 40rpx;
+}
+
+.jiangqie-usersetup image {
+    float: right;
+    height: 36rpx;
+    width: 36rpx;
+    margin-right: 40rpx;
+}
+
+.jiangqie-userinfo {
+    padding-bottom: 20rpx;
+    text-align: center;
+}
+
+.jiangqie-useravatar {
+    padding-left: 50%;
+    height: 230rpx;
+    clear: both;
+    padding-top: 80rpx;
+}
+
+.jiangqie-useravatar image {
+    float: left;
+    height: 152rpx;
+    width: 152rpx;
+    border-radius: 152rpx;
+    border: 12rpx solid #FFF;
+    margin-left: -88rpx;
+}
+
+.jiangqie-username {
+    height: 50rpx;
+    line-height: 50rpx;
+    font-size: 36rpx;
+    font-weight: 500;
+    color: #FFF;
+}
+
+.jiangqie-usermember {
+    height: 30rpx;
+    line-height: 30rpx;
+    font-size: 24rpx;
+    font-weight: 300;
+    color: #9B9B9B;
+}
+
+.jiangqie-countinfo {
+    display: none;
+    padding: 25rpx;
+    text-align: center;
+    overflow: hidden;
+}
+
+.jiangqie-countblock {
+    float: left;
+    width: 24.6%;
+    border-right: 1rpx solid #F3F3F3;
+}
+
+.jiangqie-countblock:last-child {
+    border: none;
+}
+
+.jiangqie-countnumber {
+    height: 40rpx;
+    line-height: 40rpx;
+    color: #333;
+    font-weight: 500;
+    font-size: 36rpx;
+}
+
+.jiangqie-counttype {
+    height: 40rpx;
+    line-height: 40rpx;
+    color: #999;
+    font-weight: 200;
+    font-size: 24rpx;
+}
+
+.jiangqie-listbox {
+    /* padding: 0 30rpx; */
+    padding: 0;
+}
+
+.jiangqie-postcount {
+    border-bottom: 8rpx solid #F3F3F3;
+}
+
+.jiangqie-listblock {
+    /* border-bottom: 1rpx solid #F3F3F3; */
+    overflow: hidden;
+    margin:0 30rpx;
+    padding: 25rpx 0;
+}
+
+.jiangqie-listblock:last-child {
+    border-bottom: none;
+}
+
+.jiangqie-listcont {
+    float: right;
+    text-align: right;
+}
+
+.jiangqie-listcont text {
+    font-size: 24rpx;
+    font-weight: 200;
+    color: #999;
+}
+
+.jiangqie-listcont image {
+    float: right;
+    height: 24rpx;
+    width: 24rpx;
+    margin-left: 10rpx;
+    margin-top: 8rpx;
+}
+
+.jiangqie-listtitle {
+    text-align: left;
+}
+
+.jiangqie-listtitle text {
+    font-size: 32rpx;
+    font-weight: 400;
+    color: #333;
+    vertical-align: top;
+}
+
+.jiangqie-listtitle image {
+    float: left;
+    height: 40rpx;
+    width: 40rpx;
+    margin-right: 16rpx;
+    margin-top: 2rpx;
+}
+
+button.jiangqie-listtitle {
+    padding: 0;
+    line-height: inherit;
+    background-color: transparent;
+}
+
+.jiangqie-listblock-line {
+    border-bottom: 1rpx solid #DDD;
+}
+.jiangqie-listblock-line:last-child {
+  border-bottom: none;
+}
+
+.jiangqie-list-split {
+    height: 16rpx;
+    background-color: #F3F3F3;
+}

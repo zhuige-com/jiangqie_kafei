@@ -1,0 +1,49 @@
+/*
+ * 酱茄小程序开源版
+ * Author: 	酱茄
+ * Help document：https://www.jiangqie.com/docs/kaiyuan/id1
+ * License：MIT
+ * Copyright ️ 2020 www.jiangqie.com All rights reserved.
+ */
+
+.jiangqie-app-info {
+  padding: 50rpx 40rpx;
+  text-align: center;
+}
+.jiangqie-app-info image {
+  height: 200rpx;
+  width: 200rpx;
+  border-radius: 200rpx;
+}
+.jiangqie-app-name {
+  font-size: 32rpx;
+  color: #FFF;
+  font-weight: 500;
+  line-height: 80rpx;
+}
+.jiangqie-app-slogan {
+  font-size: 28rpx;
+  color:rgb(248, 184, 184);
+  font-weight: 400;
+  line-height: 40rpx;
+}
+.jiangqie-login-btn {
+  padding: 30rpx 160rpx;
+}
+
+
+.jiangqie-login-btnl,
+.jiangqie-login-btnr {
+    height: 80rpx;
+    font-size: 30rpx;
+    color: #555;
+    font-weight: 400;
+    border-radius: 16rpx;
+    border:2rpx solid #DDD;
+    margin-top: 30rpx;
+}
+
+.jiangqie-login-btnl {
+    color: #999;
+    background: #FFF;
+}

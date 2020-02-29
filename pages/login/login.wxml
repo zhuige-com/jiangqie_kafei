@@ -1,0 +1,15 @@
+<!--pages/login/login.wxml-->
+<view style="background: url({{background}}) no-repeat;background-size: 100% auto;">
+	<view class="jiangqie-login">
+		<view class="jiangqie-app-info">
+			<!--替换为小程序logo-->
+			<image src="../../images/default_avatar.jpg" mode="aspectFill"></image>
+			<view class="jiangqie-app-name">{{title}}</view>
+			<view class="jiangqie-app-slogan">授权登录可查看更多内容</view>
+		</view>
+		<view class="jiangqie-login-btn">
+			<button catchtap="handlerCancelClick" class="jiangqie-login-btnl">取消</button>
+			<button open-type="getUserInfo" bindgetuserinfo="handlerLoginClick" class="jiangqie-login-btnr">确定</button>
+		</view>
+	</view>
+</view>

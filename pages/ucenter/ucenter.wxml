@@ -1,0 +1,140 @@
+<!--pages/ucenter/ucenter.wxml-->
+<import src="../../templates/poplogin/poplogin.wxml" />
+
+<view style="background: url({{setting.background}}) no-repeat; background-size: 750rpx 520rpx;background-position: 0 -120rpx;">
+	<view class="jiangqie-userbox">
+		<view class="jiangqie-usersetup">
+			<image src="../../images/setup.png"></image>
+		</view>
+		<view class="jiangqie-userinfo">
+			<block wx:if="{{user}}">
+				<view class="jiangqie-useravatar">
+					<image src="{{user.avatar}}" mode="aspectFill"></image>
+				</view>
+				<view class="jiangqie-username">
+					<text>{{user.nickname}}</text>
+				</view>
+			</block>
+			<block wx:else>
+				<view class="jiangqie-useravatar">
+					<image src="../../images/default_avatar.jpg" mode="aspectFill"></image>
+				</view>
+			</block>
+		</view>
+		<view class="jiangqie-countinfo">
+			<view class="jiangqie-countblock">
+				<view class="jiangqie-countnumber">39</view>
+				<view class="jiangqie-counttype">帖子</view>
+			</view>
+			<view class="jiangqie-countblock">
+				<view class="jiangqie-countnumber">56</view>
+				<view class="jiangqie-counttype">文章</view>
+			</view>
+			<view class="jiangqie-countblock">
+				<view class="jiangqie-countnumber">72</view>
+				<view class="jiangqie-counttype">粉丝</view>
+			</view>
+			<view class="jiangqie-countblock">
+				<view class="jiangqie-countnumber">18</view>
+				<view class="jiangqie-counttype">关注</view>
+			</view>
+		</view>
+	</view>
+	<view class="jiangqie-listbox jiangqie-postcount">
+		<block wx:for="{{menu}}" wx:key="index">
+			<view wx:if="{{item.tp=='views'}}" class="jiangqie-listblock {{item.line=='yes'?'jiangqie-listblock-line':''}}" data-track="views" catchtap="handlerPostTrack">
+				<view class="jiangqie-listcont">
+					<image src="../../images/more.png" mode="aspectFill"></image>
+				</view>
+				<view class="jiangqie-listtitle">
+					<text>{{item.title}}</text>
+					<image wx:if="{{item.icon}}" src="{{item.icon}}" mode="aspectFill"></image>
+				</view>
+			</view>
+			<view wx:if="{{item.tp=='likes'}}" class="jiangqie-listblock {{item.line=='yes'?'jiangqie-listblock-line':''}}" data-track="likes" catchtap="handlerPostTrack">
+				<view class="jiangqie-listcont">
+					<image src="../../images/more.png" mode="aspectFill"></image>
+				</view>
+				<view class="jiangqie-listtitle">
+					<text>{{item.title}}</text>
+					<image wx:if="{{item.icon}}" src="{{item.icon}}" mode="aspectFill"></image>
+				</view>
+			</view>
+			<view wx:if="{{item.tp=='favorites'}}" class="jiangqie-listblock {{item.line=='yes'?'jiangqie-listblock-line':''}}" data-track="favorites" catchtap="handlerPostTrack">
+				<view class="jiangqie-listcont">
+					<image src="../../images/more.png" mode="aspectFill"></image>
+				</view>
+				<view class="jiangqie-listtitle">
+					<text>{{item.title}}</text>
+					<image wx:if="{{item.icon}}" src="{{item.icon}}" mode="aspectFill"></image>
+				</view>
+			</view>
+			<view wx:if="{{item.tp=='comments'}}" class="jiangqie-listblock {{item.line=='yes'?'jiangqie-listblock-line':''}}" data-track="comments" catchtap="handlerPostTrack">
+				<view class="jiangqie-listcont">
+					<image src="../../images/more.png" mode="aspectFill"></image>
+				</view>
+				<view class="jiangqie-listtitle">
+					<text>{{item.title}}</text>
+					<image wx:if="{{item.icon}}" src="{{item.icon}}" mode="aspectFill"></image>
+				</view>
+			</view>
+			<view wx:if="{{item.tp=='about'}}" class="jiangqie-listblock {{item.line=='yes'?'jiangqie-listblock-line':''}}" catchtap="handlerAbout">
+				<view class="jiangqie-listcont">
+					<image src="../../images/more.png" mode="aspectFill"></image>
+				</view>
+				<view class="jiangqie-listtitle">
+					<text>{{item.title}}</text>
+					<image wx:if="{{item.icon}}" src="{{item.icon}}" mode="aspectFill"></image>
+				</view>
+			</view>
+			<view wx:if="{{item.tp=='feedback'}}" class="jiangqie-listblock {{item.line=='yes'?'jiangqie-listblock-line':''}}">
+				<view class="jiangqie-listcont">
+					<image src="../../images/more.png" mode="aspectFill"></image>
+				</view>
+				<button open-type="feedback" class="jiangqie-listtitle">
+					<text>{{item.title}}</text>
+					<image wx:if="{{item.icon}}" src="{{item.icon}}" mode="aspectFill"></image>
+				</button>
+			</view>
+			<view wx:if="{{item.tp=='contact'}}" class="jiangqie-listblock {{item.line=='yes'?'jiangqie-listblock-line':''}}">
+				<view class="jiangqie-listcont">
+					<image src="../../images/more.png" mode="aspectFill"></image>
+				</view>
+				<button open-type="contact" class="jiangqie-listtitle">
+					<text>{{item.title}}</text>
+					<image wx:if="{{item.icon}}" src="{{item.icon}}" mode="aspectFill"></image>
+				</button>
+			</view>
+			<view wx:if="{{item.tp=='clear'}}" class="jiangqie-listblock {{item.line=='yes'?'jiangqie-listblock-line':''}}" catchtap="handlerClearCache">
+				<view class="jiangqie-listcont">
+					<image src="../../images/more.png" mode="aspectFill"></image>
+				</view>
+				<view class="jiangqie-listtitle">
+					<text>{{item.title}}</text>
+					<image wx:if="{{item.icon}}" src="{{item.icon}}" mode="aspectFill"></image>
+				</view>
+			</view>
+			<view wx:if="{{item.tp=='page'}}" class="jiangqie-listblock {{item.line=='yes'?'jiangqie-listblock-line':''}}" data-page_id="{{item.page_id}}" catchtap="handlerPageClick">
+				<view class="jiangqie-listcont">
+					<image src="../../images/more.png" mode="aspectFill"></image>
+				</view>
+				<view class="jiangqie-listtitle">
+					<text>{{item.title}}</text>
+					<image wx:if="{{item.icon}}" src="{{item.icon}}" mode="aspectFill"></image>
+				</view>
+			</view>
+			<view wx:if="{{item.tp=='link'}}" class="jiangqie-listblock {{item.line=='yes'?'jiangqie-listblock-line':''}}" data-link="{{item.link}}" catchtap="handlerLinkClick">
+				<view class="jiangqie-listcont">
+					<image src="../../images/more.png" mode="aspectFill"></image>
+				</view>
+				<view class="jiangqie-listtitle">
+					<text>{{item.title}}</text>
+					<image wx:if="{{item.icon}}" src="{{item.icon}}" mode="aspectFill"></image>
+				</view>
+			</view>
+			<view wx:elif="{{item.tp=='split'}}" class="jiangqie-list-split"></view>
+		</block>
+	</view>
+</view>
+
+<template is="jiangqie_poplogin" data="{{show:showPopLogin}}" />

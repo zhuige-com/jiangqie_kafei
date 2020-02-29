@@ -1,0 +1,10 @@
+{
+    "navigationBarTitleText": "首页",
+    "navigationStyle": "custom",
+    "onReachBottomDistance": 50,
+    "usingComponents": {
+        "navBar": "../components/navbar/navbar",
+        "tui-loadmore": "../../components/loadmore/loadmore",
+        "tui-nomore": "../../components/nomore/nomore"
+    }
+}

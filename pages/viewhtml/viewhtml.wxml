@@ -1,0 +1,6 @@
+<!--pages/viewhtml/viewhtml.wxml-->
+<import src="../../components/wxParse/wxParse.wxml" />
+
+<view class="jiangqie-page-body">
+	<template is="wxParse" data="{{wxParseData:article.nodes}}" />
+</view>

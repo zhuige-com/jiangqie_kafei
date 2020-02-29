@@ -1,0 +1,132 @@
+<!--pages/article/article.wxml-->
+<import src="../../components/wxParse/wxParse.wxml" />
+<import src="../../templates/nodata/nodata.wxml" />
+<import src="../../templates/poplogin/poplogin.wxml" />
+
+<view class="container jiangqie-page-view">
+	<view class="jiangqie-page-head">
+		<view class="jiangqie-page-title">
+			<text>{{post.title}}</text>
+			<view class="jiangqie-page-cmt">
+				<view class="jiangqie-page-cmt-info">
+					<image src="../../images/ctm2.png" mode="widthFix" class="jiangqie-page-icon"></image>{{post.views}}
+				</view>
+				<text>{{post.time}}</text>
+			</view>
+		</view>
+	</view>
+	<view class="jiangqie-page-body">
+
+		<template is="wxParse" data="{{wxParseData:article.nodes}}" />
+
+		<view class="jiangqie-page-body-end">
+			<text>- The End -</text>
+		</view>
+		<view class="jiangqie-page-body-tag">
+			<text wx:for="{{post.tags}}" wx:key="id" data-id="{{item.id}}" data-tag="{{item.name}}" catchtap="handlerTagClick">{{item.name}}</text>
+		</view>
+		<view class="jiangqie-page-laud">
+			<view class="jiangqie-page-laud-contrl">
+				<view wx:if="{{post_like==1}}" class="jiangqie-page-laud-btn" catchtap="handlerLikeClick">
+					<image src="../../images/laud_on.png" mode="widthFix"></image>
+					<text>已赞过</text>
+				</view>
+				<view wx:else class="jiangqie-page-laud-btn" catchtap="handlerLikeClick">
+					<image src="../../images/laud.png" mode="widthFix"></image>
+					<text>点个赞</text>
+				</view>
+				<button open-type="share" class="jiangqie-page-laud-btn">
+					<image src="../../images/share.png" mode="widthFix"></image>
+					<text>分享好友</text>
+				</button>
+			</view>
+			<view class="jiangqie-page-laud-list">
+				<view class="jiangqie-page-laud-list-title">- {{like_list.length}}人已赞 -</view>
+				<view class="jiangqie-page-laud-list-block">
+					<image wx:for="{{like_list}}" wx:key="index" src="{{item.length>0?item:'../../images/default_avatar.jpg'}}" mode="aspectFill"></image>
+				</view>
+			</view>
+		</view>
+	</view>
+	<view class="jiangqie-page-cmtbox">
+		<view class="jiangqie-page-cmt-title">
+			评论<text>{{comment_count + comment_count_change}}</text>
+		</view>
+		<block wx:if="{{comments.length>0}}">
+			<view wx:for="{{comments}}" wx:key="id" class="jiangqie-page-cmt-content">
+				<view class="jiangqie-page-cmt-avatar">
+					<image src="{{item.user.avatar.length>0?item.user.avatar:'../../images/default_avatar.jpg'}}" mode="aspectFill"></image>
+				</view>
+				<view class="jiangqie-page-cmt-head">
+					{{item.user.name}}
+					<text class="jiangqie-page-cmt-time">{{item.time}}</text>
+					<text wx:if="{{item.approved!=1}}" class="jiangqie-page-cmt-time">待审核</text>
+					<text class="comment-action" data-id="{{item.id}}" catchtap="handlerCommentReplyClick">回复</text>
+					<text wx:if="{{item.user.is_me==1}}" class="comment-action" data-id="{{item.id}}" catchtap="handlerCommentDeleteClick">删除</text>
+				</view>
+				<view class="jiangqie-page-cmt-text">
+					<text class="jiangqie-page-cmt-text-world">{{item.content}}</text>
+					<view class="jiangqie-page-cmt-replay">
+						<view wx:for="{{item.replys}}" wx:key="id" wx:for-item="reply" class="jiangqie-page-cmt-replay-box">
+							<view class="jiangqie-page-cmt-replay-nametime">
+								{{reply.user.name}}
+								<text class="jiangqie-page-cmt-replay-time">{{reply.time}}</text>
+								<text wx:if="{{reply.approved!=1}}" class="jiangqie-page-cmt-time">待审核</text>
+								<text wx:if="{{reply.user.is_me==1}}" class="comment-action" data-id="{{reply.id}}" catchtap="handlerCommentDeleteClick">删除</text>
+							</view>
+							<view class="jiangqie-page-cmt-replay-world">{{reply.content}}</view>
+						</view>
+					</view>
+				</view>
+			</view>
+			<!--加载loadding-->
+			<tui-loadmore visible="{{loadding}}"></tui-loadmore>
+			<tui-nomore visible="{{!pullUpOn}}"></tui-nomore>
+			<!--加载loadding-->
+		</block>
+		<block wx:elif="{{loaded}}">
+			<template is="jiangqie_nodata" />
+		</block>
+	</view>
+</view>
+
+<!-- 操作栏 -->
+<view class="tui-operation" wx:if="{{!show_comment_submit && post.switch_comment==1}}">
+	<view class="tui-operation-left tui-col-7 tui-height-full tui-ptop-zero">
+		<view class="tui-btn-comment" catchtap="handlerCommentClick">发表你的评论...</view>
+	</view>
+	<view class="tui-operation-right tui-right-flex tui-col-5">
+		<view class="tui-operation-item" hover-class="opcity" hover-stay-time="150" bindtap="handlerCommentClick">
+			<image src="../../images/btn_com.png" mode="widthFix"></image>
+			<text>{{comment_count + comment_count_change}}</text>
+		</view>
+		<view class="tui-operation-item" catchtap="handlerFavoriteClick">
+			<block wx:if="{{post_favorite==1}}">
+				<image src="../../images/btn_fav_on.png" mode="widthFix"></image>
+			</block>
+			<block wx:else>
+				<image src="../../images/btn_fav.png" mode="widthFix"></image>
+			</block>
+		</view>
+		<button open-type="share" class="tui-operation-item" hover-class="opcity" hover-stay-time="150">
+			<image src="../../images/btn_share.png" mode="widthFix"></image>
+		</button>
+	</view>
+</view>
+
+<!-- 发表评论 -->
+<view capture-catch:touchmove class="textareacontent" wx:if="{{show_comment_submit}}">
+	<form catchsubmit="handlerCommentSubmit">
+		<view class="textheaders">
+			<view catchtap="handlerCancelClick" class="cancel">取消</view>
+			<button form-type="submit" class="publish">发布</button>
+		</view>
+		<view class="textareaBox">
+			<view class="textNum">{{comment_content.length}}/200</view>
+			<textarea autoFocus="true" name="inputComment" bindinput="handlerContentInput" class="textareaInput" maxlength="200" show-confirm-bar="{{false}}" placeholder="{{placeholder}}"></textarea>
+		</view>
+	</form>
+</view>
+<view catchtap="handlerCancelClick" class="pagemake" wx:if="{{show_comment_submit}}"></view>
+
+<template is="jiangqie_poplogin" data="{{show:showPopLogin}}" />

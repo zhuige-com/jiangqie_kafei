@@ -1,0 +1,120 @@
+/*
+ * 酱茄小程序开源版
+ * Author: 	酱茄
+ * Help document：https://www.jiangqie.com/docs/kaiyuan/id1
+ * License：MIT
+ * Copyright ️ 2020 www.jiangqie.com All rights reserved.
+ */
+
+.container {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding: 0 30rpx;
+    padding-bottom: env(safe-area-inset-bottom);
+}
+
+.jiangqie-search-box {
+    box-sizing: border-box;
+    padding: 30rpx 0;
+    border-bottom: 1rpx solid #DDDDDD;
+}
+
+.jiangqie-search-head {
+    text-align: left;
+    font-size: 30rpx;
+    font-weight: 500;
+}
+
+.jiangqie-search-icon {
+    height: 28rpx;
+    width: 28rpx;
+    margin-right: 8rpx;
+}
+
+.jiangqie-search-clear {
+    float: right;
+    font-size: 24rpx;
+    color: #999;
+    font-weight: 300;
+}
+
+.jiangqie-search-list {
+    flex-direction: column;
+    box-sizing: border-box;
+    padding: 10rpx 0;
+}
+
+.jiangqie-search-tag {
+    float: left;
+    padding: 4rpx 60rpx 8rpx 26rpx;
+    vertical-align: middle;
+    background: #EAEAEA;
+    border-radius: 40rpx;
+    margin-right: 20rpx;
+    margin-bottom: 20rpx;
+}
+
+.jiangqie-search-hot .jiangqie-search-tag {
+    padding-right: 26rpx;
+}
+
+.jiangqie-search-tag text {
+    font-weight: 300;
+    font-size: 24rpx;
+    color: #666;
+}
+
+.jiangqie-search-del {
+    float: right;
+    height: 22rpx;
+    width: 22rpx;
+    margin-right: -36rpx;
+    margin-top: 14rpx;
+}
+
+
+.jiangqie-searchbox {
+    padding: 30rpx 0;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+}
+
+.jiangqie-search-input {
+    width: 100%;
+    height: 66rpx;
+    border-radius: 35rpx;
+    padding: 0 30rpx;
+    box-sizing: border-box;
+    background: #EEE;
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    border: 1rpx solid #DDD;
+}
+
+.jiangqie-input {
+    flex: 1;
+    color: #333;
+    padding: 0 16rpx;
+    font-size: 28rpx;
+}
+
+.jiangqie-input-plholder {
+    font-size: 28rpx;
+    color: #b2b2b2;
+}
+
+.jiangqie-cancle {
+    color: #888;
+    font-size: 28rpx;
+    padding-left: 30rpx;
+    flex-shrink: 0;
+}
+
+.jiangqie-search {
+    font-size: 28rpx;
+    padding-left: 30rpx;
+    flex-shrink: 0;
+}

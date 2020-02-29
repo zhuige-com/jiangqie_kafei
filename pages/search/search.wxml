@@ -1,0 +1,39 @@
+<!--pages/search/search.wxml-->
+<view class="container">
+	<view class="jiangqie-searchbox">
+		<view class="jiangqie-search-input">
+			<icon type="search" size='13' color='#999'></icon>
+			<input confirm-type="search" placeholder="大家都在搜：咖啡" auto-focus="ture" placeholder-class="jiangqie-input-plholder" class="jiangqie-input" confirm-type="search" bindconfirm="handerSearchConfirm" bindinput="handlerSearchInput" />
+		</view>
+
+		<view wx:if="{{canSearch}}" class="jiangqie-search" bindtap="handerSearchClick">搜索</view>
+		<view wx:else class="jiangqie-cancle" bindtap="handerCancelClick">取消</view>
+
+	</view>
+
+	<!--搜索模块-->
+	<view wx:if="{{historySearch.length>0}}" class="jiangqie-search-box">
+		<view class="jiangqie-search-head">
+			<text class="jiangqie-search-clear" catchtap="handlerClearHistory">清除历史</text>
+			<image src="../../images/time.png" mode="widthFix" class="jiangqie-search-icon"></image>历史搜索
+		</view>
+		<view class="jiangqie-search-list">
+			<view wx:for="{{historySearch}}" wx:key="index" class="jiangqie-search-tag" data-item="{{item}}" catchtap="handlerSearchItemClick">
+				<image src="../../images/del.png" mode="widthFix" class="jiangqie-search-del" data-item="{{item}}" catchtap="handlerSearchItemDelete"></image>
+				<text>{{item}}</text>
+			</view>
+		</view>
+	</view>
+
+	<!--热门模块-->
+	<view wx:if="{{hotSearch.length>0}}" class="jiangqie-search-box">
+		<view class="jiangqie-search-head">
+			<image src="../../images/hot.png" mode="widthFix" class="jiangqie-search-icon"></image>热门
+		</view>
+		<view class="jiangqie-search-list jiangqie-search-hot">
+			<view wx:for="{{hotSearch}}" wx:key="index" class="jiangqie-search-tag" data-item="{{item}}" catchtap="handlerSearchItemClick">
+				<text>{{item}}</text>
+			</view>
+		</view>
+	</view>
+</view>

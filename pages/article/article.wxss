@@ -1,0 +1,500 @@
+/*
+ * 酱茄小程序开源版
+ * Author: 	酱茄
+ * Help document：https://www.jiangqie.com/docs/kaiyuan/id1
+ * License：MIT
+ * Copyright ️ 2020 www.jiangqie.com All rights reserved.
+ */
+ 
+@import "../../components/wxParse/wxParse.wxss";
+@import '../../templates/nodata/nodata.wxss';
+@import '../../templates/poplogin/poplogin.wxss';
+
+button {
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+    background-color: transparent;
+}
+
+.jiangqie-page-view {
+    padding: 0rpx;
+}
+
+.jiangqie-page-head {
+    position: sticky;
+    overflow: hidden;
+    border-bottom: 4rpx solid #F3F3F3;
+}
+
+.jiangqie-page-title {
+    width: 100%;
+}
+
+.jiangqie-page-title text {
+    display: block;
+    line-height: 46rpx;
+    padding: 50rpx 30rpx 0;
+    color: #333;
+    font-size: 36rpx;
+    font-weight: 500;
+}
+
+.jiangqie-page-cmt {
+    height: 80rpx;
+    line-height: 80rpx;
+    border-radius: 40rpx 40rpx 0 0;
+    background: #FFF;
+    padding: 0 30rpx;
+}
+
+.jiangqie-page-cmt-info {
+    float: right;
+    font-size: 24rpx;
+    font-weight: 200;
+    color: #CCC;
+}
+
+.jiangqie-page-icon {
+    height: 32rpx;
+    width: 32rpx;
+    margin-right: 10rpx;
+    vertical-align: middle;
+    margin-bottom: 2rpx;
+}
+
+.jiangqie-page-cmt text {
+    font-size: 24rpx;
+    font-weight: 200;
+    color: #CCC;
+    display: block;
+    line-height: 80rpx;
+    padding: 0rpx;
+}
+
+.jiangqie-page-title-img {
+    position: relative;
+    width: 100%;
+}
+
+.jiangqie-page-body {
+    padding: 30rpx 40rpx;
+    background: #FFF;
+}
+
+/* .wxParse-p {
+    font-size: 30rpx;
+    font-weight: 300;
+    color: #333;
+    line-height: 40rpx;
+    margin-bottom: 10rpx;
+} */
+
+.wxParse-p {
+    margin-top: 30rpx;
+    font-size: 30rpx;
+    color: #333333;
+    line-height: 40rpx;
+}
+
+.jiangqie-page-body-end {
+    height: 100rpx;
+    line-height: 100rpx;
+    font-size: 20rpx;
+    color: #CCC;
+    text-align: center
+}
+
+.jiangqie-page-body-tag {
+    padding: 20rpx 0;
+    overflow: hidden;
+    border-bottom: 1rpx solid #EEE;
+}
+
+.jiangqie-page-body-tag text {
+    float: left;
+    padding: 4rpx 22rpx 6rpx 22rpx;
+    vertical-align: middle;
+    background: #F6F6F6;
+    border-radius: 40rpx;
+    margin-right: 20rpx;
+    margin-bottom: 20rpx;
+    font-weight: 300;
+    font-size: 22rpx;
+    color: #999;
+}
+
+.jiangqie-page-body-banner {
+    height: 160rpx;
+    width: 690rpx;
+    overflow: hidden;
+    border-radius: 20rpx;
+    box-shadow: 5rpx 5rpx 20rpx rgba(0, 0, 0, 0.2);
+    margin: 20rpx 0;
+}
+
+.jiangqie-page-body-banner image {
+    width: 100%;
+}
+
+.jiangqie-page-cmtbox {
+    padding: 20rpx 30rpx 80rpx;
+    border-top: 16rpx solid #F3F3F3;
+    background: #FFF;
+    clear: left;
+}
+
+.jiangqie-page-cmt-title {
+    font-size: 32rpx;
+    font-weight: 500;
+    color: #333;
+    padding: 10rpx 0 16rpx;
+    /* border-bottom: 1rpx solid #CCC; */
+}
+
+.jiangqie-page-cmt-title text {
+    font-size: 20rpx;
+    font-weight: 200;
+    color: #CCC;
+    padding: 6rpx 16rpx;
+    border-radius: 30rpx;
+    background: #F6F6F6;
+    margin-left: 30rpx;
+}
+
+.jiangqie-page-cmt-content {
+    padding: 16rpx 0;
+    padding-left: 80rpx;
+    border-top: 1rpx solid #EEE;
+    overflow: hidden;
+}
+
+.jiangqie-page-cmt-avatar {
+    float: left;
+    margin-left: -80rpx;
+    height: 64rpx;
+    width: 64rpx;
+}
+
+.jiangqie-page-cmt-avatar image {
+    height: 64rpx;
+    width: 64rpx;
+    border-radius: 64rpx;
+    overflow: hidden;
+}
+
+.jiangqie-page-cmt-head {
+    font-size: 28rpx;
+    font-weight: 500;
+    color: #333;
+}
+
+.jiangqie-page-cmt-time {
+    font-size: 20rpx;
+    font-weight: 200;
+    color: #BBB;
+    margin-left: 20rpx;
+}
+
+.jiangqie-page-cmt-text {
+    padding: 10rpx 0;
+}
+
+.jiangqie-page-cmt-text-world {
+    font-size: 26rpx;
+    font-weight: 300;
+    color: #444;
+}
+
+.jiangqie-page-cmt-replay {
+    margin-top: 20rpx;
+    border-radius: 30rpx;
+    padding: 0 20rpx;
+    background: #F6F6F6;
+}
+
+.jiangqie-page-cmt-replay-box {
+    padding: 20rpx 0;
+    border-bottom: 1rpx solid #EEE;
+}
+
+.jiangqie-page-cmt-replay-box:last-child {
+    border-bottom: none;
+}
+
+.jiangqie-page-cmt-replay-nametime {
+    padding-bottom: 10rpx;
+    font-size: 24rpx;
+    font-weight: 500;
+    color: #333;
+}
+
+.jiangqie-page-cmt-replay-time {
+    font-size: 20rpx;
+    font-weight: 200;
+    color: #BBB;
+    margin-left: 20rpx;
+}
+
+.jiangqie-page-cmt-replay-world {
+    font-size: 24rpx;
+    font-weight: 300;
+    color: #444;
+}
+
+/**/
+
+.jiangqie-page-laud {
+    overflow: hidden;
+    border-bottom: 1rpx solid #EEE;
+}
+
+.jiangqie-page-laud-contrl {
+    padding: 40rpx 20rpx 10rpx;
+    overflow: hidden;
+}
+
+.jiangqie-page-laud-btn {
+    font-size: 16px;
+    float: left;
+    margin-left: 40rpx;
+    border-radius: 80rpx;
+    padding: 10rpx 40rpx 14rpx;
+    width: 180rpx;
+    border: 1rpx solid #efefef;
+}
+
+.jiangqie-page-laud-btn image {
+    height: 36rpx;
+    width: 36rpx;
+    margin-right: 12rpx;
+    vertical-align: middle;
+}
+
+.jiangqie-page-laud-btn text {
+    font-size: 32rpx;
+    font-weight: 200;
+    color: #999;
+}
+
+.jiangqie-page-laud-list {
+    padding: 20rpx 40rpx 10rpx;
+}
+
+.jiangqie-page-laud-list-title {
+    text-align: center;
+    padding: 20rpx;
+    font-size: 22rpx;
+    color: #BBB;
+    font-weight: 200;
+}
+
+.jiangqie-page-laud-list-block {
+    padding: 20rpx;
+    overflow: hidden;
+    text-align: center;
+}
+
+.jiangqie-page-laud-list-block image {
+    height: 64rpx;
+    width: 64rpx;
+    margin-right: 24rpx;
+    border-radius: 96rpx;
+}
+
+/**/
+
+/**/
+.tui-operation {
+    width: 100%;
+    height: 100rpx;
+    /* box-sizing: border-box; */
+    overflow: hidden;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 99999;
+    padding-bottom: env(safe-area-inset-bottom);
+}
+
+.tui-safearea-bottom {
+    width: 100%;
+    height: env(safe-area-inset-bottom);
+}
+
+.tui-operation::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    border-top: 1rpx solid #eaeef1;
+    -webkit-transform: scaleY(0.5);
+    transform: scaleY(0.5);
+}
+
+.tui-operation-left {
+    display: flex;
+    align-items: center;
+}
+
+.tui-operation-item {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+}
+
+.tui-operation-item image {
+    height: 42rpx;
+    width: 42rpx;
+}
+
+.tui-operation-item text {
+    position: absolute;
+    right: 10rpx;
+    background: #FFF;
+    font-size: 20rpx;
+    top: -10rpx;
+    padding: 4rpx;
+}
+
+.tui-operation-right {
+    height: 100rpx;
+    box-sizing: border-box;
+    padding-top: 0;
+}
+
+.tui-badge-class {
+    color: #5677fc !important;
+    position: absolute;
+    top: -6rpx;
+    padding: 2px 4px !important;
+}
+
+.tui-right-flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tui-btn-comment {
+    height: 64rpx;
+    width: 84%;
+    background: #ededed;
+    color: #999;
+    border-radius: 16rpx;
+    font-size: 28rpx;
+    display: flex;
+    align-items: center;
+    padding-left: 20rpx;
+    box-sizing: border-box;
+    padding-top: 0;
+    margin-left: 30rpx;
+}
+
+.tui-col-7 {
+    width: 58.33333333%;
+}
+
+.tui-col-5 {
+    width: 41.66666667%;
+}
+
+.tui-share-btn {
+    display: block;
+    background: none;
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+.comment-action {
+    margin-left: 20rpx;
+}
+
+
+/* 评论框 -- start --*/
+
+.textareacontent {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 500rpx;
+    border-top-left-radius: 16rpx;
+    border-top-right-radius: 16rpx;
+    background-color: #fff;
+    z-index: 10;
+}
+
+.textareacontent .textheaders {
+    width: 100%;
+    height: 96rpx;
+    border-bottom: 1rpx solid #eaeaea;
+}
+
+.textareacontent .textheaders .cancel {
+    color: #333;
+    font-size: 32rpx;
+    line-height: 96rpx;
+    margin-left: 32rpx;
+    float: left;
+}
+
+.textareacontent .textheaders .publish {
+    color: #3ec382;
+    font-size: 32rpx;
+    line-height: 96rpx;
+    margin-right: 32rpx;
+    float: right;
+}
+
+.textareaBox {
+    height: 360rpx;
+    position: relative;
+}
+
+.textNum {
+    position: absolute;
+    width: 686rpx;
+    font-size: 26rpx;
+    color: #999;
+    margin-left: 32rpx;
+    margin-right: 32rpx;
+    top: 10rpx;
+    text-align: right;
+}
+
+.textareacontent .textareaInput {
+    width: 686rpx;
+    padding: 32rpx 32rpx 42rpx 32rpx;
+    height: 286rpx;
+    font-size: 34rpx;
+    line-height: 65rpx;
+}
+
+.pagemake {
+    background-color: #000;
+    opacity: 0.8;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+}
+
+/* 评论框 -- end --*/
+
+.jiangqie-page-body {
+    overflow: hidden;
+}
+
+button.jiangqie-page-laud-btn {
+    box-sizing: content-box;
+    line-height: inherit;
+}
