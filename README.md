@@ -3,28 +3,38 @@ Hi，欢迎使用“酱茄小程序开源版 – 人人咖啡师”。
 
 酱茄小程序开源版基于WordPress开源程序和WordPress REST API开发，实现WordPress网站数据与小程序数据同步共享，通过简单的配置就能搭建自己的小程序。
 
+##演示
+![微信小程序二维码](https://github.com/longwenjunjie/jiangqie_kafei/tree/master/screenshot/code.jpg)
 
+**小程序截图**
+![小程序截图1](https://github.com/longwenjunjie/jiangqie_kafei/tree/master/screenshot/1.png)
+![小程序截图2](https://github.com/longwenjunjie/jiangqie_kafei/tree/master/screenshot/1.png)
+
+**后台截图**
+![后台截图1](https://github.com/longwenjunjie/jiangqie_kafei/tree/master/screenshot/11.png)
+![后台截图2](https://github.com/longwenjunjie/jiangqie_kafei/tree/master/screenshot/12.png)
+![后台截图2](https://github.com/longwenjunjie/jiangqie_kafei/tree/master/screenshot/12.png)
 
 ————————————【联系/版权】————————————
 
-### 微信客服：jianbing2011 （如要加入微信群请说明）
+**微信客服：jianbing2011 （如要加入微信群请说明）**
 
-### 技术支持：www.jiangqie.com
+**技术支持：www.jiangqie.com**
 
-### 安装文档：https://www.jiangqie.com/docs/kaiyuan/id1
+**安装文档：https://www.jiangqie.com/docs/kaiyuan/id1**
 
-### 更新/下载：https://www.jiangqie.com/docs/kaiyuan/id1
+**更新/下载：https://www.jiangqie.com/docs/kaiyuan/id1**
 
-### 开源协议：The MIT License (MIT)
+**开源协议：The MIT License (MIT)**
 
-### Copyright © 2020 酱茄 jiangqie.com
+**Copyright © 2020 酱茄 jiangqie.com**
 
-### 在此对提供开源及创意表示致谢，开源声明关注酱茄官网。
+**在此对提供开源及创意表示致谢，开源声明关注酱茄官网。**
 
 
 ————————————【功能清单】————————————
 
-### 1.酱茄小程序开源版插件功能清单：
+### 酱茄小程序开源版插件功能清单：
 
 1. 小程序标题设置；
 
@@ -59,7 +69,7 @@ Hi，欢迎使用“酱茄小程序开源版 – 人人咖啡师”。
 16. Tabbar“分类”顶部图片. 标题. 描述设置；
 
 
-### 2.酱茄小程序开源版前端功能清单：
+### 酱茄小程序开源版前端功能清单：
 
 1. 首页、热榜、文章分类、我的；
 
@@ -88,15 +98,8 @@ Hi，欢迎使用“酱茄小程序开源版 – 人人咖啡师”。
 13. 文章详情Tag功能；
 
 
-### 3.鸣谢
-1. 本程序富文本解析组件采用：https://github.com/icindy/wxParse
-
-2. 本程序有关前端部分代码采用：https://github.com/dingyong0214/ThorUI
-
-3. 本程序插件前端框架采用：
-
-4. 本站和WordPress REST API采用：https://cn.wordpress.org
-
-5. 本程序Navbar采用：
-
-6. 本程序LoadMore采用：
+### 鸣谢
+1. https://github.com/icindy/wxParse
+2. https://github.com/dingyong0214/ThorUI
+3. https://github.com/DevinVinson/WordPress-Plugin-Boilerplate
+4. https://cn.wordpress.org
