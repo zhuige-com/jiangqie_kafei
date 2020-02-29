@@ -7,24 +7,24 @@ Hi，欢迎使用“酱茄小程序开源版 – 人人咖啡师”。
 
 ————————————【联系/版权】————————————
 
-# 微信客服：jianbing2011 （如要加入微信群请说明）
+### 微信客服：jianbing2011 （如要加入微信群请说明）
 
-# 技术支持：www.jiangqie.com
+### 技术支持：www.jiangqie.com
 
-# 安装文档：https://www.jiangqie.com/docs/kaiyuan/id1
+### 安装文档：https://www.jiangqie.com/docs/kaiyuan/id1
 
-# 更新/下载：https://www.jiangqie.com/docs/kaiyuan/id1
+### 更新/下载：https://www.jiangqie.com/docs/kaiyuan/id1
 
-# 开源协议：The MIT License (MIT)
+### 开源协议：The MIT License (MIT)
 
-# Copyright © 2020 酱茄 jiangqie.com
+### Copyright © 2020 酱茄 jiangqie.com
 
-# 在此对提供开源及创意表示致谢，开源声明关注酱茄官网。
+### 在此对提供开源及创意表示致谢，开源声明关注酱茄官网。
 
 
 ————————————【功能清单】————————————
 
-# 1、酱茄小程序开源版插件功能清单：
+### 1、酱茄小程序开源版插件功能清单：
 
 1.1、小程序标题设置；
 
@@ -60,7 +60,7 @@ Hi，欢迎使用“酱茄小程序开源版 – 人人咖啡师”。
 
 
 
-# 2、酱茄小程序开源版前端功能清单：
+### 2、酱茄小程序开源版前端功能清单：
 
 2.1、首页、热榜、文章分类、我的；
 
