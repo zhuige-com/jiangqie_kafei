@@ -4,13 +4,16 @@ Hi，欢迎使用“酱茄小程序开源版 – 人人咖啡师”。
 酱茄小程序开源版基于WordPress开源程序和WordPress REST API开发，实现WordPress网站数据与小程序数据同步共享，通过简单的配置就能搭建自己的小程序。
 
 ##演示
+
 ![微信小程序二维码](https://raw.githubusercontent.com/longwenjunjie/jiangqie_kafei/master/screenshot/code.jpg)
 
 **小程序截图**
+
 ![小程序截图1](https://raw.githubusercontent.com/longwenjunjie/jiangqie_kafei/master/screenshot/1.png)
 ![小程序截图2](https://raw.githubusercontent.com/longwenjunjie/jiangqie_kafei/master/screenshot/1.png)
 
 **后台截图**
+
 ![后台截图1](https://raw.githubusercontent.com/longwenjunjie/jiangqie_kafei/master/screenshot/11.png)
 ![后台截图2](https://raw.githubusercontent.com/longwenjunjie/jiangqie_kafei/master/screenshot/12.png)
 ![后台截图2](https://raw.githubusercontent.com/longwenjunjie/jiangqie_kafei/master/screenshot/12.png)
@@ -100,6 +103,9 @@ Hi，欢迎使用“酱茄小程序开源版 – 人人咖啡师”。
 
 ### 鸣谢
 1. https://github.com/icindy/wxParse
+
 2. https://github.com/dingyong0214/ThorUI
+
 3. https://github.com/DevinVinson/WordPress-Plugin-Boilerplate
+
 4. https://cn.wordpress.org
