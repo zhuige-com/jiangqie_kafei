@@ -95,8 +95,7 @@ Component({
 
             const navigationbarinnerStyle = [
                 `color: ${this.data.color}`,
-                // `background: ${this.data.background}`,
-                `background: rgba(224, 48, 31, 100)`,
+                `background: ${this.data.background}`,
                 `height:${navBarHeight + navBarExtendHeight}px`,
                 `padding-top:${statusBarHeight}px`,
                 `padding-right:${leftWidth}px`,

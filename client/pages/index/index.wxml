@@ -1,6 +1,6 @@
 <!--index.wxml-->
 <view style="background: url({{background}}) no-repeat;background-size: 100% auto;background-position-y: 100rpx;">
-	<navBar background='#fff' searchBar="{{true}}" bindsearch="handlerSearchClick">
+	<navBar background='rgba(224, 48, 31, 100)' searchBar="{{true}}" bindsearch="handlerSearchClick">
 		<view slot="left" class='lxy-nav-bar__logo'>
 			<image src="{{logo}}"></image>
 		</view>

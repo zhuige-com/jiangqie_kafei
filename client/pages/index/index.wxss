@@ -9,30 +9,16 @@
  */
  
 .lxy-nav-bar__logo {
-    position: relative;
-    width: var(--right);
-    height: 32px;
-    /*  padding-left: 10px; */
-    display: flex;
+	display: flex;
     align-items: center;
-}
-
-.lxy-nav-bar__logo {
-    align-items: left;
-    padding-left: 20rpx;
-    width: auto;
+    height: 32px;
+	padding-left: 20rpx;
 }
 
 .lxy-nav-bar__logo image {
     height: 48rpx;
     width: 128rpx;
     margin-right: 12rpx;
-}
-
-.lxy-nav-bar__logo text {
-    font-size: 34rpx;
-    font-weight: 500;
-    color: #FFF;
 }
 
 .lxy-nav-bar-search {
