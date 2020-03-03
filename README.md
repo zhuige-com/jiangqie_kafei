@@ -110,4 +110,8 @@ Hi，欢迎使用“酱茄小程序开源版 – 人人咖啡师”。
 
 3. https://github.com/DevinVinson/WordPress-Plugin-Boilerplate
 
-4. https://cn.wordpress.org
+4. https://github.com/JoeSz/WordPress-Plugin-Boilerplate-Tutorial
+
+5. https://github.com/JoeSz/Exopite-Simple-Options-Framework
+
+6. https://cn.wordpress.org
