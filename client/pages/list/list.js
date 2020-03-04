@@ -30,25 +30,25 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        if (options.cat_id) {
+        if (options.cat_id) { //分类
             wx.setNavigationBarTitle({
                 title: options.title,
             });
 
             this.cat_id = options.cat_id;
-        } else if (options.tag_id) {
+        } else if (options.tag_id) { //标签
             wx.setNavigationBarTitle({
                 title: options.title,
             });
 
             this.tag_id = options.tag_id;
-        } else if (options.search) {
+        } else if (options.search) { //搜索
             wx.setNavigationBarTitle({
                 title: '搜索【' + options.search + '】',
             });
 
             this.search = options.search;
-        } else if (options.track) {
+        } else if (options.track) { //我的足迹
             let title = '我的浏览';
             if (options.track == 'likes') {
                 title = '我的点赞';
@@ -61,10 +61,14 @@ Page({
                 title: title,
             });
             this.track = options.track;
+        } else { //最新
+            wx.setNavigationBarTitle({
+                title: '最新文章',
+            });
         }
     },
 
-    onShow: function() {
+    onShow: function () {
         this.loadPost(true);
     },
 
@@ -123,6 +127,8 @@ Page({
         } else if (that.track !== undefined) {
             url = Api.JIANGQIE_POSTS_MY;
             params.track = that.track;
+        } else {
+            url = Api.JIANGQIE_POSTS_LAST;
         }
 
         Rest.get(url, params).then(res => {
