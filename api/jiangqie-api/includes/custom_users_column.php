@@ -8,10 +8,10 @@
  * Copyright ️ 2020 www.jiangqie.com All rights reserved.
  */
 
-add_filter('manage_users_columns', 'suren_manage_user_columns', 10, 2);
-add_action('manage_users_custom_column', 'suren_manage_user_custom_column', 10, 3);
+add_filter('manage_users_columns', 'jiangqie_manage_user_columns', 10, 2);
+add_action('manage_users_custom_column', 'jiangqie_manage_user_custom_column', 10, 3);
 
-function suren_manage_user_columns($columns)
+function jiangqie_manage_user_columns($columns)
 {
 	unset($columns['name']);
 
@@ -26,7 +26,7 @@ function suren_manage_user_columns($columns)
 	return array_merge($new_columns, $columns);
 }
 
-function suren_manage_user_custom_column($value, $column_name, $user_id)
+function jiangqie_manage_user_custom_column($value, $column_name, $user_id)
 {
 	if ('jqnickname' == $column_name) {
 		$value = get_user_meta($user_id, 'nickname', true);
