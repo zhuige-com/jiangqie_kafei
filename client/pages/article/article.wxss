@@ -80,7 +80,7 @@ button {
 }
 
 .jiangqie-page-body {
-    padding: 30rpx 40rpx;
+    padding: 30rpx 50rpx;
     background: #FFF;
 }
 
@@ -96,7 +96,7 @@ button {
     margin-top: 30rpx;
     font-size: 30rpx;
     color: #333333;
-    line-height: 40rpx;
+    line-height: 60rpx;
 }
 
 .jiangqie-page-body-end {
