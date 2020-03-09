@@ -8,21 +8,37 @@
  * Copyright ️ 2020 www.jiangqie.com All rights reserved.
  */
 
+const Constant = require('../../utils/constants');
+
 Page({
-
     data: {
-
+        version: Constant.JQ_VERSION
     },
 
     onLoad: function (options) {
 
     },
 
-    onShareAppMessage: function () {
-        return {
-            title: getApp().app_name,
-            path: 'pages/index/index',
-        }
+    copy: function (e) {
+        let text = e.currentTarget.dataset.text;
+        wx.setClipboardData({
+            data: text,
+            success(res) {
+                wx.getClipboardData({
+                    success(res) {
+                        wx.showToast({
+                            title: '链接已复制',
+                        });
+                    }
+                })
+            }
+        })
     },
-    
+
+    tipClick: function () {
+        wx.showToast({
+            icon: 'none',
+            title: '酱茄小程序开源版',
+        })
+    }
 })
