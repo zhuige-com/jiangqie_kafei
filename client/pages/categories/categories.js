@@ -8,7 +8,6 @@
  * Copyright ️ 2020 www.jiangqie.com All rights reserved.
  */
 
-const Config = require('../../utils/config');
 const Api = require('../../utils/api');
 const Rest = require('../../utils/rest');
 
