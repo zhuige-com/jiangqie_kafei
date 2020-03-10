@@ -479,6 +479,7 @@ button {
     height: 286rpx;
     font-size: 34rpx;
     line-height: 65rpx;
+    z-index: 0;
 }
 
 .pagemake {

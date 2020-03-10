@@ -1,14 +1,14 @@
 <template name="jiangqie_poplogin">
-	<view wx:if="{{show}}" class="jiangqie-poplogin-mask" >
-		<view class="jiangqie-poplogin">
-			<view class="jiangqie-pop-head">
-				<image src="../../images/default_avatar.jpg" mode="aspectFill"></image>
-				<text>立即登录，体验更多功能</text>
-			</view>
-			<view class="jiangqie-pop-opt">
+	<cover-view wx:if="{{show}}" class="jiangqie-poplogin-mask" >
+		<cover-view class="jiangqie-poplogin">
+			<cover-view class="jiangqie-pop-head">
+				<cover-image src="../../images/default_avatar.jpg" mode="aspectFill"></cover-image>
+				<cover-view>立即登录，体验更多功能</cover-view>
+			</cover-view>
+			<cover-view class="jiangqie-pop-opt">
 				<button class="jiangqie-pop-btnl" catchtap="handlerLoginCancelClick">取消</button>
 				<button class="jiangqie-pop-btnr" catchtap="handlerDoLoginClick">登录</button>
-			</view>
-		</view>
-	</view>
+			</cover-view>
+		</cover-view>
+	</cover-view>
 </template>

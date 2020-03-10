@@ -15,7 +15,7 @@
     top: 0;
     background: rgba(0, 0, 0, 0.3);
     text-align: center;
-    z-index: 99;
+    z-index: 199;
 }
 
 .jiangqie-poplogin {
@@ -30,19 +30,21 @@
     padding: 70rpx 60rpx;
 }
 
-.jiangqie-pop-head image {
+.jiangqie-pop-head cover-image {
     height: 72rpx;
     width: 72rpx;
     border-radius: 72rpx;
     margin-right: 30rpx;
     vertical-align: middle;
+    float: left;
 }
 
-.jiangqie-pop-head text {
+.jiangqie-pop-head cover-view {
     font-size: 30rpx;
     color: #999;
     line-height: 96rpx;
     font-weight: 300;
+    float: left;
 }
 
 .jiangqie-pop-opt {
