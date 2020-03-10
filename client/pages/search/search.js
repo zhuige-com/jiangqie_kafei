@@ -17,7 +17,8 @@ Page({
     data: {
         canSearch: false,
         historySearch: [],
-        hotSearch: []
+        hotSearch: [],
+        placeholder: '',
     },
 
     keyword: '',
@@ -31,6 +32,10 @@ Page({
                     historySearch: res.data
                 });
             }
+        });
+
+        that.setData({
+            placeholder: getApp().app_name
         });
 
         Rest.get(Api.JIANGQIE_POSTS_SEARCH_HOT).then(res => {

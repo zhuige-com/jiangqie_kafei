@@ -3,7 +3,7 @@
 	<view class="jiangqie-searchbox">
 		<view class="jiangqie-search-input">
 			<icon type="search" size='13' color='#999'></icon>
-			<input confirm-type="search" placeholder="大家都在搜：咖啡" auto-focus="ture" placeholder-class="jiangqie-input-plholder" class="jiangqie-input" confirm-type="search" bindconfirm="handerSearchConfirm" bindinput="handlerSearchInput" />
+			<input confirm-type="search" placeholder="大家都在搜：{{placeholder}}" auto-focus="ture" placeholder-class="jiangqie-input-plholder" class="jiangqie-input" confirm-type="search" bindconfirm="handerSearchConfirm" bindinput="handlerSearchInput" />
 		</view>
 
 		<view wx:if="{{canSearch}}" class="jiangqie-search" bindtap="handerSearchClick">搜索</view>
