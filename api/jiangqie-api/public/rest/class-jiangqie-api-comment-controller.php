@@ -302,7 +302,6 @@ class JiangQie_API_Comment_Controller extends JiangQie_API_Base_Controller
 		}
 
 		$result = $wpdb->get_results("SELECT $fields FROM `$table_comments` WHERE $where ORDER BY comment_ID DESC $limit");
-		$result = $wpdb->get_results("SELECT $fields FROM `$table_comments` WHERE $where ORDER BY comment_ID DESC $limit");
 		$comments = [];
 		foreach ($result as $comment) {
 			$name = get_user_meta($comment->user_id, 'nickname', true);
