@@ -7,12 +7,6 @@
 		</view>
 		<image src="{{setting.background}}" mode="aspectFill" />
 	</view>
-	<!-- <view class="tui-searchbox" catchtap="handlerSearchClick">
-		<view class="tui-search-input" bindtap="search">
-			<icon type="search" size='13' color='#999'></icon>
-			<text class="tui-search-text">搜索文章关键字</text>
-		</view>
-	</view> -->
 	<view class="right-box">
 
 		<view wx:for="{{categories}}" wx:key="id" class="sortbox" data-id="{{item.id}}" data-name="{{item.name}}" catchtap="handlerCategoryClick">

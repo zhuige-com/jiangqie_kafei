@@ -60,9 +60,4 @@ Page({
         })
     },
 
-    handlerSearchClick: function(e) {
-        wx.redirectTo({
-          url: '/pages/search/search',
-        })
-    }
 })
