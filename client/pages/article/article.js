@@ -9,6 +9,7 @@
  * Copyright ️ 2020 www.jiangqie.com All rights reserved.
  */
 
+const Constants = require('../../utils/constants');
 const Api = require('../../utils/api.js');
 const Rest = require('../../utils/rest');
 const Auth = require('../../utils/auth');
@@ -259,7 +260,7 @@ Page({
                 loaded: true,
                 loadding: false,
                 comments: refresh ? res.data : that.data.comments.concat(res.data),
-                pullUpOn: res.data.length == 10,
+                pullUpOn: res.data.length == Constants.JQ_PER_PAGE_COUNT,
             });
         });
     },

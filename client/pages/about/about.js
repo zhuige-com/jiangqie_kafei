@@ -27,7 +27,7 @@ Page({
                 wx.getClipboardData({
                     success(res) {
                         wx.showToast({
-                            title: '链接已复制',
+                            title: '微信号已复制',
                         });
                     }
                 })
