@@ -7,11 +7,10 @@
  * License：MIT
  * Copyright ️ 2020 www.jiangqie.com All rights reserved.
  */
- 
+
 @import '../../templates/poplogin/poplogin.wxss';
 
 .jiangqie-userbox {
-    /* border-bottom: 8rpx solid #F3F3F3; */
     padding-bottom: 30rpx;
     min-height: 410rpx;
 }
@@ -101,7 +100,6 @@
 }
 
 .jiangqie-listbox {
-    /* padding: 0 30rpx; */
     padding: 0;
 }
 
@@ -110,9 +108,8 @@
 }
 
 .jiangqie-listblock {
-    /* border-bottom: 1rpx solid #F3F3F3; */
     overflow: hidden;
-    margin:0 30rpx;
+    margin: 0 30rpx;
     padding: 25rpx 0;
 }
 
@@ -167,8 +164,9 @@ button.jiangqie-listtitle {
 .jiangqie-listblock-line {
     border-bottom: 1rpx solid #DDD;
 }
+
 .jiangqie-listblock-line:last-child {
-  border-bottom: none;
+    border-bottom: none;
 }
 
 .jiangqie-list-split {

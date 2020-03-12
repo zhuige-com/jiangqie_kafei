@@ -105,12 +105,6 @@ Page({
         }
     },
 
-    // handlerLoginClick: function (e) {
-    //     wx.navigateTo({
-    //         url: '/pages/login/login',
-    //     })
-    // },
-
     handlerPostTrack: function (e) {
         if (!Auth.getUser()) {
             this.setData({

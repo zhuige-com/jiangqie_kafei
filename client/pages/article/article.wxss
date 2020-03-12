@@ -84,14 +84,6 @@ button {
     background: #FFF;
 }
 
-/* .wxParse-p {
-    font-size: 30rpx;
-    font-weight: 300;
-    color: #333;
-    line-height: 40rpx;
-    margin-bottom: 10rpx;
-} */
-
 .wxParse-p {
     margin-top: 30rpx;
     font-size: 30rpx;
@@ -151,7 +143,6 @@ button {
     font-weight: 500;
     color: #333;
     padding: 10rpx 0 16rpx;
-    /* border-bottom: 1rpx solid #CCC; */
 }
 
 .jiangqie-page-cmt-title text {
@@ -305,12 +296,9 @@ button {
 }
 
 /**/
-
-/**/
 .tui-operation {
     width: 100%;
     height: 100rpx;
-    /* box-sizing: border-box; */
     overflow: hidden;
     background: #fff;
     display: flex;
@@ -426,7 +414,7 @@ button {
 
 .textareacontent {
     position: fixed;
-    top: 350rpx;/*bottom: 0rpx;*/
+    top: 350rpx;
     width: 100%;
     height: 1200rpx;
     border-top-left-radius: 16rpx;

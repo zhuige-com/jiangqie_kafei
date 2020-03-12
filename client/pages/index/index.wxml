@@ -80,9 +80,6 @@
 				<!--新闻列表——常规-->
 				<view class="jiangqie-news-view">
 					<view wx:if="{{postsLast && postsLast.length>0}}" class="jiangqie-news-type">
-						<!-- <navigator url="../tag/tag">
-						<text>更多></text>
-					</navigator> -->
 						最新文章
 					</view>
 					<block wx:for="{{postsLast}}" wx:key="id">

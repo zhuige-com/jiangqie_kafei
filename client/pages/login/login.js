@@ -37,23 +37,19 @@ Page({
     },
 
     handlerLoginClick: function(e) {
-        let that = this;
         Auth.getWXUser().then(res => {
             return Rest.get(Api.JIANGQIE_USER_LOGIN, {
                 code: res.code,
                 encrypted_data: encodeURIComponent(res.encryptedData),
                 iv: encodeURIComponent(res.iv),
-                nickName: res.userInfo.nickName, //测试
-                avatarUrl: res.userInfo.avatarUrl, //测试
+                // nickName: res.userInfo.nickName, //测试
+                // avatarUrl: res.userInfo.avatarUrl, //测试
             })
         }).then(res => {
             let user = res.data;
             Auth.setUser(user);
             
             wx.navigateBack();
-            // wx.reLaunch({
-            //   url: '/pages/ucenter/ucenter',
-            // })
         });
     }
 })

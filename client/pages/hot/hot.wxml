@@ -30,7 +30,6 @@
 					<image src="{{item.thumbnail}}" mode="aspectFill" class="jiangqie-timeline-image"></image>
 					<view class="jiangqie-timeline-text">
 						<view class="jiangqie-timeline-title">{{item.title}}</view>
-						<!-- <view class="jiangqie-timeline-describe">{{item.excerpt}}</view> -->
 						<view class="jiangqie-timeline-info">
 							<view class="jiangqie-timeline-cmt">
                                 <block wx:if="{{currentTab==0}}">

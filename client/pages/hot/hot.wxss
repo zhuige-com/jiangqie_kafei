@@ -218,7 +218,6 @@
 .tab-view::before {
     content: '';
     position: absolute;
-    /* border-bottom: 1rpx solid #eaeef1; */
     -webkit-transform: scaleY(0.5);
     transform: scaleY(0.5);
     bottom: 0;
@@ -231,8 +230,6 @@
     height: 100rpx;
     overflow: hidden;
     box-sizing: border-box;
-    /* position: fixed; */
-    /* top: 0; */
     left: 0;
     z-index: 99;
     background: #fff;
@@ -243,7 +240,6 @@
 .tab-bar-item {
     padding: 0;
     height: 100rpx;
-    /* min-width: 80rpx; */
     width: 15%;
     line-height: 100rpx;
     margin: 0 38rpx;

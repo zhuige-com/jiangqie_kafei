@@ -38,7 +38,6 @@
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
-    /* padding: 0 30rpx; */
     padding-bottom: env(safe-area-inset-bottom);
     background: #FFF;
 }
@@ -99,13 +98,6 @@
 
 
 /** jiangqie-news-icon **/
-
-navigator {
-    text-align: center;
-}
-
-/** 去掉该标签时可删除 **/
-
 .jiangqie-news-icon {
     box-sizing: border-box;
     display: flex;
@@ -115,7 +107,6 @@ navigator {
     font-size: 24rpx;
     color: #555;
     margin-top: 10rpx;
-    /* margin-bottom: 40rpx; */
 }
 
 .jiangqie-news-iconbox {
@@ -131,7 +122,6 @@ navigator {
     height: 100rpx;
     width: 100rpx;
     border-radius: 16rpx;
-    /* box-shadow: 3rpx 3rpx 10rpx rgba(0, 0, 0, 0.2); */
 }
 
 .jiangqie-news-iconbox text {
@@ -155,7 +145,6 @@ navigator {
 .jiangqie-news-lightbox-main {
     height: 300rpx;
     width: 320rpx;
-    /* background: #7FD3FF; */
     background: linear-gradient(to right bottom, #7FD3FF, #2BB1F2);
     box-shadow: 5rpx 5rpx 20rpx rgba(0, 0, 0, 0.2);
 }
@@ -166,13 +155,11 @@ navigator {
     width: 350rpx;
     text-align: left;
     margin-left: 20rpx;
-    /* background: #9788FF; */
     background: linear-gradient(to right bottom, #9788FF, #735CFF);
     box-shadow: 5rpx 5rpx 20rpx rgba(0, 0, 0, 0.2);
 }
 
 .jiangqie-news-lightbox-side2 {
-    /* background: #FF91C2; */
     background: linear-gradient(to right bottom, #FF91C2, #FF539E);
 }
 
@@ -409,7 +396,6 @@ navigator {
 .tab-view::before {
     content: '';
     position: absolute;
-    /* border-bottom: 1rpx solid #eaeef1; */
     -webkit-transform: scaleY(0.5);
     transform: scaleY(0.5);
     bottom: 0;

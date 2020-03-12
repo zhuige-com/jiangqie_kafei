@@ -9,28 +9,32 @@
  */
 
 .jiangqie-app-info {
-  padding: 50rpx 40rpx;
-  text-align: center;
+    padding: 50rpx 40rpx;
+    text-align: center;
 }
+
 .jiangqie-app-info image {
-  height: 200rpx;
-  width: 200rpx;
-  border-radius: 200rpx;
+    height: 200rpx;
+    width: 200rpx;
+    border-radius: 200rpx;
 }
+
 .jiangqie-app-name {
-  font-size: 32rpx;
-  color: #FFF;
-  font-weight: 500;
-  line-height: 80rpx;
+    font-size: 32rpx;
+    color: #FFF;
+    font-weight: 500;
+    line-height: 80rpx;
 }
+
 .jiangqie-app-slogan {
-  font-size: 28rpx;
-  color:rgb(248, 184, 184);
-  font-weight: 400;
-  line-height: 40rpx;
+    font-size: 28rpx;
+    color: rgb(248, 184, 184);
+    font-weight: 400;
+    line-height: 40rpx;
 }
+
 .jiangqie-login-btn {
-  padding: 30rpx 160rpx;
+    padding: 30rpx 160rpx;
 }
 
 
@@ -41,7 +45,7 @@
     color: #555;
     font-weight: 400;
     border-radius: 16rpx;
-    border:2rpx solid #DDD;
+    border: 2rpx solid #DDD;
     margin-top: 30rpx;
 }
 

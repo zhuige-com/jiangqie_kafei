@@ -146,11 +146,7 @@ class JiangQie_API_Public
 
 		preg_match_all('|<img.*?src=[\'"](.*?)[\'"].*?>|i', do_shortcode($post_content), $matches);
 		if ($matches && isset($matches[1]) && isset($matches[1][0])) {
-			$thumbnails = $matches[1][0];
-		}
-
-		if (!empty($thumbnails)) {
-			return $thumbnails;
+			return $matches[1][0];
 		}
 
 		$thumbnails = JiangQie_API::option_value('default_thumbnail');

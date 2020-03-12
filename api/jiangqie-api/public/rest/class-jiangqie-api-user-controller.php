@@ -145,10 +145,10 @@ class JiangQie_API_User_Controller extends JiangQie_API_Base_Controller
 
 		// $open_id = uniqid();
 		// $open_id = '5e4fc0f56e034';
-		$user_data = [
-			'nickName' => $this->param_value($request, 'nickName', ''),
-			'avatarUrl' => $this->param_value($request, 'avatarUrl', ''),
-		];
+		// $user_data = [
+		// 	'nickName' => $this->param_value($request, 'nickName', ''),
+		// 	'avatarUrl' => $this->param_value($request, 'avatarUrl', ''),
+		// ];
 		if (!username_exists($open_id)) {
 			$user_id = wp_insert_user([
 				'user_login' => $open_id,
