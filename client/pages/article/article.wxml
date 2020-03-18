@@ -123,7 +123,7 @@
 		</view>
 		<view class="textareaBox">
 			<view class="textNum">{{comment_content.length}}/200</view>
-			<textarea autoFocus="true" name="inputComment" bindinput="handlerContentInput" class="textareaInput" maxlength="200" show-confirm-bar="{{false}}" placeholder="{{placeholder}}"></textarea>
+			<textarea auto-height autoFocus="true" name="inputComment" bindinput="handlerContentInput" class="textareaInput" maxlength="200" show-confirm-bar="{{false}}" placeholder="{{placeholder}}"></textarea>
 		</view>
 	</form>
 </view>

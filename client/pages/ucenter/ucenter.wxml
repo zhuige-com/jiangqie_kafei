@@ -18,6 +18,7 @@
 			<block wx:else>
 				<view class="jiangqie-useravatar">
 					<image src="../../images/default_avatar.jpg" mode="aspectFill"></image>
+          <view class="jiangqie-useralogin"><navigator url="../login/login">立即登录</navigator></view>
 				</view>
 			</block>
 		</view>

@@ -7,7 +7,7 @@
  * License：MIT
  * Copyright ️ 2020 www.jiangqie.com All rights reserved.
  */
-
+ 
 @import '../../templates/poplogin/poplogin.wxss';
 
 .jiangqie-userbox {
@@ -35,19 +35,18 @@
 }
 
 .jiangqie-useravatar {
-    padding-left: 50%;
-    height: 230rpx;
+    text-align: center;
+    height: 240rpx;
     clear: both;
     padding-top: 80rpx;
 }
 
 .jiangqie-useravatar image {
-    float: left;
     height: 152rpx;
     width: 152rpx;
     border-radius: 152rpx;
     border: 12rpx solid #FFF;
-    margin-left: -88rpx;
+    margin-bottom: 20rpx;
 }
 
 .jiangqie-username {
@@ -55,6 +54,13 @@
     line-height: 50rpx;
     font-size: 36rpx;
     font-weight: 500;
+    color: #FFF;
+}
+.jiangqie-useralogin {
+    height: 50rpx;
+    line-height: 50rpx;
+    font-size: 30rpx;
+    font-weight: 300;
     color: #FFF;
 }
 
