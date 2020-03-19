@@ -97,13 +97,6 @@ Page({
         Rest.get(Api.JIANGQIE_USER_LIKE, {
             post_id: that.data.post.id
         }).then(res => {
-            if (res.code == -1) {
-                that.setData({
-                    showPopLogin: true
-                });
-                return;
-            }
-
             let avatar = Auth.getUser().avatar;
             var index = that.data.like_list.indexOf(avatar);
             if (index > -1) {
@@ -112,7 +105,6 @@ Page({
                 that.data.like_list.unshift(avatar);
             }
             
-
             that.setData({
                 post_like: (that.data.post_like == 1 ? 0 : 1),
                 like_list: that.data.like_list
@@ -149,13 +141,6 @@ Page({
             parent_id: that.comment_id,
             content: that.data.comment_content
         }).then(res => {
-            if (res.code == -1) {
-                that.setData({
-                    showPopLogin: true
-                });
-                return;
-            }
-
             that.setData({
                 comment_count_change: that.data.comment_count_change + (res.data.comment_verify==1?0:1),
                 show_comment_submit: false
@@ -190,13 +175,6 @@ Page({
                     Rest.get(Api.JIANGQIE_COMMENT_DELETE, {
                         comment_id: comment_id
                     }).then(res => {
-                        if (res.code == -1) {
-                            that.setData({
-                                showPopLogin: true
-                            });
-                            return;
-                        }
-
                         that.setData({
                             comment_count_change: that.data.comment_count_change - 1
                         });
@@ -224,13 +202,6 @@ Page({
         Rest.get(Api.JIANGQIE_USER_FAVORITE, {
             post_id: that.data.post.id
         }).then(res => {
-            if (res.code == -1) {
-                that.setData({
-                    showPopLogin: true
-                });
-                return;
-            }
-
             that.setData({
                 post_favorite: (that.data.post_favorite == 1 ? 0 : 1)
             });

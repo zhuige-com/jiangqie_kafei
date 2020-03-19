@@ -132,13 +132,6 @@ Page({
         }
 
         Rest.get(url, params).then(res => {
-            if (res.code == -1) {
-                that.setData({
-                    showPopLogin: true
-                });
-                return;
-            }
-
             that.setData({
                 loaded: true,
                 loadding: false,

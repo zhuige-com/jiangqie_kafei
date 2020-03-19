@@ -25,14 +25,23 @@ function request(url, data = {}, method = "GET") {
             success: function (res) {
                 wx.hideLoading();
 
-                if (res.statusCode == 200) {
-                    if (res.data.code == 0 || res.data.code == -1) {
-                        resolve(res.data);
-                    } else {
-                        reject(res.data.msg);
-                    }
-                } else {
+                if (res.statusCode != 200) {
                     reject(res.errMsg);
+                    return;
+                }
+
+                if (res.data.code == -1) {
+                    var pages = getCurrentPages();
+                    var currentPage = pages[pages.length - 1];
+                    currentPage.setData({
+                        showPopLogin: true
+                    });
+                    return;
+                }
+
+                if (res.data.code == 0) {
+                    resolve(res.data);
+                    return;
                 }
             },
             fail: function (err) {
