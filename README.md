@@ -8,6 +8,7 @@ Hi，欢迎使用“酱茄小程序开源版 – 人人咖啡师”。
 ![微信小程序二维码](https://raw.githubusercontent.com/longwenjunjie/jiangqie_kafei/master/screenshot/code.jpg)
 
 **案例(部分用户有二次开发)**
+
 ![虫子网络](https://raw.githubusercontent.com/longwenjunjie/jiangqie_kafei/master/case/chognziwang.jpg "虫子网络") ![寻找摩天轮](https://raw.githubusercontent.com/longwenjunjie/jiangqie_kafei/master/case/xunzhaomotianlun.jpg "寻找摩天轮") ![勾拉多+](https://raw.githubusercontent.com/longwenjunjie/jiangqie_kafei/master/case/golot.jpg "勾拉多+") ![WordPress中文网](https://raw.githubusercontent.com/longwenjunjie/jiangqie_kafei/master/case/wpzhongwen.jpg "WordPress中文网")
 
 ![维基案例](https://raw.githubusercontent.com/longwenjunjie/jiangqie_kafei/master/case/weiji.jpg "维基案例") ![拇指吉他谱](https://raw.githubusercontent.com/longwenjunjie/jiangqie_kafei/master/case/jitapu.jpg "拇指吉他谱") ![痞事](https://raw.githubusercontent.com/longwenjunjie/jiangqie_kafei/master/case/pishi.jpg "痞事") ![凌小云i](https://raw.githubusercontent.com/longwenjunjie/jiangqie_kafei/master/case/linngxiaoyun.jpg "凌小云i")
