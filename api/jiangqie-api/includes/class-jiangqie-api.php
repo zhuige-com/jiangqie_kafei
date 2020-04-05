@@ -12,7 +12,7 @@
 class JiangQie_API
 {
 	//分页 每页数量
-	public const POSTS_PER_PAGE = 10;
+	const POSTS_PER_PAGE = 10;
 	
 	/**
 	 * The loader that's responsible for maintaining and registering all hooks that power
