@@ -84,7 +84,7 @@ Page({
                 return;
             }
 
-            this.loadPosts(false);
+            this.loadPost(false);
         }
     },
 
