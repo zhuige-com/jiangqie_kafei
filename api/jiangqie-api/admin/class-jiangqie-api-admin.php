@@ -346,6 +346,16 @@ class JiangQie_API_Admin
                 ),
 
                 array(
+                    'id'          => 'hide_cat',
+                    'type'        => 'text',
+                    'title'       => '隐藏分类',
+                    'before'      => '分类ID,英文逗号分隔',
+                    'after'       => '例如：3,4,7',
+                    'class'       => 'text-class',
+                    'description' => '隐藏相应分类下的文章',
+                ),
+
+                array(
                     'id'      => 'switch_excerpt',
                     'type'    => 'switcher',
                     'title'   => '文章摘要',

@@ -139,6 +139,11 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 			'orderby' => 'date',
 		];
 
+		$hide_cat = JiangQie_API::option_value('hide_cat');
+		if (!empty($hide_cat)) {
+			$args['category__not_in'] = explode(',', $hide_cat);
+		}
+
 		$posts = $this->get_posts($args);
 		return $this->make_success($posts);
 	}
@@ -171,8 +176,14 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 			'posts_per_page' => JiangQie_API::POSTS_PER_PAGE,
 			'offset' => $offset,
 			'orderby' => 'date',
-			's' => $search
+			's' => $search,
+			'post_type' => ['post']
 		];
+
+		$hide_cat = JiangQie_API::option_value('hide_cat');
+		if (!empty($hide_cat)) {
+			$args['category__not_in'] = explode(',', $hide_cat);
+		}
 
 		$posts = $this->get_posts($args);
 		return $this->make_success($posts);
@@ -341,6 +352,11 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 			'offset' => $offset,
 			'order' => 'DESC',
 		];
+
+		$hide_cat = JiangQie_API::option_value('hide_cat');
+		if (!empty($hide_cat)) {
+			$args['category__not_in'] = explode(',', $hide_cat);
+		}
 
 		$sort = $this->param_value($request, 'sort', 'views');
 		if ($sort == 'views' || $sort == 'likes' || $sort == 'favorites') {

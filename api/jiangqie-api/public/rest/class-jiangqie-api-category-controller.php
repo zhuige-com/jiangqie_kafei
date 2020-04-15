@@ -33,7 +33,13 @@ class JiangQie_API_Category_Controller extends JiangQie_API_Base_Controller
 	 */
 	public function get_index($request)
 	{
-		$result = get_categories(['parent' => 0, 'hide_empty' => 0]);
+		// $result = get_categories(['parent' => 0, 'hide_empty' => 0]);
+		$args = ['parent' => 0, 'hide_empty' => 0];
+		$hide_cat = Jiangqie_API::option_value('hide_cat');
+		if (!empty($hide_cat)) {
+			$args['exclude'] = $hide_cat;
+		}
+		$result = get_categories($args);
 
 		$categories = [];
 		foreach ($result as &$catgory) {
