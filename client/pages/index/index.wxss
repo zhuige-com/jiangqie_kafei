@@ -250,9 +250,14 @@
     color: #333;
     font-weight: 400;
     line-height: 50rpx;
+    /* margin-bottom: 30rpx; */
+    /* height: 100rpx; */
+    overflow: hidden;
+}
+
+.jiangqie-news-no-excerpt {
     margin-bottom: 30rpx;
     height: 100rpx;
-    overflow: hidden;
 }
 
 .jiangqie-news-describe {

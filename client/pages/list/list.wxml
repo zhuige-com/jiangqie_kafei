@@ -11,8 +11,8 @@
 				<view wx:if="{{index%5==4}}" class="jiangqie-news-block image-wide" data-id="{{item.id}}" catchtap="handlerArticleClick">
 					<image src="{{item.thumbnail}}" mode="aspectFill" class="jiangqie-news-image"></image>
 					<view class="jiangqie-news-text">
-						<view class="jiangqie-news-title">{{item.title}}</view>
-						<!-- <view class="jiangqie-news-describe">{{item.excerpt}}</view> -->
+						<view class="jiangqie-news-title {{item.excerpt?'':'jiangqie-news-no-excerpt'}}">{{item.title}}</view>
+						<view wx:if="{{item.excerpt}}" class="jiangqie-news-describe">{{item.excerpt}}</view>
 						<view class="jiangqie-news-info">
 							<view class="jiangqie-news-cmt">
 								<image src="../../images/ctm2.png" mode="aspectFill" class=""></image>{{item.views}}
@@ -25,8 +25,8 @@
 				<view wx:else class="jiangqie-news-block" data-id="{{item.id}}" catchtap="handlerArticleClick">
 					<image src="{{item.thumbnail}}" mode="aspectFill" class="jiangqie-news-image"></image>
 					<view class="jiangqie-news-text">
-						<view class="jiangqie-news-title">{{item.title}}</view>
-						<!-- <view class="jiangqie-news-describe">{{item.excerpt}}</view> -->
+						<view class="jiangqie-news-title {{item.excerpt?'':'jiangqie-news-no-excerpt'}}">{{item.title}}</view>
+						<view wx:if="{{item.excerpt}}" class="jiangqie-news-describe">{{item.excerpt}}</view>
 						<view class="jiangqie-news-info">
 							<view class="jiangqie-news-cmt">
 								<image src="../../images/ctm2.png" mode="aspectFill" class=""></image>{{item.views}}

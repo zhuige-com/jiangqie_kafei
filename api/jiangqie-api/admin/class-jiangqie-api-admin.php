@@ -346,6 +346,14 @@ class JiangQie_API_Admin
                 ),
 
                 array(
+                    'id'      => 'switch_excerpt',
+                    'type'    => 'switcher',
+                    'title'   => '文章摘要',
+                    'label'   => '文章列表中是否显示摘要?',
+                    'default' => 'no',
+                ),
+
+                array(
                     'id'      => 'switch_comment',
                     'type'    => 'switcher',
                     'title'   => '评论',

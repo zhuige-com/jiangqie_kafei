@@ -47,10 +47,12 @@ class JiangQie_API_Public
 				'comment_count' => $post->comment_count,
 			];
 
-			if ($post->post_excerpt) {
-				$item["excerpt"] = html_entity_decode(wp_trim_words($post->post_excerpt, 50, '...'));
-			} else {
-				$item["excerpt"] = html_entity_decode(wp_trim_words($post->post_content, 50, '...'));
+			if (JiangQie_API::option_value('switch_excerpt') == 'yes') {
+				if ($post->post_excerpt) {
+					$item["excerpt"] = html_entity_decode(wp_trim_words($post->post_excerpt, 50, '...'));
+				} else {
+					$item["excerpt"] = html_entity_decode(wp_trim_words($post->post_content, 50, '...'));
+				}
 			}
 
 			$item['thumbnail'] = apply_filters('jiangqie_post_thumbnail', $post->ID);
