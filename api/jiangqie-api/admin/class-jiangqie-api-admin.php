@@ -268,6 +268,15 @@ class JiangQie_API_Admin
          * - video mp4/oembed
          */
 
+        $content = '';
+        $res = wp_remote_get("https://key.jiangqie.com/api/goods/description?goods_id=2");
+		if ($res['response']['code'] == 200) {
+			$data = json_decode($res['body'], TRUE);
+			if ($data['code'] == 1) {
+                $content = $data['data'];
+			}
+		} 
+
         $fields[] = array(
             'name'   => 'abstract',
             'title'  => '概要',
@@ -277,18 +286,7 @@ class JiangQie_API_Admin
                 array(
                     'type'    => 'content',
                     'class'   => 'class-name', // for all fieds
-                    'content' => "
-                    <h2>关于我们</h2>
-                    <p>酱茄小程序开源版基于WordPress开源程序和WordPress REST API开发，实现WordPress网站数据与小程序数据同步共享，通过简单的配置就能搭建自己的小程序。</p>
-                    
-                    <h2>联系我们</h2>
-                    <p>微信客服：jianbing2011  （如你想加入微信群请说明）</p>
-                    <p>官方网站：<a href='https://www.jiangqie.com/' title='酱茄官方网站'>https://www.jiangqie.com/</a></p>
-                    <p>安装文档：<a href='https://www.jiangqie.com/docs/kaiyuan/id1' title='安装文档'>https://www.jiangqie.com/docs/kaiyuan/id1</a></p>
-                    <p>更新日志：<a href='https://www.jiangqie.com/docs/kaiyuan/id4' title='更新日志'>https://www.jiangqie.com/docs/kaiyuan/id4</a></p>
-                    
-                    <h2>扫码体验</h2>
-                    <p><image width=200 height=200 src='https://www.jiangqie.com/wp-content/uploads/2020/02/gh_b02fe8c64231_1280.jpg'></p>",
+                    'content' => $content,
                 ),
                 
             )
