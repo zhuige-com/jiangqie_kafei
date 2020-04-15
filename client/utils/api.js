@@ -11,7 +11,11 @@
 const Config = require('./config');
 
 function makeURL(module, action) {
-    return `https://${Config.JQ_DOMAIN}/wp-json/jiangqie/v1/${module}/${action}`;
+    if (Config.JQ_DEBUG) {
+        return `http://test.wp.com/wp-json/jiangqie/v1/${module}/${action}`;
+    } else {
+        return `https://${Config.JQ_DOMAIN}/wp-json/jiangqie/v1/${module}/${action}`;
+    }
 }
 
 function makeRes(res, name) {

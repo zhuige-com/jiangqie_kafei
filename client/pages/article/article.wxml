@@ -12,6 +12,7 @@
 					<image src="../../images/ctm2.png" mode="widthFix" class="jiangqie-page-icon"></image>{{post.views}}
 				</view>
 				<text>{{post.time}}</text>
+				<text wx:for="{{post.cats}}" wx:for-index="cati" wx:key="cati" wx:for-item="cat" class="category">{{cat.name}}</text>
 			</view>
 		</view>
 	</view>

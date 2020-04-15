@@ -69,9 +69,13 @@ button {
     font-size: 24rpx;
     font-weight: 200;
     color: #CCC;
-    display: block;
+    display: inline-block;
     line-height: 80rpx;
     padding: 0rpx;
+}
+
+.jiangqie-page-cmt .category {
+    margin-left: 20rpx;
 }
 
 .jiangqie-page-title-img {

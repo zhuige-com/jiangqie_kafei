@@ -228,6 +228,16 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 			$post['tags'] = apply_filters('jiangqie_tag_for_detail', $tags);
 		}
 
+		//查询分类
+		$cats = get_the_category($post_id);
+		$post['cats'] = [];
+		foreach ($cats as $cat) {
+			$post['cats'][] = [
+				'id' => $cat->term_id,
+				'name' => $cat->name,
+			];
+		}
+
 		//美化时间
 		$post['time'] = $this->time_beautify($post['time']);
 
