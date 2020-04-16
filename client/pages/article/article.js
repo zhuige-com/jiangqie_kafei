@@ -90,6 +90,16 @@ Page({
     },
 
     /**
+     * 跳转返回
+     */
+  //点击跳转到上级页面
+  jumpBtn: function (options) {
+    wx.navigateBack({
+        delta: 1
+    })
+  },
+
+    /**
      * 文章 点赞
      */
     handlerLikeClick: function (e) {

@@ -493,3 +493,18 @@ button.jiangqie-page-laud-btn {
     box-sizing: content-box;
     line-height: inherit;
 }
+
+.jiangqie-goback-btn {
+  height: 96rpx;
+  width: 96rpx;
+  position: fixed;
+  right: 40rpx;
+  bottom: 200rpx;
+}
+.jiangqie-goback-btn button {
+  background: none;
+}
+.jiangqie-goback-btn image {
+  height: 96rpx;
+  width: 96rpx;
+}

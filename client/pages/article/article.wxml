@@ -131,3 +131,6 @@
 <view catchtap="handlerCancelClick" class="pagemake" wx:if="{{show_comment_submit}}"></view>
 
 <template is="jiangqie_poplogin" data="{{show:showPopLogin}}" />
+<view class="jiangqie-goback-btn" bindtap="jumpBtn">
+    <image src="../../images/goback.png" mode="widthFix"></image>
+</view>
