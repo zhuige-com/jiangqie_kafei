@@ -1,5 +1,5 @@
 /*
- * 酱茄小程序开源版 v1.1.0
+ * 酱茄小程序开源版 v1.0.5
  * Author: 酱茄
  * Help document: https://www.jiangqie.com/docs/kaiyuan/id1
  * github: https://github.com/longwenjunjie/jiangqie_kafei
