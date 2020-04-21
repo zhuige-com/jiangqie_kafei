@@ -74,6 +74,8 @@ require plugin_dir_path(__FILE__) . 'includes/categories-images.php';
 
 require plugin_dir_path(__FILE__) . 'includes/custom_users_column.php';
 
+require plugin_dir_path(__FILE__) . 'includes/custom_dashboard.php';
+
 /**
  * Begins execution of the plugin.
  *

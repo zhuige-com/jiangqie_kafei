@@ -268,9 +268,9 @@ class JiangQie_API_Admin
          * - video mp4/oembed
          */
 
-        $content = '';
+        $content = '欢迎使用酱茄小程序开源版';
         $res = wp_remote_get("https://key.jiangqie.com/api/goods/description?goods_id=2");
-		if ($res['response']['code'] == 200) {
+		if (!is_wp_error(res) && $res['response']['code'] == 200) {
 			$data = json_decode($res['body'], TRUE);
 			if ($data['code'] == 1) {
                 $content = $data['data'];
