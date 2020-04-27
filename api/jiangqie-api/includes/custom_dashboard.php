@@ -8,7 +8,7 @@
 function custom_dashboard_jiangqie_help()
 {
 	$content = '欢迎使用酱茄小程序';
-	$res = wp_remote_get("https://key.jiangqie.com/api/goods/description?goods_id=2");
+	$res = wp_remote_get("https://key.jiangqie.com/api/goods/description?goods_id=2", ['timeout' => 1]);
 	if (!is_wp_error($res) && $res['response']['code'] == 200) {
 		$data = json_decode($res['body'], TRUE);
 		if ($data['code'] == 1) {
