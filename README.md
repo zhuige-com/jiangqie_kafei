@@ -5,7 +5,10 @@ Hi，欢迎使用“酱茄小程序开源版 – 人人咖啡师”。
 
 ## 演示
 
-![微信小程序二维码](https://gitee.com/longwenjunj/jiangqie_kafei/raw/master/screenshot/code.jpg)
+![微信小程序二维码](https://gitee.com/longwenjunj/jiangqie_kafei/raw/master/screenshot/code.jpg) 
+
+**酱茄专业版二维码**
+![酱茄专业版二维码](https://gitee.com/longwenjunj/jiangqie_kafei/raw/master/screenshot/code_pro.jpg)
 
 **案例(部分用户有二次开发)**
 
