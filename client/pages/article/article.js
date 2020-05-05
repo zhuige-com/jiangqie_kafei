@@ -1,4 +1,3 @@
-
 /*
  * 酱茄小程序开源版 v1.0.5
  * Author: 酱茄
@@ -78,26 +77,32 @@ Page({
         }
     },
 
+    wxParseTagATap: function (e) {
+        wx.setClipboardData({
+            data: e.currentTarget.dataset.src
+        });
+    },
+
     /**
      * 点击 TAG
      */
-    handlerTagClick: function(e) {
+    handlerTagClick: function (e) {
         let tag_id = e.currentTarget.dataset.id;
         let tag = e.currentTarget.dataset.tag;
         wx.navigateTo({
-          url: '/pages/list/list?title=' + tag + '&tag_id=' + tag_id,
+            url: '/pages/list/list?title=' + tag + '&tag_id=' + tag_id,
         })
     },
 
     /**
      * 跳转返回
      */
-  //点击跳转到上级页面
-  jumpBtn: function (options) {
-    wx.navigateBack({
-        delta: 1
-    })
-  },
+    //点击跳转到上级页面
+    jumpBtn: function (options) {
+        wx.navigateBack({
+            delta: 1
+        })
+    },
 
     /**
      * 文章 点赞
@@ -114,7 +119,7 @@ Page({
             } else {
                 that.data.like_list.unshift(avatar);
             }
-            
+
             that.setData({
                 post_like: (that.data.post_like == 1 ? 0 : 1),
                 like_list: that.data.like_list
@@ -152,7 +157,7 @@ Page({
             content: that.data.comment_content
         }).then(res => {
             that.setData({
-                comment_count_change: that.data.comment_count_change + (res.data.comment_verify==1?0:1),
+                comment_count_change: that.data.comment_count_change + (res.data.comment_verify == 1 ? 0 : 1),
                 show_comment_submit: false
             });
 
