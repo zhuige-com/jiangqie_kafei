@@ -14,7 +14,10 @@ const Auth = require('./auth');
  */
 function request(url, data = {}, method = "GET") {
     return new Promise(function (resolve, reject) {
-        wx.showLoading();
+        let pages = getCurrentPages();
+        let currentPage = pages[pages.length - 1];
+        currentPage.setData({loading: true});
+        // wx.showLoading();
 
         data.token = Auth.getToken();
 
@@ -23,7 +26,8 @@ function request(url, data = {}, method = "GET") {
             data: data,
             method: method,
             success: function (res) {
-                wx.hideLoading();
+                // wx.hideLoading();
+                currentPage.setData({loading: false});
 
                 if (res.statusCode != 200) {
                     reject(res.errMsg);
@@ -31,8 +35,6 @@ function request(url, data = {}, method = "GET") {
                 }
 
                 if (res.data.code == -1) {
-                    var pages = getCurrentPages();
-                    var currentPage = pages[pages.length - 1];
                     currentPage.setData({
                         showPopLogin: true
                     });
@@ -45,7 +47,9 @@ function request(url, data = {}, method = "GET") {
                 }
             },
             fail: function (err) {
-                wx.hideLoading();
+                // wx.hideLoading();
+                currentPage.setData({loading: false});
+
                 reject(err);
             }
         })

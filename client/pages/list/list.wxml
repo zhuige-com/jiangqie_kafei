@@ -52,3 +52,7 @@
 </view>
 
 <template is="jiangqie_poplogin" data="{{show:showPopLogin}}" />
+
+<!--加载框 start-->
+<tui-loading visible="{{loading}}"></tui-loading>
+<!--加载框 end-->

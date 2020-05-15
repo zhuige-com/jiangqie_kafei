@@ -4,6 +4,7 @@
     "onReachBottomDistance": 50,
     "usingComponents": {
         "navBar": "../components/navbar/navbar",
+        "tui-loading": "../../components/loading/loading",
         "tui-loadmore": "../../components/loadmore/loadmore",
         "tui-nomore": "../../components/nomore/nomore"
     }

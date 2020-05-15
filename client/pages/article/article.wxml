@@ -134,3 +134,6 @@
 <view class="jiangqie-goback-btn" bindtap="jumpBtn">
     <image src="../../images/goback.png" mode="widthFix"></image>
 </view>
+<!--加载框 start-->
+<tui-loading visible="{{loading}}"></tui-loading>
+<!--加载框 end-->

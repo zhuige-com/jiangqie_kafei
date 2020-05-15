@@ -1,3 +1,6 @@
 {
-    "navigationBarTitleText": "文章分类"
+    "navigationBarTitleText": "文章分类",
+    "usingComponents": {
+        "tui-loading": "../../components/loading/loading"
+    }
 }

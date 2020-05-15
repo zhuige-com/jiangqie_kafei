@@ -4,3 +4,7 @@
 <view class="jiangqie-page-body">
 	<template is="wxParse" data="{{wxParseData:article.nodes}}" />
 </view>
+
+<!--加载框 start-->
+<tui-loading visible="{{loading}}"></tui-loading>
+<!--加载框 end-->

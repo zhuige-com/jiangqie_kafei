@@ -2,6 +2,7 @@
     "navigationBarTitleText": "...",
     "onReachBottomDistance": 50,
     "usingComponents": {
+        "tui-loading": "../../components/loading/loading",
         "tui-loadmore": "../../components/loadmore/loadmore",
         "tui-nomore": "../../components/nomore/nomore"
     }

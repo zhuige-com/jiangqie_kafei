@@ -1,4 +1,6 @@
 {
     "navigationBarTitleText": "关于我们",
-    "usingComponents": {}
+    "usingComponents": {
+        "tui-loading": "../../components/loading/loading"
+    }
 }

@@ -1,4 +1,6 @@
 {
     "navigationBarTitleText": "...",
-    "usingComponents": {}
+    "usingComponents": {
+        "tui-loading": "../../components/loading/loading"
+    }
 }
