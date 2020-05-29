@@ -180,6 +180,12 @@ class JiangQie_API_Setting_Controller extends JiangQie_API_Base_Controller
 			$data['hot'] = $slides;
 		}
 
+		//列表模式
+		$data['list_mode'] = JiangQie_API::option_value('home_list_mode');
+		if (!$data['list_mode']) {
+			$data['list_mode'] = 3;
+		}
+
 		return $this->make_success($data);
 	}
 

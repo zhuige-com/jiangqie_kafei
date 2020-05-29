@@ -599,6 +599,20 @@ class JiangQie_API_Admin
                     ),
                     // 'sanitize'    => array($this, 'test_sanitize_callback'),
                 ),
+
+                //列表模式
+                array(
+                    'id'            => 'home_list_mode',
+                    'type'          => 'select',
+                    'title'         => '列表模式',
+                    'description'   => '首页文章列表显示方式',
+                    'options'       => array(
+                        '3'         => '混合模式',
+                        '1'         => '小图模式',
+                        '2'         => '大图模式',
+                    ),
+                    'class'       => 'chosen width-150',
+                ),
             )
         );
 

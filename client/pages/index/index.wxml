@@ -83,7 +83,7 @@
 						最新文章
 					</view>
 					<block wx:for="{{postsLast}}" wx:key="id">
-						<view wx:if="{{index%5==4}}" class="jiangqie-news-block image-wide" data-id="{{item.id}}" catchtap="handlerArticleClick">
+						<view wx:if="{{(listMode==1 && false) || (listMode==2) || (listMode==3 && index%5==4)}}" class="jiangqie-news-block image-wide" data-id="{{item.id}}" catchtap="handlerArticleClick">
 							<image src="{{item.thumbnail}}" mode="aspectFill" class="jiangqie-news-image"></image>
 							<view class="jiangqie-news-text">
 								<view class="jiangqie-news-title {{item.excerpt?'':'jiangqie-news-no-excerpt'}}">{{item.title}}</view>
@@ -124,7 +124,7 @@
 			<view class="container">
 				<view class="jiangqie-news-view">
 					<block wx:for="{{posts}}" wx:key="id">
-						<view wx:if="{{index%5==4}}" class="jiangqie-news-block image-wide" data-id="{{item.id}}" catchtap="handlerArticleClick">
+						<view wx:if="{{(listMode==1 && false) || (listMode==2) || (listMode==3 && index%5==4)}}" class="jiangqie-news-block image-wide" data-id="{{item.id}}" catchtap="handlerArticleClick">
 							<image src="{{item.thumbnail}}" mode="aspectFill" class="jiangqie-news-image"></image>
 							<view class="jiangqie-news-text">
 								<view class="jiangqie-news-title {{item.excerpt?'':'jiangqie-news-no-excerpt'}}">{{item.title}}</view>

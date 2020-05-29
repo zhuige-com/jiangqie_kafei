@@ -43,6 +43,9 @@ Page({
         posts: [],
         loadding: false,
         pullUpOn: true,
+
+        //列表模式
+        listMode: 3,
     },
 
     onLoad: function (options) {
@@ -61,6 +64,8 @@ Page({
                 iconNav: res.data.icon_nav,
                 actives: res.data.actives,
                 hot: res.data.hot,
+                listMode: res.data.list_mode
+
             });
 
             if (res.data.title && res.data.title.length > 0) {
