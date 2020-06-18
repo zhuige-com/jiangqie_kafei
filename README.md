@@ -26,6 +26,8 @@ Hi，欢迎使用“酱茄小程序开源版 – 人人咖啡师”。
 
 ![酱茄专业版二维码](https://gitee.com/longwenjunj/jiangqie_kafei/raw/master/screenshot/code_pro.jpg)
 
+**了解专业版：https://www.jiangqie.com/pro**
+
 **案例(部分用户有二次开发)**
 
 ![虫子网络](https://gitee.com/longwenjunj/jiangqie_kafei/raw/master/case/chognziwang.jpg "虫子网络") ![寻找摩天轮](https://gitee.com/longwenjunj/jiangqie_kafei/raw/master/case/xunzhaomotianlun.jpg "寻找摩天轮") ![勾拉多+](https://gitee.com/longwenjunj/jiangqie_kafei/raw/master/case/golot.jpg "勾拉多+") ![WordPress中文网](https://gitee.com/longwenjunj/jiangqie_kafei/raw/master/case/wpzhongwen.jpg "WordPress中文网")
