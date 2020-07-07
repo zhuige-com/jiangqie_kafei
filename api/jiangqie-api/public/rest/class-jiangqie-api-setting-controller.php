@@ -47,12 +47,6 @@ class JiangQie_API_Setting_Controller extends JiangQie_API_Base_Controller
 			]
 		]);
 
-		// //页面
-		// register_rest_route($this->namespace, '/' . $this->module . '/page', [
-		// 	[
-		// 		'callback' => [$this, 'get_page'],
-		// 	]
-		// ]);
 	}
 
 	/**
@@ -241,33 +235,5 @@ class JiangQie_API_Setting_Controller extends JiangQie_API_Base_Controller
 
 		return $this->make_success($data);
 	}
-
-	// /**
-	//  * 获取页面 用户中心
-	//  */
-	// public function get_page($request)
-	// {
-	// 	$index = $this->param_value($request, 'index', 0);
-	// 	// $result = JiangQie_API::option_value('profile_menu');
-	// 	// if (empty($result)) {
-	// 	// 	$result = [];
-	// 	// } 
-
-	// 	$result = JiangQie_API::option_value('profile_menu');
-	// 	if (empty($result)) {
-	// 		$menu = [];
-	// 	} else {
-	// 		foreach ($result as $item) {
-	// 			if ($item['enable'] == 'yes') {
-	// 				$menu[] = $item;
-	// 			}
-	// 		}
-	// 	}
-		
-	// 	if (count($menu) > $index) {
-	// 		return $this->make_success($menu[$index]);
-	// 	}
-
-	// }
 	
 }

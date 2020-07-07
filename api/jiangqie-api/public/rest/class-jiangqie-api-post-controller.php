@@ -318,7 +318,9 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 		return $this->make_success($page);
 	}
 
-	//获取某一TAG下的文章
+	/**
+	 * 获取某一TAG下的文章
+	 */
 	public function get_tag_posts($request)
 	{
 		$offset = $this->param_value($request, 'offset', 0);
@@ -335,7 +337,9 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 		return $this->make_success($posts);
 	}
 
-	//获取某一分类下的文章
+	/**
+	 * 获取某一分类下的文章
+	 */
 	public function get_category_posts($request)
 	{
 		$offset = $this->param_value($request, 'offset', 0);
@@ -352,7 +356,9 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 		return $this->make_success($posts);
 	}
 
-	//热门 浏览数[views] 点赞数[likes] 评论数[commnets]
+	/**
+	 * 热门 浏览数[views] 点赞数[likes] 评论数[commnets]
+	 */
 	public function get_hot_posts($request)
 	{
 		$offset = $this->param_value($request, 'offset', 0);
@@ -390,9 +396,6 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 				$post['tags'] = apply_filters('jiangqie_tag_for_list', $tags);
 			}
 
-			// $post['views'] = (int)get_post_meta($post['id'], 'views', true);
-			// $post['likes'] = (int)get_post_meta($post['id'], 'likes', true);
-			// $post['favorites'] = (int)get_post_meta($post['id'], 'favorites', true);
 			if ($sort == 'views' || $sort == 'likes' || $sort == 'favorites') {
 				$post[$sort] = (int)get_post_meta($post['id'], $sort, true);
 			}
@@ -403,7 +406,9 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 		return $this->make_success($posts);
 	}
 
-	//我的文章 浏览数[views] 点赞数[likes] 评论数[commnets] 收藏[favorite]
+	/**
+	 * 我的文章 浏览数[views] 点赞数[likes] 评论数[commnets] 收藏[favorite]
+	 */
 	public function get_my_posts($request)
 	{
 		$user_id = $this->check_login($request);

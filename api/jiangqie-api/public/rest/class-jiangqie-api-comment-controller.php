@@ -20,6 +20,7 @@ class JiangQie_API_Comment_Controller extends JiangQie_API_Base_Controller
 
 	public function register_routes()
 	{
+		//文章的评论列表
 		register_rest_route($this->namespace, '/' . $this->module . '/index', [
 			[
 				'callback' => [$this, 'comment_index'],
@@ -38,42 +39,7 @@ class JiangQie_API_Comment_Controller extends JiangQie_API_Base_Controller
 			]
 		]);
 
-		// register_rest_route($this->namespace, '/' . $this->module . '/list', [
-		// 	[
-		// 		'callback' => [$this, 'comment_list'],
-		// 		'args' => array_merge($this->params_paging(), [
-		// 			'token' => [
-		// 				'default' => '',
-		// 				'description' => '用户token',
-		// 				'type' => 'string',
-		// 			],
-		// 			'comment_id' => [
-		// 				'default' => 0,
-		// 				'description' => '评论ID',
-		// 				'type' => 'integer',
-		// 			],
-		// 		])
-		// 	]
-		// ]);
-
-		// register_rest_route($this->namespace, '/' . $this->module . '/detail', [
-		// 	[
-		// 		'callback' => [$this, 'comment_detail'],
-		// 		'args' => [
-		// 			'token' => [
-		// 				'default' => '',
-		// 				'description' => '用户token',
-		// 				'type' => 'string',
-		// 			],
-		// 			'comment_id' => [
-		// 				'default' => 0,
-		// 				'description' => '评论ID',
-		// 				'type' => 'integer',
-		// 			],
-		// 		]
-		// 	]
-		// ]);
-
+		//发布评论
 		register_rest_route($this->namespace, '/' . $this->module . '/add', [
 			[
 				'callback' => [$this, 'comment_add'],
@@ -102,6 +68,7 @@ class JiangQie_API_Comment_Controller extends JiangQie_API_Base_Controller
 			]
 		]);
 
+		//删除评论
 		register_rest_route($this->namespace, '/' . $this->module . '/delete', [
 			[
 				'callback' => [$this, 'comment_delete'],
@@ -144,59 +111,8 @@ class JiangQie_API_Comment_Controller extends JiangQie_API_Base_Controller
 		return $this->make_success($comments);
 	}
 
-	// /**
-	//  * 文章的评论详情
-	//  */
-	// public function comment_detail($request)
-	// {
-	// 	$comment_id = $this->param_value($request, 'comment_id', 0);
-	// 	if (empty($comment_id)) {
-	// 		return $this->make_error('缺少参数');
-	// 	}
-
-	// 	$my_user_id = $this->check_login($request);
-
-	// 	$result = get_comment($comment_id);
-	// 	$comment = [
-	// 		'id' => $result->comment_ID,
-	// 		'user' => [
-	// 			'id' => $result->user_id,
-	// 			'name' => get_user_meta($result->user_id, 'nickname', true),
-	// 			'avatar' => get_user_meta($result->user_id, 'jiangqie_avatar', true),
-	// 			'is_me' => ($result->user_id === $my_user_id) ? 1 : 0,
-	// 		],
-	// 		'content' => $result->comment_content,
-	// 		'time' => $this->time_beautify($result->comment_date),
-	// 	];
-
-	// 	return $this->make_success($comment);
-	// }
-
-	// /**
-	//  * 文章的评论的回复
-	//  */
-	// public function comment_list($request)
-	// {
-	// 	$comment_id = $this->param_value($request, 'comment_id', 0);
-	// 	if (empty($comment_id)) {
-	// 		return $this->make_error('缺少参数');
-	// 	}
-
-	// 	$offset = $this->param_value($request, 'offset', 0);
-
-	// 	$my_user_id = $this->check_login($request);
-
-	// 	$comments = $this->get_comments([
-	// 		'number' => JiangQie_API::POSTS_PER_PAGE,
-	// 		'offset' => $offset,
-	// 		"parent" => $comment_id,
-	// 	], $my_user_id);
-
-	// 	return $this->make_success($comments);
-	// }
-
 	/**
-	 * 添加评论
+	 * 发布评论
 	 */
 	public function comment_add($request)
 	{
@@ -250,39 +166,9 @@ class JiangQie_API_Comment_Controller extends JiangQie_API_Base_Controller
 		return $this->make_success();
 	}
 
-	// private function get_comments($post_id, $offset, $my_user_id=0)
-	// {
-	// 	$args['status'] = 'approve';
-	// 	$result = get_comments($args);
-	// 	if (empty($result)) {
-	// 		return [];
-	// 	}
-
-	// 	$comments = [];
-	// 	foreach ($result as $comment) {
-	// 		$name = get_user_meta($comment->user_id, 'nickname', true);
-	// 		if (!$name) {
-	// 			$name = $comment->comment_author;
-	// 		}
-
-	// 		$avatar = get_user_meta($comment->user_id, 'jiangqie_avatar', true);
-
-	// 		$comments[] = [
-	// 			'id' => $comment->comment_ID,
-	// 			'user' => [
-	// 				'id' => $comment->user_id,
-	// 				'name' => $name,
-	// 				'avatar' => $avatar,
-	// 				'is_me' => ($comment->user_id === $my_user_id) ? 1 : 0,
-	// 			],
-	// 			'content' => $comment->comment_content,
-	// 			'time' => $this->time_beautify($comment->comment_date),
-	// 		];
-	// 	}
-
-	// 	return $comments;
-	// }
-
+	/**
+	 * 评论内容
+	 */
 	private function get_comments($post_id, $my_user_id, $parent, $offset = null)
 	{
 		global $wpdb;
