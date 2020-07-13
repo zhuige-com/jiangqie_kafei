@@ -19,6 +19,19 @@ Page({
 
     },
 
+    onShareAppMessage: function () {
+        return {
+            title: getApp().app_name,
+            path: 'pages/index/index',
+        }
+    },
+
+    onShareTimeline: function () {
+        return {
+            title: getApp().app_name,
+        }
+    },
+
     copy: function (e) {
         let text = e.currentTarget.dataset.text;
         wx.setClipboardData({

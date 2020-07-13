@@ -100,6 +100,12 @@ Page({
         }
     },
 
+    onShareTimeline: function () {
+        return {
+            title: getApp().app_name,
+        }
+    },
+
     //nav start----
     handlerSearchClick: function (e) {
         wx.navigateTo({

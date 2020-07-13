@@ -32,6 +32,12 @@ Page({
         }
     },
 
+    onShareTimeline: function () {
+        return {
+            title: getApp().app_name,
+        }
+    },
+
     handlerCancelClick: function(e) {
         wx.navigateBack();
     },

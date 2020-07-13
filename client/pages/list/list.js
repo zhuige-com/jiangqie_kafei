@@ -91,6 +91,12 @@ Page({
         }
     },
 
+    onShareTimeline: function () {
+        return {
+            title: getApp().app_name,
+        }
+    },
+
     handlerArticleClick: function (e) {
         let post_id = e.currentTarget.dataset.id;
         wx.navigateTo({

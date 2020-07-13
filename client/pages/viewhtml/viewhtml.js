@@ -38,4 +38,10 @@ Page({
         }
     },
 
+    onShareTimeline: function () {
+        return {
+            title: getApp().app_name,
+        }
+    },
+
 })

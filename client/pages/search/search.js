@@ -52,6 +52,12 @@ Page({
         }
     },
 
+    onShareTimeline: function () {
+        return {
+            title: getApp().app_name,
+        }
+    },
+
     //输入
     handlerSearchInput: function (e) {
         this.keyword = e.detail.value;

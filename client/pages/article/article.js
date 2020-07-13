@@ -71,9 +71,17 @@ Page({
 
     onShareAppMessage: function () {
         return {
-            title: that.data.post.title,
-            imageUrl: that.data.post.thumbnail,
+            title: this.data.post.title,
+            imageUrl: this.data.post.thumbnail,
             path: 'pages/article/article?post_id=' + this.post_id,
+        }
+    },
+
+    onShareTimeline: function () {
+        return {
+            title: this.data.post.title,
+            query: 'post_id=' + this.post_id,
+            imageUrl: this.data.post.thumbnail,
         }
     },
 

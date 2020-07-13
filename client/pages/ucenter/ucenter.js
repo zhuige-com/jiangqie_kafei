@@ -105,6 +105,12 @@ Page({
         }
     },
 
+    onShareTimeline: function () {
+        return {
+            title: getApp().app_name,
+        }
+    },
+
     handlerPostTrack: function (e) {
         if (!Auth.getUser()) {
             this.setData({

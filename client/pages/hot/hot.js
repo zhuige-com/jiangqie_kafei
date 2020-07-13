@@ -65,6 +65,12 @@ Page({
         }
     },
 
+    onShareTimeline: function () {
+        return {
+            title: getApp().app_name,
+        }
+    },
+
     // 点击标题切换当前页时改变样式
     swichNav: function (e) {
         let cur = e.currentTarget.dataset.current;
