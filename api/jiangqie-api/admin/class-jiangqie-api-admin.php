@@ -123,6 +123,7 @@ class JiangQie_API_Admin
          */
 
         wp_enqueue_script($this->jiangqie_api, plugin_dir_url(__FILE__) . 'js/jiangqie-api-admin.js', array('jquery'), $this->version, false);
+        wp_enqueue_script($this->jiangqie_api . '_edit_extend', plugin_dir_url(__FILE__) . 'js/jiangqie-pro-edit-extend.js', array('quicktags'), $this->version, false);
     }
 
     public function get_all_emails()

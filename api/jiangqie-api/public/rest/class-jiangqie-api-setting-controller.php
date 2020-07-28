@@ -87,6 +87,7 @@ class JiangQie_API_Setting_Controller extends JiangQie_API_Base_Controller
 
 		//幻灯片
 		$slide_ids = JiangQie_API::option_value('top_slide');
+		$slides = [];
 		if (!empty($slide_ids)) {
 			$slide_ids = explode(',', $slide_ids);
 			$args = [
@@ -97,7 +98,6 @@ class JiangQie_API_Setting_Controller extends JiangQie_API_Base_Controller
 			$query = new WP_Query();
 			$result = $query->query($args);
 
-			$slides = [];
 			foreach ($slide_ids as $slide_id) {
 				foreach ($result as $item) {
 					if ($slide_id == $item->ID) {
@@ -108,8 +108,8 @@ class JiangQie_API_Setting_Controller extends JiangQie_API_Base_Controller
 					}
 				}
 			}
-			$data['slide'] = $slides;
 		}
+		$data['slide'] = $slides;
 
 		//图标导航
 		$icon_nav_org = JiangQie_API::option_value('home_icon_nav');
@@ -119,9 +119,7 @@ class JiangQie_API_Setting_Controller extends JiangQie_API_Base_Controller
 				$icon_nav[] = $item;
 			}
 		}
-		if (!empty($icon_nav)) {
-			$data['icon_nav'] = $icon_nav;
-		}
+		$data['icon_nav'] = $icon_nav;
 
 		//活动区域
 		$home_active = JiangQie_API::option_value('home_active');
@@ -149,6 +147,7 @@ class JiangQie_API_Setting_Controller extends JiangQie_API_Base_Controller
 
 		//热门文章
 		$hot_ids = JiangQie_API::option_value('home_hot');
+		$hots = [];
 		if (!empty($hot_ids)) {
 			$hot_ids = explode(',', $hot_ids);
 			$args = [
@@ -159,11 +158,10 @@ class JiangQie_API_Setting_Controller extends JiangQie_API_Base_Controller
 			$query = new WP_Query();
 			$result = $query->query($args);
 
-			$slides = [];
 			foreach ($hot_ids as $hot_id) {
 				foreach ($result as $item) {
 					if ($hot_id == $item->ID) {
-						$slides[] = [
+						$hots[] = [
 							'id' => $item->ID,
 							'title' => $item->post_title,
 							'thumbnail' => apply_filters('jiangqie_post_thumbnail', $item->ID)
@@ -171,8 +169,8 @@ class JiangQie_API_Setting_Controller extends JiangQie_API_Base_Controller
 					}
 				}
 			}
-			$data['hot'] = $slides;
 		}
+		$data['hot'] = $hots;
 
 		//列表模式
 		$data['list_mode'] = JiangQie_API::option_value('home_list_mode');

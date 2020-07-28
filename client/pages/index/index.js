@@ -16,7 +16,7 @@ Page({
     data: {
         logo: '',
 
-        background: Api.JIANGQIE_BG_INDEX,
+        background: '',
 
         //顶部导航
         topNav: [{
@@ -64,8 +64,9 @@ Page({
                 iconNav: res.data.icon_nav,
                 actives: res.data.actives,
                 hot: res.data.hot,
-                listMode: res.data.list_mode
+                listMode: res.data.list_mode,
 
+                background: (res.data.slide && res.data.slide.length>0)?Api.JIANGQIE_BG_INDEX:'',
             });
 
             if (res.data.title && res.data.title.length > 0) {
@@ -130,6 +131,7 @@ Page({
         }
 
         this.setData({
+            background: (cur==0 && this.data.slide && this.data.slide.length>0)?Api.JIANGQIE_BG_INDEX:'',
             currentTab: cur
         })
 

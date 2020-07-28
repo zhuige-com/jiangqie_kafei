@@ -87,9 +87,9 @@
 		</block>
 
 		<!--audio类型-->
-		<!-- <block wx:elif="{{item.tag == 'audio'}}">
-      <template is="wxParseAudio" data="{{item}}" />
-    </block> -->
+		<block wx:elif="{{item.tag == 'audio'}}">
+			<template is="wxParseAudio" data="{{item}}" />
+		</block>
 
 		<!--img类型-->
 		<block wx:elif="{{item.tag == 'img'}}">
@@ -199,9 +199,9 @@
 		</block>
 
 		<!--audio类型-->
-		<!-- <block wx:elif="{{item.tag == 'audio'}}">
-      <template is="wxParseAudio" data="{{item}}" />
-    </block> -->
+		<block wx:elif="{{item.tag == 'audio'}}">
+      		<template is="wxParseAudio" data="{{item}}" />
+    	</block>
 
 		<!--img类型-->
 		<block wx:elif="{{item.tag == 'img'}}">
@@ -286,9 +286,9 @@
 		</block>
 
 		<!--audio类型-->
-		<!-- <block wx:elif="{{item.tag == 'audio'}}">
-      <template is="wxParseAudio" data="{{item}}" />
-    </block> -->
+		<block wx:elif="{{item.tag == 'audio'}}">
+      		<template is="wxParseAudio" data="{{item}}" />
+    	</block>
 
 		<!--img类型-->
 		<block wx:elif="{{item.tag == 'img'}}">
@@ -372,9 +372,9 @@
 		</block>
 
 		<!--audio类型-->
-		<!-- <block wx:elif="{{item.tag == 'audio'}}">
-      <template is="wxParseAudio" data="{{item}}" />
-    </block> -->
+		<block wx:elif="{{item.tag == 'audio'}}">
+  			<template is="wxParseAudio" data="{{item}}" />
+    	</block>
 
 		<!--img类型-->
 		<block wx:elif="{{item.tag == 'img'}}">
@@ -458,9 +458,9 @@
 		</block>
 
 		<!--audio类型-->
-		<!-- <block wx:elif="{{item.tag == 'audio'}}">
-      <template is="wxParseAudio" data="{{item}}" />
-    </block> -->
+		<block wx:elif="{{item.tag == 'audio'}}">
+      		<template is="wxParseAudio" data="{{item}}" />
+    	</block>
 
 		<!--img类型-->
 		<block wx:elif="{{item.tag == 'img'}}">
@@ -544,9 +544,9 @@
 		</block>
 
 		<!--audio类型-->
-		<!-- <block wx:elif="{{item.tag == 'audio'}}">
-      <template is="wxParseAudio" data="{{item}}" />
-    </block> -->
+		<block wx:elif="{{item.tag == 'audio'}}">
+      		<template is="wxParseAudio" data="{{item}}" />
+    	</block>
 
 		<!--img类型-->
 		<block wx:elif="{{item.tag == 'img'}}">
@@ -630,9 +630,9 @@
 		</block>
 
 		<!--audio类型-->
-		<!-- <block wx:elif="{{item.tag == 'audio'}}">
-      <template is="wxParseAudio" data="{{item}}" />
-    </block> -->
+		<block wx:elif="{{item.tag == 'audio'}}">
+      		<template is="wxParseAudio" data="{{item}}" />
+    	</block>
 
 		<!--img类型-->
 		<block wx:elif="{{item.tag == 'img'}}">
@@ -715,9 +715,9 @@
 		</block>
 
 		<!--audio类型-->
-		<!-- <block wx:elif="{{item.tag == 'audio'}}">
-      <template is="wxParseAudio" data="{{item}}" />
-    </block> -->
+		<block wx:elif="{{item.tag == 'audio'}}">
+      		<template is="wxParseAudio" data="{{item}}" />
+    	</block>
 
 		<!--img类型-->
 		<block wx:elif="{{item.tag == 'img'}}">
@@ -801,9 +801,9 @@
 		</block>
 
 		<!--audio类型-->
-		<!-- <block wx:elif="{{item.tag == 'audio'}}">
-      <template is="wxParseAudio" data="{{item}}" />
-    </block> -->
+		<block wx:elif="{{item.tag == 'audio'}}">
+      		<template is="wxParseAudio" data="{{item}}" />
+    	</block>
 
 		<!--img类型-->
 		<block wx:elif="{{item.tag == 'img'}}">
@@ -887,9 +887,9 @@
 		</block>
 
 		<!--audio类型-->
-		<!-- <block wx:elif="{{item.tag == 'audio'}}">
-      <template is="wxParseAudio" data="{{item}}" />
-    </block> -->
+		<block wx:elif="{{item.tag == 'audio'}}">
+      		<template is="wxParseAudio" data="{{item}}" />
+    	</block>
 
 		<!--img类型-->
 		<block wx:elif="{{item.tag == 'img'}}">
@@ -973,9 +973,9 @@
 		</block>
 
 		<!--audio类型-->
-		<!-- <block wx:elif="{{item.tag == 'audio'}}">
-      <template is="wxParseAudio" data="{{item}}" />
-    </block> -->
+		<block wx:elif="{{item.tag == 'audio'}}">
+      		<template is="wxParseAudio" data="{{item}}" />
+    	</block>
 
 		<!--img类型-->
 		<block wx:elif="{{item.tag == 'img'}}">
@@ -1059,9 +1059,9 @@
 		</block>
 
 		<!--audio类型-->
-		<!-- <block wx:elif="{{item.tag == 'audio'}}">
-      <template is="wxParseAudio" data="{{item}}" />
-    </block> -->
+		<block wx:elif="{{item.tag == 'audio'}}">
+      		<template is="wxParseAudio" data="{{item}}" />
+    	</block>
 
 		<!--img类型-->
 		<block wx:elif="{{item.tag == 'img'}}">

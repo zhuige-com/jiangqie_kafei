@@ -50,10 +50,6 @@
             }
         ]
     },
-    "navigateToMiniProgramAppIdList": [
-        "wxb0b82c1a4e82a353",
-        "wx0684ec4f84ff2207"
-    ],
     "networkTimeout": {
         "request": 10000,
         "connectSocket": 10000,
