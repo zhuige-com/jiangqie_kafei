@@ -9,6 +9,7 @@
  */
 
 const Constant = require('../../utils/constants');
+const Util = require('../../utils/util');
 const Api = require('../../utils/api.js');
 const Rest = require('../../utils/rest');
 
@@ -119,7 +120,7 @@ Page({
 
     //取消搜索
     handerCancelClick: function (e) {
-        wx.navigateBack();
+        Util.navigateBack();
     },
 
     //清楚搜索历史

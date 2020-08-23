@@ -9,6 +9,7 @@
  */
 
 const Constants = require('../../utils/constants');
+const Util = require('../../utils/util');
 const Api = require('../../utils/api.js');
 const Rest = require('../../utils/rest');
 const Auth = require('../../utils/auth');
@@ -107,9 +108,7 @@ Page({
      */
     //点击跳转到上级页面
     jumpBtn: function (options) {
-        wx.navigateBack({
-            delta: 1
-        })
+        Util.navigateBack();
     },
 
     /**

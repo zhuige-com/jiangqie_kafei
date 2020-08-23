@@ -8,6 +8,7 @@
  * Copyright ️ 2020 www.jiangqie.com All rights reserved.
  */
 
+const Util = require('../../utils/util');
 const Auth = require('../../utils/auth');
 const Api = require('../../utils/api.js');
 const Rest = require('../../utils/rest');
@@ -39,7 +40,7 @@ Page({
     },
 
     handlerCancelClick: function(e) {
-        wx.navigateBack();
+        Util.navigateBack();
     },
 
     handlerLoginClick: function(e) {
@@ -55,7 +56,7 @@ Page({
             let user = res.data;
             Auth.setUser(user);
             
-            wx.navigateBack();
+            Util.navigateBack();
         });
     }
 })

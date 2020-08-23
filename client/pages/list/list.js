@@ -9,6 +9,7 @@
  */
 
 const Constants = require('../../utils/constants');
+const Util = require('../../utils/util');
 const Api = require('../../utils/api.js');
 const Rest = require('../../utils/rest');
 
@@ -151,7 +152,7 @@ Page({
         this.setData({
             showPopLogin: false
         });
-        wx.navigateBack();
+        Util.navigateBack();
     },
 
     handlerDoLoginClick: function (e) {
