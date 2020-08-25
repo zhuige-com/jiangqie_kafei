@@ -62,21 +62,6 @@ class JiangQie_API_Public
 		return $data;
 	}
 
-	public function filter_post_for_detail($posts)
-	{
-		$post = $posts[0];
-		$data = [
-			'id' => $post->ID,
-			'time' => $post->post_date,
-			'title' => $post->post_title,
-			'content' => apply_filters('the_content', $post->post_content),
-			'comment_count' => $post->comment_count,
-			//'thumbnail' => apply_filters('jiangqie_post_thumbnail', $post->ID)
-		];
-
-		return $data;
-	}
-
 	public function filter_tag_for_list($tags)
 	{
 		$data = [];

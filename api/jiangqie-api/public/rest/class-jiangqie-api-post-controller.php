@@ -124,6 +124,14 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 				])
 			]
 		]);
+
+		//二维码
+		register_rest_route($this->namespace, '/' . $this->module . '/wxacode', [
+			[
+				'callback' => [$this, 'get_wxacode']
+			]
+		]);
+
 	}
 
 	/**
@@ -212,13 +220,21 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 			return $this->make_error('缺少参数');
 		}
 
-		$args = [
-			'p' => $post_id
+		$postObj = get_post($post_id);
+		$post = [
+			'id' => $postObj->ID,
+			'time' => $postObj->post_date,
+			'title' => $postObj->post_title,
+			'content' => apply_filters('the_content', $postObj->post_content),
+			'comment_count' => $postObj->comment_count,
+			'thumbnail' => apply_filters('jiangqie_post_thumbnail', $postObj->ID)
 		];
-
-		$query = new WP_Query();
-		$result = $query->query($args);
-		$post = apply_filters('jiangqie_post_for_detail', $result);
+		
+		if ($postObj->post_excerpt) {
+			$post['excerpt'] = html_entity_decode(wp_trim_words($postObj->post_excerpt, 100, '...'));
+		} else {
+			$post['excerpt'] = html_entity_decode(wp_trim_words($post['content'], 100, '...'));
+		}
 
 		//查询tag
 		$tags = get_the_tags($post_id);
@@ -483,6 +499,83 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 		}
 
 		return $posts;
+	}
+
+	/**
+	 * 获取小程序码
+	 */
+	public function get_wxacode($request)
+	{
+		$post_id = $this->param_value($request, 'post_id', 0);
+		if (!$post_id) {
+			return $this->make_error('缺少参数');
+		}
+
+		$post_type = get_post_type($post_id);
+
+		$uploads = wp_upload_dir();
+		$qrcode_path = $uploads['path'] . '/wxacode/';
+		if (!is_dir($qrcode_path)) {
+			mkdir($qrcode_path, 0755);
+		}
+
+		$qrcode = $qrcode_path . 'wxacode-' . $post_type . '-' . $post_id . '.png';
+		$qrcode_link = $uploads['url'] . '/wxacode/' . 'wxacode-' . $post_type . '-' . $post_id . '.png';
+		if (is_file($qrcode)) {
+			return $this->make_success($qrcode_link);
+		}
+
+		$wx_session = $this->getWXSession();
+		$access_token = $wx_session['access_token'];
+		if (empty($access_token)) {
+			return $this->make_error('获取二维码失败');
+		}
+
+		$api = 'https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=' . $access_token;
+
+		$color = array(
+			"r" => "0",  //这个颜色码自己到Photoshop里设
+			"g" => "0",  //这个颜色码自己到Photoshop里设
+			"b" => "0",  //这个颜色码自己到Photoshop里设
+		);
+
+		$page = 'pages/article/article';
+
+		$data = array(
+			'scene' => $post_id, //TODO 自定义信息，可以填写诸如识别用户身份的字段，注意用中文时的情况
+			'page' => $page, // 前端传过来的页面path,不能为空，最大长度 128 字节
+			'width' => 200, // 设置二维码尺寸,二维码的宽度
+			'auto_color' => false, // 自动配置线条颜色，如果颜色依然是黑色，则说明不建议配置主色调
+			'line_color' => $color, // auth_color 为 false 时生效，使用 rgb 设置颜色 例如 {"r":"xxx","g":"xxx","b":"xxx"},十进制表示
+			'is_hyaline' => true, // 是否需要透明底色， is_hyaline 为true时，生成透明底色的小程序码
+		);
+
+		$args = array(
+			'method'  => 'POST',
+			'body' 	  => wp_json_encode($data),
+			'headers' => array(),
+			'cookies' => array()
+		);
+
+		$remote = wp_remote_post($api, $args);
+		if (is_wp_error($remote)) {
+			return $this->make_error('系统异常');
+		}
+
+		$content = wp_remote_retrieve_body($remote);
+		if (strstr($content, 'errcode') !== false || strstr($content, 'errmsg') !== false) {
+			$json = json_decode($content, TRUE);
+			// return $this->make_error($json['errmsg']);
+			return $this->make_success(plugins_url('/jiangqie-pro/public/images/wxacode.jpg'));
+		}
+
+		//输出二维码
+		file_put_contents($qrcode, $content);
+
+		//同步到媒体库
+		$this->handle_import_file($qrcode);
+
+		return $this->make_success($qrcode_link);
 	}
 
 }

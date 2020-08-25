@@ -349,7 +349,6 @@ class JiangQie_API
 
 		$this->loader->add_action('jiangqie_post_thumbnail', $this->public, 'filter_post_thumbnail');
 		$this->loader->add_filter('jiangqie_post_for_list', $this->public, 'filter_post_for_list');
-		$this->loader->add_filter('jiangqie_post_for_detail', $this->public, 'filter_post_for_detail');
 		$this->loader->add_filter('jiangqie_tag_for_list', $this->public, 'filter_tag_for_list');
 		$this->loader->add_filter('jiangqie_tag_for_detail', $this->public, 'filter_tag_for_detail');
 

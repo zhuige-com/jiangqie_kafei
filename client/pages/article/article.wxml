@@ -36,9 +36,13 @@
 					<image src="../../images/laud.png" mode="widthFix"></image>
 					<text>点个赞</text>
 				</view>
-				<button open-type="share" class="jiangqie-page-laud-btn">
+				<!-- <button open-type="share" class="jiangqie-page-laud-btn">
 					<image src="../../images/share.png" mode="widthFix"></image>
 					<text>分享好友</text>
+				</button> -->
+				<button class="jiangqie-page-laud-btn" catchtap="sharePosterClick">
+					<image src="../../images/share.png" mode="widthFix"></image>
+					<text>海报分享</text>
 				</button>
 			</view>
 			<view class="jiangqie-page-laud-list">
@@ -137,3 +141,5 @@
 <!--加载框 start-->
 <tui-loading visible="{{loading}}"></tui-loading>
 <!--加载框 end-->
+<!-- 海报组件 -->
+<jiangqie-poster id="poster" hide-loading="{{false}}" preload="{{false}}" config="{{posterConfig}}" bind:success="onPosterSuccess" bind:fail="onPosterFail"></jiangqie-poster>

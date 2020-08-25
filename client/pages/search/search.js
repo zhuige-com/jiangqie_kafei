@@ -36,7 +36,7 @@ Page({
         });
 
         that.setData({
-            placeholder: getApp().app_name
+            placeholder: getApp().appName
         });
 
         Rest.get(Api.JIANGQIE_POSTS_SEARCH_HOT).then(res => {
@@ -48,14 +48,14 @@ Page({
 
     onShareAppMessage: function () {
         return {
-            title: getApp().app_name,
+            title: getApp().appName,
             path: 'pages/index/index',
         }
     },
 
     onShareTimeline: function () {
         return {
-            title: getApp().app_name,
+            title: getApp().appName,
         }
     },
 

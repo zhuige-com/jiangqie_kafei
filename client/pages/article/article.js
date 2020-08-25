@@ -14,6 +14,7 @@ const Api = require('../../utils/api.js');
 const Rest = require('../../utils/rest');
 const Auth = require('../../utils/auth');
 const WxParse = require('../../components/wxParse/wxParse');
+const Poster = require('../../components/poster/poster/poster');
 
 Page({
 
@@ -35,11 +36,29 @@ Page({
     post_id: 0,
     comment_id: 0,
 
+    //小程序码
+    wxacode: '',
+
+    //返回页面是否需要刷新
+    needRefresh: true,
+
     onLoad: function (options) {
-        this.post_id = options.post_id
+        if (options.scene) {
+            this.post_id = decodeURIComponent(options.scene);
+        } else if (options.post_id) {
+            this.post_id = options.post_id;
+        }
+
+        //小程序码
+        this.loadWxacode();
     },
 
     onShow: function () {
+        if (!this.needRefresh) {
+            this.needRefresh = true;
+            return;
+        }
+
         let that = this;
         Rest.get(Api.JIANGQIE_POST_DETAIL, {
             post_id: that.post_id
@@ -86,6 +105,107 @@ Page({
         }
     },
 
+    /**
+     * 海报分享
+     */
+    sharePosterClick: function (e) {
+        let posterConfig = {
+            width: 750,
+            height: 1334,
+            backgroundColor: '#E6372F',
+            debug: false,
+            pixelRatio: 1,
+            blocks: [{
+                width: 690,
+                height: 1000,
+                x: 30,
+                y: 234,
+                backgroundColor: '#FFFFFF'
+            }, ],
+            texts: [{
+                    x: 375,
+                    y: 120,
+                    baseLine: 'middle',
+                    textAlign: 'center',
+                    text: this.data.post.title,
+                    fontSize: 38,
+                    color: '#FFFFFF',
+                },
+                {
+                    x: 70,
+                    y: 780,
+                    fontSize: 28,
+                    lineHeight: 40,
+                    baseLine: 'middle',
+                    text: this.data.post.excerpt,
+                    width: 600,
+                    lineNum: 3,
+                    color: '#000000',
+                    zIndex: 200,
+                },
+                {
+                    x: 360,
+                    y: 1170,
+                    baseLine: 'middle',
+                    textAlign: 'center',
+                    text: getApp().appName,
+                    fontSize: 28,
+                    color: '#888888',
+                    zIndex: 200,
+                }
+            ],
+            images: [
+                {
+                    width: 690,
+                    height: 520,
+                    x: 30,
+                    y: 200,
+                    url: this.data.post.thumbnail,
+                    zIndex: 100
+                },
+                {
+                    width: 200,
+                    height: 200,
+                    x: 275,
+                    y: 920,
+                    url: this.wxacode,
+                }
+            ]
+
+        }
+
+        this.setData({
+            posterConfig: posterConfig
+        }, () => {
+            Poster.create(true); // 入参：true为抹掉重新生成 
+        });
+    },
+
+    /**
+     * 画报生成成功
+     */
+    onPosterSuccess(e) {
+        this.needRefresh = false;
+
+        const {
+            detail
+        } = e;
+        wx.previewImage({
+            current: detail,
+            urls: [detail]
+        })
+    },
+
+    /**
+     * 画报生成失败
+     */
+    onPosterFail(err) {
+        console.error(err);
+    },
+
+    /**
+     * 文章中a标签点击
+     */
     wxParseTagATap: function (e) {
         wx.setClipboardData({
             data: e.currentTarget.dataset.src
@@ -106,7 +226,6 @@ Page({
     /**
      * 跳转返回
      */
-    //点击跳转到上级页面
     jumpBtn: function (options) {
         Util.navigateBack();
     },
@@ -228,6 +347,20 @@ Page({
                 post_favorite: (that.data.post_favorite == 1 ? 0 : 1)
             });
         })
+    },
+
+    /**
+     * 加载小程序码
+     */
+    loadWxacode: function () {
+        let that = this;
+        Rest.get(Api.JIANGQIE_POST_WXACODE, {
+            post_id: that.post_id
+        }).then(res => {
+            that.wxacode = res.data;
+        }, err => {
+            console.log(err);
+        });
     },
 
     /**

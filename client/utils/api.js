@@ -95,6 +95,11 @@ module.exports = {
     JIANGQIE_POST_PAGE: makeURL('posts', 'page'),
 
     /**
+     * 获取小程序码
+     */
+    JIANGQIE_POST_WXACODE: makeURL('posts', 'wxacode'),
+
+    /**
      * 用户登录
      */
     JIANGQIE_USER_LOGIN: makeURL('user', 'login'),

@@ -70,7 +70,7 @@ Page({
             });
 
             if (res.data.title && res.data.title.length > 0) {
-                getApp().app_name = res.data.title;
+                getApp().appName = res.data.title;
             }
         })
 
@@ -96,14 +96,14 @@ Page({
 
     onShareAppMessage: function () {
         return {
-            title: getApp().app_name,
+            title: getApp().appName,
             path: 'pages/index/index',
         }
     },
 
     onShareTimeline: function () {
         return {
-            title: getApp().app_name,
+            title: getApp().appName,
         }
     },
 

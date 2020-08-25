@@ -47,14 +47,14 @@ Page({
 
     onShareAppMessage: function () {
         return {
-            title: getApp().app_name,
+            title: getApp().appName,
             path: 'pages/index/index',
         }
     },
 
     onShareTimeline: function () {
         return {
-            title: getApp().app_name,
+            title: getApp().appName,
         }
     },
 
