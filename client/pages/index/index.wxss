@@ -7,12 +7,12 @@
  * License：MIT
  * Copyright ️ 2020 www.jiangqie.com All rights reserved.
  */
- 
+
 .lxy-nav-bar__logo {
-	display: flex;
+    display: flex;
     align-items: center;
     height: 32px;
-	padding-left: 20rpx;
+    padding-left: 20rpx;
 }
 
 .lxy-nav-bar__logo image {
@@ -228,8 +228,9 @@
     border-bottom: 1rpx solid #DDD;
     padding-right: 260rpx;
 }
+
 .jiangqie-news-block:last-child {
-  border: none;
+    border: none;
 }
 
 .jiangqie-news-image {

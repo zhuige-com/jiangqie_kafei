@@ -7,7 +7,7 @@
  * License：MIT
  * Copyright ️ 2020 www.jiangqie.com All rights reserved.
  */
- 
+
 @import "../../components/wxParse/wxParse.wxss";
 
 .jiangqie-page-body {
@@ -20,6 +20,7 @@
     color: #333333;
     line-height: 40rpx;
 }
+
 .wxParse-inline {
-  line-height: 70rpx;
+    line-height: 70rpx;
 }

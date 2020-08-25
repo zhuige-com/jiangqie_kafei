@@ -7,7 +7,7 @@
  * License：MIT
  * Copyright ️ 2020 www.jiangqie.com All rights reserved.
  */
- 
+
 @import "../../components/wxParse/wxParse.wxss";
 @import '../../templates/nodata/nodata.wxss';
 @import '../../templates/poplogin/poplogin.wxss';
@@ -495,16 +495,18 @@ button.jiangqie-page-laud-btn {
 }
 
 .jiangqie-goback-btn {
-  height: 96rpx;
-  width: 96rpx;
-  position: fixed;
-  right: 40rpx;
-  bottom: 200rpx;
+    height: 96rpx;
+    width: 96rpx;
+    position: fixed;
+    right: 40rpx;
+    bottom: 200rpx;
 }
+
 .jiangqie-goback-btn button {
-  background: none;
+    background: none;
 }
+
 .jiangqie-goback-btn image {
-  height: 96rpx;
-  width: 96rpx;
+    height: 96rpx;
+    width: 96rpx;
 }
