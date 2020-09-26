@@ -51,7 +51,8 @@ class JiangQie_API_Public
 				if ($post->post_excerpt) {
 					$item["excerpt"] = html_entity_decode(wp_trim_words($post->post_excerpt, 50, '...'));
 				} else {
-					$item["excerpt"] = html_entity_decode(wp_trim_words($post->post_content, 50, '...'));
+					$content = apply_filters('the_content', $post->post_content);
+					$item["excerpt"] = html_entity_decode(wp_trim_words($content, 50, '...'));
 				}
 			}
 

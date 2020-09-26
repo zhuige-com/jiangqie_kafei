@@ -223,6 +223,7 @@
 }
 
 .jiangqie-news-block {
+    position: relative;
     padding: 30rpx 0;
     min-height: 160rpx;
     border-bottom: 1rpx solid #DDD;
@@ -231,6 +232,14 @@
 
 .jiangqie-news-block:last-child {
     border: none;
+}
+
+.jiangqie-news-stick-image {
+    position: absolute;
+    height: 60rpx;
+    width: 60rpx;
+    left: 0rpx;
+    top: 0rpx;
 }
 
 .jiangqie-news-image {

@@ -383,6 +383,14 @@ class JiangQie_API_Admin
                     'type'  => 'image',
                     'title' => '默认微缩图',
                 ),
+
+                array(
+                    'id'      => 'jiangqie_switch_stick',
+                    'type'    => 'switcher',
+                    'title'   => '置顶功能',
+                    'label'   => '是否开启置顶功能',
+                    'default' => 'no',
+                ),
             )
         );
 
@@ -710,12 +718,6 @@ class JiangQie_API_Admin
                     'type'  => 'image',
                     'title' => '顶部背景图',
                 ),
-
-                // array(
-                //     'id'    => 'copyright_logo',
-                //     'type'  => 'image',
-                //     'title' => '版权LOGO',
-                // ),
 
                 array(
                     'type'    => 'group',

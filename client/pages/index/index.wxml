@@ -96,6 +96,7 @@
 									<text class="jiangqie-news-time">{{item.time}}</text>
 								</view>
 							</view>
+							<image wx:if="{{item.stick==1}}" src="../../images/set_top.png" mode="aspectFill" class="jiangqie-news-stick-image"></image>
 						</view>
 						<view wx:else class="jiangqie-news-block" data-id="{{item.id}}" catchtap="handlerArticleClick">
 							<image src="{{item.thumbnail}}" mode="aspectFill" class="jiangqie-news-image"></image>
@@ -110,6 +111,7 @@
 									<text class="jiangqie-news-time">{{item.time}}</text>
 								</view>
 							</view>
+							<image wx:if="{{item.stick==1}}" src="../../images/set_top.png" mode="aspectFill" class="jiangqie-news-stick-image"></image>
 						</view>
 					</block>
 				</view>
