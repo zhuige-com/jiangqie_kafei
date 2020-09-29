@@ -387,7 +387,7 @@ Page({
                 loaded: true,
                 loadding: false,
                 comments: refresh ? res.data : that.data.comments.concat(res.data),
-                pullUpOn: res.data.length == Constants.JQ_PER_PAGE_COUNT,
+                pullUpOn: res.data.length >= Constants.JQ_PER_PAGE_COUNT,
             });
         });
     },

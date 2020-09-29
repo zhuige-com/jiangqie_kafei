@@ -109,7 +109,7 @@ Page({
                 loaded: true,
                 loadding: false,
                 posts: refresh ? res.data : that.data.posts.concat(res.data),
-                pullUpOn: res.data.length == Constants.JQ_PER_PAGE_COUNT
+                pullUpOn: res.data.length >= Constants.JQ_PER_PAGE_COUNT
             });
 
         })

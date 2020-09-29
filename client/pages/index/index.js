@@ -183,7 +183,7 @@ Page({
             that.setData({
                 loaddingLast: false,
                 postsLast: refresh ? res.data : that.data.postsLast.concat(res.data),
-                pullUpOnLast: res.data.length == Constants.JQ_PER_PAGE_COUNT
+                pullUpOnLast: res.data.length >= Constants.JQ_PER_PAGE_COUNT
             });
         })
     },
@@ -207,7 +207,7 @@ Page({
             that.setData({
                 loadding: false,
                 posts: refresh ? res.data : that.data.posts.concat(res.data),
-                pullUpOn: res.data.length == Constants.JQ_PER_PAGE_COUNT
+                pullUpOn: res.data.length >= Constants.JQ_PER_PAGE_COUNT
             });
         })
     },
