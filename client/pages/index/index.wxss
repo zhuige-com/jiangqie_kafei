@@ -234,14 +234,6 @@
     border: none;
 }
 
-.jiangqie-news-stick-image {
-    position: absolute;
-    height: 60rpx;
-    width: 60rpx;
-    left: 0rpx;
-    top: 0rpx;
-}
-
 .jiangqie-news-image {
     float: right;
     height: 160rpx;
@@ -460,3 +452,18 @@
 }
 
 /*tabbar end*/
+
+.jiangqie-news-title text {
+    font-size: 22rpx;
+    font-weight: 300;
+    color: #FFF;
+    background: #F30;
+    float: left;
+    width: 60rpx;
+    height: 36rpx;
+    margin-top: 6rpx;
+    line-height: 36rpx;
+    text-align: center;
+    border-radius: 8rpx;
+    margin-right: 12rpx;
+}
