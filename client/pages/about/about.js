@@ -1,5 +1,5 @@
 /*
- * 酱茄小程序开源版 v1.1.8
+ * 酱茄小程序开源版 v1.2.0
  * Author: 酱茄
  * Help document: https://www.jiangqie.com/ky
  * github: https://github.com/longwenjunjie/jiangqie_kafei
@@ -51,7 +51,7 @@ Page({
     tipClick: function () {
         wx.showToast({
             icon: 'none',
-            title: '酱茄小程序开源版 v1.1.8',
+            title: '酱茄小程序开源版 v1.2.0',
         })
     }
 })

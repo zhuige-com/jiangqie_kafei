@@ -1,5 +1,5 @@
 /*
- * 酱茄小程序开源版 v1.1.8
+ * 酱茄小程序开源版 v1.2.0
  * Author: 酱茄
  * Help document: https://www.jiangqie.com/ky
  * github: https://github.com/longwenjunjie/jiangqie_kafei
@@ -9,7 +9,7 @@
  */
 
 module.exports = {
-    JQ_VERSION: '1.1.8',
+    JQ_VERSION: '1.2.0',
 
     //分页 每页 数量 需要与服务器一致
     JQ_PER_PAGE_COUNT: 10,
