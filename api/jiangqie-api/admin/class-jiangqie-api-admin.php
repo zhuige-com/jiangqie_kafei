@@ -164,7 +164,7 @@ class JiangQie_API_Admin
             'id'                => $this->jiangqie_api,              // Required, meta box id, unique per page, to save: get_option( id )
             'parent'            => 'plugins.php',                   // Parent page of plugin menu (default Settings [options-general.php])
             'submenu'           => false,                            // Required for submenu
-            'title'             => '酱茄设置',                       // The title of the options page and the name in admin menu
+            'title'             => '酱茄Free小程序',                       // The title of the options page and the name in admin menu
             'capability'        => 'manage_options',                // The capability needed to view the page
             'plugin_basename'   =>  plugin_basename(plugin_dir_path(__DIR__) . $this->jiangqie_api . '.php'),
             'tabbed'            => true,

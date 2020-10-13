@@ -789,7 +789,7 @@ if ( ! class_exists( 'Exopite_Simple_Options_Framework' ) ) :
 				//
 				'parent'        => 'options-general.php',
 				'menu'          => 'plugins.php', // For backward compatibility
-				'menu_title'    => __( '酱茄设置', 'exopite-options-framework' ),
+				'menu_title'    => __( '酱茄Free小程序', 'exopite-options-framework' ),
 				// Required for submenu
 				'submenu'       => false,
 				//The name of this page
