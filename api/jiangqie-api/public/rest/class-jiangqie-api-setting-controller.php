@@ -114,9 +114,11 @@ class JiangQie_API_Setting_Controller extends JiangQie_API_Base_Controller
 		//图标导航
 		$icon_nav_org = JiangQie_API::option_value('home_icon_nav');
 		$icon_nav = [];
-		foreach ($icon_nav_org as $item) {
-			if ($item['enable'] == 'yes') {
-				$icon_nav[] = $item;
+		if (is_array($icon_nav_org)) {
+			foreach ($icon_nav_org as $item) {
+				if ($item['enable'] == 'yes') {
+					$icon_nav[] = $item;
+				}
 			}
 		}
 		$data['icon_nav'] = $icon_nav;
