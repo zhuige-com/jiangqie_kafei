@@ -234,6 +234,14 @@
     border: none;
 }
 
+.jiangqie-news-stick-image {
+    position: absolute;
+    height: 60rpx;
+    width: 60rpx;
+    left: 0rpx;
+    top: 0rpx;
+}
+
 .jiangqie-news-image {
     float: right;
     height: 160rpx;

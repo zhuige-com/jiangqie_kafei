@@ -143,3 +143,9 @@
 <!--加载框 start-->
 <tui-loading visible="{{loading}}"></tui-loading>
 <!--加载框 end-->
+
+<view class="tui-nomore-class tui-loadmore">
+	<view class="tui-nomore">
+		<view class="tui-text" style="background: #FFF;">© 酱茄 jiangqie.com</view>
+	</view>
+</view>

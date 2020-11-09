@@ -20,7 +20,7 @@ Component({
         //isDot为false时生效
         text: {
             type: String,
-            value: "我是有底线的..."
+            value: "© 酱茄 jiangqie.com"
         }
     },
     data: {
