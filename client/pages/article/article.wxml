@@ -16,6 +16,9 @@
 			</view>
 		</view>
 	</view>
+	<view wx:if="{{official}}" class="jiangqie-official-mod">
+		<official-account></official-account>
+	</view>
 	<view class="jiangqie-page-body">
 
 		<template is="wxParse" data="{{wxParseData:article.nodes}}" />

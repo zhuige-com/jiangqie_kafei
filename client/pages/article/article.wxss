@@ -510,3 +510,7 @@ button.jiangqie-page-laud-btn {
     height: 96rpx;
     width: 96rpx;
 }
+
+.jiangqie-official-mod {
+    padding: 10rpx 0;
+}
