@@ -40,7 +40,7 @@ Page({
                 wx.getClipboardData({
                     success(res) {
                         wx.showToast({
-                            title: '微信号已复制',
+                            title: '网址已复制',
                         });
                     }
                 })
