@@ -20,7 +20,7 @@ Hi，欢迎使用“酱茄小程序开源版 – 人人咖啡师”。
 
 ## 演示
 
-![酱茄小程序二维码](https://gitee.com/longwenjunj/jiangqie_kafei/raw/master/screenshot/code4.jpg) 
+![酱茄小程序二维码](https://gitee.com/longwenjunj/jiangqie_kafei/raw/master/screenshot/code4.png) 
 
 **案例(部分用户有二次开发)**
 
