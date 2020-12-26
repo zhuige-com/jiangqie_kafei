@@ -20,6 +20,8 @@ function request(url, data = {}, method = "GET") {
         // wx.showLoading();
 
         data.token = Auth.getToken();
+        data.t = new Date().getTime();
+        data.r = Math.floor(Math.random() * 10000);
 
         wx.request({
             url: url,
