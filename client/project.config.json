@@ -18,24 +18,25 @@
         "checkInvalidKey": true,
         "checkSiteMap": true,
         "uploadWithSourceMap": true,
-        "useMultiFrameRuntime": false,
+        "useMultiFrameRuntime": true,
         "useApiHook": true,
+        "useApiHostProcess": false,
         "babelSetting": {
             "ignore": [],
             "disablePlugins": [],
             "outputPath": ""
         },
+        "bundle": false,
         "useIsolateContext": true,
         "useCompilerModule": true,
         "userConfirmedUseCompilerModuleSwitch": false,
         "userConfirmedBundleSwitch": false,
         "packNpmManually": false,
         "packNpmRelationList": [],
-        "minifyWXSS": true,
-        "bundle": false
+        "minifyWXSS": true
     },
     "compileType": "miniprogram",
-    "libVersion": "2.10.1",
+    "libVersion": "2.12.2",
     "appid": "wxb0b82c1a4e82a353",
     "projectname": "client_free",
     "debugOptions": {
