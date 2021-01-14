@@ -108,19 +108,40 @@ class JiangQie_API_Base_Controller extends WP_REST_Controller
 	}
 
 	/**
-	 * 获取WX session
+	 * 检查敏感内容
 	 */
-	public function getWXSession()
+	public function msg_sec_check($content)
 	{
-		$app_id = JiangQie_API::option_value('app_id');
-		$app_secret = JiangQie_API::option_value('app_secret');
-		$url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=' . $app_id . '&secret=' . $app_secret;
-		$body = wp_remote_get($url);
-		if (!is_array($body) || is_wp_error($body) || $body['response']['code'] != '200') {
+		$wx_session = JiangQie_API::get_wx_token();
+		$access_token = $wx_session['access_token'];
+		if (empty($access_token)) {
 			return false;
 		}
-		$access_token = json_decode($body['body'], true);
-		return $access_token;
+
+		$api = 'https://api.weixin.qq.com/wxa/msg_sec_check?access_token=' . $access_token;
+
+		$args = array(
+			'method'  => 'POST',
+			'body' 	  => json_encode(['content' => $content], JSON_UNESCAPED_UNICODE),
+			'headers' => array(
+				'Content-Type' => 'application/json'
+			),
+			'cookies' => array()
+		);
+
+		$res = wp_remote_post($api, $args);
+		if (is_wp_error($res)) {
+			return true;
+		}
+
+		if ($res['response']['code'] == 200) {
+			$body = json_decode($res['body'], TRUE);
+			if ($body['errcode'] == 0) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	//把图片添加到媒体库

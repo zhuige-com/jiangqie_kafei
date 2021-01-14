@@ -168,6 +168,10 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 			return $this->make_error('缺少参数');
 		}
 
+		if (!$this->msg_sec_check($search)) {
+			return $this->make_error('请勿搜索敏感信息');
+		}
+
 		global $wpdb;
 		$table_post_search = $wpdb->prefix . 'jiangqie_post_search';
 		$times = $wpdb->get_var($wpdb->prepare("SELECT times FROM `$table_post_search` WHERE search=%s", $search));
@@ -547,7 +551,7 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 			return $this->make_success($qrcode_link);
 		}
 
-		$wx_session = $this->getWXSession();
+		$wx_session = JiangQie_API::get_wx_token();
 		$access_token = $wx_session['access_token'];
 		if (empty($access_token)) {
 			return $this->make_error('获取二维码失败');

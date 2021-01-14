@@ -132,6 +132,10 @@ class JiangQie_API_Comment_Controller extends JiangQie_API_Base_Controller
 			return $this->make_error('缺少参数');
 		}
 
+		if(!$this->msg_sec_check($content)) {
+			return $this->make_error('请勿发布敏感信息');
+		}
+
 		$comment_approved = JiangQie_API::option_value('switch_comment_verify') === 'yes' ? 0 : 1;
 		$comment_id = wp_insert_comment([
 			'comment_post_ID' => $post_id,

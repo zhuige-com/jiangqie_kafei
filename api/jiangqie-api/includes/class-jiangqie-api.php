@@ -90,7 +90,36 @@ class JiangQie_API
 		}
 
 		return false;
-    }
+	}
+	
+	/**
+	 * 微信token
+	 */
+	public static function get_wx_token()
+	{
+		$path_token = JIANG_QIE_API_BASE_DIR . 'wx_access_token.data';
+		if (file_exists($path_token)) {
+			$str_token = file_get_contents($path_token);
+			$access_token = json_decode($str_token, TRUE);
+			if ($access_token['expires_in'] > time()) {
+				return $access_token;
+			}
+		}
+		
+		$app_id = JiangQie_API::option_value('app_id');
+		$app_secret = JiangQie_API::option_value('app_secret');
+		$url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=' . $app_id . '&secret=' . $app_secret;
+		$body = wp_remote_get($url);
+		if (!is_array($body) || is_wp_error($body) || $body['response']['code'] != '200') {
+			return false;
+		}
+		$access_token = json_decode($body['body'], TRUE);
+		
+		$access_token['expires_in'] = $access_token['expires_in'] + time() - 200;
+		file_put_contents($path_token, json_encode($access_token));
+
+		return $access_token;
+	}
 
 	/**
 	 * Define the core functionality of the plugin.
