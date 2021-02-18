@@ -7,7 +7,7 @@
  * github: https://github.com/longwenjunjie/jiangqie_kafei
  * gitee: https://gitee.com/longwenjunj/jiangqie_kafei
  * License：MIT
- * Copyright ️ 2020 www.jiangqie.com All rights reserved.
+ * Copyright ️© 2020-2021 www.jiangqie.com All rights reserved.
  */
 
 class JiangQie_API_Category_Controller extends JiangQie_API_Base_Controller

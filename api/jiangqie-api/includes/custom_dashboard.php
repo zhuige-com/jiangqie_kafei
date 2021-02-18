@@ -2,7 +2,7 @@
 /*
  * 酱茄小程序PRO
  * Author: www.jiangqie.com
- * Copyright ️ 2020 www.jiangqie.com All rights reserved.
+ * Copyright ️© 2020-2021 www.jiangqie.com All rights reserved.
  */
 
 function custom_dashboard_jiangqie_help()
