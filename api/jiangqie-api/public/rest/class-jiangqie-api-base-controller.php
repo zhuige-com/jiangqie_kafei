@@ -15,6 +15,11 @@ class JiangQie_API_Base_Controller extends WP_REST_Controller
 	public function __construct()
 	{
 		$this->namespace = 'jiangqie/v1';
+
+		//设置时区 修复8小时
+		if (!is_admin()) {
+			date_default_timezone_set("Asia/Shanghai");
+		}
 	}
 
 	//组合返回值
