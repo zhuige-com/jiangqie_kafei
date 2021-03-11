@@ -9,7 +9,7 @@
 		</view>
 		<view class="jiangqie-login-btn">
 			<button catchtap="handlerCancelClick" class="jiangqie-login-btnl">取消</button>
-			<button open-type="getUserInfo" bindgetuserinfo="handlerLoginClick" class="jiangqie-login-btnr">确定</button>
+			<button catchtap="handlerLoginClick" class="jiangqie-login-btnr">确定</button>
 		</view>
 	</view>
 </view>

@@ -39,24 +39,30 @@ Page({
         }
     },
 
-    handlerCancelClick: function(e) {
+    handlerCancelClick: function (e) {
         Util.navigateBack();
     },
 
-    handlerLoginClick: function(e) {
-        Auth.getWXUser().then(res => {
-            return Rest.get(Api.JIANGQIE_USER_LOGIN, {
-                code: res.code,
-                encrypted_data: encodeURIComponent(res.encryptedData),
-                iv: encodeURIComponent(res.iv),
-                // nickName: res.userInfo.nickName, //测试
-                // avatarUrl: res.userInfo.avatarUrl, //测试
-            })
-        }).then(res => {
-            let user = res.data;
-            Auth.setUser(user);
-            
-            Util.navigateBack();
+    handlerLoginClick: function (e) {
+        wx.getUserProfile({
+            desc: '使用微信的头像昵称初始化用户',
+            success: function (wxu) {
+                Auth.getWXUser().then(res => {
+                    return Rest.get(Api.JIANGQIE_USER_LOGIN, {
+                        code: res.code,
+                        nickName: wxu.userInfo.nickName,
+                        avatarUrl: wxu.userInfo.avatarUrl,
+                    })
+                }).then(res => {
+                    let user = res.data;
+                    Auth.setUser(user);
+
+                    Util.navigateBack();
+                });
+            },
+            fail: function (err) {
+                Util.toast('需要同意才能登录');
+            }
         });
     }
 })

@@ -102,7 +102,7 @@ module.exports = {
     /**
      * 用户登录
      */
-    JIANGQIE_USER_LOGIN: makeURL('user', 'login'),
+    JIANGQIE_USER_LOGIN: makeURL('user', 'login2'),
 
     /**
      * 用户数据

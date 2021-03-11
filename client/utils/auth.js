@@ -54,18 +54,6 @@ module.exports = {
                     reject(err);
                 }
             });
-        }).then(data => {
-            return new Promise(function (resolve, reject) {
-                wx.getUserInfo({
-                    success: function (res) {
-                        res.code = data.code;
-                        resolve(res);
-                    },
-                    fail: function (err) {
-                        reject(err);
-                    }
-                });
-            });
         });
     },
 
