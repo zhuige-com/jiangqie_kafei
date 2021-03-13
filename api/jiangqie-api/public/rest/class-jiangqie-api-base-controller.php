@@ -81,7 +81,7 @@ class JiangQie_API_Base_Controller extends WP_REST_Controller
 	public function time_beautify($time)
 	{
 		$origin_time = strtotime($time);
-		$dur = time() + 28800 - $origin_time;
+		$dur = time() - $origin_time;
 		if ($dur < 60) {
 			return '刚刚';
 		} else if ($dur < 3600) {
