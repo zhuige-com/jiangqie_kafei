@@ -6,7 +6,7 @@
  * Plugin Name:       JiangQie Mini Program API
  * Plugin URI:        https://www.jiangqie.com/
  * Description:       为小程序提供定制化API，让Wordpress快速变身小程序。
- * Version:           1.3.0
+ * Version:           1.3.5
  * Author:            酱茄
  * Author URI:        https://www.jiangqie.com/
  * Text Domain:       jiangqie-api
