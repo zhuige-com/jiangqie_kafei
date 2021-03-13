@@ -592,7 +592,7 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 		if (strstr($content, 'errcode') !== false || strstr($content, 'errmsg') !== false) {
 			$json = json_decode($content, TRUE);
 			// return $this->make_error($json['errmsg']);
-			return $this->make_success(plugins_url('/jiangqie-pro/public/images/wxacode.jpg'));
+			return $this->make_success(plugins_url('/jiangqie-api/public/images/wxacode.jpg'));
 		}
 
 		//输出二维码
