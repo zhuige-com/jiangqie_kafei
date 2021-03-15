@@ -12,7 +12,7 @@ const Auth = require('./utils/auth.js');
 
 App({
 
-    appName: '酱茄',
+    appName: '酱茄Free',
 
     onLaunch: function () {
         Auth.checkSession();
