@@ -86,10 +86,8 @@ require plugin_dir_path(__FILE__) . 'includes/custom_dashboard.php';
  * @since    1.0.0
  */
 // function run_jiangqie_api() {
-
 // 	$plugin = new JiangQie_API();
 // 	$plugin->run();
-
 // }
 // run_jiangqie_api();
 
