@@ -31,6 +31,7 @@ class JiangQie_API_Activator
           `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
           `user_id` bigint(20) NOT NULL DEFAULT '0' COMMENT '用户ID',
           `post_id` bigint(20) NOT NULL DEFAULT '0' COMMENT '文章ID',
+          `time` int(11) NOT NULL DEFAULT '0' COMMENT '时间',
           PRIMARY KEY (`id`)
         ) $charset_collate;";
         dbDelta($sql);
@@ -40,6 +41,7 @@ class JiangQie_API_Activator
           `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
           `user_id` bigint(20) NOT NULL DEFAULT '0' COMMENT '用户ID',
           `post_id` bigint(20) NOT NULL DEFAULT '0' COMMENT '文章ID',
+          `time` int(11) NOT NULL DEFAULT '0' COMMENT '时间',
           PRIMARY KEY (`id`)
         ) $charset_collate;";
         dbDelta($sql);
@@ -49,6 +51,7 @@ class JiangQie_API_Activator
           `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
           `user_id` bigint(20) NOT NULL DEFAULT '0' COMMENT '用户ID',
           `post_id` bigint(20) NOT NULL DEFAULT '0' COMMENT '文章ID',
+          `time` int(11) NOT NULL DEFAULT '0' COMMENT '时间',
           PRIMARY KEY (`id`)
         ) $charset_collate;";
         dbDelta($sql);
