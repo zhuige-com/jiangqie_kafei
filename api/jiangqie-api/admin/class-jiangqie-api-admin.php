@@ -401,6 +401,16 @@ class JiangQie_API_Admin
             'fields' => array(
 
                 array(
+                    'id'          => 'home_hot_search',
+                    'type'        => 'text',
+                    'title'       => '热门搜索词',
+                    'before'      => '搜索词,英文逗号分隔',
+                    'after'       => '例如：酱茄,美食',
+                    'class'       => 'text-class',
+                    'description' => '设置热门搜索词',
+                ),
+
+                array(
                     'id'          => 'home_top_nav',
                     'type'        => 'text',
                     'title'       => '顶部导航',

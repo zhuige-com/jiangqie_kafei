@@ -206,10 +206,15 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 	 */
 	public function get_search_hot($request)
 	{
-		global $wpdb;
-		$table_post_search = $wpdb->prefix . 'jiangqie_post_search';
-		$result = $wpdb->get_results($wpdb->prepare("SELECT search FROM `$table_post_search` ORDER BY times DESC LIMIT 0, 10"));
-		$searchs = array_column($result, 'search');
+		$home_hot_search = Jiangqie_Api::option_value('home_hot_search');
+		if (!$home_hot_search) {
+			global $wpdb;
+			$table_post_search = $wpdb->prefix . 'jiangqie_post_search';
+			$result = $wpdb->get_results($wpdb->prepare("SELECT search FROM `$table_post_search` ORDER BY times DESC LIMIT 0, 10"));
+			$searchs = array_column($result, 'search');
+		} else {
+			$searchs = explode(',', $home_hot_search);
+		}
 
 		return $this->make_success($searchs);
 	}
@@ -540,13 +545,13 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 		$post_type = get_post_type($post_id);
 
 		$uploads = wp_upload_dir();
-		$qrcode_path = $uploads['path'] . '/wxacode/';
+		$qrcode_path = $uploads['basedir'] . '/jiangqie_wxacode/';
 		if (!is_dir($qrcode_path)) {
 			mkdir($qrcode_path, 0755);
 		}
 
-		$qrcode = $qrcode_path . 'wxacode-' . $post_type . '-' . $post_id . '.png';
-		$qrcode_link = $uploads['url'] . '/wxacode/' . 'wxacode-' . $post_type . '-' . $post_id . '.png';
+		$qrcode = $qrcode_path . $post_type . '-' . $post_id . '.png';
+		$qrcode_link = $uploads['baseurl'] . '/jiangqie_wxacode/' . $post_type . '-' . $post_id . '.png';
 		if (is_file($qrcode)) {
 			return $this->make_success($qrcode_link);
 		}
