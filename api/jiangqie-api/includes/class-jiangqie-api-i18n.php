@@ -1,37 +1,17 @@
 <?php
 
-/**
- * Define the internationalization functionality
- *
- * Loads and defines the internationalization files for this plugin
- * so that it is ready for translation.
- *
- * @link       https://xcx.jiangqie.com
- * @since      1.0.0
- *
- * @package    JiangQie_API
- * @subpackage JiangQie_API/includes
+/*
+ * 酱茄小程序开源版
+ * Author: 酱茄
+ * Help document: https://www.jiangqie.com/docs/kaiyuan/id1
+ * github: https://github.com/longwenjunjie/jiangqie_kafei
+ * gitee: https://gitee.com/longwenjunj/jiangqie_kafei
+ * License：MIT
+ * Copyright ️© 2020-2021 www.jiangqie.com All rights reserved.
  */
 
-/**
- * Define the internationalization functionality.
- *
- * Loads and defines the internationalization files for this plugin
- * so that it is ready for translation.
- *
- * @since      1.0.0
- * @package    JiangQie_API
- * @subpackage JiangQie_API/includes
- * @author     Your Name <email@example.com>
- */
 class JiangQie_API_i18n {
 
-
-	/**
-	 * Load the plugin text domain for translation.
-	 *
-	 * @since    1.0.0
-	 */
 	public function load_plugin_textdomain() {
 
 		load_plugin_textdomain(
@@ -41,7 +21,5 @@ class JiangQie_API_i18n {
 		);
 
 	}
-
-
 
 }

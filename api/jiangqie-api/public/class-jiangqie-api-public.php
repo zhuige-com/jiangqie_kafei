@@ -11,7 +11,6 @@
 
 class JiangQie_API_Public
 {
-
 	private $jiangqie_api;
 
 	private $version;
