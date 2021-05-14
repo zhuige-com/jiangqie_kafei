@@ -46,7 +46,7 @@ class JiangQie_API_Category_Controller extends JiangQie_API_Base_Controller
 				'id' => $catgory->term_id,
 				'name' => $catgory->name,
 				'description' => $catgory->description,
-				'cover' => z_taxonomy_image_url($catgory->term_id)
+				'cover' => jiangqie_api_taxonomy_image_url($catgory->term_id)
 			];
 		}
 

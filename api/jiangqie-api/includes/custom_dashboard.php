@@ -1,11 +1,15 @@
 <?php
+
 /*
- * 酱茄小程序PRO
- * Author: www.jiangqie.com
+ * 酱茄小程序开源版
+ * Author: 酱茄
+ * Help document: https://www.jiangqie.com/docs/kaiyuan/id1
+ * github: https://github.com/longwenjunjie/jiangqie_kafei
+ * gitee: https://gitee.com/longwenjunj/jiangqie_kafei
  * Copyright ️© 2020-2021 www.jiangqie.com All rights reserved.
  */
 
-function custom_dashboard_jiangqie_help()
+function jiangqie_api_custom_dashboard_help()
 {
 	$content = '欢迎使用酱茄小程序';
 	$res = wp_remote_get("https://key.jiangqie.com/api/goods/description?id=jq_xcx_free", ['timeout' => 1]);
@@ -19,9 +23,9 @@ function custom_dashboard_jiangqie_help()
 	echo $content;
 }
 
-function jiangqie_add_dashboard_widgets()
+function jiangqie_api_add_dashboard_widgets()
 {
-	wp_add_dashboard_widget('jiangqie_dashboard_widget', '酱茄Free小程序', 'custom_dashboard_jiangqie_help');
+	wp_add_dashboard_widget('jiangqie_dashboard_widget', '酱茄Free小程序', 'jiangqie_api_custom_dashboard_help');
 }
 
-add_action('wp_dashboard_setup', 'jiangqie_add_dashboard_widgets');
+add_action('wp_dashboard_setup', 'jiangqie_api_add_dashboard_widgets');

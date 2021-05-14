@@ -169,7 +169,6 @@ if ( ! class_exists( 'Exopite_Simple_Options_Framework' ) ) :
 
 			$this->version = '20191203';
 
-			// TODO: Do sanitize $config['id']
 			$this->unique = $config['id'];
 
 			// Filter for override every exopite $config and $fields
@@ -567,20 +566,18 @@ if ( ! class_exists( 'Exopite_Simple_Options_Framework' ) ) :
 		public function import_options() {
 
 			$retval = 'error';
+			
+			$wpnonce = (isset($_POST['wpnonce'])) ? wp_unslash($_POST['wpnonce']) : '';
+			$unique = (isset($_POST['unique'])) ? sanitize_key(wp_unslash($_POST['unique'])) : '';
+			$value = (isset($_POST['value'])) ? stripslashes(wp_unslash($_POST['value'])) : '';
 
-			$nonce_v = wp_verify_nonce( $_POST['wpnonce'], 'exopite_sof_backup' );
-			$nonce = $_POST['wpnonce'];
-
-			if ( isset( $_POST['unique'] ) && ! empty( $_POST['value'] ) && isset( $_POST['wpnonce'] ) && wp_verify_nonce( $_POST['wpnonce'], 'exopite_sof_backup' ) ) {
-
-				$option_key = sanitize_key( $_POST['unique'] );
-
-				//Using json_decode
-				$value = json_decode( stripslashes( $_POST['value'] ), true );
+			if ( wp_verify_nonce( $wpnonce, 'exopite_sof_backup' ) && ! empty( $unique ) && ! empty( $value ) ) {
+				
+				$value = json_decode( $value, true );
 
 				if ( is_array( $value ) ) {
 
-					update_option( $option_key, $value );
+					update_option( $unique, $value );
 					$retval = 'success';
 
 				}
@@ -592,10 +589,10 @@ if ( ! class_exists( 'Exopite_Simple_Options_Framework' ) ) :
 		}
 
 		public function export_options() {
-
-			if ( isset( $_GET['export'] ) && isset( $_GET['wpnonce'] ) && wp_verify_nonce( $_GET['wpnonce'], 'exopite_sof_backup' ) ) {
-
-				$option_key = sanitize_key( $_GET['export'] );
+			
+			$export = (isset($_GET['export'])) ? sanitize_key(wp_unslash($_GET['export'])) : '';
+			$wpnonce = (isset($_GET['wpnonce'])) ? wp_unslash($_GET['wpnonce']) : '';
+			if ( $export && wp_verify_nonce( $wpnonce, 'exopite_sof_backup' ) ) {
 
 				header( 'Content-Type: plain/text' );
 				header( 'Content-disposition: attachment; filename=exopite-sof-options-' . gmdate( 'd-m-Y' ) . '.txt' );
@@ -604,7 +601,7 @@ if ( ! class_exists( 'Exopite_Simple_Options_Framework' ) ) :
 				header( 'Expires: 0' );
 
 				// Using json_encode()
-				echo json_encode( get_option( $option_key ) );
+				echo json_encode( get_option( $export ) );
 
 			}
 
@@ -615,9 +612,12 @@ if ( ! class_exists( 'Exopite_Simple_Options_Framework' ) ) :
 
 			$retval = 'error';
 
-			if ( isset( $_POST['unique'] ) && isset( $_POST['wpnonce'] ) && wp_verify_nonce( $_POST['wpnonce'], 'exopite_sof_backup' ) ) {
+			$wpnonce = (isset($_POST['wpnonce'])) ? wp_unslash($_POST['wpnonce']) : '';
+			$unique = (isset($_POST['unique'])) ? sanitize_key(wp_unslash($_POST['unique'])) : '';
+			
+			if ( wp_verify_nonce( $wpnonce, 'exopite_sof_backup' ) && ! empty($unique) ) {
 
-				delete_option( sanitize_key( $_POST['unique'] ) );
+				delete_option( $unique );
 
 				$retval = 'success';
 
@@ -911,7 +911,6 @@ if ( ! class_exists( 'Exopite_Simple_Options_Framework' ) ) :
 			 * Load Scripts for only Menu page
 			 */
 			if ( $this->is_menu_page_loaded() ):
-				// TODO: Shift Scripts from all $type to this section
 
 			endif; //$this->is_menu_page_loaded()
 
@@ -920,7 +919,6 @@ if ( ! class_exists( 'Exopite_Simple_Options_Framework' ) ) :
 			 * Load Scripts for metabox that have enabled metabox using Exopite framework
 			 */
 			if ( $this->is_metabox_enabled_post_type() ):
-				// TODO: Shift Scripts from all $type to this section
 
 			endif; // $this->is_metabox_enabled_post_type()
 
@@ -1016,8 +1014,6 @@ if ( ! class_exists( 'Exopite_Simple_Options_Framework' ) ) :
 				return null;
 			}
 
-			//TODO Verify nonce
-
 			$valid   = array();
 			$post_id = null;
 
@@ -1032,7 +1028,8 @@ if ( ! class_exists( 'Exopite_Simple_Options_Framework' ) ) :
 				/**
 				 * Import options should not be checked.
 				 */
-				if ( isset( $_POST['action'] ) && sanitize_key( $_POST['action'] ) === 'exopite-sof-import-options' ) {
+				 $action = (isset($_POST['action'])) ? sanitize_key(wp_unslash($_POST['action'])) : '';
+				if ( $action === 'exopite-sof-import-options' ) {
 					return apply_filters( 'exopite_sof_import_options', $posted_data, $this->unique );
 				}
 
@@ -1064,7 +1061,7 @@ if ( ! class_exists( 'Exopite_Simple_Options_Framework' ) ) :
 				} else {
 
 					if ( isset( $_POST[ $this->unique ] ) ) {
-						$posted_data = $_POST[ $this->unique ];
+						$posted_data = wp_unslash( $_POST[ $this->unique ] );
 					} else {
 						return false;
 					}

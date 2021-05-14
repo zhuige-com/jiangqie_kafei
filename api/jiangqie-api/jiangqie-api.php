@@ -1,13 +1,15 @@
 <?php
 
 /**
- * Plugin Name:       JiangQie Mini Program API
- * Plugin URI:        https://www.jiangqie.com/
- * Description:       为小程序提供定制化API，让Wordpress快速变身小程序。
- * Version:           1.4.0
- * Author:            酱茄
- * Author URI:        https://www.jiangqie.com/
- * Text Domain:       jiangqie-api
+ * Plugin Name:		JiangQie Mini Program API
+ * Plugin URI:		https://www.jiangqie.com/ky/4639.html
+ * Description:		为小程序提供定制化API，让Wordpress快速变身小程序。
+ * Version:			1.4.0
+ * Author:			酱茄
+ * Author URI:		https://www.jiangqie.com/
+ * License:			GPLv2 or later
+ * License URI:		http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * Text Domain:		jiangqie-api
  */
 
 if (!defined('WPINC')) {

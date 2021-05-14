@@ -822,7 +822,8 @@ class Exopite_Meta_Boxes {
     public function check_rights() {
 
         // Check nonce
-        if( ! isset( $_POST['meta_box_nonce'] ) || ! wp_verify_nonce( $_POST['meta_box_nonce'], 'meta_box_nonce' ) ) return false;
+		$meta_box_nonce = (isset($_POST['meta_box_nonce'])) ? sanitize_text_field(wp_unslash($_POST['meta_box_nonce'])) : '';
+        if( empty( $meta_box_nonce ) || ! wp_verify_nonce( $$meta_box_nonce , 'meta_box_nonce' ) ) return false;
 
        // If this is an autosave, our form has not been submitted, so we don't want to do anything.
         if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return false;
@@ -854,24 +855,20 @@ class Exopite_Meta_Boxes {
             }
 
             foreach ( $options['fields'] as $name => $value ) {
-
+				$post_name = wp_unslash($_POST[$name]);
+				
                 // 'text' | 'password' | 'textarea' | 'select' | 'radio' | 'checkbox'
                 switch ( $value['type'] ) {
 
                     case 'checkbox':
 
-                        if ( is_array( $_POST[$name] ) ) {
-
-                            /**
-                             * ToDos:
-                             * - sanitize array each
-                             */
-                            update_post_meta( $post->ID, $name, $_POST[$name] );
+                        if ( is_array( $post_name) ) {
+							
+                            update_post_meta( $post->ID, $name, $post_name);
 
                         } else {
 
-                            // Sanitize user input.
-                            $sanitized_value = $_POST[$name] ? 'yes' : 'no';
+                            $sanitized_value = $post_name ? 'yes' : 'no';
 
                             // Update the meta field in the database.
                             update_post_meta( $post->ID, $name, $sanitized_value );

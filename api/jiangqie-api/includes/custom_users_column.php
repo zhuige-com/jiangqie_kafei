@@ -9,10 +9,10 @@
  * Copyright ️© 2020-2021 www.jiangqie.com All rights reserved.
  */
 
-add_filter('manage_users_columns', 'jiangqie_manage_user_columns', 10, 2);
-add_action('manage_users_custom_column', 'jiangqie_manage_user_custom_column', 10, 3);
+add_filter('manage_users_columns', 'jiangqie_api_manage_user_columns', 10, 2);
+add_action('manage_users_custom_column', 'jiangqie_api_manage_user_custom_column', 10, 3);
 
-function jiangqie_manage_user_columns($columns)
+function jiangqie_api_manage_user_columns($columns)
 {
 	unset($columns['name']);
 
@@ -27,7 +27,7 @@ function jiangqie_manage_user_columns($columns)
 	return array_merge($new_columns, $columns);
 }
 
-function jiangqie_manage_user_custom_column($value, $column_name, $user_id)
+function jiangqie_api_manage_user_custom_column($value, $column_name, $user_id)
 {
 	if ('jqnickname' == $column_name) {
 		$value = get_user_meta($user_id, 'nickname', true);
@@ -36,8 +36,8 @@ function jiangqie_manage_user_custom_column($value, $column_name, $user_id)
 	return $value;
 }
 
-add_filter('get_avatar', 'jq_get_avatar', 10, 2);
-function jq_get_avatar($avatar, $id_or_email, $size = 96, $default = '', $alt = '', $args = null )  {
+add_filter('get_avatar', 'jiangqie_api_get_avatar', 10, 2);
+function jiangqie_api_get_avatar($avatar, $id_or_email, $size = 96, $default = '', $alt = '', $args = null )  {
 	$jq_avatar = get_user_meta($id_or_email, 'jiangqie_avatar', true);
 	if ($jq_avatar) {
 		return "<img src='$jq_avatar' class='avatar avatar-32 photo' height='32' width='32'>";

@@ -573,7 +573,7 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 		$page = 'pages/article/article';
 
 		$data = array(
-			'scene' => $post_id, //TODO 自定义信息，可以填写诸如识别用户身份的字段，注意用中文时的情况
+			'scene' => $post_id, //自定义信息，可以填写诸如识别用户身份的字段，注意用中文时的情况
 			'page' => $page, // 前端传过来的页面path,不能为空，最大长度 128 字节
 			'width' => 200, // 设置二维码尺寸,二维码的宽度
 			'auto_color' => false, // 自动配置线条颜色，如果颜色依然是黑色，则说明不建议配置主色调

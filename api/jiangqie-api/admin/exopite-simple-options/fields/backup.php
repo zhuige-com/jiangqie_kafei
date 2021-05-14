@@ -69,14 +69,6 @@ if ( ! class_exists( 'Exopite_Simple_Options_Framework_Field_backup' ) ) {
 			// return rtrim( strtr( call_user_func( 'base' . '64' . '_encode', addslashes( gzcompress( serialize( $option ), 9 ) ) ), '+/', '-_' ), '=' );
 		}
 
-		/**
-		 * Decode string for backup options
-		 */
-		function decode_string( $option ) {
-			return json_decode( $_POST['value'], true );
-			// return unserialize( gzuncompress( stripslashes( call_user_func( 'base' . '64' . '_decode', rtrim( strtr( $option, '-_', '+/' ), '=' ) ) ) ) );
-		}
-
 		public static function enqueue( $args ) {
 
 			/*

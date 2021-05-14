@@ -55,9 +55,6 @@ if ( ! class_exists( 'Exopite_Simple_Options_Framework_Sanitize' ) ) {
 		 * https://stackoverflow.com/questions/6625808/how-can-i-use-a-php-array-as-a-path-to-target-a-value-in-another-array/6625931#6625931
 		 */
 
-		/**
-		 * Loop $_POST recursive.
-		 */
 		public function array_search_and_replace( &$arr ) {
 
 			foreach ( $arr as $key => $value ) {
@@ -213,7 +210,6 @@ if ( ! class_exists( 'Exopite_Simple_Options_Framework_Sanitize' ) ) {
 
 				case 'ace_editor':
 					/**
-					 * TODO:
 					 * This is basically also a textarea.
 					 * Here user can save code, like JS or CSS or even PHP
 					 * depense of the use of the field, this can be like

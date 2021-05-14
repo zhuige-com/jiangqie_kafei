@@ -48,9 +48,9 @@ if ( ! class_exists( 'Exopite_Simple_Options_Framework_Upload' ) ) {
 		 */
 		public static function file_uploader_callback() {
 
-			// file_put_contents( dirname(__FILE__) . '\test.log', var_export( $_POST, true ) . PHP_EOL . PHP_EOL, FILE_APPEND );
-
-			if ( strtoupper( sanitize_key( $_POST['_method'] ) ) == 'DELETE' && isset( $_POST['qquuid'] ) ) {
+			$method = (isset($_POST['_method'])) ? sanitize_key(wp_unslash($_POST['_method'])) : '';
+			$qquuid = (isset($_POST['qquuid'])) ? sanitize_text_field(wp_unslash($_POST['qquuid'])) : '';
+			if ( strtoupper( $method ) == 'DELETE' && $qquuid ) {
 
 				/**
 				 * Delete file on AJAX request with qquuid
@@ -82,10 +82,11 @@ if ( ! class_exists( 'Exopite_Simple_Options_Framework_Upload' ) ) {
 
 			$deleted = array();
 
-			if ( isset( $_POST['media-ids'] ) && is_array( $_POST['media-ids'] ) ) {
+			$media_ids = (isset($_POST['media-ids'])) ? wp_unslash($_POST['media-ids']) : '';
+			if ( is_array( $media_ids ) ) {
 
 				// Sanitize attachment ids, these should be absint
-				$attachment_id_array = array_map( 'absint', $_POST['media-ids'] );
+				$attachment_id_array = array_map( 'absint', $media_ids );
 
 
 				foreach ( $attachment_id_array as $attachmentid ) {
@@ -224,7 +225,7 @@ if ( ! class_exists( 'Exopite_Simple_Options_Framework_Upload' ) ) {
 			);
 
 			// Attach file to post if attach is true and it is uploaded in a post (metabox)
-			$post_id   = ( isset( $_POST['postId'] ) ) ? intval( $_POST['postId'] ) : 0;
+			$post_id   = ( isset( $_POST['postId'] ) ) ? intval( sanitize_text_field( wp_unslash( $_POST['postId'] ) ) ) : 0;
 			$attach_id = wp_insert_attachment( $attachment, $updated_url, $post_id );
 
 			// Determines if attachment is an image.

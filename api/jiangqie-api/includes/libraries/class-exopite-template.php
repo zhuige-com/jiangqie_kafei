@@ -47,23 +47,6 @@ if ( ! class_exists( 'Exopite_Template' ) ) {
         public static $display_errors = false;
         public static $remove_HTML_comments = false;
 
-        public static function URL_exists( $url ) {
-            // Source: http://stackoverflow.com/questions/981954/how-can-one-check-to-see-if-a-remote-file-exists-using-php/982045#982045
-            if ( $ch = curl_init( $url ) ) {
-                curl_setopt( $ch, CURLOPT_NOBODY, true );
-                curl_exec( $ch );
-                $retcode = curl_getinfo( $ch, CURLINFO_HTTP_CODE );
-                // $retcode >= 404 -> not found, $retcode = 200, found.
-                curl_close( $ch );
-
-                if ( $retcode === 200 ) {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-        }
-
         /**
          * Flatten a multi-dimensional array and constructing concatenated keys for nested elements.
          * @param  array $array
@@ -119,7 +102,7 @@ if ( ! class_exists( 'Exopite_Template' ) ) {
         public static function get_template() {
 
             // Check is file or url exist
-            if ( ! ( file_exists( self::$filename ) || self::URL_exists( self::$filename ) ) ) {
+            if ( ! file_exists( self::$filename ) ) {
                 /*
                  * This function assume you are using under Wordpress.
                  * Otherwise error message style will be not displayed correctly!
