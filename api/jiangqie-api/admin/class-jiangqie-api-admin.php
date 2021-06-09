@@ -139,11 +139,11 @@ class JiangQie_API_Admin
                 array(
                     'id'          => 'app_id',
                     'type'        => 'text',
-                    'title'       => 'Appid',
+                    'title'       => '微信 Appid',
                     'class'       => 'text-class',
                     'description' => '小程序 Appid',
                     'attributes'    => array(
-                        'placeholder' => '请输入小程序 Appid',
+                        'placeholder' => '微信小程序 Appid',
                         'data-test'   => 'test',
                     ),
                     // 'sanitize'    => array($this, 'test_sanitize_callback'),
@@ -152,11 +152,63 @@ class JiangQie_API_Admin
                 array(
                     'id'          => 'app_secret',
                     'type'        => 'text',
-                    'title'       => 'AppSecret',
+                    'title'       => '微信 AppSecret',
                     'class'       => 'text-class',
                     'description' => '小程序 AppSecret',
                     'attributes'    => array(
-                        'placeholder' => '请输入小程序 AppSecret',
+                        'placeholder' => '微信小程序 AppSecret',
+                        'data-test'   => 'test',
+                    ),
+                    // 'sanitize'    => array($this, 'test_sanitize_callback'),
+                ),
+
+                array(
+                    'id'          => 'bd_app_key',
+                    'type'        => 'text',
+                    'title'       => '百度 App Key',
+                    'class'       => 'text-class',
+                    'description' => '小程序 App Key',
+                    'attributes'    => array(
+                        'placeholder' => '百度小程序 App Key',
+                        'data-test'   => 'test',
+                    ),
+                    // 'sanitize'    => array($this, 'test_sanitize_callback'),
+                ),
+
+                array(
+                    'id'          => 'bd_app_secret',
+                    'type'        => 'text',
+                    'title'       => '百度 AppSecret',
+                    'class'       => 'text-class',
+                    'description' => '小程序 AppSecret',
+                    'attributes'    => array(
+                        'placeholder' => '百度小程序 AppSecret',
+                        'data-test'   => 'test',
+                    ),
+                    // 'sanitize'    => array($this, 'test_sanitize_callback'),
+                ),
+
+                array(
+                    'id'          => 'qq_app_id',
+                    'type'        => 'text',
+                    'title'       => 'QQ Appid',
+                    'class'       => 'text-class',
+                    'description' => '小程序 Appid',
+                    'attributes'    => array(
+                        'placeholder' => 'QQ小程序 Appid',
+                        'data-test'   => 'test',
+                    ),
+                    // 'sanitize'    => array($this, 'test_sanitize_callback'),
+                ),
+
+                array(
+                    'id'          => 'qq_app_secret',
+                    'type'        => 'text',
+                    'title'       => 'QQ AppSecret',
+                    'class'       => 'text-class',
+                    'description' => '小程序 AppSecret',
+                    'attributes'    => array(
+                        'placeholder' => 'QQ小程序 AppSecret',
                         'data-test'   => 'test',
                     ),
                     // 'sanitize'    => array($this, 'test_sanitize_callback'),

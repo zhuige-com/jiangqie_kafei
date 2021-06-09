@@ -53,6 +53,16 @@ class JiangQie_API_User_Controller extends JiangQie_API_Base_Controller
 				'callback' => [$this, 'user_login2']
 			]
 		]);
+		register_rest_route($this->namespace, '/' . $this->module . '/login3', [
+			[
+				'callback' => [$this, 'user_login3']
+			]
+		]);
+		register_rest_route($this->namespace, '/' . $this->module . '/logintest', [
+			[
+				'callback' => [$this, 'user_logintest']
+			]
+		]);
 
 		/**
 		 * 用户配置
@@ -272,6 +282,197 @@ class JiangQie_API_User_Controller extends JiangQie_API_Base_Controller
 		);
 
 		return $this->make_success($user);
+	}
+
+	/**
+	 *用户登录
+	 */
+	public function user_login3($request)
+	{
+		$code = $this->param_value($request, 'code', '');
+		$nickname = $this->param_value($request, 'nickname', '');
+		$avatar = $this->param_value($request, 'avatar', '');
+		$channel = $this->param_value($request, 'channel', '');
+		if (empty($code) || empty($nickname) || empty($avatar) || empty($channel)) {
+			return $this->make_error('缺少参数');
+		}
+
+		$session = false;
+		if ('weixin' == $channel) {
+			$session = $this->wx_code2openid($code);
+		} else if ('qq' == $channel) {
+			$session = $this->qq_code2openid($code);
+		} else if ('baidu' == $channel) {
+			$session = $this->bd_code2openid($code);
+		}
+
+		if (!$session) {
+			return $this->make_error('授权失败');
+		}
+
+
+		$user = get_user_by('login', $session['openid']);
+		if ($user) {
+			$user_id = $user->ID;
+		} else {
+			$email_domain = '@jiangqie.com';
+			$user_id = wp_insert_user([
+				'user_login' => $session['openid'],
+				'nickname' => $nickname,
+				'user_nicename' => $nickname,
+				'display_name' => $nickname,
+				'user_email' => $session['openid'] . $email_domain,
+				'role' => 'subscriber',
+				'user_pass' => wp_generate_password(16, false),
+			]);
+			
+			if (is_wp_error($user_id)) {
+				return $this->make_error('创建用户失败');
+			}
+		}
+		
+		update_user_meta($user_id, 'jq_channel', $channel);
+
+		update_user_meta($user_id, 'jq_session_key', $session['session_key']);
+
+		if (isset($session['unionid']) && !empty($session['unionid'])) {
+			update_user_meta($user_id, 'jq_unionid', $session['unionid']);
+		}
+
+		//如果每次都同步微信头像 会导致小程序设置的头像失效；所以没有头像时，才同步头像
+		$old_avatar = get_user_meta($user_id, 'jiangqie_avatar', true);
+		if (!$old_avatar || strstr($old_avatar, 'qlogo.cn')) {
+			$new_avatar = jiangqie_free_download_wx_avatar($avatar, $user_id);
+			
+			if ($new_avatar) {
+				$new_avatar_url = $new_avatar['url'];
+				$dres = jiangqie_free_import_image2attachment($new_avatar['path']);
+				if (!is_wp_error($dres)) {
+					$upload_dir = wp_upload_dir();
+					$new_avatar_url = $upload_dir['url'] . '/' . $dres;
+				}
+				update_user_meta($user_id, 'jiangqie_avatar', $new_avatar_url);
+			} else {
+				update_user_meta($user_id, 'jiangqie_avatar', $avatar);
+			}
+		}
+
+
+		$jiangqie_token = $this->generate_token();
+		update_user_meta($user_id, 'jiangqie_token', $jiangqie_token);
+
+		$user = array(
+			'nickname' => $nickname,
+			'avatar' => get_user_meta($user_id, 'jiangqie_avatar', true),
+			'token' => $jiangqie_token,
+		);
+
+		return $this->make_success($user);	
+	}
+
+	public function user_logintest($request)
+	{
+		$jiangqie_token = $this->generate_token();
+
+		$user_id = 4;
+
+		$user = array(
+			'nickname' => '酱茄',
+			'avatar' => get_user_meta($user_id, 'jiangqie_avatar', true),
+			'token' => $jiangqie_token,
+		);
+
+		update_user_meta($user_id, 'jiangqie_token', $jiangqie_token);
+
+		return $this->make_success($user);
+	}
+
+	
+	private function wx_code2openid($code)
+	{
+		$app_id = JiangQie_API::option_value('app_id');
+		$app_secret = JiangQie_API::option_value('app_secret');
+		if (!$app_id || !$app_secret) {
+			return false;
+		}
+
+		$params = [
+			'appid' => $app_id,
+			'secret' => $app_secret,
+			'js_code' => $code,
+			'grant_type' => 'authorization_code'
+		];
+
+		$result = wp_remote_get(add_query_arg($params, 'https://api.weixin.qq.com/sns/jscode2session'));
+		if (!is_array($result) || is_wp_error($result) || $result['response']['code'] != '200') {
+			return false;
+		}
+
+		file_put_contents('wx_login', json_encode($result));
+
+		$body = stripslashes($result['body']);
+		$session = json_decode($body, true);
+
+		// $openId = $wx_session['openid'];
+		// $unionId = $wx_session['unionid'];
+		// update_user_meta($user_id, 'jq_wx_session_key', $wx_session['session_key']);
+
+		return $session;
+	}
+
+	private function qq_code2openid($code)
+	{
+		$app_id = JiangQie_API::option_value('qq_app_id');
+		$app_secret = JiangQie_API::option_value('qq_app_secret');
+		if (!$app_id || !$app_secret) {
+			return false;
+		}
+
+		$params = [
+			'appid' => $app_id,
+			'secret' => $app_secret,
+			'js_code' => $code,
+			'grant_type' => 'authorization_code'
+		];
+
+		$result = wp_remote_get(add_query_arg($params, 'https://api.q.qq.com/sns/jscode2session'));
+		if (!is_array($result) || is_wp_error($result) || $result['response']['code'] != '200') {
+			return false;
+		}
+
+		file_put_contents('qq_login', json_encode($result));
+
+		$body = stripslashes($result['body']);
+		$session = json_decode($body, true);
+
+		return $session;
+	}
+
+	private function bd_code2openid($code)
+	{
+		$app_id = JiangQie_API::option_value('bd_app_key');
+		$app_secret = JiangQie_API::option_value('bd_app_secret');
+		if (!$app_id || !$app_secret) {
+			return false;
+		}
+
+		$params = [
+			'client_id' => $app_id,
+			'sk' => $app_secret,
+			'code' => $code,
+		];
+
+		$result = wp_remote_get(add_query_arg($params, 'https://spapi.baidu.com/oauth/jscode2sessionkey'));
+		if (!is_array($result) || is_wp_error($result) || $result['response']['code'] != '200') {
+			return false;
+		}
+
+		file_put_contents('bd_login', json_encode($result));
+
+		$body = stripslashes($result['body']);
+		$session = json_decode($body, true);
+
+		return $session;
 	}
 
 	/**

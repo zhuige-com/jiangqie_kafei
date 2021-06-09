@@ -125,13 +125,27 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 			]
 		]);
 
-		//二维码
+		//微信二维码
 		register_rest_route($this->namespace, '/' . $this->module . '/wxacode', [
 			[
 				'callback' => [$this, 'get_wxacode']
 			]
 		]);
 
+
+		//百度二维码
+		register_rest_route($this->namespace, '/' . $this->module . '/bdacode', [
+			[
+				'callback' => [$this, 'get_bdacode']
+			]
+		]);
+
+		//QQ二维码
+		register_rest_route($this->namespace, '/' . $this->module . '/qqacode', [
+			[
+				'callback' => [$this, 'get_qqacode']
+			]
+		]);
 	}
 
 	/**
@@ -533,7 +547,7 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 	}
 
 	/**
-	 * 获取小程序码
+	 * 获取微信小程序码
 	 */
 	public function get_wxacode($request)
 	{
@@ -595,7 +609,7 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 
 		$content = wp_remote_retrieve_body($remote);
 		if (strstr($content, 'errcode') !== false || strstr($content, 'errmsg') !== false) {
-			$json = json_decode($content, TRUE);
+			// $json = json_decode($content, TRUE);
 			// return $this->make_error($json['errmsg']);
 			return $this->make_success(plugins_url('/jiangqie-api/public/images/wxacode.jpg'));
 		}
@@ -604,7 +618,143 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 		file_put_contents($qrcode, $content);
 
 		//同步到媒体库
-		$this->handle_import_file($qrcode);
+		$res = jiangqie_free_import_image2attachment($qrcode);
+		if (!is_wp_error($res)) {
+			$qrcode_link = $uploads['baseurl'] . '/jiangqie_bdacode/' . $res;
+		}
+
+		return $this->make_success($qrcode_link);
+	}
+
+	/**
+	 * 获取百度小程序码
+	 */
+	public function get_bdacode($request)
+	{
+		$post_id = $this->param_value($request, 'post_id', 0);
+		if (!$post_id) {
+			return $this->make_error('缺少参数');
+		}
+
+		$post_type = get_post_type($post_id);
+
+		$uploads = wp_upload_dir();
+		$qrcode_path = $uploads['basedir'] . '/jiangqie_bdacode/';
+		if (!is_dir($qrcode_path)) {
+			mkdir($qrcode_path, 0755);
+		}
+
+		$qrcode = $qrcode_path . $post_type . '-' . $post_id . '.png';
+		$qrcode_link = $uploads['baseurl'] . '/jiangqie_bdacode/' . $post_type . '-' . $post_id . '.png';
+		if (is_file($qrcode)) {
+			return $this->make_success($qrcode_link);
+		}
+
+		$wx_session = JiangQie_API::get_bd_token();
+		$access_token = $wx_session['access_token'];
+		if (empty($access_token)) {
+			return $this->make_error('获取二维码失败');
+		}
+
+		$api = 'https://openapi.baidu.com/rest/2.0/smartapp/qrcode/getunlimited?access_token=' . $access_token;
+
+		$data = array(
+			'path' => 'pages/detail/detail?post_id=' . $post_id,
+			// 'width' => 430, 尺寸 默认430
+			// 'mf' => 1 是否包含logo 1001不包含 默认包含
+		);
+
+		$args = array(
+			'method'  => 'POST',
+			'body' 	  => $data,
+			'headers' => array(),
+			'cookies' => array()
+		);
+
+		$remote = wp_remote_post($api, $args);
+		if (is_wp_error($remote)) {
+			return $this->make_error('系统异常');
+		}
+
+		$content = wp_remote_retrieve_body($remote);
+		if (strstr($content, 'errno') !== false || strstr($content, 'errmsg') !== false) {
+			return $this->make_success(plugins_url('/jiangqie-ow-free/public/images/bdacode.jpg'));
+		}
+
+		//输出二维码
+		file_put_contents($qrcode, $content);
+
+		//同步到媒体库
+		$res = jiangqie_free_import_image2attachment($qrcode);
+		if (!is_wp_error($res)) {
+			$qrcode_link = $uploads['baseurl'] . '/jiangqie_bdacode/' . $res;
+		}
+
+		return $this->make_success($qrcode_link);
+	}
+
+	/**
+	 * 获取QQ小程序码
+	 */
+	public function get_qqacode($request)
+	{
+		$post_id = $this->param_value($request, 'post_id', 0);
+		if (!$post_id) {
+			return $this->make_error('缺少参数');
+		}
+
+		$post_type = get_post_type($post_id);
+
+		$uploads = wp_upload_dir();
+		$qrcode_path = $uploads['basedir'] . '/jiangqie_qqacode/';
+		if (!is_dir($qrcode_path)) {
+			mkdir($qrcode_path, 0755);
+		}
+
+		$qrcode = $qrcode_path . $post_type . '-' . $post_id . '.png';
+		$qrcode_link = $uploads['baseurl'] . '/jiangqie_qqacode/' . $post_type . '-' . $post_id . '.png';
+		if (is_file($qrcode)) {
+			return $this->make_success($qrcode_link);
+		}
+
+		$qq_session = JiangQie_API::get_qq_token();
+		$access_token = $qq_session['access_token'];
+		if (empty($access_token)) {
+			return $this->make_error('获取二维码失败');
+		}
+
+		$api = 'https://api.q.qq.com/api/json/qqa/CreateMiniCode?access_token=' . $access_token;
+
+		$data = array(
+			'appid' => JiangQie_API::option_value('qq_app_id'),
+			'path' => 'pages/detail/detail?post_id=' . $post_id,
+		);
+
+		$args = array(
+			'method'  => 'POST',
+			'body' 	  => wp_json_encode($data),
+			'headers' => array(),
+			'cookies' => array()
+		);
+
+		$remote = wp_remote_post($api, $args);
+		if (is_wp_error($remote)) {
+			return $this->make_error('系统异常');
+		}
+
+		$content = wp_remote_retrieve_body($remote);
+		if (strstr($content, 'errcode') !== false || strstr($content, 'errmsg') !== false) {
+			return $this->make_success(plugins_url('/jiangqie-ow-free/public/images/qqacode.jpg'));
+		}
+
+		//输出二维码
+		file_put_contents($qrcode, $content);
+
+		//同步到媒体库
+		$res = jiangqie_free_import_image2attachment($qrcode);
+		if (!is_wp_error($res)) {
+			$qrcode_link = $uploads['baseurl'] . '/jiangqie_qqacode/' . $res;
+		}
 
 		return $this->make_success($qrcode_link);
 	}

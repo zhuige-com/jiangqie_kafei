@@ -44,7 +44,7 @@ class JiangQie_API
 	 */
 	public static function get_wx_token()
 	{
-		$path_token = JIANG_QIE_API_BASE_DIR . 'wx_access_token.data';
+		$path_token = JIANG_QIE_API_BASE_DIR . 'jiangqie_free_wx_access_token.data';
 		if (file_exists($path_token)) {
 			$str_token = file_get_contents($path_token);
 			$access_token = json_decode($str_token, TRUE);
@@ -55,6 +55,10 @@ class JiangQie_API
 		
 		$app_id = JiangQie_API::option_value('app_id');
 		$app_secret = JiangQie_API::option_value('app_secret');
+		if (!$app_id || !$app_secret) {
+			return false;
+		}
+
 		$url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=' . $app_id . '&secret=' . $app_secret;
 		$body = wp_remote_get($url);
 		if (!is_array($body) || is_wp_error($body) || $body['response']['code'] != '200') {
@@ -62,6 +66,73 @@ class JiangQie_API
 		}
 		$access_token = json_decode($body['body'], TRUE);
 		
+		$access_token['expires_in'] = $access_token['expires_in'] + time() - 200;
+		file_put_contents($path_token, json_encode($access_token));
+
+		return $access_token;
+	}
+
+	/**
+	 * QQ token
+	 */
+	public static function get_qq_token()
+	{
+		$path_token = JIANG_QIE_PLUS_BASE_DIR . 'jiangqie_free_qq_access_token.data';
+		if (file_exists($path_token)) {
+			$str_token = file_get_contents($path_token);
+			$access_token = json_decode($str_token, TRUE);
+			if ($access_token['expires_in'] > time()) {
+				return $access_token;
+			}
+		}
+
+		$app_id = JiangQie_API::option_value('qq_app_id');
+		$app_secret = JiangQie_API::option_value('qq_app_secret');
+		if (!$app_id || !$app_secret) {
+			return false;
+		}
+
+		$url = "https://api.q.qq.com/api/getToken?grant_type=client_credential&appid=$app_id&secret=$app_secret";
+		$body = wp_remote_get($url);
+		if (!is_array($body) || is_wp_error($body) || $body['response']['code'] != '200') {
+			return false;
+		}
+		$access_token = json_decode($body['body'], TRUE);
+
+		$access_token['expires_in'] = $access_token['expires_in'] + time() - 200;
+		file_put_contents($path_token, json_encode($access_token));
+
+		return $access_token;
+	}
+
+	/**
+	 * 百度 token
+	 */
+	public static function get_bd_token()
+	{
+		$path_token = JIANG_QIE_PLUS_BASE_DIR . 'jiangqie_free_baidu_access_token.data';
+		if (file_exists($path_token)) {
+			$str_token = file_get_contents($path_token);
+			$access_token = json_decode($str_token, TRUE);
+			if ($access_token['expires_in'] > time()) {
+				return $access_token;
+			}
+		}
+
+		$app_id = JiangQie_API::option_value('bd_app_key');
+		$app_secret = JiangQie_API::option_value('bd_app_secret');
+		if (!$app_id || !$app_secret) {
+			return false;
+		}
+
+		$url = "https://openapi.baidu.com/oauth/2.0/token?grant_type=client_credentials&client_id=$app_id&client_secret=$app_secret&scope=smartapp_snsapi_base
+		";
+		$body = wp_remote_get($url);
+		if (!is_array($body) || is_wp_error($body) || $body['response']['code'] != '200') {
+			return false;
+		}
+		$access_token = json_decode($body['body'], TRUE);
+
 		$access_token['expires_in'] = $access_token['expires_in'] + time() - 200;
 		file_put_contents($path_token, json_encode($access_token));
 

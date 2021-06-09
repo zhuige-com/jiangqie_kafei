@@ -41,6 +41,7 @@ register_activation_hook(__FILE__, 'activate_jiangqie_api');
 register_deactivation_hook(__FILE__, 'deactivate_jiangqie_api');
 
 require plugin_dir_path(__FILE__) . 'includes/class-jiangqie-api.php';
+require plugin_dir_path(__FILE__) . 'includes/jiangqie-function.php';
 require plugin_dir_path(__FILE__) . 'includes/categories-images.php';
 require plugin_dir_path(__FILE__) . 'includes/custom_users_column.php';
 require plugin_dir_path(__FILE__) . 'includes/custom_dashboard.php';
