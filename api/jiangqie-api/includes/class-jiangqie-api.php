@@ -77,7 +77,7 @@ class JiangQie_API
 	 */
 	public static function get_qq_token()
 	{
-		$path_token = JIANG_QIE_PLUS_BASE_DIR . 'jiangqie_free_qq_access_token.data';
+		$path_token = JIANG_QIE_API_BASE_DIR . 'jiangqie_free_qq_access_token.data';
 		if (file_exists($path_token)) {
 			$str_token = file_get_contents($path_token);
 			$access_token = json_decode($str_token, TRUE);
@@ -110,7 +110,7 @@ class JiangQie_API
 	 */
 	public static function get_bd_token()
 	{
-		$path_token = JIANG_QIE_PLUS_BASE_DIR . 'jiangqie_free_baidu_access_token.data';
+		$path_token = JIANG_QIE_API_BASE_DIR . 'jiangqie_free_baidu_access_token.data';
 		if (file_exists($path_token)) {
 			$str_token = file_get_contents($path_token);
 			$access_token = json_decode($str_token, TRUE);

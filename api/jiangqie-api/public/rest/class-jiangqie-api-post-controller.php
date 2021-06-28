@@ -368,6 +368,7 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 		$args = [
 			'posts_per_page' => JiangQie_API::POSTS_PER_PAGE,
 			'offset' => $offset,
+			'ignore_sticky_posts' => 1,
 			'orderby' => 'date',
 			'tag_id' => $tag_id
 		];
@@ -406,6 +407,7 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 			'posts_per_page' => JiangQie_API::POSTS_PER_PAGE,
 			'offset' => $offset,
 			'order' => 'DESC',
+			'ignore_sticky_posts' => 1
 		];
 
 		$hide_cat = JiangQie_API::option_value('hide_cat');
@@ -659,7 +661,7 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 		$api = 'https://openapi.baidu.com/rest/2.0/smartapp/qrcode/getunlimited?access_token=' . $access_token;
 
 		$data = array(
-			'path' => 'pages/detail/detail?post_id=' . $post_id,
+			'path' => 'pages/article/article?post_id=' . $post_id,
 			// 'width' => 430, 尺寸 默认430
 			// 'mf' => 1 是否包含logo 1001不包含 默认包含
 		);
@@ -678,7 +680,7 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 
 		$content = wp_remote_retrieve_body($remote);
 		if (strstr($content, 'errno') !== false || strstr($content, 'errmsg') !== false) {
-			return $this->make_success(plugins_url('/jiangqie-ow-free/public/images/bdacode.jpg'));
+			return $this->make_success(plugins_url('/jiangqie-api/public/images/bdacode.jpg'));
 		}
 
 		//输出二维码
@@ -727,13 +729,15 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 
 		$data = array(
 			'appid' => JiangQie_API::option_value('qq_app_id'),
-			'path' => 'pages/detail/detail?post_id=' . $post_id,
+			'path' => 'pages/article/article?post_id=' . $post_id,
 		);
 
 		$args = array(
 			'method'  => 'POST',
 			'body' 	  => wp_json_encode($data),
-			'headers' => array(),
+			'headers' => array(
+				'Content-Type' => 'application/json'
+			),
 			'cookies' => array()
 		);
 
@@ -744,7 +748,7 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 
 		$content = wp_remote_retrieve_body($remote);
 		if (strstr($content, 'errcode') !== false || strstr($content, 'errmsg') !== false) {
-			return $this->make_success(plugins_url('/jiangqie-ow-free/public/images/qqacode.jpg'));
+			return $this->make_success(plugins_url('/jiangqie-api/public/images/qqacode.jpg'));
 		}
 
 		//输出二维码
