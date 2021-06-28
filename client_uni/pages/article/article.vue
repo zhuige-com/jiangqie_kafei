@@ -156,8 +156,8 @@
 		<!--加载框 end-->
 			
 		<!-- #ifdef MP-BAIDU -->
-		<view v-if="isShowPainter" isRenderImage style="position: fixed; top: 0;" @click="clickPainter()">
-			<l-painter isRenderImage :board="base" />
+		<view v-if="isShowPainter" isRenderImage style="position: fixed; top: 0;" @longpress="longTapPainter" @click="clickPainter()">
+			<l-painter isRenderImage :board="base" @success="onPainterSuccess" />
 		</view>
 		<!-- #endif -->
 		
@@ -215,7 +215,7 @@
 				comment_id: 0,
 				
 				//小程序码
-				wxacode: '',
+				acode: '',
 				
 				//返回页面是否需要刷新
 				needRefresh: true,
@@ -314,19 +314,55 @@
 		// #endif
 		
 		methods: {
+			//海报分享-百度
+			// #ifdef MP-BAIDU
 			clickPainter() {
 				this.isShowPainter = false;
 			},
 			
+			longTapPainter() {
+				uni.showActionSheet({
+					itemList: ['保存到相册'],
+					success: (res) => {
+						if (res.tapIndex == 0) {
+							uni.showLoading({
+								title: '导出……'
+							})
+							let save2album = setInterval(() => {
+								if (!this.painterImage || this.painterImage.length == 0) {
+									return;
+								}
+								clearInterval(save2album)
+								uni.hideLoading();
+			
+								uni.saveImageToPhotosAlbum({
+									filePath: this.painterImage,
+									success() {
+										uni.showToast({
+											title:'已保存'
+										})
+									}
+								})
+							}, 500);
+						}
+					},
+					fail: (res) => {
+						console.log(res.errMsg);
+					}
+				});
+			},
+			// #endif
+			
 			//海报分享
 			sharePosterClick() {
+				// #ifndef MP-BAIDU
 				if (this.painterImage) {
 					uni.previewImage({
 						urls: [this.painterImage]
 					});
-					console.log('海报分享');
 					return;
 				}
+				// #endif
 			
 				this.isShowPainter = true;
 				this.base = {
@@ -408,9 +444,12 @@
 			
 			onPainterSuccess: function(e) {
 				this.painterImage = e;
+				
+				// #ifndef MP-BAIDU
 				uni.previewImage({
 					urls: [e]
 				});
+				// #endif
 			},
 
 			/**
@@ -687,7 +726,7 @@
 		float: right;
 		font-size: 24rpx;
 		font-weight: 200;
-		color: #CCC;
+		color: #999;
 	}
 
 	.jiangqie-page-icon {
@@ -701,7 +740,7 @@
 	.jiangqie-page-cmt text {
 		font-size: 24rpx;
 		font-weight: 200;
-		color: #CCC;
+		color: #999;
 		display: inline-block;
 		line-height: 80rpx;
 		padding: 0rpx;
@@ -756,7 +795,7 @@
 		margin-bottom: 20rpx;
 		font-weight: 300;
 		font-size: 22rpx;
-		color: #999;
+		color: #666;
 	}
 
 	.jiangqie-page-body-banner {
@@ -789,7 +828,7 @@
 	.jiangqie-page-cmt-title text {
 		font-size: 20rpx;
 		font-weight: 200;
-		color: #CCC;
+		color: #999;
 		padding: 6rpx 16rpx;
 		border-radius: 30rpx;
 		background: #F6F6F6;
@@ -826,7 +865,7 @@
 	.jiangqie-page-cmt-time {
 		font-size: 20rpx;
 		font-weight: 200;
-		color: #BBB;
+		color: #888;
 		margin-left: 20rpx;
 	}
 
@@ -889,24 +928,26 @@
 	}
 
 	.jiangqie-page-laud-btn {
-		font-size: 16px;
+		font-size: 14px;
+		text-align: center;
 		float: left;
 		margin-left: 40rpx;
 		border-radius: 80rpx;
-		padding: 10rpx 40rpx 14rpx;
+		padding: 5rpx 40rpx 7rpx;
 		width: 180rpx;
-		border: 1rpx solid #efefef;
+		border: 1rpx solid #CCCCCC;
+		line-height: 1.8rem;
 	}
 
 	.jiangqie-page-laud-btn image {
 		height: 36rpx;
 		width: 36rpx;
 		margin-right: 12rpx;
-		vertical-align: middle;
+		vertical-align: text-bottom;
 	}
 
 	.jiangqie-page-laud-btn text {
-		font-size: 32rpx;
+		font-size: 26rpx;
 		font-weight: 200;
 		color: #999;
 	}
@@ -1121,8 +1162,8 @@
 		/*
 		   #ifdef  H5  
 		 */
-		top: calc(88rpx + constant(safe-area-inset-top));
-		top: calc(88rpx + env(safe-area-inset-top));
+		/* top: calc(88rpx + constant(safe-area-inset-top));
+		top: calc(88rpx + env(safe-area-inset-top)); */
 		/*
 		   #endif  
 		 */
@@ -1137,6 +1178,7 @@
 	button.jiangqie-page-laud-btn {
 		box-sizing: content-box;
 		line-height: inherit;
+		line-height: 1.8rem;
 	}
 
 	.jiangqie-goback-btn {

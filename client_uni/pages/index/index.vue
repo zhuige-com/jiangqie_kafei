@@ -9,7 +9,7 @@
 					</view>
 				</template>
 				<view class="jiangqie-btn-search" @click="handlerSearchClick">
-					<uni-icons class="input-uni-icon" type="search" size="22" color="#f8b8b8" />
+					<uni-icons class="input-uni-icon" type="search" size="18" color="#f8b8b8" />
 					<text>点我搜索</text>
 				</view>
 			</uni-nav-bar>
@@ -510,10 +510,11 @@
 		align-items: center;
 		width: 80%;
 		height: 32px;
-		padding-left: 10rpx;
+		padding-left: 20rpx;
 		background: #d5544f;
 		border-radius: 16px;
 		color: #f8b8b8;
+		font-size: 28rpx;
 	}
 	
 	.container {

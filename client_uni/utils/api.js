@@ -99,12 +99,12 @@ module.exports = {
 	/**
 	 * 获取百度小程序码
 	 */
-	JIANGQIE_POST_BD_ACODE: makeURL('posts', 'wxacode'),
+	JIANGQIE_POST_BD_ACODE: makeURL('posts', 'bdacode'),
 	
 	/**
 	 * 获取QQ小程序码
 	 */
-	JIANGQIE_POST_QQ_ACODE: makeURL('posts', 'wxacode'),
+	JIANGQIE_POST_QQ_ACODE: makeURL('posts', 'qqacode'),
 
 	/**
 	 * 用户登录
