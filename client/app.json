@@ -1,5 +1,6 @@
 {
     "pages": [
+        
         "pages/index/index",
         "pages/hot/hot",
         "pages/ucenter/ucenter",
@@ -9,7 +10,8 @@
         "pages/article/article",
         "pages/about/about",
         "pages/login/login",
-        "pages/viewhtml/viewhtml"
+        "pages/viewhtml/viewhtml",
+        "pages/discovery/discovery"
     ],
     "window": {
         "backgroundTextStyle": "light",
@@ -33,6 +35,12 @@
             {
                 "pagePath": "pages/categories/categories",
                 "text": "分类",
+                "iconPath": "images/tabbar/cat_gray.png",
+                "selectedIconPath": "images/tabbar/cat_active.png"
+            },
+            {
+                "pagePath": "pages/discovery/discovery",
+                "text": "发现",
                 "iconPath": "images/tabbar/cat_gray.png",
                 "selectedIconPath": "images/tabbar/cat_active.png"
             },

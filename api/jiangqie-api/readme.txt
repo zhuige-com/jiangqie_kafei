@@ -5,7 +5,7 @@ Donate link: https://www.jiangqie.com/
 Tags: 酱茄,小程序
 Requires at least: 5.4
 Tested up to: 5.7
-Stable tag: 1.4.0
+Stable tag: 1.5.0
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -85,6 +85,12 @@ gitee下载：https://gitee.com/longwenjunj/jiangqie_kafei
 
 
 == Changelog ==
+
+= 1.5.0 =
+
+1. 支持多端（微信，百度，QQ）小程序；
+
+2. 修复了已知的bug
 
 = 1.4.0 =
 

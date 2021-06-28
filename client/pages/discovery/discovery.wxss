@@ -1,0 +1,86 @@
+/* pages/discovery/discovery.wxss */
+.content {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background: #E6E6E6;
+}
+.jiangqie-dis-box {
+  padding: 30rpx;
+}
+.jiangqie-dis-head {
+  height: 3rem;
+  line-height: 2.4rem;
+  font-size: 36rpx;
+  font-weight: 500;
+  padding: 0 30rpx;
+}
+.jiangqie-dis-head text {
+  float: right;
+  margin-top: 6px;
+  font-size: 20rpx;
+  line-height: 1.4rem;
+  height: 1.4rem;
+  padding: 0 8px;
+  background-color: #FFF;
+  border-radius: 40rpx;
+  border: 1px solid #CCCCCC;
+}
+.jiangqie-block {
+  background: #FFF;
+  padding: 30rpx;
+  border-top: 12rpx solid #F5F5F5;
+  display: flex;
+}
+
+.jiangqie-block:first-of-type {
+  border: none;
+  border-radius: 20rpx 20rpx 0 0;
+}
+.jiangqie-block:last-of-type {
+  border-radius: 0 0 20rpx 20rpx;
+}
+.jiangqie-dis-block .jiangqie-block-title {
+  font-size: 28rpx;
+  font-weight: 600;
+  line-height: 2.4rem;
+}
+.jiangqie-dis-block .jiangqie-block-data {
+  font-size: 24rpx;
+  font-weight: 300;
+  color: #777777;
+}
+    
+.jiangqie-block-text>.jiangqie-block-title {
+  max-height: 3.4rem;
+  white-space: normal;
+  font-size: 30rpx;
+  font-weight: 600;
+}
+
+.jiangqie-block-img .jiangqie-block-img {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 120rpx;
+  -ms-flex: 0 0 120rpx;
+  flex: 0 0 120rpx;
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.jiangqie-block-img image {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+}
+
+.jiangqie-block-text {
+  margin-left: 30rpx;
+}
+.jiangqie-dis-block .jiangqie-block-text:first-child {
+  margin: 0!important;
+}
+.tui-text {
+  background: none!important;
+}

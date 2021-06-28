@@ -18,14 +18,7 @@ Hi，欢迎使用“酱茄小程序开源版 – 酱茄Free”。
 
 ## 演示
 
-![酱茄小程序二维码](https://gitee.com/longwenjunj/jiangqie_kafei/raw/master/screenshot/code4.png) 
-
-**案例(部分用户有二次开发)**
-
-![虫子网络](https://gitee.com/longwenjunj/jiangqie_kafei/raw/master/case/chognziwang.jpg "虫子网络") ![寻找摩天轮](https://gitee.com/longwenjunj/jiangqie_kafei/raw/master/case/xunzhaomotianlun.jpg "寻找摩天轮") ![勾拉多+](https://gitee.com/longwenjunj/jiangqie_kafei/raw/master/case/golot.jpg "勾拉多+") ![WordPress中文网](https://gitee.com/longwenjunj/jiangqie_kafei/raw/master/case/wpzhongwen.jpg "WordPress中文网")
-
-![维基案例](https://gitee.com/longwenjunj/jiangqie_kafei/raw/master/case/weiji.jpg "维基案例") ![拇指吉他谱](https://gitee.com/longwenjunj/jiangqie_kafei/raw/master/case/jitapu.jpg "拇指吉他谱") ![痞事](https://gitee.com/longwenjunj/jiangqie_kafei/raw/master/case/pishi.jpg "痞事") ![凌小云i](https://gitee.com/longwenjunj/jiangqie_kafei/raw/master/case/linngxiaoyun.jpg "凌小云i")
-
+![酱茄小程序二维码](https://gitee.com/longwenjunj/jiangqie_kafei/raw/master/screenshot/jiangqie.png) 
 
 **小程序截图**
 
@@ -108,6 +101,13 @@ Hi，欢迎使用“酱茄小程序开源版 – 酱茄Free”。
 
 
 ### 更新日志
+
+#### 2021.6.28 V1.5.0
+
+1. 支持多端（微信，百度，QQ）小程序；
+
+2. 修复了已知的bug
+
 
 #### 2021.4.29 V1.4.0
 

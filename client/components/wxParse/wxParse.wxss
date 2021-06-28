@@ -28,7 +28,10 @@ view {
   margin: 0;
   padding: 0;
 }
-
+/*//兼容fix */
+.wxParse-p {
+    min-height: 1.1rem;
+}
 /*//标题 */
 
 .wxParse-div {
