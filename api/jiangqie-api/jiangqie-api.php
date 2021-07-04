@@ -40,6 +40,14 @@ function deactivate_jiangqie_api()
 register_activation_hook(__FILE__, 'activate_jiangqie_api');
 register_deactivation_hook(__FILE__, 'deactivate_jiangqie_api');
 
+function jiangqie_api_action_links($actions)
+{
+	$actions[] = '<a href="admin.php?page=jiangqie-api">设置</a>';
+	$actions[] = '<a href="https://www.jiangqie.com/ky/4639.html" target="_blank">技术支持</a>';
+    return $actions;
+}
+add_filter('plugin_action_links_' . plugin_basename(__FILE__), 'jiangqie_api_action_links');
+
 require plugin_dir_path(__FILE__) . 'includes/class-jiangqie-api.php';
 require plugin_dir_path(__FILE__) . 'includes/jiangqie-function.php';
 require plugin_dir_path(__FILE__) . 'includes/categories-images.php';

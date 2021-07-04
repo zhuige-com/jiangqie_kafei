@@ -31,7 +31,11 @@ class JiangQie_API
 	 */
 	public static function option_value($key)
     {
-        $options = get_option('jiangqie-api');
+		static $options = false;
+		if (!$options) {
+			$options = get_option('jiangqie-api');
+		}
+		
 		if (isset($options[$key]) && !empty($options[$key])) {
 			return $options[$key];
 		}
