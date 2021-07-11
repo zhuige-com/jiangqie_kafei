@@ -421,12 +421,12 @@ if ( ! class_exists( 'Exopite_Simple_Options_Framework' ) ) :
 			add_action( 'wp_ajax_exopite-sof-import-options', array( $this, 'import_options' ) );
 			add_action( 'wp_ajax_exopite-sof-reset-options', array( $this, 'reset_options' ) );
 
-			if ( isset( $this->config['plugin_basename'] ) && ! empty( $this->config['plugin_basename'] ) ) {
-				add_filter( 'plugin_action_links_' . $this->config['plugin_basename'], array(
-					$this,
-					'plugin_action_links'
-				) );
-			}
+			// if ( isset( $this->config['plugin_basename'] ) && ! empty( $this->config['plugin_basename'] ) ) {
+			// 	add_filter( 'plugin_action_links_' . $this->config['plugin_basename'], array(
+			// 		$this,
+			// 		'plugin_action_links'
+			// 	) );
+			// }
 
 		}
 
