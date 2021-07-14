@@ -6,13 +6,13 @@
 					<text>{{setting.title}}</text>
 					<view>{{setting.description}}</view>
 				</view>
-				<image :src="setting.background" mode="aspectFill"></image>
+				<image v-if="setting.background && setting.background.length>0" :src="setting.background" mode="aspectFill"></image>
 			</view>
 			<view class="right-box">
 
 				<view v-for="(item, index) in categories" :key="index" class="sortbox" :data-id="item.id"
 					:data-name="item.name" @tap.stop="handlerCategoryClick">
-					<image :src="item.cover?item.cover:categorie_cover" mode="aspectFill" class="sortimage"></image>
+					<image :src="item.cover" mode="aspectFill" class="sortimage"></image>
 					<view class="sorttitle">{{item.name}}</view>
 					<view class="sortsummary">{{item.description}}</view>
 				</view>
@@ -52,9 +52,7 @@
 					background: ""
 				},
 				categories: [],
-				categorie_cover: Api.JIANGQIE_CAT_COVER,
 				default: {
-					background: Api.JIANGQIE_BG_CATEGORY,
 					title: '分类标题，请在后台修改',
 					description: '分类描述，请在后台修改'
 				},
@@ -65,17 +63,16 @@
 		components: {
 			JiangqieLoading
 		},
-		
+
 		props: {},
-		
+
 		onLoad: function(options) {
 			//获取配置
 			let that = this;
 			Rest.get(Api.JIANGQIE_SETTING_CATEGORY).then(res => {
 				that.setData({
 					setting: {
-						background: res.data.background ? res.data.background : that.default
-							.background,
+						background: res.data.background,
 						title: res.data.title ? res.data.title : that.default.title,
 						description: res.data.description ? res.data.description : that.default
 							.description
@@ -89,14 +86,14 @@
 				});
 			});
 		},
-		
+
 		onShareAppMessage: function() {
 			return {
 				title: getApp().appName,
 				path: 'pages/index/index'
 			};
 		},
-		
+
 		// #ifdef MP-WEIXIN
 		onShareTimeline: function() {
 			return {
@@ -104,7 +101,7 @@
 			};
 		},
 		// #endif
-		
+
 		methods: {
 			handlerCategoryClick: function(e) {
 				let cat_id = e.currentTarget.dataset.id;
@@ -252,5 +249,4 @@
 		font-weight: 200;
 		line-height: 40rpx;
 	}
-
 </style>

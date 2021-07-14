@@ -319,7 +319,7 @@
 					actives: res.data.actives,
 					hot: res.data.hot,
 					listMode: res.data.list_mode,
-					background: res.data.slide && res.data.slide.length > 0 ? Api.JIANGQIE_BG_INDEX :
+					background: res.data.slide && res.data.slide.length > 0 ? res.data.background :
 						''
 				});
 

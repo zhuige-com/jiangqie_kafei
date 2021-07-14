@@ -163,7 +163,7 @@
 
 		<view class="jiangqie-nomore-class jiangqie-loadmore">
 			<view class="jiangqie-nomore">
-				<view class="jiangqie-text" style="background: #FFF;">© 酱茄 jiangqie.com</view>
+				<view @click="clickJiangQie" class="jiangqie-text" style="background: #FFF;">© 酱茄 jiangqie.com</view>
 			</view>
 		</view>
 	</view>
@@ -180,6 +180,7 @@
 	 */
 	const Auth = require("@/utils/auth.js");
 	const Api = require("@/utils/api.js");
+	const Util = require("@/utils/util.js");
 	const Rest = require("@/utils/rest.js");
 	import JiangqieLoading from "@/components/loading/loading";
 
@@ -190,7 +191,6 @@
 				user: undefined,
 				menu: {},
 				default: {
-					background: Api.JIANGQIE_BG_MY,
 					menu: [ //views,likes,favorites,comments,about,feedback,contact,clear,split,link,page
 						{
 							tp: 'views',
@@ -262,7 +262,7 @@
 
 				that.setData({
 					setting: {
-						background: res.data.background ? res.data.background : that.default.background
+						background: res.data.background
 					},
 					menu: menu
 				});
@@ -350,7 +350,10 @@
 					url: '/pages/viewhtml/viewhtml?page_id=' + page_id
 				});
 			},
-			
+
+			clickJiangQie() {
+				Util.jiangqie();
+			}
 		}
 	};
 </script>

@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<view class="jiangqie-timeline-head">
-			<image :src="setting.background" mode="aspectFill"></image>
+			<image v-if="setting.background && setting.background.length>0" :src="setting.background" mode="aspectFill"></image>
 			<view v-if="setting.title.length>0 || setting.description.length>0" class="timeline-head-text">
 				<text>{{setting.title}}</text>
 				<view class="timeline-head-describe">{{setting.description}}</view>
@@ -16,7 +16,7 @@
 			</view>
 		</scroll-view>
 
-		<view :style="'background: url(' + tl_background + ') repeat-y; background-position: -30rpx 0;'">
+		<view :style="tl_background?'background: url(' + tl_background + ') repeat-y; background-position: -30rpx 0;':''">
 
 			<template v-if="posts.length > 0">
 				<view class="jiangqie-timeline-view">
@@ -106,9 +106,9 @@
 				loadding: false,
 				pullUpOn: true,
 				loaded: false,
-				tl_background: Api.JIANGQIE_BG_TIMELINE,
+				tl_background: '',
 				default: {
-					background: Api.JIANGQIE_BG_HOT,
+					background: '',
 					title: '热门标题，请在后台修改',
 					description: '热门描述，请在后台修改'
 				},
@@ -132,12 +132,12 @@
 			Rest.get(Api.JIANGQIE_SETTING_HOT).then(res => {
 				that.setData({
 					setting: {
-						background: res.data.background ? res.data.background : that.default
-							.background,
+						background: res.data.background,
 						title: res.data.title ? res.data.title : that.default.title,
 						description: res.data.description ? res.data.description : that.default
 							.description
-					}
+					},
+					tl_background: res.data.tl_background
 				});
 			});
 			this.loadPosts(true);

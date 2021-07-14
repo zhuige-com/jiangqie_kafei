@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<view :style="'background: url(' + background + ') no-repeat;background-size: 100% auto;'">
+		<view :style="background?'background-image: url(' + background + ');':''" style="background: no-repeat;background-size: 100% auto;">
 			<view class="jiangqie-login">
 				<view class="jiangqie-app-info">
 					<!--替换为小程序logo-->
@@ -78,7 +78,7 @@
 	export default {
 		data() {
 			return {
-				background: Api.JIANGQIE_BG_INDEX,
+				background: '',
 				title: '',
 				loading: false,
 				
@@ -104,6 +104,10 @@
 				}
 			});
 			// #endif
+			
+			Rest.get(Api.JIANGQIE_SETTING_LOGIN).then(res => {
+				this.background = res.data.background;
+			});
 		},
 		
 		onShareAppMessage: function() {

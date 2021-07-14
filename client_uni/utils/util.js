@@ -18,6 +18,37 @@ function navigateBack() {
 	});
 }
 
+function jiangqie() {
+	let os = undefined;
+	// #ifdef MP-WEIXIN
+	os = 'weixin';
+	uni.navigateToMiniProgram({
+		appId: 'wxb0b82c1a4e82a353'
+	})
+	// #endif
+	
+	// #ifdef MP-BAIDU
+	os = 'baidu';
+	uni.navigateToMiniProgram({
+		appId: 'UBGY8eyZqGooUziDVAz27P0KuMWj0eR1'
+	})
+	// #endif
+	
+	// #ifdef MP-QQ
+	os = 'qq';
+	uni.navigateToMiniProgram({
+		appId: '1111804134'
+	})
+	// #endif
+	
+	if (!os) {
+		uni.navigateTo({
+			url: '/pages/webview/webview'
+		})
+	}
+}
+
 module.exports = {
-	navigateBack
+	navigateBack,
+	jiangqie
 };

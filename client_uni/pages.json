@@ -69,6 +69,14 @@
 			"style": {
 				"navigationBarTitleText": "..."
 			}
+		},
+		{
+		    "path" : "pages/webview/webview",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
 		}
 	],
 	"tabBar": {

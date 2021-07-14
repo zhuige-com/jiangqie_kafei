@@ -9,15 +9,7 @@
 const Config = require("./config.js");
 
 function makeURL(module, action) {
-	if (Config.JQ_DEBUG) {
-		return `http://test.wp.com/wp-json/jiangqie/v1/${module}/${action}`;
-	} else {
-		return `https://${Config.JQ_DOMAIN}/wp-json/jiangqie/v1/${module}/${action}`;
-	}
-}
-
-function makeRes(res, name) {
-	return `https://${Config.JQ_DOMAIN}/wp-content/plugins/jiangqie-api/public/${res}/${name}`;
+	return `https://${Config.JQ_DOMAIN}/wp-json/jiangqie/v1/${module}/${action}`;
 }
 
 module.exports = {
@@ -40,6 +32,11 @@ module.exports = {
 	 * 获取我的配置
 	 */
 	JIANGQIE_SETTING_UCENTER: makeURL('setting', 'ucenter'),
+	
+	/**
+	 * 获取登录配置
+	 */
+	JIANGQIE_SETTING_LOGIN: makeURL('setting', 'login'),
 
 	/**
 	 * 获取分类 只获取一级分类
@@ -145,10 +142,4 @@ module.exports = {
 	 * 删除评论
 	 */
 	JIANGQIE_COMMENT_DELETE: makeURL('comment', 'delete'),
-	JIANGQIE_BG_INDEX: makeRes('images', 'id_bg.png'),
-	JIANGQIE_BG_TIMELINE: makeRes('images', 'timeline_bg.png'),
-	JIANGQIE_BG_MY: makeRes('images', 'my_bg.png'),
-	JIANGQIE_BG_CATEGORY: makeRes('images', 'cat_bg.png'),
-	JIANGQIE_BG_HOT: makeRes('images', 'hot_bg.png'),
-	JIANGQIE_CAT_COVER: makeRes('images', 'cat_cover.png')
 };
