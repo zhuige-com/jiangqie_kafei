@@ -1,0 +1,182 @@
+.exopite-meta-boxes-wrapper .meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 7px;
+    position: relative;
+    min-height: 30px;
+    line-height: 30px;
+}
+.exopite-meta-boxes-wrapper .meta-row > label {
+    flex: 0 0 200px;
+}
+.exopite-meta-boxes-wrapper .meta-row > span {
+    flex: 1 1 auto;
+    max-width: calc(100% - 200px);
+}
+.exopite-meta-boxes-wrapper .meta-row select,
+.exopite-meta-boxes-wrapper .meta-row textarea,
+.exopite-meta-boxes-wrapper .meta-row input {
+    border: 1px solid #ddd;
+    box-shadow: none;
+}
+.exopite-meta-boxes-wrapper .meta-row select:disabled,
+.exopite-meta-boxes-wrapper .meta-row textarea:disabled,
+.exopite-meta-boxes-wrapper .meta-row input:disabled {
+    background: #f5f5f5;
+    cursor: no-drop;
+}
+.exopite-meta-boxes-wrapper .meta-row select,
+.exopite-meta-boxes-wrapper .meta-row textarea,
+.exopite-meta-boxes-wrapper .meta-row input[type="text"],
+.exopite-meta-boxes-wrapper .meta-row input[type="url"],
+.exopite-meta-boxes-wrapper .meta-row input[type="password"] {
+    width: 100%;
+}
+.exopite-meta-boxes-wrapper .meta-row select {
+    max-width: 375px;
+}
+.exopite-meta-boxes-unit {
+    font-size: 16px;
+    vertical-align: middle;
+}
+.exopite-meta-boxes-unit.muted {
+    color: #aaa;
+}
+.exopite-meta-boxes-upload-preview {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    height: 100px;
+    width: 100px;
+    border: 1px solid #bbb;
+    position: relative;
+    display: none;
+}
+.exopite-meta-boxes-upload-preview-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 18px;
+    background: rgba(255,0,0,.5);
+    width: 15px;
+    text-align: center;
+    height: 16px;
+    line-height: 13px;
+    color: #fff;
+    cursor: pointer;
+}
+/**
+ * TABS
+ * @link https://kyusuf.com/post/completely-css-tabs/
+ */
+.tabs {
+    display: flex;
+    flex-wrap: wrap;
+    border-bottom: 1px solid #ddd;
+}
+.tabs > .input {
+    position: absolute;
+    opacity: 0;
+}
+.tabs > .nav-tab {
+    width: 100%;
+    cursor: pointer;
+    transition: background 0.1s, color 0.1s;
+    border-bottom: 1px solid #ddd;
+}
+.tabs > .input:focus + .nav-tab {
+    z-index: 1;
+}
+.tabs > .input:checked + .nav-tab {
+    border-bottom: 1px solid #fff;
+    background: #fff;
+    color: #000;
+}
+@media (max-width: 599px) {
+    .tabs > .nav-tab {
+        margin-left: 0;
+    }
+}
+@media (min-width: 600px) {
+    .tabs > .nav-tab {
+        width: auto;
+        margin-bottom: -1px;
+        z-index: 1;
+    }
+}
+.tabs > .panel {
+    display: none;
+    padding: 12px 12px 5px 12px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-bottom: none;
+}
+@media (min-width: 600px) {
+    .tabs > .panel {
+        order: 99;
+    }
+}
+.tabs > .input:checked + .nav-tab + .panel {
+    display: block;
+    width: 100%;
+}
+/* Gallery */
+.exopite-meta-boxes-gallery {
+    list-style: none;
+}
+.exopite-meta-boxes-gallery > span {
+    position: relative;
+    /* display: inline-block; */
+    margin-right: 6px;
+    margin-bottom: 6px;
+    cursor: grab;
+    height: 150px;
+    width: 150px;
+    overflow: hidden;
+}
+.exopite-meta-boxes-image-delete::before {
+    content: '×';
+}
+.exopite-meta-boxes-image-delete {
+    font-size: 20px;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    line-height: 16px;
+    padding: 0 2px 3px 2px;
+    background: red;
+    color: #fff;
+    display: inline-block;
+    box-sizing: border-box;
+    cursor: pointer;
+    z-index: 1;
+}
+.exopite-meta-boxes-gallery {
+    line-height: 0;
+}
+.exopite-meta-boxes-gallery img {
+    float: left;
+}
+.exopite-meta-boxes-gallery-add {
+    cursor: pointer;
+}
+.exopite-meta-boxes-gallery .sortable-placeholder {
+    height: 150px;
+    width: 150px;
+    border: 5px dashed #ccc;
+    margin-bottom: 6px;
+    box-sizing: border-box;
+}
+.exopite-meta-boxes-video-thumbs {
+    max-width: 150px;
+    max-height: 150px;
+}
+.exopite-meta-boxes-gallery {
+    display: flex;
+    flex-wrap: wrap;
+}
+.exopite-meta-boxes-image-item video {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+}

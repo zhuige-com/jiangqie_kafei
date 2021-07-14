@@ -202,20 +202,8 @@ class JiangQie_API
 		$this->loader->add_action('admin_enqueue_scripts', $this->admin, 'enqueue_scripts');
 
 		$this->loader->add_action('init', $this->admin, 'create_menu');
-
-		$this->loader->add_action('upgrader_process_complete', $this->admin, 'upgrader_process_complete', 10, 2);
-
-		$this->loader->add_action('admin_notices', $this->admin, 'display_update_notice');
-
-		$this->loader->add_action('after_setup_theme', $this->admin, 'add_thumbnail_size');
-
-		$this->loader->add_filter('manage_test_posts_columns', $this->admin, 'manage_test_posts_columns');
-		$this->loader->add_action('manage_posts_custom_column', $this->admin, 'manage_posts_custom_column', 10, 2);
-
-		$this->loader->add_action('admin_head', $this->admin, 'add_style_to_admin_head');
-
-		$this->loader->add_filter('manage_edit-test_sortable_columns', $this->admin, 'manage_sortable_columns');
-		$this->loader->add_action('pre_get_posts', $this->admin, 'manage_posts_orderby');
+		$this->loader->add_action('admin_init', $this->admin, 'admin_init');
+		$this->loader->add_action('admin_menu', $this->admin, 'admin_menu', 20);
 	}
 
 	private function define_public_hooks()

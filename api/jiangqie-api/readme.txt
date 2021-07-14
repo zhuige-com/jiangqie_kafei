@@ -1,4 +1,4 @@
-=== JiangQie Mini Program API ===
+=== JiangQie Free Mini Program ===
 
 Contributors: jiangqie
 Donate link: https://www.jiangqie.com/

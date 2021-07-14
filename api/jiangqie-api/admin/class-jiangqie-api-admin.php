@@ -35,24 +35,6 @@ class JiangQie_API_Admin
         wp_enqueue_script($this->jiangqie_api . '_edit_extend', plugin_dir_url(__FILE__) . 'js/jiangqie-pro-edit-extend.js', array('quicktags'), $this->version, false);
     }
 
-    public function get_all_emails()
-    {
-        $all_users = get_users();
-
-        $user_email_list = array();
-
-        foreach ($all_users as $user) {
-            $user_email_list[esc_html($user->user_email)] = esc_html($user->display_name);
-        }
-
-        return $user_email_list;
-    }
-
-    public function test_sanitize_callback($val)
-    {
-        return str_replace('a', 'b', $val);
-    }
-
     public function create_menu()
     {
         $result = get_pages(array('child_of' => 0, 'sort_column' => 'post_date', 'sort_order' => 'desc'));
@@ -87,8 +69,8 @@ class JiangQie_API_Admin
             'options'           => 'simple',                        // Only for metabox, options is stored az induvidual meta key, value pair.
         );
 
-        $content = '欢迎使用酱茄小程序开源版';
-        $res = wp_remote_get("https://key.jiangqie.com/api/goods/description?id=jq_xcx_free", ['timeout' => 1]);
+        $content = '欢迎使用酱茄小程序! <br/><br/> 微信客服：jianbing2011 (加开源群、问题咨询、项目定制、购买咨询) <br/><br/> <a href="https://www.jiangqie.com/xz" target="_blank">更多免费产品</a>';
+	    $res = wp_remote_get("https://key.jiangqie.com/api/goods/description?id=jq_xcx_free", ['timeout' => 1]);
 		if (!is_wp_error($res) && $res['response']['code'] == 200) {
 			$data = json_decode($res['body'], TRUE);
 			if ($data['code'] == 1) {
@@ -127,7 +109,6 @@ class JiangQie_API_Admin
                         'placeholder' => '请输入小程序标题',
                         'data-test'   => 'test',
                     ),
-                    // 'sanitize'    => array($this, 'test_sanitize_callback'),
                 ),
 
                 array(
@@ -146,7 +127,6 @@ class JiangQie_API_Admin
                         'placeholder' => '微信小程序 Appid',
                         'data-test'   => 'test',
                     ),
-                    // 'sanitize'    => array($this, 'test_sanitize_callback'),
                 ),
 
                 array(
@@ -159,7 +139,6 @@ class JiangQie_API_Admin
                         'placeholder' => '微信小程序 AppSecret',
                         'data-test'   => 'test',
                     ),
-                    // 'sanitize'    => array($this, 'test_sanitize_callback'),
                 ),
 
                 array(
@@ -172,7 +151,6 @@ class JiangQie_API_Admin
                         'placeholder' => '百度小程序 App Key',
                         'data-test'   => 'test',
                     ),
-                    // 'sanitize'    => array($this, 'test_sanitize_callback'),
                 ),
 
                 array(
@@ -185,7 +163,6 @@ class JiangQie_API_Admin
                         'placeholder' => '百度小程序 AppSecret',
                         'data-test'   => 'test',
                     ),
-                    // 'sanitize'    => array($this, 'test_sanitize_callback'),
                 ),
 
                 array(
@@ -198,7 +175,6 @@ class JiangQie_API_Admin
                         'placeholder' => 'QQ小程序 Appid',
                         'data-test'   => 'test',
                     ),
-                    // 'sanitize'    => array($this, 'test_sanitize_callback'),
                 ),
 
                 array(
@@ -211,7 +187,6 @@ class JiangQie_API_Admin
                         'placeholder' => 'QQ小程序 AppSecret',
                         'data-test'   => 'test',
                     ),
-                    // 'sanitize'    => array($this, 'test_sanitize_callback'),
                 ),
 
                 array(
@@ -292,7 +267,6 @@ class JiangQie_API_Admin
                         'placeholder' => '请输入分类ID,英文逗号分隔',
                         'data-test'   => 'test',
                     ),
-                    // 'sanitize'    => array($this, 'test_sanitize_callback'),
                 ),
 
                 array(
@@ -307,7 +281,6 @@ class JiangQie_API_Admin
                         'placeholder' => '请输入文章ID,英文逗号分隔',
                         'data-test'   => 'test',
                     ),
-                    // 'sanitize'    => array($this, 'test_sanitize_callback'),
                 ),
 
                 array(
@@ -486,7 +459,6 @@ class JiangQie_API_Admin
                         'placeholder' => '请输入文章ID,英文逗号分隔',
                         'data-test'   => 'test',
                     ),
-                    // 'sanitize'    => array($this, 'test_sanitize_callback'),
                 ),
 
                 //列表模式
@@ -528,7 +500,6 @@ class JiangQie_API_Admin
                         'placeholder' => '请输入分类标题',
                         'data-test'   => 'test',
                     ),
-                    // 'sanitize'    => array($this, 'test_sanitize_callback'),
                 ),
 
                 array(
@@ -541,7 +512,6 @@ class JiangQie_API_Admin
                         'placeholder' => '请输入分类描述',
                         'data-test'   => 'test',
                     ),
-                    // 'sanitize'    => array($this, 'test_sanitize_callback'),
                 ),
             )
         );
@@ -569,7 +539,6 @@ class JiangQie_API_Admin
                         'placeholder' => '请输入热门标题',
                         'data-test'   => 'test',
                     ),
-                    // 'sanitize'    => array($this, 'test_sanitize_callback'),
                 ),
 
                 array(
@@ -582,7 +551,6 @@ class JiangQie_API_Admin
                         'placeholder' => '请输入热门描述',
                         'data-test'   => 'test',
                     ),
-                    // 'sanitize'    => array($this, 'test_sanitize_callback'),
                 ),
             )
         );
@@ -705,131 +673,33 @@ class JiangQie_API_Admin
         $options_panel = new Exopite_Simple_Options_Framework($config_metabox, $fields);
     }
 
-    public function add_thumbnail_size()
-    {
-        add_image_size('new_thumbnail_size', 60, 75, true);
+    public function admin_init()
+	{
+        $this->handle_external_redirects();
     }
 
-    public function manage_test_posts_columns($columns)
-    {
-        unset($columns['author'],
-        $columns['comments']);
-
-        $columns['thumbnail'] = '';
-        $columns['text_1'] = esc_attr__('Text', 'jiangqie-api');
-        $columns['color_2'] = esc_attr__('Color', 'jiangqie-api');
-        $columns['date_2'] = esc_attr__('Date', 'jiangqie-api');
-
-        $customOrder = array('cb', 'thumbnail', 'title', 'text_1', 'color_2', 'date_2', 'icl_translations', 'date');
-
-        foreach ($customOrder as $column_name)
-            $rearranged[$column_name] = $columns[$column_name];
-
-        return $rearranged;
+    public function admin_menu()
+	{
+        remove_submenu_page('jiangqie-api', 'jiangqie-api');
+        add_submenu_page('jiangqie-api', '', '安装文档', 'manage_options', 'jiangqie_xcx_free_setup', array( &$this, 'handle_external_redirects' ) );
+        add_submenu_page('jiangqie-api', '', '新版下载', 'manage_options', 'jiangqie_xcx_free_upgrade', array( &$this, 'handle_external_redirects' ) );
     }
 
-    // Populate new columns in customers list in admin area
-    public function manage_posts_custom_column($column, $post_id)
+    public function handle_external_redirects()
     {
-        switch ($column) {
-            case "thumbnail":
-                echo '<a href="' . get_edit_post_link() . '">';
-                echo get_the_post_thumbnail($post_id, array(60, 60));
-                echo '</a>';
-                break;
-            case "text_1":
-                // no break;
-            case "color_2":
-                // no break;
-            case "date_2":
-                echo get_post_meta($post_id, $column, true);
-                break;
-        // case "some_column":
-        //     // For array, not simple options
-        //     echo $meta["some_column"];
-        //     break;
-        }
+      if (empty($_GET['page'])) {
+        return;
+      }
+
+      if ('jiangqie_xcx_free_setup' === $_GET['page']) {
+        wp_redirect('https://www.jiangqie.com/ky/4655.html');
+        die;
+      }
+
+      if ('jiangqie_xcx_free_upgrade' === $_GET['page']) {
+        wp_redirect('https://www.jiangqie.com/ky/4639.html');
+        die;
+      }
     }
 
-    public function add_style_to_admin_head()
-    {
-        global $post_type;
-        if ('test' == $post_type) {
-?>
-            <style type="text/css">
-                .column-thumbnail {
-                    width: 80px !important;
-                }
-
-                .column-title {
-                    width: 30% !important;
-                }
-            </style>
-<?php
-        }
-    }
-
-    public function manage_sortable_columns($columns)
-    {
-        $columns['text_1'] = 'text_1';
-        $columns['color_2'] = 'color_2';
-        $columns['date_2'] = 'date_2';
-
-        return $columns;
-    }
-
-    public function manage_posts_orderby($query)
-    {
-        if (!is_admin() || !$query->is_main_query()) {
-            return;
-        }
-
-        $columns = array(
-            'text_1'  => 'char',
-            'color_2' => 'char',
-            'date_2'  => 'date',
-        );
-
-        foreach ($columns as $key => $type) {
-
-            if ($key === $query->get('orderby')) {
-                $query->set('orderby', 'meta_value');
-                $query->set('meta_key', $key);
-                $query->set('meta_type', $type);
-                break;
-            }
-        }
-    }
-
-    public function upgrader_process_complete($upgrader_object, $options)
-    {
-        // If an update has taken place and the updated type is plugins and the plugins element exists
-        if ($options['action'] == 'update' && $options['type'] == 'plugin' && isset($options['plugins'])) {
-
-            // Iterate through the plugins being updated and check if ours is there
-            foreach ($options['plugins'] as $plugin) {
-                if ($plugin == JIANG_QIE_API_BASE_NAME) {
-
-                    // Set a transient to record that our plugin has just been updated
-                    set_transient('exopite_sof_updated', 1);
-                    set_transient('exopite_sof_updated_message', esc_html__('Thanks for updating', 'exopite_sof'));
-                }
-            }
-        }
-    }
-
-    public function display_update_notice()
-    {
-        // Check the transient to see if we've just activated the plugin
-        if (get_transient('exopite_sof_updated')) {
-
-            // @link https://digwp.com/2016/05/wordpress-admin-notices/
-            echo '<div class="notice notice-success is-dismissible"><p><strong>' . get_transient('exopite_sof_updated_message') . '</strong></p><button type="button" class="notice-dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button></div>';
-
-            // Delete the transient so we don't keep displaying the activation message
-            delete_transient('exopite_sof_updated');
-            delete_transient('exopite_sof_updated_message');
-        }
-    }
-    // RUN CODE ON PLUGIN UPGRADE AND ADMIN NOTICE
 }

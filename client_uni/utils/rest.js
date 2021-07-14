@@ -13,34 +13,26 @@ const Auth = require("./auth.js");
  */
 function request(url, data = {}, method = "GET") {
 	return new Promise(function(resolve, reject) {
-		let pages = getCurrentPages();
-		let currentPage = pages[pages.length - 1];
-		currentPage.setData({
-			loading: true
-		}); // wx.showLoading();
+		uni.showLoading();
 
 		data.token = Auth.getToken();
 		data.t = new Date().getTime();
 		data.r = Math.floor(Math.random() * 10000);
+		
 		uni.request({
 			url: url,
 			data: data,
 			method: method,
-			success: function(res) {
-				// wx.hideLoading();
-				currentPage.setData({
-					loading: false
-				});
-
+			success (res) {
 				if (res.statusCode != 200) {
 					reject(res.errMsg);
 					return;
 				}
 
 				if (res.data.code == -1) {
-					currentPage.setData({
-						showPopLogin: true
-					});
+					uni.navigateTo({
+						url: '/pages/login/login'
+					})
 					return;
 				}
 
@@ -49,12 +41,11 @@ function request(url, data = {}, method = "GET") {
 					return;
 				}
 			},
-			fail: function(err) {
-				// wx.hideLoading();
-				currentPage.setData({
-					loading: false
-				});
+			fail (err) {
 				reject(err);
+			},
+			complete() {
+				uni.hideLoading();
 			}
 		});
 	});

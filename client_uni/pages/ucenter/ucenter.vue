@@ -157,9 +157,6 @@
 			</view>
 		</view>
 
-		<jiangqie-pop-login :show="showPopLogin" @clickLoginCancel="handlerLoginCancelClick"
-			@clickLogin="handlerDoLoginClick"></jiangqie-pop-login>
-
 		<!--加载框 start-->
 		<jiangqie-loading v-if="loading"></jiangqie-loading>
 		<!--加载框 end-->
@@ -185,7 +182,6 @@
 	const Api = require("@/utils/api.js");
 	const Rest = require("@/utils/rest.js");
 	import JiangqieLoading from "@/components/loading/loading";
-	import JiangqiePopLogin from "@/components/poplogin/poplogin";
 
 	export default {
 		data() {
@@ -242,13 +238,11 @@
 					]
 				},
 				loading: false,
-				showPopLogin: false
 			};
 		},
 
 		components: {
 			JiangqieLoading,
-			JiangqiePopLogin
 		},
 
 		props: {},
@@ -293,9 +287,9 @@
 		methods: {
 			handlerPostTrack: function(e) {
 				if (!Auth.getUser()) {
-					this.setData({
-						showPopLogin: true
-					});
+					uni.navigateTo({
+						url: '/pages/login/login'
+					})
 					return;
 				}
 
@@ -356,21 +350,7 @@
 					url: '/pages/viewhtml/viewhtml?page_id=' + page_id
 				});
 			},
-
-			handlerLoginCancelClick: function(e) {
-				this.setData({
-					showPopLogin: false
-				});
-			},
-
-			handlerDoLoginClick: function(e) {
-				uni.navigateTo({
-					url: '/pages/login/login'
-				});
-				this.setData({
-					showPopLogin: false
-				});
-			}
+			
 		}
 	};
 </script>

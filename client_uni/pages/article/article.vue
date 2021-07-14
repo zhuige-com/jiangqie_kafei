@@ -129,7 +129,7 @@
 
 		<!-- 发表评论 -->
 		<view capture-catch:touchmove class="textareacontent" v-if="show_comment_submit">
-			<form catchsubmit="handlerCommentSubmit">
+			<form @submit="handlerCommentSubmit">
 				<view class="textheaders">
 					<view @tap.stop="handlerCancelClick" class="cancel">取消</view>
 					<button form-type="submit" class="publish">发布</button>
@@ -143,9 +143,6 @@
 			</form>
 		</view>
 		<view @tap.stop="handlerCancelClick" class="pagemake" v-if="show_comment_submit"></view>
-		
-		<jiangqie-pop-login :show="showPopLogin" @clickLoginCancel="handlerLoginCancelClick"
-			@clickLogin="handlerDoLoginClick"></jiangqie-pop-login>
 		
 		<view class="jiangqie-goback-btn" @tap="jumpBtn">
 			<image src="/static/images/goback.png" mode="widthFix"></image>
@@ -181,7 +178,6 @@
 	import JiangqieLoadmore from "@/components/loadmore/loadmore";
 	import jiangqieNomore from "@/components/nomore/nomore";
 	import JiangqieNoData from "@/components/nodata/nodata";
-	import JiangqiePopLogin from "@/components/poplogin/poplogin";
 	import lPainter from '@/uni_modules/lime-painter/components/lime-painter/';
 	
 	const Constants = require("@/utils/constants.js");
@@ -224,8 +220,6 @@
 				like_list: [],
 				placeholder: "",
 				loading: false,
-				// posterConfig: "",
-				showPopLogin: false,
 				
 				isShowPainter: false,
 				painterImage: '',
@@ -238,7 +232,6 @@
 			JiangqieLoadmore,
 			jiangqieNomore,
 			JiangqieNoData,
-			JiangqiePopLogin,
 			lPainter,
 		},
 		
@@ -526,6 +519,14 @@
 			 * 评论 提交
 			 */
 			handlerCommentSubmit: function(e) {
+				if (!this.comment_content) {
+					uni.showToast({
+						icon: 'none',
+						title: '请输入内容'
+					})
+					return;
+				}
+				
 				let that = this;
 				Rest.get(Api.JIANGQIE_COMMENT_ADD, {
 					post_id: that.post_id,
@@ -666,20 +667,6 @@
 				});
 			},
 			
-			handlerLoginCancelClick: function(e) {
-				this.setData({
-					showPopLogin: false
-				});
-			},
-			
-			handlerDoLoginClick: function(e) {
-				uni.navigateTo({
-					url: '/pages/login/login'
-				});
-				this.setData({
-					showPopLogin: false
-				});
-			}
 		}
 	};
 </script>
