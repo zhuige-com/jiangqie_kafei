@@ -165,7 +165,7 @@ class JiangQie_API_Comment_Controller extends JiangQie_API_Base_Controller
 
 		global $wpdb;
 		$table_comments = $wpdb->prefix . 'comments';
-		$wpdb->query("DELETE FROM $table_comments WHERE comment_ID=$comment_id OR comment_parent=$comment_id");
+		$wpdb->query($wpdb->prepare("DELETE FROM `$table_comments` WHERE `comment_ID`=%d OR `comment_parent`=%d", $comment_id, $comment_id));
 
 		return $this->make_success();
 	}
