@@ -1,6 +1,7 @@
 <template>
 	<view>
-		<view :style="background?'background-image: url(' + background + ');':''" style="background: no-repeat;background-size: 100% auto;">
+		<view :style="background?'background-image: url(' + background + ');':''"
+			style="background: no-repeat;background-size: 100% auto;">
 			<view class="jiangqie-login">
 				<view class="jiangqie-app-info">
 					<!--替换为小程序logo-->
@@ -10,7 +11,7 @@
 				</view>
 				<view class="jiangqie-login-btn">
 					<button @tap.stop="handlerCancelClick" class="jiangqie-login-btnl">取消</button>
-					
+
 					<!-- #ifdef MP-WEIXIN -->
 					<button v-if="code" @tap.stop="clickLogin" class="jiangqie-login-btnr">确定</button>
 					<template v-else>
@@ -20,7 +21,7 @@
 						</view>
 					</template>
 					<!-- #endif -->
-					
+
 					<!-- #ifdef MP-QQ -->
 					<button v-if="code" open-type="getUserInfo" class="jiangqie-login-btnr"
 						@getuserinfo="getuserinfo">确定</button>
@@ -31,7 +32,7 @@
 						</view>
 					</template>
 					<!-- #endif -->
-					
+
 					<!-- #ifdef MP-BAIDU -->
 					<button v-if="code" open-type="getUserInfo" class="jiangqie-login-btnr"
 						@getuserinfo="getuserinfo">确定</button>
@@ -42,7 +43,7 @@
 						</view>
 					</template>
 					<!-- #endif -->
-					
+
 					<!-- #ifdef H5 -->
 					<button @tap.stop="clickLoginTest" class="jiangqie-login-btnr">确定</button>
 					<view class="jiangqie-no-login-tip">
@@ -62,7 +63,7 @@
 
 <script>
 	/*
-	 * 酱茄小程序开源版 v1.5.0
+	 * 酱茄小程序开源版
 	 * Author: 酱茄
 	 * Help document: https://www.jiangqie.com/ky
 	 * github: https://github.com/longwenjunjie/jiangqie_kafei
@@ -81,7 +82,7 @@
 				background: '',
 				title: '',
 				loading: false,
-				
+
 				code: undefined,
 			};
 		},
@@ -89,34 +90,53 @@
 		components: {
 			JiangqieLoading
 		},
-		
+
 		props: {},
-		
+
 		onLoad: function(options) {
 			this.setData({
 				title: getApp().appName
 			});
-			
-			// #ifdef MP-WEIXIN || MP-QQ || MP-BAIDU
+
+			// #ifdef MP-WEIXIN || MP-QQ
 			uni.login({
 				success: (res) => {
 					this.code = res.code;
 				}
 			});
 			// #endif
-			
+
+			// #ifdef MP-BAIDU
+			swan.login({
+				success: res => {
+					swan.getLoginCode({
+						success: (res2) => {
+							this.code = res2.code;
+						}
+					})
+				},
+				fail: err => {
+					console.log(err)
+					swan.showToast({
+						title: '登录失败',
+						icon: 'none'
+					});
+				}
+			});
+			// #endif
+
 			Rest.get(Api.JIANGQIE_SETTING_LOGIN).then(res => {
 				this.background = res.data.background;
 			});
 		},
-		
+
 		onShareAppMessage: function() {
 			return {
 				title: getApp().appName,
 				path: 'pages/index/index'
 			};
 		},
-		
+
 		// #ifdef MP-WEIXIN
 		onShareTimeline: function() {
 			return {
@@ -124,12 +144,12 @@
 			};
 		},
 		// #endif
-		
+
 		methods: {
 			handlerCancelClick: function(e) {
 				Util.navigateBack();
 			},
-			
+
 			clickLoginTest(e) {
 				Rest.get(Api.JIANGQIE_USER_LOGIN_TEST, {}).then(res => {
 					Auth.setUser(res.data);
@@ -138,13 +158,13 @@
 					console.log(err)
 				});
 			},
-			
+
 			clickLogin(e) {
 				wx.getUserProfile({
 					desc: '用于完善会员资料',
 					success: res => {
 						console.log(res);
-			
+
 						let userInfo = res.userInfo;
 						this.login(userInfo.nickName, userInfo.avatarUrl);
 					},
@@ -153,31 +173,31 @@
 					}
 				})
 			},
-			
+
 			getuserinfo(res) {
 				let userInfo = res.detail.userInfo;
 				this.login(userInfo.nickName, userInfo.avatarUrl);
 			},
-			
+
 			login(nickname, avatar) {
 				let params = {
 					code: this.code,
 					nickname: nickname,
 					avatar: avatar
 				};
-				
+
 				// #ifdef MP-WEIXIN
 				params.channel = 'weixin';
 				// #endif
-				
+
 				// #ifdef MP-QQ
 				params.channel = 'qq';
 				// #endif
-				
+
 				// #ifdef MP-BAIDU
 				params.channel = 'baidu';
 				// #endif
-			
+
 				Rest.get(Api.JIANGQIE_USER_LOGIN, params).then(res => {
 					Auth.setUser(res.data);
 					Util.navigateBack();

@@ -6,7 +6,8 @@
 					<text>{{setting.title}}</text>
 					<view>{{setting.description}}</view>
 				</view>
-				<image v-if="setting.background && setting.background.length>0" :src="setting.background" mode="aspectFill"></image>
+				<image v-if="setting.background && setting.background.length>0" :src="setting.background"
+					mode="aspectFill"></image>
 			</view>
 			<view class="right-box">
 
@@ -32,7 +33,7 @@
 
 <script>
 	/*
-	 * 酱茄小程序开源版 v1.5.0
+	 * 酱茄小程序开源版
 	 * Author: 酱茄
 	 * Help document: https://www.jiangqie.com/ky
 	 * github: https://github.com/longwenjunjie/jiangqie_kafei
@@ -126,14 +127,10 @@
 		position: fixed;
 		left: 0;
 		top: 0;
-		/*
-		   #ifdef  H5  
-		 */
+		/* #ifdef H5 */
 		top: calc(88rpx + constant(safe-area-inset-top));
 		top: calc(88rpx + env(safe-area-inset-top));
-		/*
-		   #endif  
-		 */
+		/* #endif */
 		z-index: 100;
 	}
 

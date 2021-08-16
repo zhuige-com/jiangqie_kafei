@@ -14,13 +14,13 @@
 					</view>
 				</view>
 			</view>
-			
+
 			<!-- #ifdef MP-WEIXIN -->
 			<view v-if="official" class="jiangqie-official-mod">
 				<official-account></official-account>
 			</view>
 			<!-- #endif -->
-			
+
 			<view class="jiangqie-page-body">
 
 				<mp-html :content="article"></mp-html>
@@ -109,7 +109,8 @@
 				<view class="jiangqie-btn-comment" @tap.stop="handlerCommentClick">发表你的评论...</view>
 			</view>
 			<view class="jiangqie-operation-right jiangqie-right-flex jiangqie-col-5">
-				<view class="jiangqie-operation-item" hover-class="opcity" hover-stay-time="150" @tap="handlerCommentClick">
+				<view class="jiangqie-operation-item" hover-class="opcity" hover-stay-time="150"
+					@tap="handlerCommentClick">
 					<image src="/static/images/btn_com.png" mode="widthFix"></image>
 					<text>{{comment_count + comment_count_change}}</text>
 				</view>
@@ -143,31 +144,32 @@
 			</form>
 		</view>
 		<view @tap.stop="handlerCancelClick" class="pagemake" v-if="show_comment_submit"></view>
-		
+
 		<view class="jiangqie-goback-btn" @tap="jumpBtn">
 			<image src="/static/images/goback.png" mode="widthFix"></image>
 		</view>
-		
+
 		<!--加载框 start-->
 		<jiangqie-loading v-if="loading"></jiangqie-loading>
 		<!--加载框 end-->
-			
+
 		<!-- #ifdef MP-BAIDU -->
-		<view v-if="isShowPainter" isRenderImage style="position: fixed; top: 0;" @longpress="longTapPainter" @click="clickPainter()">
+		<view v-if="isShowPainter" isRenderImage style="position: fixed; top: 0;" @longpress="longTapPainter"
+			@click="clickPainter()">
 			<l-painter isRenderImage :board="base" @success="onPainterSuccess" />
 		</view>
 		<!-- #endif -->
-		
+
 		<!-- #ifdef MP-WEIXIN || MP-QQ || H5 -->
 		<l-painter v-if="isShowPainter" isRenderImage custom-style="position: fixed; left: 200%;" :board="base"
 			@success="onPainterSuccess" />
-		<!-- #endif -->	
+		<!-- #endif -->
 	</view>
 </template>
 
 <script>
 	/*
-	 * 酱茄小程序开源版 v1.5.0
+	 * 酱茄小程序开源版
 	 * Author: 酱茄
 	 * Help document: https://www.jiangqie.com/ky
 	 * github: https://github.com/longwenjunjie/jiangqie_kafei
@@ -179,7 +181,7 @@
 	import jiangqieNomore from "@/components/nomore/nomore";
 	import JiangqieNoData from "@/components/nodata/nodata";
 	import lPainter from '@/uni_modules/lime-painter/components/lime-painter/';
-	
+
 	const Constants = require("@/utils/constants.js");
 	const Util = require("@/utils/util.js");
 	const Api = require("@/utils/api.js");
@@ -209,10 +211,10 @@
 				comment_count_change: 0,
 				post_id: 0,
 				comment_id: 0,
-				
+
 				//小程序码
 				acode: '',
-				
+
 				//返回页面是否需要刷新
 				needRefresh: true,
 				article: "",
@@ -220,7 +222,7 @@
 				like_list: [],
 				placeholder: "",
 				loading: false,
-				
+
 				isShowPainter: false,
 				painterImage: '',
 				base: undefined,
@@ -234,27 +236,27 @@
 			JiangqieNoData,
 			lPainter,
 		},
-		
+
 		onLoad: function(options) {
 			if (options.scene) {
 				this.post_id = decodeURIComponent(options.scene);
 			} else if (options.post_id) {
 				this.post_id = options.post_id;
 			} //小程序码
-			
+
 			// #ifdef MP-WEIXIN
 			this.loadWxacode();
 			// #endif
-			
+
 			// #ifdef MP-QQ
 			this.loadQqacode();
 			// #endif
-			
+
 			// #ifdef MP-BAIDU || H5
 			this.loadBdacode();
 			// #endif
 		},
-		
+
 		onShow: function() {
 			if (!this.needRefresh) {
 				this.needRefresh = true;
@@ -279,7 +281,7 @@
 			});
 			this.loadComments(true);
 		},
-		
+
 		onReachBottom: function() {
 			if (!this.pullUpOn) {
 				return;
@@ -287,7 +289,7 @@
 
 			this.loadComments(false);
 		},
-		
+
 		onShareAppMessage: function() {
 			return {
 				title: this.post.title,
@@ -295,7 +297,7 @@
 				path: 'pages/article/article?post_id=' + this.post_id
 			};
 		},
-		
+
 		// #ifdef MP-WEIXIN
 		onShareTimeline: function() {
 			return {
@@ -305,14 +307,14 @@
 			};
 		},
 		// #endif
-		
+
 		methods: {
 			//海报分享-百度
 			// #ifdef MP-BAIDU
 			clickPainter() {
 				this.isShowPainter = false;
 			},
-			
+
 			longTapPainter() {
 				uni.showActionSheet({
 					itemList: ['保存到相册'],
@@ -327,12 +329,12 @@
 								}
 								clearInterval(save2album)
 								uni.hideLoading();
-			
+
 								uni.saveImageToPhotosAlbum({
 									filePath: this.painterImage,
 									success() {
 										uni.showToast({
-											title:'已保存'
+											title: '已保存'
 										})
 									}
 								})
@@ -345,7 +347,7 @@
 				});
 			},
 			// #endif
-			
+
 			//海报分享
 			sharePosterClick() {
 				// #ifndef MP-BAIDU
@@ -356,7 +358,7 @@
 					return;
 				}
 				// #endif
-			
+
 				this.isShowPainter = true;
 				this.base = {
 					width: '750rpx',
@@ -434,10 +436,10 @@
 					]
 				}
 			},
-			
+
 			onPainterSuccess: function(e) {
 				this.painterImage = e;
-				
+
 				// #ifndef MP-BAIDU
 				uni.previewImage({
 					urls: [e]
@@ -526,7 +528,7 @@
 					})
 					return;
 				}
-				
+
 				let that = this;
 				Rest.get(Api.JIANGQIE_COMMENT_ADD, {
 					post_id: that.post_id,
@@ -600,7 +602,7 @@
 					});
 				});
 			},
-			
+
 			/**
 			 * 加载微信小程序码
 			 */
@@ -613,7 +615,7 @@
 					console.log(err);
 				});
 			},
-			
+
 			/**
 			 * 加载QQ小程序码
 			 */
@@ -626,7 +628,7 @@
 					console.log(err);
 				});
 			},
-			
+
 			/**
 			 * 加载百度小程序码
 			 */
@@ -639,7 +641,7 @@
 					console.log(err);
 				});
 			},
-			
+
 			/**
 			 * 加载 评论
 			 */
@@ -666,7 +668,7 @@
 					});
 				});
 			},
-			
+
 		}
 	};
 </script>
@@ -902,8 +904,6 @@
 		color: #444;
 	}
 
-	/**/
-
 	.jiangqie-page-laud {
 		overflow: hidden;
 		border-bottom: 1rpx solid #EEE;
@@ -964,7 +964,6 @@
 		border-radius: 96rpx;
 	}
 
-	/**/
 	.jiangqie-operation {
 		width: 100%;
 		height: 100rpx;
@@ -1080,7 +1079,6 @@
 
 
 	/* 评论框 -- start --*/
-
 	.textareacontent {
 		position: fixed;
 		top: 350rpx;
@@ -1146,18 +1144,13 @@
 		width: 100%;
 		position: fixed;
 		top: 0;
-		/*
-		   #ifdef  H5  
-		 */
+		/* #ifdef H5 */
 		/* top: calc(88rpx + constant(safe-area-inset-top));
 		top: calc(88rpx + env(safe-area-inset-top)); */
-		/*
-		   #endif  
-		 */
+		/* #endif */
 	}
 
 	/* 评论框 -- end --*/
-
 	.jiangqie-page-body {
 		overflow: hidden;
 	}
@@ -1188,5 +1181,4 @@
 	.jiangqie-official-mod {
 		padding: 10rpx 0;
 	}
-
 </style>

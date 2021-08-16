@@ -1,0 +1,79 @@
+{
+    "id": "jiangqie-xcx-free",
+    "name": "新闻资讯博客模板-酱茄Free小程序",
+    "version": "1.5.2",
+    "description": "酱茄小程序开源版，基于WordPress的微信小程序，适用于博客小程序和新闻资讯小程序。",
+    "keywords": [
+        "模板",
+        "新闻",
+        "资讯",
+        "博客",
+        "WordPress"
+    ],
+    "displayName": "新闻资讯博客模板（含后端）-酱茄Free小程序",
+    "repository": "https://github.com/longwenjunjie/jiangqie_kafei",
+    "engines": {
+        "HBuilderX": "^3.1.16"
+    },
+    "dcloudext": {
+        "category": [
+            "前端页面模板",
+            "uni-app前端项目模板"
+        ],
+        "sale": {
+            "regular": {
+                "price": "0.00"
+            },
+            "sourcecode": {
+                "price": "0.00"
+            }
+        },
+        "contact": {
+            "qq": ""
+        },
+        "declaration": {
+            "ads": "无",
+            "data": "无",
+            "permissions": "无"
+        },
+        "npmurl": ""
+    },
+    "uni_modules": {
+        "platforms": {
+            "cloud": {
+                "tcb": "y",
+                "aliyun": "y"
+            },
+            "client": {
+                "App": {
+                    "app-vue": "u",
+                    "app-nvue": "u"
+                },
+                "H5-mobile": {
+                    "Safari": "u",
+                    "Android Browser": "u",
+                    "微信浏览器(Android)": "u",
+                    "QQ浏览器(Android)": "u"
+                },
+                "H5-pc": {
+                    "Chrome": "u",
+                    "IE": "u",
+                    "Edge": "u",
+                    "Firefox": "u",
+                    "Safari": "u"
+                },
+                "小程序": {
+                    "微信": "y",
+                    "阿里": "u",
+                    "百度": "y",
+                    "字节跳动": "u",
+                    "QQ": "y"
+                },
+                "快应用": {
+                    "华为": "u",
+                    "联盟": "u"
+                }
+            }
+        }
+    }
+}

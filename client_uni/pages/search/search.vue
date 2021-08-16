@@ -50,7 +50,7 @@
 
 <script>
 	/*
-	 * 酱茄小程序开源版 v1.5.0
+	 * 酱茄小程序开源版
 	 * Author: 酱茄
 	 * Help document: https://www.jiangqie.com/ky
 	 * github: https://github.com/longwenjunjie/jiangqie_kafei
@@ -78,9 +78,9 @@
 		components: {
 			JiangqieLoading
 		},
-		
+
 		props: {},
-		
+
 		onLoad: function(options) {
 			let that = this;
 			uni.getStorage({
@@ -102,14 +102,14 @@
 				});
 			});
 		},
-		
+
 		onShareAppMessage: function() {
 			return {
 				title: getApp().appName,
 				path: 'pages/index/index'
 			};
 		},
-		
+
 		// #ifdef MP-WEIXIN
 		onShareTimeline: function() {
 			return {
@@ -117,7 +117,7 @@
 			};
 		},
 		// #endif
-		
+
 		methods: {
 			//输入
 			handlerSearchInput: function(e) {
@@ -126,16 +126,16 @@
 					canSearch: this.keyword.length > 0
 				});
 			},
-			
+
 			handerSearchConfirm: function(e) {
 				this.search();
 			},
-			
+
 			//搜索
 			handerSearchClick: function(e) {
 				this.search();
 			},
-			
+
 			search: function() {
 				let that = this;
 				uni.getStorage({
@@ -178,12 +178,12 @@
 					url: '/pages/list/list?search=' + this.keyword
 				});
 			},
-			
+
 			//取消搜索
 			handerCancelClick: function(e) {
 				Util.navigateBack();
 			},
-			
+
 			//清楚搜索历史
 			handlerClearHistory: function(e) {
 				let that = this;
@@ -209,7 +209,7 @@
 
 				});
 			},
-			
+
 			//点击 搜索历史
 			handlerSearchItemClick: function(e) {
 				let item = e.currentTarget.dataset.item;
@@ -217,7 +217,7 @@
 					url: '/pages/list/list?search=' + item
 				});
 			},
-			
+
 			//历史删除
 			handlerSearchItemDelete: function(e) {
 				let that = this;
@@ -366,5 +366,4 @@
 		padding-left: 30rpx;
 		flex-shrink: 0;
 	}
-
 </style>

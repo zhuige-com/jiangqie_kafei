@@ -108,8 +108,8 @@
 								最新文章
 							</view>
 							<template v-for="(item, index) in postsLast">
-								<view v-if="(listMode==1 && false) || (listMode==2) || (listMode==3 && index%5==4)" :key="index"
-									class="jiangqie-news-block image-wide" :data-id="item.id"
+								<view v-if="(listMode==1 && false) || (listMode==2) || (listMode==3 && index%5==4)"
+									:key="index" class="jiangqie-news-block image-wide" :data-id="item.id"
 									@tap.stop="handlerArticleClick">
 									<image :src="item.thumbnail" mode="aspectFill" class="jiangqie-news-image"></image>
 									<view class="jiangqie-news-text">
@@ -165,7 +165,8 @@
 					<view class="container">
 						<view class="jiangqie-news-view">
 							<template v-for="(item, index) in posts">
-								<view v-if="(listMode==1 && false) || (listMode==2) || (listMode==3 && index%5==4)" :key="index" class="jiangqie-news-block image-wide" :data-id="item.id"
+								<view v-if="(listMode==1 && false) || (listMode==2) || (listMode==3 && index%5==4)"
+									:key="index" class="jiangqie-news-block image-wide" :data-id="item.id"
 									@tap.stop="handlerArticleClick">
 									<image :src="item.thumbnail" mode="aspectFill" class="jiangqie-news-image"></image>
 									<view class="jiangqie-news-text">
@@ -223,7 +224,7 @@
 
 <script>
 	/*
-	 * 酱茄小程序开源版 v1.5.0
+	 * 酱茄小程序开源版
 	 * Author: 酱茄
 	 * Help document: https://www.jiangqie.com/ky
 	 * github: https://github.com/longwenjunjie/jiangqie_kafei
@@ -233,7 +234,7 @@
 	const Constants = require("@/utils/constants.js");
 	const Api = require("@/utils/api.js");
 	const Rest = require("@/utils/rest.js");
-	
+
 	import JiangqieLoading from "@/components/loading/loading";
 	import JiangqieLoadmore from "@/components/loadmore/loadmore";
 	import JiangqieNomore from "@/components/nomore/nomore";
@@ -247,7 +248,7 @@
 
 				logo: '',
 				background: undefined,
-				
+
 				//顶部导航
 				topNav: [{
 					id: 0,
@@ -255,29 +256,29 @@
 				}],
 				currentTab: 0,
 				//预设当前项的值
-				
+
 				//幻灯片
 				slide: [],
-				
+
 				//图片导航
 				iconNav: [],
-				
+
 				//热门文章
 				hot: [],
-				
+
 				//热门tab
 				postsLast: [],
 				loaddingLast: false,
 				pullUpOnLast: true,
-				
+
 				//其他tab
 				posts: [],
 				loadding: false,
 				pullUpOn: true,
-				
+
 				//列表模式
 				listMode: 3,
-				
+
 				scrollLeft: "",
 				current: "",
 				undefined: "",
@@ -319,8 +320,7 @@
 					actives: res.data.actives,
 					hot: res.data.hot,
 					listMode: res.data.list_mode,
-					background: res.data.slide && res.data.slide.length > 0 ? res.data.background :
-						''
+					background: res.data.slide && res.data.slide.length > 0 ? res.data.background : ''
 				});
 
 				if (res.data.title && res.data.title.length > 0) {
@@ -498,13 +498,13 @@
 		display: flex;
 		align-items: center;
 		margin-right: 15rpx;
-		
+
 		image {
 			height: 48rpx;
 			width: 128rpx;
 		}
 	}
-	
+
 	.jiangqie-btn-search {
 		display: flex;
 		align-items: center;
@@ -516,7 +516,7 @@
 		color: #f8b8b8;
 		font-size: 28rpx;
 	}
-	
+
 	.container {
 		display: flex;
 		flex-direction: column;
@@ -747,8 +747,6 @@
 		color: #333;
 		font-weight: 400;
 		line-height: 50rpx;
-		/* margin-bottom: 30rpx; */
-		/* height: 100rpx; */
 		overflow: hidden;
 	}
 

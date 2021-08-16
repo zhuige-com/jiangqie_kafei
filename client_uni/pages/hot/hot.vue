@@ -1,7 +1,8 @@
 <template>
 	<view>
 		<view class="jiangqie-timeline-head">
-			<image v-if="setting.background && setting.background.length>0" :src="setting.background" mode="aspectFill"></image>
+			<image v-if="setting.background && setting.background.length>0" :src="setting.background" mode="aspectFill">
+			</image>
 			<view v-if="setting.title.length>0 || setting.description.length>0" class="timeline-head-text">
 				<text>{{setting.title}}</text>
 				<view class="timeline-head-describe">{{setting.description}}</view>
@@ -16,7 +17,8 @@
 			</view>
 		</scroll-view>
 
-		<view :style="tl_background?'background: url(' + tl_background + ') repeat-y; background-position: -30rpx 0;':''">
+		<view
+			:style="tl_background?'background: url(' + tl_background + ') repeat-y; background-position: -30rpx 0;':''">
 
 			<template v-if="posts.length > 0">
 				<view class="jiangqie-timeline-view">
@@ -77,7 +79,7 @@
 
 <script>
 	/*
-	 * 酱茄小程序开源版 v1.5.0
+	 * 酱茄小程序开源版
 	 * Author: 酱茄
 	 * Help document: https://www.jiangqie.com/ky
 	 * github: https://github.com/longwenjunjie/jiangqie_kafei
@@ -123,9 +125,9 @@
 			JiangqieNomore,
 			JiangqieNoData
 		},
-		
+
 		props: {},
-		
+
 		onLoad: function(options) {
 			//获取配置
 			let that = this;
@@ -142,7 +144,7 @@
 			});
 			this.loadPosts(true);
 		},
-		
+
 		onReachBottom: function() {
 			if (!this.pullUpOn) {
 				return;
@@ -150,14 +152,14 @@
 
 			this.loadPosts(false);
 		},
-		
+
 		onShareAppMessage: function() {
 			return {
 				title: getApp().appName,
 				path: 'pages/index/index'
 			};
 		},
-		
+
 		// #ifdef MP-WEIXIN
 		onShareTimeline: function() {
 			return {
@@ -165,7 +167,7 @@
 			};
 		},
 		// #endif
-		
+
 		methods: {
 			// 点击标题切换当前页时改变样式
 			swichNav: function(e) {
@@ -181,7 +183,7 @@
 				this.posts = [];
 				this.loadPosts(true);
 			},
-			
+
 			handlerHotArticle: function(e) {
 				let post_id = e.currentTarget.dataset.id;
 				uni.navigateTo({
@@ -474,5 +476,4 @@
 	.scoll-y {
 		height: 100%;
 	}
-
 </style>

@@ -11,7 +11,8 @@
 							<image :src="item.thumbnail" mode="aspectFill" class="jiangqie-news-image"></image>
 							<view class="jiangqie-news-text">
 								<view :class="'jiangqie-news-title ' + (item.excerpt?'':'jiangqie-news-no-excerpt')">
-									{{item.title}}</view>
+									{{item.title}}
+								</view>
 								<view v-if="item.excerpt" class="jiangqie-news-describe">{{item.excerpt}}</view>
 								<view class="jiangqie-news-info">
 									<view class="jiangqie-news-cmt">
@@ -23,11 +24,13 @@
 								</view>
 							</view>
 						</view>
-						<view v-else :key="index" class="jiangqie-news-block" :data-id="item.id" @tap.stop="handlerArticleClick">
+						<view v-else :key="index" class="jiangqie-news-block" :data-id="item.id"
+							@tap.stop="handlerArticleClick">
 							<image :src="item.thumbnail" mode="aspectFill" class="jiangqie-news-image"></image>
 							<view class="jiangqie-news-text">
 								<view :class="'jiangqie-news-title ' + (item.excerpt?'':'jiangqie-news-no-excerpt')">
-									{{item.title}}</view>
+									{{item.title}}
+								</view>
 								<view v-if="item.excerpt" class="jiangqie-news-describe">{{item.excerpt}}</view>
 								<view class="jiangqie-news-info">
 									<view class="jiangqie-news-cmt">
@@ -62,7 +65,7 @@
 
 <script>
 	/*
-	 * 酱茄小程序开源版 v1.5.0
+	 * 酱茄小程序开源版
 	 * Author: 酱茄
 	 * Help document: https://www.jiangqie.com/ky
 	 * github: https://github.com/longwenjunjie/jiangqie_kafei
@@ -99,7 +102,7 @@
 			JiangqieNomore,
 			JiangqieNoData,
 		},
-		
+
 		props: {},
 
 		/**
@@ -147,13 +150,13 @@
 				});
 			}
 		},
-		
+
 		onShow: function() {
 			this.loadPost(true);
 		},
-		
+
 		onPullDownRefresh: function() {},
-		
+
 		onReachBottom: function() {
 			if (!this.pullUpOn) {
 				return;
@@ -161,14 +164,14 @@
 
 			this.loadPost(false);
 		},
-		
+
 		onShareAppMessage: function() {
 			return {
 				title: getApp().appName,
 				path: 'pages/index/index'
 			};
 		},
-		
+
 		// #ifdef MP-WEIXIN
 		onShareTimeline: function() {
 			return {
@@ -176,7 +179,7 @@
 			};
 		},
 		// #endif
-		
+
 		methods: {
 			handlerArticleClick: function(e) {
 				let post_id = e.currentTarget.dataset.id;
@@ -184,7 +187,7 @@
 					url: '/pages/article/article?post_id=' + post_id
 				});
 			},
-			
+
 			loadPost: function(refresh) {
 				let that = this;
 				that.setData({
@@ -279,8 +282,6 @@
 		color: #333;
 		font-weight: 400;
 		line-height: 50rpx;
-		/* margin-bottom: 30rpx;
-    height: 100rpx;  */
 		overflow: hidden;
 	}
 
@@ -352,5 +353,4 @@
 		height: auto;
 		margin-bottom: 10rpx;
 	}
-
 </style>

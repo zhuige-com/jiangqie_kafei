@@ -12,7 +12,7 @@
 				</view>
 			</view>
 			<view class="jiangqie-content-box">
-				<view class="jiangqie-content">酱茄小程序开源版 v1.5.0基于WordPress开源程序和WordPress REST
+				<view class="jiangqie-content">酱茄小程序开源版，基于WordPress开源程序和WordPress REST
 					API开发，实现WordPress网站数据与小程序数据同步共享，通过简单的配置就能搭建自己的小程序。项目免费开源，源码可在
 					<text class="jiangqie-content-email" @tap="copy"
 						data-text="https://github.com/longwenjunjie/jiangqie_kafei">GitHub</text>上下载，欢迎Watch & Star ★。
@@ -34,7 +34,7 @@
 
 <script>
 	/*
-	 * 酱茄小程序开源版 v1.5.0
+	 * 酱茄小程序开源版
 	 * Author: 酱茄
 	 * Help document: https://www.jiangqie.com/ky
 	 * github: https://github.com/longwenjunjie/jiangqie_kafei
@@ -55,18 +55,18 @@
 		components: {
 			JiangqieLoading
 		},
-		
+
 		props: {},
-		
+
 		onLoad: function(options) {},
-		
+
 		onShareAppMessage: function() {
 			return {
 				title: getApp().appName,
 				path: 'pages/index/index'
 			};
 		},
-		
+
 		// #ifdef MP-WEIXIN
 		onShareTimeline: function() {
 			return {
@@ -74,7 +74,7 @@
 			};
 		},
 		// #endif
-		
+
 		methods: {
 			copy: function(e) {
 				let text = e.currentTarget.dataset.text;
@@ -92,11 +92,11 @@
 
 				});
 			},
-			
+
 			tipClick: function() {
 				uni.showToast({
 					icon: 'none',
-					title: '酱茄小程序开源版 v1.5.0'
+					title: '酱茄小程序开源版'
 				});
 			}
 		}

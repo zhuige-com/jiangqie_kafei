@@ -12,7 +12,7 @@
 
 <script>
 	/*
-	 * 酱茄小程序开源版 v1.5.0
+	 * 酱茄小程序开源版
 	 * Author: 酱茄
 	 * Help document: https://www.jiangqie.com/ky
 	 * github: https://github.com/longwenjunjie/jiangqie_kafei
@@ -37,9 +37,9 @@
 		components: {
 			JiangqieLoading
 		},
-		
+
 		props: {},
-		
+
 		onLoad: function(options) {
 			let that = this;
 			Rest.get(Api.JIANGQIE_POST_PAGE, {
@@ -54,14 +54,14 @@
 				that.article = that.escape2Html(res.data.content);
 			});
 		},
-		
+
 		onShareAppMessage: function() {
 			return {
 				title: this.title,
 				path: 'pages/viewhtml/viewhtml?page_id=' + this.page_id
 			};
 		},
-		
+
 		// #ifdef MP-WEIXIN
 		onShareTimeline: function() {
 			return {
@@ -70,9 +70,9 @@
 			};
 		},
 		// #endif
-		
+
 		methods: {
-			
+
 		}
 	};
 </script>
@@ -91,8 +91,9 @@
 	.wxParse-inline {
 		line-height: 70rpx;
 	}
-	.jiangqie-page-body rich-text, .jiangqie-page-body uni-view {
+
+	.jiangqie-page-body rich-text,
+	.jiangqie-page-body uni-view {
 		line-height: 2.2rem;
 	}
-
 </style>
