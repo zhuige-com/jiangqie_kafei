@@ -1,7 +1,7 @@
 {
     "id": "jiangqie-xcx-free",
     "name": "新闻资讯博客模板-酱茄Free小程序",
-    "version": "1.5.2",
+    "version": "1.5.3",
     "description": "酱茄小程序开源版，基于WordPress的微信小程序，适用于博客小程序和新闻资讯小程序。",
     "keywords": [
         "模板",
@@ -13,7 +13,7 @@
     "displayName": "新闻资讯博客模板（含后端）-酱茄Free小程序",
     "repository": "https://github.com/longwenjunjie/jiangqie_kafei",
     "engines": {
-        "HBuilderX": "^3.1.16"
+        "HBuilderX": "^3.1.22"
     },
     "dcloudext": {
         "category": [
@@ -72,6 +72,10 @@
                 "快应用": {
                     "华为": "u",
                     "联盟": "u"
+                },
+                "Vue": {
+                    "vue2": "u",
+                    "vue3": "u"
                 }
             }
         }

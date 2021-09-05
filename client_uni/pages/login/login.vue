@@ -163,7 +163,7 @@
 				wx.getUserProfile({
 					desc: '用于完善会员资料',
 					success: res => {
-						console.log(res);
+						// console.log(res);
 
 						let userInfo = res.userInfo;
 						this.login(userInfo.nickName, userInfo.avatarUrl);
