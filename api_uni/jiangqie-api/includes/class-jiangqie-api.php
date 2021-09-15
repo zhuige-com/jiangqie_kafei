@@ -63,7 +63,7 @@ class JiangQie_API
 	 */
 	public static function get_wx_token()
 	{
-		$path_token = JIANG_QIE_API_BASE_DIR . 'jiangqie_free_wx_access_token.data';
+		$path_token = JIANG_QIE_API_BASE_DIR . 'wx_access_token.data';
 		if (file_exists($path_token)) {
 			$str_token = file_get_contents($path_token);
 			$access_token = json_decode($str_token, TRUE);
@@ -96,7 +96,7 @@ class JiangQie_API
 	 */
 	public static function get_qq_token()
 	{
-		$path_token = JIANG_QIE_API_BASE_DIR . 'jiangqie_free_qq_access_token.data';
+		$path_token = JIANG_QIE_API_BASE_DIR . 'qq_access_token.data';
 		if (file_exists($path_token)) {
 			$str_token = file_get_contents($path_token);
 			$access_token = json_decode($str_token, TRUE);
@@ -129,7 +129,7 @@ class JiangQie_API
 	 */
 	public static function get_bd_token()
 	{
-		$path_token = JIANG_QIE_API_BASE_DIR . 'jiangqie_free_baidu_access_token.data';
+		$path_token = JIANG_QIE_API_BASE_DIR . 'bd_access_token.data';
 		if (file_exists($path_token)) {
 			$str_token = file_get_contents($path_token);
 			$access_token = json_decode($str_token, TRUE);
@@ -161,7 +161,7 @@ class JiangQie_API
 	public function __construct()
 	{
 		$this->jiangqie_api = 'jiangqie-api';
-		$this->version = '1.0.0';
+		$this->version = JIANG_QIE_API_VERSION;
 
 		$this->main = $this;
 
@@ -173,25 +173,25 @@ class JiangQie_API
 
 	private function load_dependencies()
 	{
-		require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-jiangqie-api-loader.php';
-		require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-jiangqie-api-i18n.php';
-		require_once plugin_dir_path(dirname(__FILE__)) . 'admin/class-jiangqie-api-admin.php';
+		require_once JIANG_QIE_API_BASE_DIR . 'includes/class-jiangqie-api-loader.php';
+		require_once JIANG_QIE_API_BASE_DIR . 'includes/class-jiangqie-api-i18n.php';
+		require_once JIANG_QIE_API_BASE_DIR . 'admin/class-jiangqie-api-admin.php';
 
 		/**
 		 * rest api
 		 */
-		require_once plugin_dir_path(dirname(__FILE__)) . 'public/class-jiangqie-api-public.php';
-		require_once plugin_dir_path(dirname(__FILE__)) . 'public/rest/class-jiangqie-api-base-controller.php';
-		require_once plugin_dir_path(dirname(__FILE__)) . 'public/rest/class-jiangqie-api-setting-controller.php';
-		require_once plugin_dir_path(dirname(__FILE__)) . 'public/rest/class-jiangqie-api-comment-controller.php';
-		require_once plugin_dir_path(dirname(__FILE__)) . 'public/rest/class-jiangqie-api-post-controller.php';
-		require_once plugin_dir_path(dirname(__FILE__)) . 'public/rest/class-jiangqie-api-category-controller.php';
-		require_once plugin_dir_path(dirname(__FILE__)) . 'public/rest/class-jiangqie-api-user-controller.php';
+		require_once JIANG_QIE_API_BASE_DIR . 'public/class-jiangqie-api-public.php';
+		require_once JIANG_QIE_API_BASE_DIR . 'public/rest/class-jiangqie-api-base-controller.php';
+		require_once JIANG_QIE_API_BASE_DIR . 'public/rest/class-jiangqie-api-setting-controller.php';
+		require_once JIANG_QIE_API_BASE_DIR . 'public/rest/class-jiangqie-api-comment-controller.php';
+		require_once JIANG_QIE_API_BASE_DIR . 'public/rest/class-jiangqie-api-post-controller.php';
+		require_once JIANG_QIE_API_BASE_DIR . 'public/rest/class-jiangqie-api-category-controller.php';
+		require_once JIANG_QIE_API_BASE_DIR . 'public/rest/class-jiangqie-api-user-controller.php';
 
 		/**
 		 * 后台管理
 		 */
-		require_once plugin_dir_path(dirname(__FILE__)) . 'admin/codestar-framework/codestar-framework.php';
+		require_once JIANG_QIE_API_BASE_DIR . 'admin/codestar-framework/codestar-framework.php';
 
 		$this->loader = new JiangQie_API_Loader();
 	}

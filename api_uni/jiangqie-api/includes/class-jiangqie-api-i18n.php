@@ -10,16 +10,14 @@
  * Copyright ️© 2020-2021 www.jiangqie.com All rights reserved.
  */
 
-class JiangQie_API_i18n {
-
-	public function load_plugin_textdomain() {
-
+class JiangQie_API_i18n
+{
+	public function load_plugin_textdomain()
+	{
 		load_plugin_textdomain(
 			'jiangqie-api',
 			false,
-			dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/'
+			dirname(JIANG_QIE_API_BASE_NAME) . '/languages/'
 		);
-
 	}
-
 }

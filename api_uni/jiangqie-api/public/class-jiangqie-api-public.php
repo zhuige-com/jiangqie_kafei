@@ -26,12 +26,12 @@ class JiangQie_API_Public
 
 	public function enqueue_styles()
 	{
-		wp_enqueue_style($this->jiangqie_api, plugin_dir_url(__FILE__) . 'css/jiangqie-api-public.css', array(), $this->version, 'all');
+		wp_enqueue_style($this->jiangqie_api, JIANG_QIE_API_BASE_URL . 'public/css/jiangqie-api-public.css', array(), $this->version, 'all');
 	}
 
 	public function enqueue_scripts()
 	{
-		wp_enqueue_script($this->jiangqie_api, plugin_dir_url(__FILE__) . 'js/jiangqie-api-public.js', array('jquery'), $this->version, false);
+		wp_enqueue_script($this->jiangqie_api, JIANG_QIE_API_BASE_URL . 'public/js/jiangqie-api-public.js', array('jquery'), $this->version, false);
 	}
 
 	public function filter_post_for_list($posts)

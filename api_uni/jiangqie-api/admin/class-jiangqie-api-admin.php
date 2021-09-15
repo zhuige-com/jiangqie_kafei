@@ -26,13 +26,13 @@ class JiangQie_API_Admin
 
     public function enqueue_styles()
     {
-        wp_enqueue_style($this->jiangqie_api, plugin_dir_url(__FILE__) . 'css/jiangqie-api-admin.css', array(), $this->version, 'all');
+        wp_enqueue_style($this->jiangqie_api, JIANG_QIE_API_BASE_URL . 'admin/css/jiangqie-api-admin.css', array(), $this->version, 'all');
     }
 
     public function enqueue_scripts()
     {
-        wp_enqueue_script($this->jiangqie_api, plugin_dir_url(__FILE__) . 'js/jiangqie-api-admin.js', array('jquery'), $this->version, false);
-        wp_enqueue_script($this->jiangqie_api . '_edit_extend', plugin_dir_url(__FILE__) . 'js/jiangqie-api-edit-extend.js', array('quicktags'), $this->version, false);
+        wp_enqueue_script($this->jiangqie_api, JIANG_QIE_API_BASE_URL . 'admin/js/jiangqie-api-admin.js', array('jquery'), $this->version, false);
+        wp_enqueue_script($this->jiangqie_api . '_edit_extend', JIANG_QIE_API_BASE_URL . 'admin/js/jiangqie-api-edit-extend.js', array('quicktags'), $this->version, false);
     }
 
     public function create_menu()

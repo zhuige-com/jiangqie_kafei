@@ -408,7 +408,7 @@ class JiangQie_API_User_Controller extends JiangQie_API_Base_Controller
 			return false;
 		}
 
-		file_put_contents('wx_login', json_encode($result));
+		// file_put_contents('wx_login', json_encode($result));
 
 		$body = stripslashes($result['body']);
 		$session = json_decode($body, true);
@@ -440,7 +440,7 @@ class JiangQie_API_User_Controller extends JiangQie_API_Base_Controller
 			return false;
 		}
 
-		file_put_contents('qq_login', json_encode($result));
+		// file_put_contents('qq_login', json_encode($result));
 
 		$body = stripslashes($result['body']);
 		$session = json_decode($body, true);
@@ -467,7 +467,7 @@ class JiangQie_API_User_Controller extends JiangQie_API_Base_Controller
 			return false;
 		}
 
-		file_put_contents('bd_login', json_encode($result));
+		// file_put_contents('bd_login', json_encode($result));
 
 		$body = stripslashes($result['body']);
 		$session = json_decode($body, true);
