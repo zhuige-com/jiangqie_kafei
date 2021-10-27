@@ -336,9 +336,12 @@
 					uni.navigateToMiniProgram({
 						appId: link,
 						fail: res => {
-							uni.showToast({
-								title: '无效链接'
-							});
+							if (res.errMsg && res.errMsg.indexOf('fail cancel') < 0) {
+								uni.showToast({
+									icon: 'none',
+									title: res.errMsg
+								});
+							}
 						}
 					});
 				}
