@@ -6,8 +6,7 @@
  * Help document: https://www.jiangqie.com/docs/kaiyuan/id1
  * github: https://github.com/longwenjunjie/jiangqie_kafei
  * gitee: https://gitee.com/longwenjunj/jiangqie_kafei
- * License：MIT
- * Copyright ️© 2020-2021 www.jiangqie.com All rights reserved.
+ * Copyright ️© 2020-2022 www.jiangqie.com All rights reserved.
  */
 
 class JiangQie_API_Base_Controller extends WP_REST_Controller
@@ -69,7 +68,7 @@ class JiangQie_API_Base_Controller extends WP_REST_Controller
 	public function param_value($request, $param_name, $default_value = false)
 	{
 		if (isset($request[$param_name])) {
-			return $request[$param_name];
+			return sanitize_text_field(wp_unslash($request[$param_name]));
 		}
 
 		return $default_value;
@@ -91,7 +90,7 @@ class JiangQie_API_Base_Controller extends WP_REST_Controller
 		} else if ($dur < 604800) { //7天内
 			return floor($dur / 86400) . '天前';
 		} else {
-			return date("Y-m-d", $origin_time);
+			return wp_date("Y-m-d", $origin_time);
 		}
 	}
 
@@ -107,7 +106,11 @@ class JiangQie_API_Base_Controller extends WP_REST_Controller
 
 		global $wpdb;
 		$table_usermeta = $wpdb->prefix . 'usermeta';
-		$user_id = $wpdb->get_var($wpdb->prepare("SELECT user_id FROM `$table_usermeta` WHERE  meta_key='jiangqie_token' AND meta_value='%s'", $token));
+		$user_id = $wpdb->get_var(
+			$wpdb->prepare(
+				"SELECT user_id FROM `$table_usermeta` WHERE  meta_key='jiangqie_token' AND meta_value='%s'", $token
+			)
+		);
 
 		return $user_id;
 	}

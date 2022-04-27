@@ -4,11 +4,12 @@
  * Help document: https://www.jiangqie.com/ky
  * github: https://github.com/longwenjunjie/jiangqie_kafei
  * gitee: https://gitee.com/longwenjunj/jiangqie_kafei
- * Copyright © 2020-2021 www.jiangqie.com All rights reserved.
+ * Copyright © 2020-2022 www.jiangqie.com All rights reserved.
  */
 
-const Constant = require("./constants.js"); //获取TOKEN
+const Constant = require("./constants.js");
 
+//获取TOKEN
 function getToken() {
 	let user = uni.getStorageSync(Constant.JQ_USER_KEY);
 
@@ -17,18 +18,18 @@ function getToken() {
 	}
 
 	return user.token;
-} //注销
+}
 
-
+//注销
 function logout() {
 	uni.setStorageSync(Constant.JQ_USER_KEY, false);
 }
 
 module.exports = {
 	//检查登录态
-	checkSession: function() {
+	checkSession() {
 		uni.checkSession({
-			fail() {
+			fail: () => {
 				logout();
 			}
 		});
@@ -43,24 +44,24 @@ module.exports = {
 	isLogin: getToken,
 
 	//获取用户信息
-	getWXUser: function() {
+	getWXUser() {
 		return new Promise(function(resolve, reject) {
 			uni.login({
-				success: function(res) {
+				success: (res) => {
 					resolve(res);
 				},
-				fail: function(err) {
+				fail: (err) => {
 					reject(err);
 				}
 			});
 		});
 	},
 
-	setUser: function(user) {
+	setUser(user) {
 		uni.setStorageSync(Constant.JQ_USER_KEY, user);
 	},
 
-	getUser: function() {
+	getUser() {
 		return uni.getStorageSync(Constant.JQ_USER_KEY);
 	}
 };

@@ -17,7 +17,7 @@
 	 * Help document: https://www.jiangqie.com/ky
 	 * github: https://github.com/longwenjunjie/jiangqie_kafei
 	 * gitee: https://gitee.com/longwenjunj/jiangqie_kafei
-	 * Copyright © 2020-2021 www.jiangqie.com All rights reserved.
+	 * Copyright © 2020-2022 www.jiangqie.com All rights reserved.
 	 */
 	const Api = require("@/utils/api.js");
 	const Rest = require("@/utils/rest.js");
@@ -40,22 +40,21 @@
 
 		props: {},
 
-		onLoad: function(options) {
-			let that = this;
+		onLoad(options) {
 			Rest.get(Api.JIANGQIE_POST_PAGE, {
 				page_id: options.page_id
 			}).then(res => {
-				that.page_id = options.page_id;
-				that.title = res.data.title;
+				this.page_id = options.page_id;
+				this.title = res.data.title;
 				uni.setNavigationBarTitle({
 					title: res.data.title
 				});
-				//WxParse.wxParse('article', 'html', res.data.content, that, 5)
-				that.article = that.escape2Html(res.data.content);
+
+				this.article = res.data.content;
 			});
 		},
 
-		onShareAppMessage: function() {
+		onShareAppMessage() {
 			return {
 				title: this.title,
 				path: 'pages/viewhtml/viewhtml?page_id=' + this.page_id
@@ -63,7 +62,7 @@
 		},
 
 		// #ifdef MP-WEIXIN
-		onShareTimeline: function() {
+		onShareTimeline() {
 			return {
 				title: this.title,
 				query: 'page_id=' + this.page_id
@@ -76,7 +75,8 @@
 		}
 	};
 </script>
-<style>
+
+<style lang="scss" scoped>
 	.jiangqie-page-body {
 		padding: 0 30rpx 30rpx 30rpx;
 	}

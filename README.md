@@ -1,24 +1,34 @@
 
-Hi，欢迎使用“酱茄小程序开源版 – 酱茄Free”。
+### 介绍
 
-酱茄小程序开源版基于WordPress开源程序和WordPress REST API开发，实现WordPress网站数据与小程序数据同步共享，通过简单的配置就能搭建自己的小程序。
+Hi，欢迎使用追格资讯小程序（酱茄小程序开源版 – 酱茄Free）。
 
-————————————【联系/版权】————————————
-
-**微信客服：jianbing2011 （如要加入微信群请说明）**
-
-**技术支持：www.jiangqie.com**
-
-**下载安装：https://www.jiangqie.com/ky**
-
-**Copyright © 2020-2021 酱茄 jiangqie.com**
-
-**在此对提供开源及创意表示致谢，开源声明关注酱茄官网。**
+追格资讯小程序基于WordPress开源程序和WordPress REST API开发，实现WordPress网站数据与小程序数据同步共享，通过简单的配置就能搭建自己的小程序。
 
 
-## 演示
+#### 微信：**jianbing2011**（加微信，进微信群交流）
 
-![酱茄小程序二维码](https://gitee.com/longwenjunj/jiangqie_kafei/raw/master/screenshot/jiangqie.png) 
+<img src="https://www.zhuige.com/uploads/20210828/2830bbe86eb2379d2f629dd125c6f9d7.jpg" alt="扫码加微信" width="300" height="300" />
+
+
+#### 追格（酱茄）开源产品：
+
+1. 追格资讯小程序Free：[https://www.zhuige.com/product/zxfree.html](https://www.zhuige.com/product/zxfree.html)
+
+2. 酱茄主题Free：[https://www.zhuige.com/product/ztfree.html](https://www.zhuige.com/product/ztfree.html)
+
+3. 追格企业官网小程序Free：[https://www.zhuige.com/product/gwfree.html](https://www.zhuige.com/product/gwfree.html)
+
+4. 追格企业官网主题：[https://www.zhuige.com/product/gwztfree.html](https://www.zhuige.com/product/gwztfree.html)
+
+5. 追格积分商城小程序：[https://www.zhuige.com/product/jf.html](https://www.zhuige.com/product/jf.html)
+
+6. 追格商城小程序：[https://www.zhuige.com/product/sc.html](https://www.zhuige.com/product/sc.html)
+
+
+### 演示
+
+![追格小程序二维码](https://gitee.com/longwenjunj/jiangqie_kafei/raw/master/screenshot/jiangqie.png) 
 
 **小程序截图**
 
@@ -34,9 +44,33 @@ Hi，欢迎使用“酱茄小程序开源版 – 酱茄Free”。
 ![后台截图5](https://gitee.com/longwenjunj/jiangqie_kafei/raw/master/screenshot/15.png)
 
 
-————————————【功能清单】————————————
+### 后端代码下载
 
-### 酱茄小程序开源版插件功能清单：
+[https://gitee.com/longwenjunj/jiangqie_kafei](https://gitee.com/longwenjunj/jiangqie_kafei)
+
+[https://github.com/longwenjunjie/jiangqie_kafei](https://github.com/longwenjunjie/jiangqie_kafei)
+
+**最近github老是连不上，最新代码请到gitee下载。**
+
+
+### 代码说明
+
+推荐使用client_uni（uniapp前端）和api_uni（WordPress插件）搭配使用。uniapp+WordPress开发，支持多端（微信小程序、百度小程序、QQ小程序等）。
+
+*api和client是之前的老版本，已不再维护*
+
+
+### 安装教程
+
+1. 上传jiangqie-api到WordPress插件目录，并启用
+2. 使用HBuilderX导入client_uni目录，并修改client_uni/utils/config.js中的域名
+
+*本项目依赖 WordPress rest api 功能，请确保其正常*
+
+
+### 功能清单
+
+#### 追格资讯小程序插件功能清单：
 
 1. 小程序标题设置；
 
@@ -71,7 +105,7 @@ Hi，欢迎使用“酱茄小程序开源版 – 酱茄Free”。
 16. Tabbar“分类”顶部图片. 标题. 描述设置；
 
 
-### 酱茄小程序开源版前端功能清单：
+#### 追格资讯小程序前端功能清单：
 
 1. 首页、热榜、文章分类、我的；
 
@@ -100,158 +134,25 @@ Hi，欢迎使用“酱茄小程序开源版 – 酱茄Free”。
 13. 文章详情Tag功能；
 
 
-### 更新日志
+### 开源协议
 
-#### 2021.6.28 V1.5.0
+遵循GPL V2.0开源协议发布（协议连接 [www.gnu.org/licenses/gpl-2.0.html](http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)）
 
-1. 支持多端（微信，百度，QQ）小程序；
 
-2. 修复了已知的bug
+### 免责声明
 
+用户在接受服务之前，请务必仔细阅读 [免责声明](https://www.zhuige.com/about/5.html) 并同意本声明
 
-#### 2021.4.29 V1.4.0
 
-1. 增加：热门搜索词管理功能；（首页设置-热门搜索词）；
+### 特别声明
 
-2. 优化：海报二维码图片重复生成问题；
+黑灰产请绕行！
 
-3. 优化：搜索结果问题；
-
-4. 优化：单页分享点击进入该页（非首页）。
-
-
-#### 2021.3.15 V1.3.5
-
-1. 优化后台文章发布8小时问题；
-
-2. 【重要】适配wx.getUserProfile接口（登录、用户信息）；
-
-3. 其他已知细节。
-
-
-#### 2021.1.15 V1.3.0
-
-1. 新增微信安全api（评论/搜索敏感词检测）；
-
-2. 修复post_in错误；
-
-3. 修复缓存导致的bug；
-
-4. 优化wp-json/jiangqie/v1 接口缓存；
-
-5. 其他已知细节。
-
-
-#### 2020.12.02 V1.2.2
-
-1. 新增扫码打开小程序引导关注公众号；
-
-2. 优化小程序访问速度；
-
-3. 其他已知细节。
-
-
-#### 2020.9.29 V1.2.0
-
-1. 新增文章置顶功能；
-
-2. 修复首页列表文章显示问题；
-
-3. 其他已知细节。
-
-
-#### 2020.7.29 V1.1.8
-
-1. 新增海报功能；
-
-2. 修复部分页面点击左上角无法返回的问题；
-
-3. 小程序代码格式整理；
-
-4. 其他已知细节。
-
-
-#### 2020.7.29 V1.1.0
-
-1. 支持分享到朋友圈；
-
-2. 支持音频和视频（受微信小程序本身限制，仅供参考）；
-
-3. 修复已知的bug；
-
-
-#### 2020. 5.29 V1.0.8
-
-1. 新增首页支持设置小图、大图、混合模式功能；
-
-2. 新增复制超链内容功能；
-
-3. 优化页面加载框样式；
-
-4. 其他已知细节。
-
-#### 2020. 4.21 V1.0.6
-
-修复插件接口问题。
-
-
-#### 2020.4.16 V1.0.5
-
-1. 新增打开第三方小程序功能；
-
-2. 新增文章详情显示该文隶属某分类目录；
-
-3. 新增文章摘要是否显示；
-
-4. 新增屏蔽指定分类文章功能；
-
-5. 文章详情新增悬浮返回按钮；
-
-6. wp插件兼容php7.1之前版本；
-
-7. 修复顶部Tab分类只显示10条信息问题；
-
-8. 其他已知细节。
-
-
-#### 2020.3.18 V1.0.2
-
-1. 我的页面新增登录入口；
-
-2. 修复部分设备文章段落出现滚动条问题；
-
-3. 修复评论无法登录问题；
-
-4. 优化幻灯片高度，分享可见分类标题；
-
-5. 优化文章详情页面行间距；
-
-6. 删除冗余的代码；
-
-7. 其他已知细节。
- 
-
-#### 2020.3.6 V1.0.1
-
-1. 修复小程序评论框高度问题；
-
-2. 修复登录框弹出问题；
-
-3. 插件代码规范命名问题；
-
-4. 修复插件因名称问题导致图片路径错误；
-
-5. 优化/pages/list/list不带参数按时间倒序显示；
-
-6. 其他已知细节。
-
-
-#### 2020.2.29 V1.0.0
-
-酱茄小程序开源版“人人咖啡师”发布！
+如果发现有人使用本程序从事违法活动，将即可向公安机关举报，并协助破案！
 
 
 ### 鸣谢
+
 1. https://github.com/icindy/wxParse
 
 2. https://github.com/dingyong0214/ThorUI

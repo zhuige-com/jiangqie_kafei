@@ -6,7 +6,7 @@
  * Help document: https://www.jiangqie.com/docs/kaiyuan/id1
  * github: https://github.com/longwenjunjie/jiangqie_kafei
  * gitee: https://gitee.com/longwenjunj/jiangqie_kafei
- * Copyright ️© 2020-2021 www.jiangqie.com All rights reserved.
+ * Copyright ️© 2020-2022 www.jiangqie.com All rights reserved.
  */
 
 class JiangQie_API_Setting_Controller extends JiangQie_API_Base_Controller
@@ -65,6 +65,12 @@ class JiangQie_API_Setting_Controller extends JiangQie_API_Base_Controller
 
 		//小程序名称
 		$data['title'] = JiangQie_API::option_value('title');
+		
+		//描述
+		$data['description'] = JiangQie_API::option_value('description');
+		
+		//关键字
+		$data['keywords'] = JiangQie_API::option_value('keywords');
 
 		//顶部分类
 		$cat_ids = JiangQie_API::option_value('home_top_nav');
@@ -127,7 +133,11 @@ class JiangQie_API_Setting_Controller extends JiangQie_API_Base_Controller
 
 		//活动区域
 		$home_active = JiangQie_API::option_value('home_active');
-		if (!empty($home_active) && !empty($home_active['left_image']) && !empty($home_active['right_top_image']) && !empty($home_active['right_down_image'])) {
+		if (JiangQie_API::option_value('home_active_switch')
+			&& !empty($home_active) 
+			&& !empty($home_active['left_image']) 
+			&& !empty($home_active['right_top_image']) 
+			&& !empty($home_active['right_down_image'])) {
 			$data['actives'] = [
 				'left' => [
 					'image' => JiangQie_API::option_image_url($home_active['left_image']),
@@ -181,6 +191,15 @@ class JiangQie_API_Setting_Controller extends JiangQie_API_Base_Controller
 
 		$data['background'] = plugins_url("images/id_bg.png", dirname(__FILE__));
 
+		// 广告设置
+		$wx_ad = JiangQie_API::option_value('wx_ad_home');
+		if ($wx_ad && $wx_ad['switch'] && $wx_ad['adid']) {
+			$data['wx_ad'] = $wx_ad['adid'];
+			$data['wx_ad_delay'] = $wx_ad['delay'];
+		} else {
+			$data['wx_ad'] = false;
+		}
+
 		return $this->make_success($data);
 	}
 
@@ -209,6 +228,14 @@ class JiangQie_API_Setting_Controller extends JiangQie_API_Base_Controller
 			'title' => JiangQie_API::option_value('category_title'),
 			'description' => JiangQie_API::option_value('category_description'),
 		];
+
+		// 广告设置
+		$wx_ad = JiangQie_API::option_value('wx_ad_category');
+		if ($wx_ad && $wx_ad['switch'] && $wx_ad['adid']) {
+			$data['wx_ad'] = $wx_ad['adid'];
+		} else {
+			$data['wx_ad'] = false;
+		}
 
 		return $this->make_success($data);
 	}

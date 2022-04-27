@@ -229,10 +229,11 @@
 	 * Help document: https://www.jiangqie.com/ky
 	 * github: https://github.com/longwenjunjie/jiangqie_kafei
 	 * gitee: https://gitee.com/longwenjunj/jiangqie_kafei
-	 * Copyright © 2020-2021 www.jiangqie.com All rights reserved.
+	 * Copyright © 2020-2022 www.jiangqie.com All rights reserved.
 	 */
 	const Constants = require("@/utils/constants.js");
 	const Api = require("@/utils/api.js");
+	const Util = require("@/utils/util.js");
 	const Rest = require("@/utils/rest.js");
 
 	import JiangqieLoading from "@/components/loading/loading";
@@ -243,6 +244,10 @@
 	export default {
 		data() {
 			return {
+				bd_title: undefined,
+				bd_description: undefined,
+				bd_keywords: undefined,
+				
 				statusBarH: this.statusBar,
 				customBarH: 50,
 
@@ -282,14 +287,11 @@
 				scrollLeft: "",
 				current: "",
 				undefined: "",
-				actives: {
-					left: {
-						image: ""
-					},
-					right_top: "",
-					right_down: ""
-				},
+				actives: undefined,
 				loading: false,
+				
+				interstitialAd: undefined,
+				wx_ad: undefined,
 			};
 		},
 
@@ -302,36 +304,75 @@
 
 		props: {},
 
-		onLoad: function(options) {
-			let that = this; //获取配置
-
+		onLoad(options) {
 			Rest.get(Api.JIANGQIE_SETTING_HOME).then(res => {
 				let logo = "/static/images/logo.png";
-
 				if (res.data.logo && res.data.logo.length > 0) {
 					logo = res.data.logo;
 				}
 
-				that.setData({
-					logo: logo,
-					topNav: that.topNav.concat(res.data.top_nav),
-					slide: res.data.slide,
-					iconNav: res.data.icon_nav,
-					actives: res.data.actives,
-					hot: res.data.hot,
-					listMode: res.data.list_mode,
-					background: res.data.slide && res.data.slide.length > 0 ? res.data.background : ''
-				});
+				this.logo = logo;
+				this.topNav = this.topNav.concat(res.data.top_nav);
+				this.slide = res.data.slide;
+				this.iconNav = res.data.icon_nav;
+				this.actives = res.data.actives;
+				this.hot = res.data.hot;
+				this.listMode = res.data.list_mode;
+				this.background = (res.data.slide && res.data.slide.length > 0 ? res.data.background : '')
 
 				if (res.data.title && res.data.title.length > 0) {
-					getApp().appName = res.data.title;
+					getApp().globalData.appName = res.data.title;
+					
+					// #ifdef MP-BAIDU
+					this.bd_title = res.data.title;
+					this.bd_description = res.data.description;
+					this.bd_keywords = res.data.keywords;
+					swan.setPageInfo({
+						title: this.bd_title,
+						description: this.bd_description,
+						keywords: this.bd_keywords,
+					});
+					// #endif
 				}
+				
+				//插屏广告
+				// #ifdef MP-WEIXIN
+				if(res.data.wx_ad && wx.createInterstitialAd) {
+					setTimeout(() => {
+						this.interstitialAd = wx.createInterstitialAd({ adUnitId: res.data.wx_ad })
+						this.interstitialAd.onLoad(() => {
+							// console.log('onLoad event emit')
+							this.interstitialAd.show().catch((err) => {
+								console.error(err)
+							})
+						})
+						this.interstitialAd.onError((err) => {
+							// console.log('onError event emit', err)
+						})
+						this.interstitialAd.onClose((res) => {
+							// console.log('onClose event emit', res)
+						})
+					}, 1000 * parseInt(res.data.wx_ad_delay))
+				}
+				// #endif
 			}); //加载文章
 
 			this.loadPostLast(true);
 		},
+		
+		onShow() {
+			// #ifdef MP-BAIDU
+			if (this.bd_title) {
+				swan.setPageInfo({
+					title: this.bd_title,
+					description: this.bd_description,
+					keywords: this.bd_keywords,
+				});
+			}
+			// #endif
+		},
 
-		onReachBottom: function() {
+		onReachBottom() {
 			if (this.currentTab == 0) {
 				if (!this.pullUpOnLast) {
 					return;
@@ -347,17 +388,17 @@
 			}
 		},
 
-		onShareAppMessage: function() {
+		onShareAppMessage() {
 			return {
-				title: getApp().appName,
+				title: getApp().globalData.appName,
 				path: 'pages/index/index'
 			};
 		},
 
 		// #ifdef MP-WEIXIN
-		onShareTimeline: function() {
+		onShareTimeline() {
 			return {
-				title: getApp().appName
+				title: getApp().globalData.appName
 			};
 		},
 		// #endif
@@ -370,7 +411,7 @@
 
 		methods: {
 			//nav start----
-			handlerSearchClick: function(e) {
+			handlerSearchClick(e) {
 				uni.navigateTo({
 					url: '/pages/search/search'
 				});
@@ -378,49 +419,44 @@
 			//nav end ----
 
 			//slide start----
-			handlerSlideChange: function(e) {
-				this.setData({
-					current: e.detail.current
-				});
+			handlerSlideChange(e) {
+				this.current = e.detail.current;
 			},
 			//slide end----
 
 			//tab -- start
-			swichNav: function(e) {
+			swichNav(e) {
 				let cur = e.currentTarget.dataset.current;
-
 				if (this.currentTab == cur) {
 					return false;
 				}
-
-				this.setData({
-					background: cur == 0 && this.slide && this.slide.length > 0 ? Api.JIANGQIE_BG_INDEX : '',
-					currentTab: cur
-				});
+				
+				this.background = (cur == 0 && this.slide && this.slide.length > 0 ? Api.JIANGQIE_BG_INDEX : '');
+				this.currentTab = cur;
 
 				if (cur !== 0) {
 					this.loadPost(true);
 				}
 			},
 
-			handlerTabMoreClick: function(e) {
+			handlerTabMoreClick(e) {
 				uni.switchTab({
 					url: '/pages/categories/categories'
 				});
 			},
 			//tab -- end
 
-			handlerIconNavClick: function(e) {
+			handlerIconNavClick(e) {
 				let link = e.currentTarget.dataset.link;
-				this.openLink(link);
+				Util.openLink(link);
 			},
 
-			handlerActiveClick: function(e) {
+			handlerActiveClick(e) {
 				let link = e.currentTarget.dataset.link;
-				this.openLink(link);
+				Util.openLink(link);
 			},
 
-			handlerArticleClick: function(e) {
+			handlerArticleClick(e) {
 				let post_id = e.currentTarget.dataset.id;
 				uni.navigateTo({
 					url: '/pages/article/article?post_id=' + post_id
@@ -428,75 +464,44 @@
 			},
 
 			//加载数据
-			loadPostLast: function(refresh) {
-				let that = this;
-				that.setData({
-					loaddingLast: true
-				});
+			loadPostLast(refresh) {
+				this.loaddingLast = true;
 				let offset = 0;
 
 				if (!refresh) {
-					offset = that.postsLast.length;
+					offset = this.postsLast.length;
 				}
 
 				Rest.get(Api.JIANGQIE_POSTS_LAST, {
 					'offset': offset
 				}).then(res => {
-					that.setData({
-						loaddingLast: false,
-						postsLast: refresh ? res.data : that.postsLast.concat(res.data),
-						pullUpOnLast: res.data.length >= Constants.JQ_PER_PAGE_COUNT
-					});
+					this.loaddingLast = false;
+					this.postsLast = (refresh ? res.data : this.postsLast.concat(res.data));
+					this.pullUpOnLast = (res.data.length >= Constants.JQ_PER_PAGE_COUNT)
 				});
 			},
 
-			loadPost: function(refresh) {
-				let that = this;
-				that.setData({
-					loadding: true
-				});
+			loadPost(refresh) {
+				this.loadding = true;
 				let offset = 0;
-
 				if (!refresh) {
-					offset = that.posts.length;
+					offset = this.posts.length;
 				}
 
 				Rest.get(Api.JIANGQIE_POSTS_CATEGORY, {
 					'offset': offset,
-					'cat_id': that.topNav[that.currentTab].id
+					'cat_id': this.topNav[this.currentTab].id
 				}).then(res => {
-					that.setData({
-						loadding: false,
-						posts: refresh ? res.data : that.posts.concat(res.data),
-						pullUpOn: res.data.length >= Constants.JQ_PER_PAGE_COUNT
-					});
+					this.loadding = false;
+					this.posts = (refresh ? res.data : this.posts.concat(res.data));
+					this.pullUpOn = res.data.length >= Constants.JQ_PER_PAGE_COUNT
 				});
 			},
-
-			openLink: function(link) {
-				if (link.startsWith('/pages')) {
-					uni.navigateTo({
-						url: link
-					});
-				} else {
-					uni.navigateToMiniProgram({
-						appId: link,
-						fail: res => {
-							if (res.errMsg && res.errMsg.indexOf('fail cancel') < 0) {
-								uni.showToast({
-									icon: 'none',
-									title: res.errMsg
-								});
-							}
-						}
-					});
-				}
-			}
 		}
 	};
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 	.jiangqie-logo {
 		display: flex;
 		align-items: center;
@@ -636,7 +641,7 @@
 	.jiangqie-news-lightbox-main {
 		height: 300rpx;
 		width: 320rpx;
-		background: linear-gradient(to right bottom, #7FD3FF, #2BB1F2);
+		// background: linear-gradient(to right bottom, #7FD3FF, #2BB1F2);
 		box-shadow: 5rpx 5rpx 20rpx rgba(0, 0, 0, 0.2);
 	}
 
@@ -646,12 +651,12 @@
 		width: 350rpx;
 		text-align: left;
 		margin-left: 20rpx;
-		background: linear-gradient(to right bottom, #9788FF, #735CFF);
+		// background: linear-gradient(to right bottom, #9788FF, #735CFF);
 		box-shadow: 5rpx 5rpx 20rpx rgba(0, 0, 0, 0.2);
 	}
 
 	.jiangqie-news-lightbox-side2 {
-		background: linear-gradient(to right bottom, #FF91C2, #FF539E);
+		// background: linear-gradient(to right bottom, #FF91C2, #FF539E);
 	}
 
 	.jiangqie-news-lightimg {
@@ -794,6 +799,7 @@
 		border: 1rpx solid #AAA;
 		border-radius: 26rpx;
 		margin-right: 12rpx;
+		display: none;
 	}
 
 	.jiangqie-news-time {

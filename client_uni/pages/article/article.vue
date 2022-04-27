@@ -19,10 +19,13 @@
 			<view v-if="official" class="jiangqie-official-mod">
 				<official-account></official-account>
 			</view>
+			
+			<template v-if="wx_ad_top">
+				<ad :unit-id="wx_ad_top"></ad>
+			</template>
 			<!-- #endif -->
 
 			<view class="jiangqie-page-body">
-
 				<mp-html :content="article"></mp-html>
 
 				<view class="jiangqie-page-body-end">
@@ -56,6 +59,26 @@
 					</view>
 				</view>
 			</view>
+			
+			<view v-if="pre_next" class="jiangqie-pre-next-view">
+				<view @click="clickNext" class="jiangqie-next-view">
+					<template v-if="next">
+						<uni-icons type="arrowleft" size="24"></uni-icons>上一篇
+					</template>
+				</view>
+				<view @click="clickPre" class="jiangqie-pre-view">
+					<template v-if="pre">
+						下一篇<uni-icons type="arrowright" size="24"></uni-icons>
+					</template>
+				</view>
+			</view>
+			
+			<!-- #ifdef MP-WEIXIN -->
+			<template v-if="wx_ad_bottom">
+				<ad :unit-id="wx_ad_bottom"></ad>
+			</template>
+			<!-- #endif -->
+			
 			<view class="jiangqie-page-cmtbox">
 				<view class="jiangqie-page-cmt-title">
 					评论<text>{{comment_count + comment_count_change}}</text>
@@ -174,7 +197,7 @@
 	 * Help document: https://www.jiangqie.com/ky
 	 * github: https://github.com/longwenjunjie/jiangqie_kafei
 	 * gitee: https://gitee.com/longwenjunj/jiangqie_kafei
-	 * Copyright © 2020-2021 www.jiangqie.com All rights reserved.
+	 * Copyright © 2020-2022 www.jiangqie.com All rights reserved.
 	 */
 	import JiangqieLoading from "@/components/loading/loading";
 	import JiangqieLoadmore from "@/components/loadmore/loadmore";
@@ -211,6 +234,13 @@
 				comment_count_change: 0,
 				post_id: 0,
 				comment_id: 0,
+				
+				wx_ad_top: undefined,
+				wx_ad_bottom: undefined,
+				
+				pre_next: undefined,
+				pre: undefined,
+				next: undefined,
 
 				//小程序码
 				acode: '',
@@ -237,7 +267,7 @@
 			lPainter,
 		},
 
-		onLoad: function(options) {
+		onLoad(options) {
 			if (options.scene) {
 				this.post_id = decodeURIComponent(options.scene);
 			} else if (options.post_id) {
@@ -257,32 +287,51 @@
 			// #endif
 		},
 
-		onShow: function() {
+		onShow() {
 			if (!this.needRefresh) {
 				this.needRefresh = true;
 				return;
 			}
 
-			let that = this;
 			Rest.get(Api.JIANGQIE_POST_DETAIL, {
-				post_id: that.post_id
+				post_id: this.post_id
 			}).then(res => {
 				uni.setNavigationBarTitle({
 					title: res.data.title
 				});
-				that.setData({
-					post: res.data,
-					post_like: res.data.user.islike,
-					post_favorite: res.data.user.isfavorite,
-					comment_count: Number(res.data.comment_count),
-					like_list: res.data.like_list
+
+				this.post = res.data;
+				this.post_like = res.data.user.islike;
+				this.post_favorite = res.data.user.isfavorite;
+				this.comment_count = Number(res.data.comment_count);
+				this.like_list = res.data.like_list;
+
+				this.article = res.data.content;
+				
+				this.wx_ad_top = res.data.wx_ad_top;
+				this.wx_ad_bottom = res.data.wx_ad_bottom;
+				this.pre_next = res.data.pre_next;
+				if (this.pre_next) {
+					this.pre = res.data.pre;
+					this.next = res.data.next;
+				}
+				
+				// #ifdef MP-BAIDU
+				let keywords = [];
+				this.post.tags.forEach(tag => {
+					keywords.push(tag.name)
+				})
+				swan.setPageInfo({
+					title: this.post.title,
+					keywords: keywords.join(','),
+					description: this.post.excerpt,
 				});
-				that.article = that.escape2Html(res.data.content);
+				// #endif
 			});
 			this.loadComments(true);
 		},
 
-		onReachBottom: function() {
+		onReachBottom() {
 			if (!this.pullUpOn) {
 				return;
 			}
@@ -290,7 +339,7 @@
 			this.loadComments(false);
 		},
 
-		onShareAppMessage: function() {
+		onShareAppMessage() {
 			return {
 				title: this.post.title,
 				imageUrl: this.post.thumbnail,
@@ -299,7 +348,7 @@
 		},
 
 		// #ifdef MP-WEIXIN
-		onShareTimeline: function() {
+		onShareTimeline() {
 			return {
 				title: this.post.title,
 				query: 'post_id=' + this.post_id,
@@ -332,7 +381,7 @@
 
 								uni.saveImageToPhotosAlbum({
 									filePath: this.painterImage,
-									success() {
+									success: () => {
 										uni.showToast({
 											title: '已保存'
 										})
@@ -423,7 +472,7 @@
 						},
 						{
 							type: 'text',
-							text: getApp().appName,
+							text: getApp().globalData.appName,
 							css: {
 								left: '30rpx',
 								top: '1170rpx',
@@ -437,7 +486,7 @@
 				}
 			},
 
-			onPainterSuccess: function(e) {
+			onPainterSuccess(e) {
 				this.painterImage = e;
 
 				// #ifndef MP-BAIDU
@@ -450,7 +499,7 @@
 			/**
 			 * 文章中a标签点击
 			 */
-			wxParseTagATap: function(e) {
+			wxParseTagATap(e) {
 				uni.setClipboardData({
 					data: e.currentTarget.dataset.src
 				});
@@ -459,7 +508,7 @@
 			/**
 			 * 点击 TAG
 			 */
-			handlerTagClick: function(e) {
+			handlerTagClick(e) {
 				let tag_id = e.currentTarget.dataset.id;
 				let tag = e.currentTarget.dataset.tag;
 				uni.navigateTo({
@@ -470,57 +519,50 @@
 			/**
 			 * 跳转返回
 			 */
-			jumpBtn: function(options) {
+			jumpBtn() {
 				Util.navigateBack();
 			},
 
 			/**
 			 * 文章 点赞
 			 */
-			handlerLikeClick: function(e) {
-				let that = this;
+			handlerLikeClick(e) {
 				Rest.get(Api.JIANGQIE_USER_LIKE, {
-					post_id: that.post.id
+					post_id: this.post.id
 				}).then(res => {
 					let avatar = Auth.getUser().avatar;
-					var index = that.like_list.indexOf(avatar);
+					var index = this.like_list.indexOf(avatar);
 
 					if (index > -1) {
-						that.like_list.splice(index, 1);
+						this.like_list.splice(index, 1);
 					} else {
-						that.like_list.unshift(avatar);
+						this.like_list.unshift(avatar);
 					}
 
-					that.setData({
-						post_like: that.post_like == 1 ? 0 : 1,
-						like_list: that.like_list
-					});
+					this.post_like = (this.post_like == 1 ? 0 : 1);
+					this.like_list = this.like_list;
 				});
 			},
 
 			/**
 			 * 评论 弹框
 			 */
-			handlerCommentClick: function(e) {
+			handlerCommentClick(e) {
 				this.comment_id = 0;
-				this.setData({
-					show_comment_submit: true
-				});
+				this.show_comment_submit = true
 			},
 
 			/**
 			 * 评论 取消
 			 */
-			handlerCancelClick: function(e) {
-				this.setData({
-					show_comment_submit: false
-				});
+			handlerCancelClick(e) {
+				this.show_comment_submit = false
 			},
 
 			/**
 			 * 评论 提交
 			 */
-			handlerCommentSubmit: function(e) {
+			handlerCommentSubmit(e) {
 				if (!this.comment_content) {
 					uni.showToast({
 						icon: 'none',
@@ -529,50 +571,41 @@
 					return;
 				}
 
-				let that = this;
 				Rest.get(Api.JIANGQIE_COMMENT_ADD, {
-					post_id: that.post_id,
-					parent_id: that.comment_id,
-					content: that.comment_content
+					post_id: this.post_id,
+					parent_id: this.comment_id,
+					content: this.comment_content
 				}).then(res => {
-					that.setData({
-						comment_count_change: that.comment_count_change + (res.data.comment_verify ==
-							1 ? 0 : 1),
-						show_comment_submit: false
-					});
-					that.loadComments(true);
+					this.comment_count_change = this.comment_count_change + (res.data.comment_verify ==
+						1 ? 0 : 1);
+					this.show_comment_submit = false;
+					this.loadComments(true);
 				});
 			},
 
 			/**
 			 * 评论 回复
 			 */
-			handlerCommentReplyClick: function(e) {
+			handlerCommentReplyClick(e) {
 				this.comment_id = e.currentTarget.dataset.id;
-				this.setData({
-					show_comment_submit: true
-				});
+				this.show_comment_submit = true;
 			},
 
 			/**
 			 * 评论 删除
 			 */
-			handlerCommentDeleteClick: function(e) {
-				let that = this;
+			handlerCommentDeleteClick(e) {
 				uni.showModal({
 					title: '提示',
 					content: '确定要删除吗？',
-
-					success(res) {
+					success: (res) => {
 						if (res.confirm) {
 							let comment_id = e.currentTarget.dataset.id;
 							Rest.get(Api.JIANGQIE_COMMENT_DELETE, {
 								comment_id: comment_id
 							}).then(res => {
-								that.setData({
-									comment_count_change: that.comment_count_change - 1
-								});
-								that.loadComments(true);
+								this.comment_count_change = this.comment_count_change - 1;
+								this.loadComments(true);
 							});
 						}
 					}
@@ -583,30 +616,43 @@
 			/**
 			 * 评论输入
 			 */
-			handlerContentInput: function(e) {
-				this.setData({
-					comment_content: e.detail.value
-				});
+			handlerContentInput(e) {
+				this.comment_content = e.detail.value;
 			},
 
 			/**
 			 * 文章 收藏
 			 */
-			handlerFavoriteClick: function(e) {
-				let that = this;
+			handlerFavoriteClick(e) {
 				Rest.get(Api.JIANGQIE_USER_FAVORITE, {
-					post_id: that.post.id
+					post_id: this.post.id
 				}).then(res => {
-					that.setData({
-						post_favorite: that.post_favorite == 1 ? 0 : 1
-					});
+					this.post_favorite = (this.post_favorite == 1 ? 0 : 1);
 				});
+			},
+			
+			/**
+			 * 上一篇
+			 */
+			clickPre() {
+				if (this.pre) {
+					Util.openLink('/pages/article/article?post_id=' + this.pre)
+				}
+			},
+			
+			/**
+			 * 下一篇
+			 */
+			clickNext() {
+				if (this.next) {
+					Util.openLink('/pages/article/article?post_id=' + this.next)
+				}
 			},
 
 			/**
 			 * 加载微信小程序码
 			 */
-			loadWxacode: function() {
+			loadWxacode() {
 				Rest.get(Api.JIANGQIE_POST_WX_ACODE, {
 					post_id: this.post_id
 				}).then(res => {
@@ -619,7 +665,7 @@
 			/**
 			 * 加载QQ小程序码
 			 */
-			loadQqacode: function() {
+			loadQqacode() {
 				Rest.get(Api.JIANGQIE_POST_QQ_ACODE, {
 					post_id: this.post_id
 				}).then(res => {
@@ -632,7 +678,7 @@
 			/**
 			 * 加载百度小程序码
 			 */
-			loadBdacode: function() {
+			loadBdacode() {
 				Rest.get(Api.JIANGQIE_POST_BD_ACODE, {
 					post_id: this.post_id
 				}).then(res => {
@@ -645,34 +691,28 @@
 			/**
 			 * 加载 评论
 			 */
-			loadComments: function(refresh) {
-				let that = this;
-				that.setData({
-					loadding: true
-				});
+			loadComments(refresh) {
+				this.loadding = true;
 				let offset = 0;
-
 				if (!refresh) {
-					offset = that.comments.length;
+					offset = this.comments.length;
 				}
 
 				Rest.get(Api.JIANGQIE_COMMENT_INDEX, {
-					post_id: that.post_id,
+					post_id: this.post_id,
 					offset: offset
 				}).then(res => {
-					that.setData({
-						loaded: true,
-						loadding: false,
-						comments: refresh ? res.data : that.comments.concat(res.data),
-						pullUpOn: res.data.length >= Constants.JQ_PER_PAGE_COUNT
-					});
+					this.loaded = true;
+					this.loadding = false;
+					this.comments = (refresh ? res.data : this.comments.concat(res.data));
+					this.pullUpOn = (res.data.length >= Constants.JQ_PER_PAGE_COUNT);
 				});
 			},
 
 		}
 	};
 </script>
-<style>
+<style lang="scss" scoped>
 	button {
 		margin: 0;
 		padding: 0;
@@ -722,7 +762,7 @@
 		height: 32rpx;
 		width: 32rpx;
 		margin-right: 10rpx;
-		vertical-align: middle;
+		vertical-align: text-bottom;
 		margin-bottom: 2rpx;
 	}
 
@@ -750,6 +790,11 @@
 		line-height: 2rem;
 		font-weight: 300;
 		font-size: 30rpx;
+	}
+	.jiangqie-page-body rich-text {
+		line-height: 2rem;
+		min-height: 2rem;
+		display: block;
 	}
 
 	.wxParse-p {
@@ -1180,5 +1225,17 @@
 
 	.jiangqie-official-mod {
 		padding: 10rpx 0;
+	}
+	
+	.jiangqie-pre-next-view {
+		display: flex;
+		justify-content: space-between;
+		padding-bottom: 30rpx;
+		border-bottom: 1rpx solid #EEEEEE;
+		color: #333333;
+		.jiangqie-pre-view, .jiangqie-next-view  {
+			display: flex;
+			align-items: center;
+		}
 	}
 </style>

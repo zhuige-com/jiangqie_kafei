@@ -2,7 +2,7 @@
     "name" : "jiangqie_xcx_free",
     "appid" : "",
     "description" : "酱茄Free小程序",
-    "versionName" : "1.5.6",
+    "versionName" : "1.8.2",
     "versionCode" : "100",
     "transformPx" : false,
     "app-plus" : {
@@ -49,7 +49,7 @@
     },
     "quickapp" : {},
     "mp-weixin" : {
-        "appid" : "wxb0b82c1a4e82a353",
+        "appid" : "",
         "setting" : {
             "urlCheck" : false
         },
@@ -69,7 +69,7 @@
         "setting" : {
             "urlCheck" : false
         },
-        "appid" : "24354588"
+        "appid" : ""
     },
     "mp-toutiao" : {
         "usingComponents" : true
@@ -81,7 +81,7 @@
         "downloadFile" : 10000
     },
     "mp-qq" : {
-        "appid" : "1111804134",
+        "appid" : "",
         "setting" : {
             "urlCheck" : false
         }

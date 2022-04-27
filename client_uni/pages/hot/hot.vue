@@ -10,16 +10,14 @@
 		</view>
 
 		<scroll-view scroll-x scroll-with-animation class="tab-view" :scroll-left="0">
-			<view v-for="(item, index) in tabbar" :key="index"
-				:class="'tab-bar-item ' + (currentTab==index ? 'active' : '')" :data-current="index"
+			<view v-for="(item, index) in tabbar" :key="index" class="tab-bar-item"
+				:class="(currentTab==index ? 'active' : '')" :data-current="index"
 				@tap.stop="swichNav">
 				<text class="tab-bar-title">{{item}}</text>
 			</view>
 		</scroll-view>
 
-		<view
-			:style="tl_background?'background: url(' + tl_background + ') repeat-y; background-position: -30rpx 0;':''">
-
+		<view :style="tl_background?'background: url(' + tl_background + ') repeat-y; background-position: -30rpx 0;':''">
 			<template v-if="posts.length > 0">
 				<view class="jiangqie-timeline-view">
 
@@ -84,7 +82,7 @@
 	 * Help document: https://www.jiangqie.com/ky
 	 * github: https://github.com/longwenjunjie/jiangqie_kafei
 	 * gitee: https://gitee.com/longwenjunj/jiangqie_kafei
-	 * Copyright © 2020-2021 www.jiangqie.com All rights reserved.
+	 * Copyright © 2020-2022 www.jiangqie.com All rights reserved.
 	 */
 	const Constants = require("@/utils/constants.js");
 	const Api = require("@/utils/api.js");
@@ -128,24 +126,39 @@
 
 		props: {},
 
-		onLoad: function(options) {
+		onLoad(options) {
 			//获取配置
-			let that = this;
 			Rest.get(Api.JIANGQIE_SETTING_HOT).then(res => {
-				that.setData({
-					setting: {
-						background: res.data.background,
-						title: res.data.title ? res.data.title : that.default.title,
-						description: res.data.description ? res.data.description : that.default
-							.description
-					},
-					tl_background: res.data.tl_background
+				this.setting = {
+					background: res.data.background,
+					title: res.data.title ? res.data.title : this.default.title,
+					description: res.data.description ? res.data.description : this.default
+						.description
+				};
+				this.tl_background = res.data.tl_background;
+				
+				// #ifdef MP-BAIDU
+				swan.setPageInfo({
+					title: this.setting.title,
+					description: this.setting.description,
+					keywords: '热榜',
 				});
+				// #endif
 			});
 			this.loadPosts(true);
 		},
+		
+		onShow() {
+			// #ifdef MP-BAIDU
+			swan.setPageInfo({
+				title: this.setting.title,
+				description: this.setting.description,
+				keywords: '热榜',
+			});
+			// #endif
+		},
 
-		onReachBottom: function() {
+		onReachBottom() {
 			if (!this.pullUpOn) {
 				return;
 			}
@@ -153,38 +166,36 @@
 			this.loadPosts(false);
 		},
 
-		onShareAppMessage: function() {
+		onShareAppMessage() {
 			return {
-				title: getApp().appName,
+				title: getApp().globalData.appName,
 				path: 'pages/index/index'
 			};
 		},
 
 		// #ifdef MP-WEIXIN
-		onShareTimeline: function() {
+		onShareTimeline() {
 			return {
-				title: getApp().appName
+				title: getApp().globalData.appName
 			};
 		},
 		// #endif
 
 		methods: {
 			// 点击标题切换当前页时改变样式
-			swichNav: function(e) {
+			swichNav(e) {
 				let cur = e.currentTarget.dataset.current;
 
 				if (this.currentTab == cur) {
 					return false;
 				}
 
-				this.setData({
-					currentTab: cur
-				});
+				this.currentTab = cur;
 				this.posts = [];
 				this.loadPosts(true);
 			},
 
-			handlerHotArticle: function(e) {
+			handlerHotArticle(e) {
 				let post_id = e.currentTarget.dataset.id;
 				uni.navigateTo({
 					url: '/pages/article/article?post_id=' + post_id
@@ -193,20 +204,15 @@
 
 			//加载数据
 			loadPosts(refresh) {
-				let that = this;
-				that.setData({
-					loadding: true
-				});
+				this.loadding = true;
 				Rest.get(Api.JIANGQIE_POSTS_HOT, {
-					'offset': refresh ? 0 : that.posts.length,
-					'sort': that.sorts[that.currentTab]
-				}).then(res => {
-					that.setData({
-						loaded: true,
-						loadding: false,
-						posts: refresh ? res.data : that.posts.concat(res.data),
-						pullUpOn: res.data.length >= Constants.JQ_PER_PAGE_COUNT
-					});
+					'offset': refresh ? 0 : this.posts.length,
+					'sort': this.sorts[this.currentTab]
+				}).then(res => {					
+					this.loaded = true;
+					this.loadding = false;
+					this.posts = (refresh ? res.data : this.posts.concat(res.data)),
+					this.pullUpOn = (res.data.length >= Constants.JQ_PER_PAGE_COUNT)
 				});
 			}
 
@@ -214,7 +220,7 @@
 	};
 </script>
 
-<style>
+<style lang="scss" scoped>
 	.jiangqie-timeline-view {
 		text-align: left;
 		padding-left: 66rpx;
@@ -431,6 +437,10 @@
 	}
 
 	.tab-view {
+		position: -webkit-sticky;
+		position: sticky;
+		top: var(--window-top);
+		
 		width: 100%;
 		height: 100rpx;
 		overflow: hidden;

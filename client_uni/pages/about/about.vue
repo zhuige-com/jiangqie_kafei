@@ -18,8 +18,8 @@
 						data-text="https://github.com/longwenjunjie/jiangqie_kafei">GitHub</text>上下载，欢迎Watch & Star ★。
 				</view>
 				<view class="jiangqie-content">项目可能存在缺陷或者bug，如果您在使用过程中发现问题或者有更好的建议，可反馈给我们。</view>
-				<view class="jiangqie-content jiangqie-content-email" @tap="copy" data-text="www.jiangqie.com">
-					技术支持：www.jiangqie.com</view>
+				<view class="jiangqie-content jiangqie-content-email" @tap="copy" data-text="www.zhuige.com">
+					技术支持：www.zhuige.com</view>
 				<view class="jiangqie-footer">
 					<image src="/static/images/qrcode.jpg" class="jiangqie-applets" mode="widthFix"></image>
 					<view class="jiangqie-footer-text">扫描二维码，体验酱茄开源小程序！</view>
@@ -39,7 +39,7 @@
 	 * Help document: https://www.jiangqie.com/ky
 	 * github: https://github.com/longwenjunjie/jiangqie_kafei
 	 * gitee: https://gitee.com/longwenjunj/jiangqie_kafei
-	 * Copyright © 2020-2021 www.jiangqie.com All rights reserved.
+	 * Copyright © 2020-2022 www.jiangqie.com All rights reserved.
 	 */
 	const Constant = require("@/utils/constants.js");
 	import JiangqieLoading from "@/components/loading/loading";
@@ -58,31 +58,31 @@
 
 		props: {},
 
-		onLoad: function(options) {},
+		onLoad(options) {},
 
-		onShareAppMessage: function() {
+		onShareAppMessage() {
 			return {
-				title: getApp().appName,
+				title: getApp().globalData.appName,
 				path: 'pages/index/index'
 			};
 		},
 
 		// #ifdef MP-WEIXIN
-		onShareTimeline: function() {
+		onShareTimeline() {
 			return {
-				title: getApp().appName
+				title: getApp().globalData.appName
 			};
 		},
 		// #endif
 
 		methods: {
-			copy: function(e) {
+			copy(e) {
 				let text = e.currentTarget.dataset.text;
 				uni.setClipboardData({
 					data: text,
-					success(res) {
+					success: (res) => {
 						uni.getClipboardData({
-							success(res) {
+							success: (res) => {
 								uni.showToast({
 									title: '网址已复制'
 								});
@@ -93,7 +93,7 @@
 				});
 			},
 
-			tipClick: function() {
+			tipClick() {
 				uni.showToast({
 					icon: 'none',
 					title: '酱茄小程序开源版'
@@ -103,7 +103,7 @@
 	};
 </script>
 
-<style>
+<style lang="scss" scoped>
 	.container {
 		padding: 0 50rpx 40rpx 50rpx;
 		box-sizing: border-box;

@@ -6,14 +6,14 @@
  * Help document: https://www.jiangqie.com/docs/kaiyuan/id1
  * github: https://github.com/longwenjunjie/jiangqie_kafei
  * gitee: https://gitee.com/longwenjunj/jiangqie_kafei
- * Copyright ️© 2020-2021 www.jiangqie.com All rights reserved.
+ * Copyright ️© 2020-2022 www.jiangqie.com All rights reserved.
  */
 
 // 首页设置
 CSF::createSection($prefix, array(
     'id'    => 'home',
     'title' => '首页设置',
-    'icon'  => 'fas fa-plus-circle',
+    'icon'  => 'fas fa-home',
     'fields' => array(
 
         array(
@@ -79,6 +79,13 @@ CSF::createSection($prefix, array(
         ),
 
         array(
+            'id'    => 'home_active_switch',
+            'type'  => 'switcher',
+            'title' => '活动区域图',
+            'subtitle' => '是否显示活动区域图?',
+        ),
+
+        array(
             'id'         => 'home_active',
             'type'       => 'accordion',
             'title'      => '活动区域图',
@@ -102,6 +109,7 @@ CSF::createSection($prefix, array(
                             'id'    => 'left_link',
                             'type'  => 'text',
                             'title' => '链接',
+                            'after' => '<a href="https://www.jiangqie.com/ky/4673.html" target="_blank" title="页面路径怎么写？">页面路径</a>或小程序appid'
                         ),
                     )
                 ),
@@ -124,6 +132,7 @@ CSF::createSection($prefix, array(
                             'id'    => 'right_top_link',
                             'type'  => 'text',
                             'title' => '链接',
+                            'after' => '<a href="https://www.jiangqie.com/ky/4673.html" target="_blank" title="页面路径怎么写？">页面路径</a>或小程序appid'
                         ),
                     )
                 ),
@@ -146,6 +155,7 @@ CSF::createSection($prefix, array(
                             'id'    => 'right_down_link',
                             'type'  => 'text',
                             'title' => '链接',
+                            'after' => '<a href="https://www.jiangqie.com/ky/4673.html" target="_blank" title="页面路径怎么写？">页面路径</a>或小程序appid'
                         ),
                     )
                 ),

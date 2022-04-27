@@ -68,7 +68,7 @@
 	 * Help document: https://www.jiangqie.com/ky
 	 * github: https://github.com/longwenjunjie/jiangqie_kafei
 	 * gitee: https://gitee.com/longwenjunj/jiangqie_kafei
-	 * Copyright © 2020-2021 www.jiangqie.com All rights reserved.
+	 * Copyright © 2020-2022 www.jiangqie.com All rights reserved.
 	 */
 	const Util = require("@/utils/util.js");
 	const Auth = require("@/utils/auth.js");
@@ -93,10 +93,8 @@
 
 		props: {},
 
-		onLoad: function(options) {
-			this.setData({
-				title: getApp().appName
-			});
+		onLoad(options) {
+			this.title = getApp().globalData.appName;
 
 			// #ifdef MP-WEIXIN || MP-QQ
 			uni.login({
@@ -130,23 +128,23 @@
 			});
 		},
 
-		onShareAppMessage: function() {
+		onShareAppMessage() {
 			return {
-				title: getApp().appName,
+				title: getApp().globalData.appName,
 				path: 'pages/index/index'
 			};
 		},
 
 		// #ifdef MP-WEIXIN
-		onShareTimeline: function() {
+		onShareTimeline() {
 			return {
-				title: getApp().appName
+				title: getApp().globalData.appName
 			};
 		},
 		// #endif
 
 		methods: {
-			handlerCancelClick: function(e) {
+			handlerCancelClick(e) {
 				Util.navigateBack();
 			},
 
@@ -208,7 +206,8 @@
 		}
 	};
 </script>
-<style>
+
+<style lang="scss" scoped>
 	.jiangqie-app-info {
 		padding: 50rpx 40rpx;
 		text-align: center;

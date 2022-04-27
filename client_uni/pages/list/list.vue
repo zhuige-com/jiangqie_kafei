@@ -70,7 +70,7 @@
 	 * Help document: https://www.jiangqie.com/ky
 	 * github: https://github.com/longwenjunjie/jiangqie_kafei
 	 * gitee: https://gitee.com/longwenjunj/jiangqie_kafei
-	 * Copyright © 2020-2021 www.jiangqie.com All rights reserved.
+	 * Copyright © 2020-2022 www.jiangqie.com All rights reserved.
 	 */
 	const Constants = require("@/utils/constants.js");
 	const Util = require("@/utils/util.js");
@@ -84,6 +84,8 @@
 	export default {
 		data() {
 			return {
+				title: undefined,
+				
 				posts: [],
 				loadding: false,
 				pullUpOn: true,
@@ -108,23 +110,26 @@
 		/**
 		 * 生命周期函数--监听页面加载
 		 */
-		onLoad: function(options) {
+		onLoad(options) {
 			if (options.cat_id) {
 				//分类
+				this.title = options.title;
 				uni.setNavigationBarTitle({
 					title: options.title
 				});
 				this.cat_id = options.cat_id;
 			} else if (options.tag_id) {
 				//标签
+				this.title = options.title;
 				uni.setNavigationBarTitle({
 					title: options.title
 				});
 				this.tag_id = options.tag_id;
 			} else if (options.search) {
 				//搜索
+				this.title = '搜索【' + options.search + '】';
 				uni.setNavigationBarTitle({
-					title: '搜索【' + options.search + '】'
+					title: this.title
 				});
 				this.search = options.search;
 			} else if (options.track) {
@@ -139,25 +144,35 @@
 					title = '我的评论';
 				}
 
+				this.title = title;
 				uni.setNavigationBarTitle({
 					title: title
 				});
 				this.track = options.track;
 			} else {
 				//最新
+				this.title = '最新文章';
 				uni.setNavigationBarTitle({
 					title: '最新文章'
 				});
 			}
 		},
 
-		onShow: function() {
+		onShow() {
+			// #ifdef MP-BAIDU
+			swan.setPageInfo({
+				title: this.title,
+				description: this.title + '相关的文章',
+				keywords: this.title,
+			});
+			// #endif
+			
 			this.loadPost(true);
 		},
 
-		onPullDownRefresh: function() {},
+		onPullDownRefresh() {},
 
-		onReachBottom: function() {
+		onReachBottom() {
 			if (!this.pullUpOn) {
 				return;
 			}
@@ -165,38 +180,34 @@
 			this.loadPost(false);
 		},
 
-		onShareAppMessage: function() {
+		onShareAppMessage() {
 			return {
-				title: getApp().appName,
+				title: getApp().globalData.appName,
 				path: 'pages/index/index'
 			};
 		},
 
 		// #ifdef MP-WEIXIN
-		onShareTimeline: function() {
+		onShareTimeline() {
 			return {
-				title: getApp().appName
+				title: getApp().globalData.appName
 			};
 		},
 		// #endif
 
 		methods: {
-			handlerArticleClick: function(e) {
+			handlerArticleClick(e) {
 				let post_id = e.currentTarget.dataset.id;
 				uni.navigateTo({
 					url: '/pages/article/article?post_id=' + post_id
 				});
 			},
 
-			loadPost: function(refresh) {
-				let that = this;
-				that.setData({
-					loadding: true
-				});
+			loadPost(refresh) {
+				this.loadding = true;
 				let offset = 0;
-
 				if (!refresh) {
-					offset = that.posts.length;
+					offset = this.posts.length;
 				}
 
 				let url = '';
@@ -204,35 +215,34 @@
 					offset: offset
 				};
 
-				if (that.cat_id !== undefined) {
+				if (this.cat_id !== undefined) {
 					url = Api.JIANGQIE_POSTS_CATEGORY;
-					params.cat_id = that.cat_id;
-				} else if (that.tag_id !== undefined) {
+					params.cat_id = this.cat_id;
+				} else if (this.tag_id !== undefined) {
 					url = Api.JIANGQIE_POSTS_TAG;
-					params.tag_id = that.tag_id;
-				} else if (that.search !== undefined) {
+					params.tag_id = this.tag_id;
+				} else if (this.search !== undefined) {
 					url = Api.JIANGQIE_POSTS_SEARCH;
-					params.search = that.search;
-				} else if (that.track !== undefined) {
+					params.search = this.search;
+				} else if (this.track !== undefined) {
 					url = Api.JIANGQIE_POSTS_MY;
-					params.track = that.track;
+					params.track = this.track;
 				} else {
 					url = Api.JIANGQIE_POSTS_LAST;
 				}
 
 				Rest.get(url, params).then(res => {
-					that.setData({
-						loaded: true,
-						loadding: false,
-						posts: refresh ? res.data : that.posts.concat(res.data),
-						pullUpOn: res.data.length >= Constants.JQ_PER_PAGE_COUNT
-					});
+					this.loaded = true;
+					this.loadding = false;
+					this.posts = (refresh ? res.data : this.posts.concat(res.data));
+					this.pullUpOn = res.data.length >= Constants.JQ_PER_PAGE_COUNT;
 				});
 			},
 		}
 	};
 </script>
-<style>
+
+<style lang="scss" scoped>
 	.container {
 		display: flex;
 		flex-direction: column;

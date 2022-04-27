@@ -6,7 +6,7 @@
  * Help document: https://www.jiangqie.com/docs/kaiyuan/id1
  * github: https://github.com/longwenjunjie/jiangqie_kafei
  * gitee: https://gitee.com/longwenjunj/jiangqie_kafei
- * Copyright ️© 2020-2021 www.jiangqie.com All rights reserved.
+ * Copyright ️© 2020-2022 www.jiangqie.com All rights reserved.
  */
 
 class JiangQie_API_Admin
@@ -44,6 +44,8 @@ class JiangQie_API_Admin
 			'menu_title' => '酱茄Free小程序',
 			'menu_slug'  => 'jiangqie-api',
 			'menu_position' => 2,
+            'show_bar_menu' => false,
+            'show_sub_menu' => false,
             'footer_credit' => 'Thank you for creating with <a href="https://www.jiangqie.com/" target="_blank">酱茄</a>'
 		));
 
@@ -55,7 +57,52 @@ class JiangQie_API_Admin
 		require_once $base_dir . 'partials/home.php';
         require_once $base_dir . 'partials/category.php';
         require_once $base_dir . 'partials/hot.php';
+        require_once $base_dir . 'partials/ad.php';
 		require_once $base_dir . 'partials/profile.php';
+        require_once $base_dir . 'partials/article.php';
+
+        //
+        // 备份
+        //
+        CSF::createSection($prefix, array(
+            'title'       => '备份',
+            'icon'        => 'fas fa-shield-alt',
+            'fields'      => array(
+                array(
+                    'type' => 'backup',
+                ),
+            )
+        ));
+
+        //过滤ID - 修复多选情况下 ID丢失造成的bug
+		function jiangqie_api_sanitize_ids($ids, $type='') {
+			if (!is_array($ids)) {
+				return $ids;
+			}
+
+			$ids_n = [];
+			foreach ($ids as $id) {
+				if (($type=='cat' && get_category($id))) {
+					$ids_n[] = $id;
+				} else if ($type=='post' || $type=='page') {
+					$post = get_post($id);
+					if ($post && $post->post_status == 'publish') {
+						$ids_n[] = $id;
+					}
+				}
+			}
+			return $ids_n;
+		}
+
+		function jiangqie_api_save_before( &$data, $option ) {
+			$data['hide_cat'] = jiangqie_api_sanitize_ids($data['hide_cat'], 'cat');
+			$data['home_top_nav'] = jiangqie_api_sanitize_ids($data['home_top_nav'], 'cat');
+			$data['top_slide'] = jiangqie_api_sanitize_ids($data['top_slide'], 'post');
+			$data['home_hot'] = jiangqie_api_sanitize_ids($data['home_hot'], 'post');
+			
+			return $data;
+		}
+		add_filter( 'csf_jiangqie-api_save', 'jiangqie_api_save_before', 10, 2 );
 	}
 
     public function admin_init()

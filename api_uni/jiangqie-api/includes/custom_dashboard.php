@@ -6,7 +6,7 @@
  * Help document: https://www.jiangqie.com/docs/kaiyuan/id1
  * github: https://github.com/longwenjunjie/jiangqie_kafei
  * gitee: https://gitee.com/longwenjunj/jiangqie_kafei
- * Copyright ️© 2020-2021 www.jiangqie.com All rights reserved.
+ * Copyright ️© 2020-2022 www.jiangqie.com All rights reserved.
  */
 
 function jiangqie_api_custom_dashboard_help()

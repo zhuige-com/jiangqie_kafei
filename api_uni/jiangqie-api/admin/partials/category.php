@@ -6,14 +6,14 @@
  * Help document: https://www.jiangqie.com/docs/kaiyuan/id1
  * github: https://github.com/longwenjunjie/jiangqie_kafei
  * gitee: https://gitee.com/longwenjunj/jiangqie_kafei
- * Copyright ️© 2020-2021 www.jiangqie.com All rights reserved.
+ * Copyright ️© 2020-2022 www.jiangqie.com All rights reserved.
  */
 
 // 分类设置
 CSF::createSection($prefix, array(
     'id'    => 'category',
     'title' => '分类设置',
-    'icon'  => 'fas fa-plus-circle',
+    'icon'  => 'fas fa-coins',
     'fields' => array(
         
         array(

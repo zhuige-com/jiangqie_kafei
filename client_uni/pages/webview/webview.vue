@@ -11,7 +11,7 @@
 	 * Help document: https://www.jiangqie.com/ky
 	 * github: https://github.com/longwenjunjie/jiangqie_kafei
 	 * gitee: https://gitee.com/longwenjunj/jiangqie_kafei
-	 * Copyright © 2020-2021 www.jiangqie.com All rights reserved.
+	 * Copyright © 2020-2022 www.jiangqie.com All rights reserved.
 	 */
 
 	export default {
@@ -23,28 +23,28 @@
 
 		onLoad(options) {
 			if (options.src) {
-				this.src = options.src;
+				this.src = decodeURIComponent(options.src);
 			}
 			uni.setNavigationBarTitle({
-				title: getApp().appName
+				title: getApp().globalData.appName
 			})
 		},
 
 		onShareAppMessage() {
 			return {
-				title: getApp().appName,
-				path: 'pages/mix/webview/webview?src=' + this.src
+				title: getApp().globalData.appName,
+				path: 'pages/webview/webview?src=' + encodeURIComponent(this.src)
 			};
 		},
 
 		onShareTimeline() {
 			return {
-				title: getApp().appName
+				title: getApp().globalData.appName
 			};
 		},
 	}
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 
 </style>

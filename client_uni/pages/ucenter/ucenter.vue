@@ -23,24 +23,6 @@
 						</view>
 					</template>
 				</view>
-				<view class="jiangqie-countinfo">
-					<view class="jiangqie-countblock">
-						<view class="jiangqie-countnumber">39</view>
-						<view class="jiangqie-counttype">帖子</view>
-					</view>
-					<view class="jiangqie-countblock">
-						<view class="jiangqie-countnumber">56</view>
-						<view class="jiangqie-counttype">文章</view>
-					</view>
-					<view class="jiangqie-countblock">
-						<view class="jiangqie-countnumber">72</view>
-						<view class="jiangqie-counttype">粉丝</view>
-					</view>
-					<view class="jiangqie-countblock">
-						<view class="jiangqie-countnumber">18</view>
-						<view class="jiangqie-counttype">关注</view>
-					</view>
-				</view>
 			</view>
 			<view class="jiangqie-listbox jiangqie-postcount">
 				<template v-for="(item, index) in menu">
@@ -176,7 +158,7 @@
 	 * Help document: https://www.jiangqie.com/ky
 	 * github: https://github.com/longwenjunjie/jiangqie_kafei
 	 * gitee: https://gitee.com/longwenjunj/jiangqie_kafei
-	 * Copyright © 2020-2021 www.jiangqie.com All rights reserved.
+	 * Copyright © 2020-2022 www.jiangqie.com All rights reserved.
 	 */
 	const Auth = require("@/utils/auth.js");
 	const Api = require("@/utils/api.js");
@@ -247,45 +229,38 @@
 
 		props: {},
 
-		onShow: function(options) {
-			let that = this;
-			let user = Auth.getUser();
-			that.setData({
-				user: user
-			});
+		onShow(options) {
+			this.user = Auth.getUser();
 			Rest.get(Api.JIANGQIE_SETTING_UCENTER).then(res => {
-				let menu = that.default.menu;
-
+				let menu = this.default.menu;
 				if (res.data.menu.length > 0) {
 					menu = res.data.menu;
 				}
 
-				that.setData({
-					setting: {
-						background: res.data.background
-					},
-					menu: menu
-				});
+				this.setting = {
+					background: res.data.background
+				};
+				this.menu = menu;
 			});
 		},
 
-		onShareAppMessage: function() {
+		onShareAppMessage() {
 			return {
-				title: getApp().appName,
+				title: getApp().globalData.appName,
 				path: 'pages/index/index'
 			};
 		},
 
 		// #ifdef MP-WEIXIN
-		onShareTimeline: function() {
+		onShareTimeline() {
 			return {
-				title: getApp().appName
+				title: getApp().globalData.appName
 			};
 		},
 		// #endif
 
 		methods: {
-			handlerPostTrack: function(e) {
+			handlerPostTrack(e) {
 				if (!Auth.getUser()) {
 					uni.navigateTo({
 						url: '/pages/login/login'
@@ -299,18 +274,17 @@
 				});
 			},
 
-			handlerAbout: function(e) {
+			handlerAbout(e) {
 				uni.navigateTo({
 					url: '/pages/about/about'
 				});
 			},
 
-			handlerClearCache: function(e) {
+			handlerClearCache(e) {
 				uni.showModal({
 					title: '提示',
 					content: '清除缓存 需要重新登录',
-
-					success(res) {
+					success: (res) => {
 						if (res.confirm) {
 							uni.clearStorageSync();
 							uni.showToast({
@@ -325,7 +299,7 @@
 				});
 			},
 
-			handlerLinkClick: function(e) {
+			handlerLinkClick(e) {
 				let link = e.currentTarget.dataset.link;
 
 				if (link.startsWith('/pages')) {
@@ -347,7 +321,7 @@
 				}
 			},
 
-			handlerPageClick: function(e) {
+			handlerPageClick(e) {
 				let page_id = e.currentTarget.dataset.page_id;
 				uni.navigateTo({
 					url: '/pages/viewhtml/viewhtml?page_id=' + page_id
@@ -360,7 +334,8 @@
 		}
 	};
 </script>
-<style>
+
+<style lang="scss" scoped>
 	.jiangqie-top-bg {
 		background-repeat: no-repeat;
 		background-size: 750rpx 520rpx;
@@ -428,39 +403,6 @@
 		font-size: 24rpx;
 		font-weight: 300;
 		color: #9B9B9B;
-	}
-
-	.jiangqie-countinfo {
-		display: none;
-		padding: 25rpx;
-		text-align: center;
-		overflow: hidden;
-	}
-
-	.jiangqie-countblock {
-		float: left;
-		width: 24.6%;
-		border-right: 1rpx solid #F3F3F3;
-	}
-
-	.jiangqie-countblock:last-child {
-		border: none;
-	}
-
-	.jiangqie-countnumber {
-		height: 40rpx;
-		line-height: 40rpx;
-		color: #333;
-		font-weight: 500;
-		font-size: 36rpx;
-	}
-
-	.jiangqie-counttype {
-		height: 40rpx;
-		line-height: 40rpx;
-		color: #999;
-		font-weight: 200;
-		font-size: 24rpx;
 	}
 
 	.jiangqie-listbox {

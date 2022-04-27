@@ -9,6 +9,13 @@
 				<image v-if="setting.background && setting.background.length>0" :src="setting.background"
 					mode="aspectFill"></image>
 			</view>
+			
+			<!-- #ifdef MP-WEIXIN -->
+			<template v-if="wx_ad">
+				<ad :unit-id="wx_ad"></ad>
+			</template>
+			<!-- #endif -->
+			
 			<view class="right-box">
 
 				<view v-for="(item, index) in categories" :key="index" class="sortbox" :data-id="item.id"
@@ -38,7 +45,7 @@
 	 * Help document: https://www.jiangqie.com/ky
 	 * github: https://github.com/longwenjunjie/jiangqie_kafei
 	 * gitee: https://gitee.com/longwenjunj/jiangqie_kafei
-	 * Copyright © 2020-2021 www.jiangqie.com All rights reserved.
+	 * Copyright © 2020-2022 www.jiangqie.com All rights reserved.
 	 */
 	const Api = require("@/utils/api.js");
 	const Rest = require("@/utils/rest.js");
@@ -52,6 +59,7 @@
 					description: "",
 					background: ""
 				},
+				wx_ad: undefined,
 				categories: [],
 				default: {
 					title: '分类标题，请在后台修改',
@@ -67,44 +75,58 @@
 
 		props: {},
 
-		onLoad: function(options) {
+		onLoad(options) {
 			//获取配置
-			let that = this;
 			Rest.get(Api.JIANGQIE_SETTING_CATEGORY).then(res => {
-				that.setData({
-					setting: {
-						background: res.data.background,
-						title: res.data.title ? res.data.title : that.default.title,
-						description: res.data.description ? res.data.description : that.default
-							.description
-					}
+				this.setting = {
+					background: res.data.background,
+					title: res.data.title ? res.data.title : this.default.title,
+					description: res.data.description ? res.data.description : this.default.description
+				};
+				this.wx_ad = res.data.wx_ad;
+				
+				// #ifdef MP-BAIDU
+				swan.setPageInfo({
+					title: this.setting.title,
+					description: this.setting.description,
+					keywords: '文章分类',
 				});
-			}); //获取一级分类
+				// #endif
+			}); 
 
+			//获取一级分类
 			Rest.get(Api.JIANGQIE_CATEGORY_INDEX).then(res => {
-				that.setData({
-					categories: res.data
-				});
+				this.categories = res.data
 			});
 		},
+		
+		onShow() {
+			// #ifdef MP-BAIDU
+			swan.setPageInfo({
+				title: this.setting.title,
+				description: this.setting.description,
+				keywords: '文章分类',
+			});
+			// #endif
+		},
 
-		onShareAppMessage: function() {
+		onShareAppMessage() {
 			return {
-				title: getApp().appName,
+				title: getApp().globalData.appName,
 				path: 'pages/index/index'
 			};
 		},
 
 		// #ifdef MP-WEIXIN
-		onShareTimeline: function() {
+		onShareTimeline() {
 			return {
-				title: getApp().appName
+				title: getApp().globalData.appName
 			};
 		},
 		// #endif
 
 		methods: {
-			handlerCategoryClick: function(e) {
+			handlerCategoryClick(e) {
 				let cat_id = e.currentTarget.dataset.id;
 				let cat_name = e.currentTarget.dataset.name;
 				uni.navigateTo({
@@ -114,7 +136,7 @@
 		}
 	};
 </script>
-<style>
+<style lang="scss" scoped>
 	.jiangqie-searchbox {
 		width: 100%;
 		height: 92rpx;

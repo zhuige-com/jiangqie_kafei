@@ -1,4 +1,4 @@
-推荐使用api_uni和client_uni搭配使用。uniapp开发，支持多端。
+推荐使用api_uni和client_uni搭配使用。uniapp+WordPress开发，支持多端。
 
 api和client是之前的老版本，后续可能不再维护。
 

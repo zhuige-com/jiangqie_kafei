@@ -6,7 +6,7 @@
  * Help document: https://www.jiangqie.com/docs/kaiyuan/id1
  * github: https://github.com/longwenjunjie/jiangqie_kafei
  * gitee: https://gitee.com/longwenjunj/jiangqie_kafei
- * Copyright ️© 2020-2021 www.jiangqie.com All rights reserved.
+ * Copyright ️© 2020-2022 www.jiangqie.com All rights reserved.
  */
 
 class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
@@ -153,7 +153,7 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 	 */
 	public function get_last_posts($request)
 	{
-		$offset = $this->param_value($request, 'offset', 0);
+		$offset = (int)($this->param_value($request, 'offset', 0));
 
 		$args = [
 			'posts_per_page' => JiangQie_API::POSTS_PER_PAGE,
@@ -176,7 +176,7 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 	 */
 	public function get_search_posts($request)
 	{
-		$offset = $this->param_value($request, 'offset', 0);
+		$offset = (int)($this->param_value($request, 'offset', 0));
 		$search = $this->param_value($request, 'search', '');
 
 		if (empty($search)) {
@@ -189,7 +189,11 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 
 		global $wpdb;
 		$table_post_search = $wpdb->prefix . 'jiangqie_post_search';
-		$times = $wpdb->get_var($wpdb->prepare("SELECT times FROM `$table_post_search` WHERE search=%s", $search));
+		$times = $wpdb->get_var(
+			$wpdb->prepare(
+				"SELECT times FROM `$table_post_search` WHERE search=%s", $search
+			)
+		);
 		if (empty($times)) {
 			$wpdb->insert($table_post_search, [
 				'search' => $search,
@@ -226,7 +230,11 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 		if (!$home_hot_search) {
 			global $wpdb;
 			$table_post_search = $wpdb->prefix . 'jiangqie_post_search';
-			$result = $wpdb->get_results($wpdb->prepare("SELECT search FROM `$table_post_search` ORDER BY times DESC LIMIT 0, 10"));
+			$result = $wpdb->get_results(
+				$wpdb->prepare(
+					"SELECT search FROM `$table_post_search` ORDER BY times DESC LIMIT %d, %d", 0, 10
+				)
+			);
 			$searchs = array_column($result, 'search');
 		} else {
 			$searchs = explode(',', $home_hot_search);
@@ -240,7 +248,7 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 	 */
 	public function get_post_detail($request)
 	{
-		$post_id = $this->param_value($request, 'post_id');
+		$post_id = (int)($this->param_value($request, 'post_id'));
 		if (!$post_id) {
 			return $this->make_error('缺少参数');
 		}
@@ -295,7 +303,11 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 		//点赞列表
 		global $wpdb;
 		$table_post_like = $wpdb->prefix . 'jiangqie_post_like';
-		$users = $wpdb->get_results("SELECT user_id FROM `$table_post_like` WHERE post_id=$post_id ORDER BY id DESC");
+		$users = $wpdb->get_results(
+			$wpdb->prepare(
+				"SELECT user_id FROM `$table_post_like` WHERE post_id=%d ORDER BY id DESC", $post_id
+			)
+		);
 		$post['like_list'] = [];
 		if (!empty($users)) {
 			foreach ($users as $user) {
@@ -314,16 +326,28 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 		$user_id = $this->check_login($request);
 		if ($user_id) {
 			$table_post_like = $wpdb->prefix . 'jiangqie_post_like';
-			$post_like_id = $wpdb->get_var($wpdb->prepare("SELECT id FROM `$table_post_like` WHERE user_id=%d AND post_id=%d", $user_id, $post_id));
+			$post_like_id = $wpdb->get_var(
+				$wpdb->prepare(
+					"SELECT id FROM `$table_post_like` WHERE user_id=%d AND post_id=%d", $user_id, $post_id
+				)
+			);
 			$user['islike'] = $post_like_id ? 1 : 0;
 
 			$table_post_favorite = $wpdb->prefix . 'jiangqie_post_favorite';
-			$post_favorite_id = $wpdb->get_var($wpdb->prepare("SELECT id FROM `$table_post_favorite` WHERE user_id=%d AND post_id=%d", $user_id, $post_id));
+			$post_favorite_id = $wpdb->get_var(
+				$wpdb->prepare(
+					"SELECT id FROM `$table_post_favorite` WHERE user_id=%d AND post_id=%d", $user_id, $post_id
+				)
+			);
 			$user['isfavorite'] = $post_favorite_id ? 1 : 0;
 
 			//添加文章浏览记录
 			$table_post_view = $wpdb->prefix . 'jiangqie_post_view';
-			$post_view_id = $wpdb->get_var($wpdb->prepare("SELECT id FROM `$table_post_view` WHERE user_id=%d AND post_id=%d", $user_id, $post_id));
+			$post_view_id = $wpdb->get_var(
+				$wpdb->prepare(
+					"SELECT id FROM `$table_post_view` WHERE user_id=%d AND post_id=%d", $user_id, $post_id
+				)
+			);
 			if (!$post_view_id) {
 				$wpdb->insert($table_post_view, [
 					'user_id' => $user_id,
@@ -333,6 +357,33 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 		}
 		$post['user'] = $user;
 
+		//广告设置
+		$wx_ad_top = JiangQie_API::option_value('wx_ad_article_top');
+		if ($wx_ad_top && $wx_ad_top['switch'] && $wx_ad_top['adid']) {
+			$post['wx_ad_top'] = $wx_ad_top['adid'];
+		} else {
+			$post['wx_ad_top'] = false;
+		}
+
+		$wx_ad_bottom = JiangQie_API::option_value('wx_ad_article_bottom');
+		if ($wx_ad_bottom && $wx_ad_bottom['switch'] && $wx_ad_bottom['adid']) {
+			$post['wx_ad_bottom'] = $wx_ad_bottom['adid'];
+		} else {
+			$post['wx_ad_bottom'] = false;
+		}
+
+		//上一篇 下一篇
+		if (JiangQie_API::option_value('switch_pre_next')) {
+			$post['pre_next'] = true;
+			$GLOBALS['post'] = $postObj;
+			$pre_post = get_previous_post();
+			$post['pre'] = $pre_post ? $pre_post->ID : false;
+			$next_post = get_next_post();
+			$post['next'] = $next_post ? $next_post->ID: false;
+		} else {
+			$post['pre_next'] = false;
+		}
+
 		return $this->make_success($post);
 	}
 
@@ -341,18 +392,21 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 	 */
 	public function get_post_page($request)
 	{
-		$page_id = $this->param_value($request, 'page_id');
+		$page_id = (int)($this->param_value($request, 'page_id'));
 		if (!$page_id) {
 			return $this->make_error('缺少参数');
 		}
 
-		$args = [
-			'p' => $page_id
-		];
-
 		global $wpdb;
 		$table_post = $wpdb->prefix . 'posts';
-		$result = $wpdb->get_row("SELECT post_title, post_content FROM `$table_post` WHERE ID=$page_id");
+		$result = $wpdb->get_row(
+			$wpdb->prepare(
+				"SELECT post_title, post_content FROM `$table_post` WHERE ID=%d", $page_id
+			)
+		);
+		if (!$result) {
+			return $this->make_error('未找到文章');
+		}
 		$page['title'] = $result->post_title;
 		$page['content'] = apply_filters('the_content', $result->post_content);
 
@@ -364,8 +418,8 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 	 */
 	public function get_tag_posts($request)
 	{
-		$offset = $this->param_value($request, 'offset', 0);
-		$tag_id = $this->param_value($request, 'tag_id', 0);
+		$offset = (int)($this->param_value($request, 'offset', 0));
+		$tag_id = (int)($this->param_value($request, 'tag_id', 0));
 
 		$args = [
 			'posts_per_page' => JiangQie_API::POSTS_PER_PAGE,
@@ -384,8 +438,8 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 	 */
 	public function get_category_posts($request)
 	{
-		$offset = $this->param_value($request, 'offset', 0);
-		$cat_id = $this->param_value($request, 'cat_id', 0);
+		$offset = (int)($this->param_value($request, 'offset', 0));
+		$cat_id = (int)($this->param_value($request, 'cat_id', 0));
 
 		$args = [
 			'posts_per_page' => JiangQie_API::POSTS_PER_PAGE,
@@ -403,7 +457,7 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 	 */
 	public function get_hot_posts($request)
 	{
-		$offset = $this->param_value($request, 'offset', 0);
+		$offset = (int)($this->param_value($request, 'offset', 0));
 
 		$args = [
 			'posts_per_page' => JiangQie_API::POSTS_PER_PAGE,
@@ -465,7 +519,7 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 			return $this->make_error('缺少参数');
 		}
 
-		$offset = $this->param_value($request, 'offset', 0);
+		$offset = (int)($this->param_value($request, 'offset', 0));
 
 		global $wpdb;
 		if ($track == 'views') {
@@ -487,7 +541,12 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 		}
 		
 		$per_page_count = JiangQie_API::POSTS_PER_PAGE;
-		$post_ids = $wpdb->get_results("SELECT distinct $field FROM `$table_name` WHERE user_id=$user_id ORDER BY $orderby DESC LIMIT $offset, $per_page_count");
+		$post_ids = $wpdb->get_results(
+			$wpdb->prepare(
+				"SELECT distinct $field FROM `$table_name` WHERE user_id=%d ORDER BY $orderby DESC LIMIT %d, %d",
+				$user_id, $offset, $per_page_count
+			)
+		);
 		if (empty($post_ids)) {
 			return $this->make_success([]);
 		}
@@ -556,12 +615,15 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 	 */
 	public function get_wxacode($request)
 	{
-		$post_id = $this->param_value($request, 'post_id', 0);
+		$post_id = (int)($this->param_value($request, 'post_id', 0));
 		if (!$post_id) {
 			return $this->make_error('缺少参数');
 		}
 
 		$post_type = get_post_type($post_id);
+		if ($post_type != 'post') {
+			return $this->make_error('暂不支持');
+		}
 
 		$uploads = wp_upload_dir();
 		$qrcode_path = $uploads['basedir'] . '/jiangqie_wxacode/';
@@ -625,7 +687,7 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 		//同步到媒体库
 		$res = jiangqie_free_import_image2attachment($qrcode);
 		if (!is_wp_error($res)) {
-			$qrcode_link = $uploads['baseurl'] . '/jiangqie_bdacode/' . $res;
+			$qrcode_link = $uploads['baseurl'] . '/jiangqie_wxacode/' . $res;
 		}
 
 		return $this->make_success($qrcode_link);
@@ -636,12 +698,15 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 	 */
 	public function get_bdacode($request)
 	{
-		$post_id = $this->param_value($request, 'post_id', 0);
+		$post_id = (int)($this->param_value($request, 'post_id', 0));
 		if (!$post_id) {
 			return $this->make_error('缺少参数');
 		}
 
 		$post_type = get_post_type($post_id);
+		if ($post_type != 'post') {
+			return $this->make_error('暂不支持');
+		}
 
 		$uploads = wp_upload_dir();
 		$qrcode_path = $uploads['basedir'] . '/jiangqie_bdacode/';
@@ -703,12 +768,15 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 	 */
 	public function get_qqacode($request)
 	{
-		$post_id = $this->param_value($request, 'post_id', 0);
+		$post_id = (int)($this->param_value($request, 'post_id', 0));
 		if (!$post_id) {
 			return $this->make_error('缺少参数');
 		}
 
 		$post_type = get_post_type($post_id);
+		if ($post_type != 'post') {
+			return $this->make_error('暂不支持');
+		}
 
 		$uploads = wp_upload_dir();
 		$qrcode_path = $uploads['basedir'] . '/jiangqie_qqacode/';

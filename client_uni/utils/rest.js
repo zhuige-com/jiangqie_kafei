@@ -4,7 +4,7 @@
  * Help document: https://www.jiangqie.com/ky
  * github: https://github.com/longwenjunjie/jiangqie_kafei
  * gitee: https://gitee.com/longwenjunj/jiangqie_kafei
- * Copyright © 2020-2021 www.jiangqie.com All rights reserved.
+ * Copyright © 2020-2022 www.jiangqie.com All rights reserved.
  */
 const Auth = require("./auth.js");
 
@@ -38,7 +38,7 @@ function request(url, data = {}, method = "GET") {
 			url: url,
 			data: data,
 			method: method,
-			success (res) {
+			success: (res) => {
 				if (res.statusCode != 200) {
 					reject(res.errMsg);
 					return;
@@ -56,10 +56,10 @@ function request(url, data = {}, method = "GET") {
 					return;
 				}
 			},
-			fail (err) {
+			fail: (err) => {
 				reject(err);
 			},
-			complete() {
+			complete: () => {
 				uni.hideLoading();
 			}
 		});

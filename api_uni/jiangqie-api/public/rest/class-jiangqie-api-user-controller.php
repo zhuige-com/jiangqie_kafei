@@ -6,7 +6,7 @@
  * Help document: https://www.jiangqie.com/docs/kaiyuan/id1
  * github: https://github.com/longwenjunjie/jiangqie_kafei
  * gitee: https://gitee.com/longwenjunj/jiangqie_kafei
- * Copyright ️© 2020-2021 www.jiangqie.com All rights reserved.
+ * Copyright ️© 2020-2022 www.jiangqie.com All rights reserved.
  */
 
 class JiangQie_API_User_Controller extends JiangQie_API_Base_Controller
@@ -488,16 +488,32 @@ class JiangQie_API_User_Controller extends JiangQie_API_Base_Controller
 		global $wpdb;
 
 		$table_post_view = $wpdb->prefix . 'jiangqie_post_view';
-		$view_count = $wpdb->get_var("SELECT COUNT(id) FROM `$table_post_view` WHERE user_id=$user_id");
+		$view_count = $wpdb->get_var(
+			$wpdb->prepare(
+				"SELECT COUNT(id) FROM `$table_post_view` WHERE user_id=%d", $user_id
+			)
+		);
 
 		$table_post_like = $wpdb->prefix . 'jiangqie_post_like';
-		$like_count = $wpdb->get_var("SELECT COUNT(id) FROM `$table_post_like` WHERE user_id=$user_id");
+		$like_count = $wpdb->get_var(
+			$wpdb->prepare(
+				"SELECT COUNT(id) FROM `$table_post_like` WHERE user_id=%d", $user_id
+			)
+		);
 
 		$table_post_favorite = $wpdb->prefix . 'jiangqie_post_favorite';
-		$favorite_count = $wpdb->get_var("SELECT COUNT(id) FROM `$table_post_favorite` WHERE user_id=$user_id");
+		$favorite_count = $wpdb->get_var(
+			$wpdb->prepare(
+				"SELECT COUNT(id) FROM `$table_post_favorite` WHERE user_id=%d", $user_id
+			)
+		);
 
 		$table_comments = $wpdb->prefix . 'comments';
-		$comment_count = $wpdb->get_var("SELECT COUNT(distinct comment_post_ID) FROM `$table_comments` WHERE user_id=$user_id");
+		$comment_count = $wpdb->get_var(
+			$wpdb->prepare(
+				"SELECT COUNT(distinct comment_post_ID) FROM `$table_comments` WHERE user_id=%d", $user_id
+			)
+		);
 
 		return $this->make_success([
 			'view_count' => $view_count,
@@ -512,7 +528,7 @@ class JiangQie_API_User_Controller extends JiangQie_API_Base_Controller
 	 */
 	public function user_like($request)
 	{
-		$post_id = $this->param_value($request, 'post_id', 0);
+		$post_id = (int)($this->param_value($request, 'post_id', 0));
 		if (empty($post_id)) {
 			return $this->make_error('缺少参数');
 		}
@@ -524,7 +540,11 @@ class JiangQie_API_User_Controller extends JiangQie_API_Base_Controller
 
 		global $wpdb;
 		$table_post_like = $wpdb->prefix . 'jiangqie_post_like';
-		$post_like_id = $wpdb->get_var($wpdb->prepare("SELECT id FROM `$table_post_like` WHERE user_id=%d AND post_id=%d", $user_id, $post_id));
+		$post_like_id = $wpdb->get_var(
+			$wpdb->prepare(
+				"SELECT id FROM `$table_post_like` WHERE user_id=%d AND post_id=%d", $user_id, $post_id
+			)
+		);
 
 		$post_likes = (int) get_post_meta($post_id, "likes", true);
 
@@ -551,7 +571,7 @@ class JiangQie_API_User_Controller extends JiangQie_API_Base_Controller
 	 */
 	public function user_favorite($request)
 	{
-		$post_id = $this->param_value($request, 'post_id', 0);
+		$post_id = (int)($this->param_value($request, 'post_id', 0));
 		if (empty($post_id)) {
 			return $this->make_error('缺少参数');
 		}
@@ -563,7 +583,11 @@ class JiangQie_API_User_Controller extends JiangQie_API_Base_Controller
 
 		global $wpdb;
 		$table_post_favorite = $wpdb->prefix . 'jiangqie_post_favorite';
-		$post_favorite_id = $wpdb->get_var($wpdb->prepare("SELECT id FROM `$table_post_favorite` WHERE user_id=%d AND post_id=%d", $user_id, $post_id));
+		$post_favorite_id = $wpdb->get_var(
+			$wpdb->prepare(
+				"SELECT id FROM `$table_post_favorite` WHERE user_id=%d AND post_id=%d", $user_id, $post_id
+			)
+		);
 
 		$post_favorites = (int) get_post_meta($post_id, "favorites", true);
 

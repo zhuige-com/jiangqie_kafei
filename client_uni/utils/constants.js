@@ -4,10 +4,10 @@
  * Help document: https://www.jiangqie.com/ky
  * github: https://github.com/longwenjunjie/jiangqie_kafei
  * gitee: https://gitee.com/longwenjunj/jiangqie_kafei
- * Copyright © 2020-2021 www.jiangqie.com All rights reserved.
+ * Copyright © 2020-2022 www.jiangqie.com All rights reserved.
  */
 module.exports = {
-	JQ_VERSION: '1.5.6',
+	JQ_VERSION: '1.8.2',
 	//分页 每页 数量 需要与服务器一致
 	JQ_PER_PAGE_COUNT: 10,
 	//搜索词 做多缓存个数

@@ -6,7 +6,7 @@
  * Help document: https://www.jiangqie.com/docs/kaiyuan/id1
  * github: https://github.com/longwenjunjie/jiangqie_kafei
  * gitee: https://gitee.com/longwenjunj/jiangqie_kafei
- * Copyright ️© 2020-2021 www.jiangqie.com All rights reserved.
+ * Copyright ️© 2020-2022 www.jiangqie.com All rights reserved.
  */
 
 class JiangQie_API_Comment_Controller extends JiangQie_API_Base_Controller
@@ -93,12 +93,12 @@ class JiangQie_API_Comment_Controller extends JiangQie_API_Base_Controller
 	 */
 	public function comment_index($request)
 	{
-		$post_id = $this->param_value($request, 'post_id', 0);
+		$post_id = (int)($this->param_value($request, 'post_id', 0));
 		if (empty($post_id)) {
 			return $this->make_error('缺少参数');
 		}
 
-		$offset = $this->param_value($request, 'offset', 0);
+		$offset = (int)($this->param_value($request, 'offset', 0));
 
 		$my_user_id = $this->check_login($request);
 
@@ -125,8 +125,8 @@ class JiangQie_API_Comment_Controller extends JiangQie_API_Base_Controller
 			return $this->make_error('评论功能未开启');
 		}
 
-		$post_id = $this->param_value($request, 'post_id', 0);
-		$parent_id = $this->param_value($request, 'parent_id', 0);
+		$post_id = (int)($this->param_value($request, 'post_id', 0));
+		$parent_id = (int)($this->param_value($request, 'parent_id', 0));
 		$content = $this->param_value($request, 'content', '');
 		if (empty($post_id) || empty($content)) {
 			return $this->make_error('缺少参数');
@@ -158,7 +158,7 @@ class JiangQie_API_Comment_Controller extends JiangQie_API_Base_Controller
 			return $this->make_error('还没有登陆', -1);
 		}
 
-		$comment_id = $this->param_value($request, 'comment_id', 0);
+		$comment_id = (int)($this->param_value($request, 'comment_id', 0));
 		if (empty($comment_id)) {
 			return $this->make_error('缺少参数');
 		}
@@ -179,19 +179,21 @@ class JiangQie_API_Comment_Controller extends JiangQie_API_Base_Controller
 		$per_page_count = JiangQie_API::POSTS_PER_PAGE;
 		$table_comments = $wpdb->prefix . 'comments';
 		$fields = 'comment_ID, comment_author, comment_date, comment_content, comment_approved, user_id';
-		$where = "comment_post_ID=$post_id AND comment_parent=$parent";
+		$where = $wpdb->prepare("comment_post_ID=%d AND comment_parent=%d", $post_id, $parent);
 		if ($my_user_id) {
-			$where = $where . " AND (comment_approved=1 OR user_id=$my_user_id)";
+			$where = $where . $wpdb->prepare(" AND (comment_approved=1 OR user_id=%d)", $my_user_id);
 		} else {
 			$where = $where . " AND comment_approved=1";
 		}
 
 		$limit = '';
 		if ($offset !== null) {
-			$limit = "LIMIT $offset, $per_page_count";
+			$limit = $wpdb->prepare("LIMIT %d, %d", $offset, $per_page_count);
 		}
 
-		$result = $wpdb->get_results("SELECT $fields FROM `$table_comments` WHERE $where ORDER BY comment_ID DESC $limit");
+		$result = $wpdb->get_results(
+			"SELECT $fields FROM `$table_comments` WHERE $where ORDER BY comment_ID DESC $limit"
+		);
 		$comments = [];
 		foreach ($result as $comment) {
 			$name = get_user_meta($comment->user_id, 'nickname', true);

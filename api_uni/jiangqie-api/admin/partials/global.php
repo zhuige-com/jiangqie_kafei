@@ -6,14 +6,14 @@
  * Help document: https://www.jiangqie.com/docs/kaiyuan/id1
  * github: https://github.com/longwenjunjie/jiangqie_kafei
  * gitee: https://gitee.com/longwenjunj/jiangqie_kafei
- * Copyright ️© 2020-2021 www.jiangqie.com All rights reserved.
+ * Copyright ️© 2020-2022 www.jiangqie.com All rights reserved.
  */
 
 // 基础设置
 CSF::createSection($prefix, array(
     'id'    => 'basic',
     'title' => '基础设置',
-    'icon'  => 'fas fa-plus-circle',
+    'icon'  => 'fas fa-cubes',
     'fields' => array(
 
         array(
@@ -21,6 +21,20 @@ CSF::createSection($prefix, array(
             'type'        => 'text',
             'title'       => '标题',
             'placeholder' => '标题'
+        ),
+
+        array(
+            'id'          => 'description',
+            'type'        => 'text',
+            'title'       => '描述',
+            'placeholder' => '描述'
+        ),
+
+        array(
+            'id'          => 'keywords',
+            'type'        => 'text',
+            'title'       => '关键字',
+            'placeholder' => '关键字，英文逗号分隔'
         ),
 
         array(
@@ -84,21 +98,21 @@ CSF::createSection($prefix, array(
             'default' => '1'
         ),
 
-        array(
-            'id'    => 'switch_comment',
-            'type'  => 'switcher',
-            'title' => '评论',
-            'subtitle' => '是否开启评论功能?',
-            'default' => '1'
-        ),
+        // array(
+        //     'id'    => 'switch_comment',
+        //     'type'  => 'switcher',
+        //     'title' => '评论',
+        //     'subtitle' => '是否开启评论功能?',
+        //     'default' => '1'
+        // ),
 
-        array(
-            'id'    => 'switch_comment_verify',
-            'type'  => 'switcher',
-            'title' => '评论审核',
-            'subtitle' => '评论是否需要审核?',
-            'default' => '1'
-        ),
+        // array(
+        //     'id'    => 'switch_comment_verify',
+        //     'type'  => 'switcher',
+        //     'title' => '评论审核',
+        //     'subtitle' => '评论是否需要审核?',
+        //     'default' => '1'
+        // ),
 
         array(
             'id'      => 'default_thumbnail',
