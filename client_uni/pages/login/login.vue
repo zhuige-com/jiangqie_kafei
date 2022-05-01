@@ -96,29 +96,10 @@
 		onLoad(options) {
 			this.title = getApp().globalData.appName;
 
-			// #ifdef MP-WEIXIN || MP-QQ
+			// #ifdef MP-WEIXIN || MP-QQ || MP-BAIDU
 			uni.login({
 				success: (res) => {
 					this.code = res.code;
-				}
-			});
-			// #endif
-
-			// #ifdef MP-BAIDU
-			swan.login({
-				success: res => {
-					swan.getLoginCode({
-						success: (res2) => {
-							this.code = res2.code;
-						}
-					})
-				},
-				fail: err => {
-					console.log(err)
-					swan.showToast({
-						title: '登录失败',
-						icon: 'none'
-					});
 				}
 			});
 			// #endif
