@@ -1,34 +1,29 @@
 <template>
-	<view>
-		<view class="container">
-			<view class="jiangqie-flex">
-				<view class="jiangqie-cube-box" @tap="tipClick">
-					<view class="jiangqie-cube jiangqie-cube-1">❤</view>
-					<view class="jiangqie-cube jiangqie-cube-2">V{{version}}</view>
-					<view class="jiangqie-cube jiangqie-cube-3">酱茄</view>
-					<view class="jiangqie-cube jiangqie-cube-4">开源</view>
-					<view class="jiangqie-cube jiangqie-cube-5">小程序</view>
-					<view class="jiangqie-cube jiangqie-cube-6">免费</view>
-				</view>
-			</view>
-			<view class="jiangqie-content-box">
-				<view class="jiangqie-content">酱茄小程序开源版，基于WordPress开源程序和WordPress REST
-					API开发，实现WordPress网站数据与小程序数据同步共享，通过简单的配置就能搭建自己的小程序。项目免费开源，源码可在
-					<text class="jiangqie-content-email" @tap="copy"
-						data-text="https://github.com/longwenjunjie/jiangqie_kafei">GitHub</text>上下载，欢迎Watch & Star ★。
-				</view>
-				<view class="jiangqie-content">项目可能存在缺陷或者bug，如果您在使用过程中发现问题或者有更好的建议，可反馈给我们。</view>
-				<view class="jiangqie-content jiangqie-content-email" @tap="copy" data-text="www.zhuige.com">
-					技术支持：www.zhuige.com</view>
-				<view class="jiangqie-footer">
-					<image src="/static/images/qrcode.jpg" class="jiangqie-applets" mode="widthFix"></image>
-					<view class="jiangqie-footer-text">扫描二维码，体验酱茄开源小程序！</view>
-				</view>
+	<view class="container">
+		<view class="jiangqie-flex">
+			<view class="jiangqie-cube-box" @tap="tipClick">
+				<view class="jiangqie-cube jiangqie-cube-1">❤</view>
+				<view class="jiangqie-cube jiangqie-cube-2">V{{version}}</view>
+				<view class="jiangqie-cube jiangqie-cube-3">酱茄</view>
+				<view class="jiangqie-cube jiangqie-cube-4">开源</view>
+				<view class="jiangqie-cube jiangqie-cube-5">小程序</view>
+				<view class="jiangqie-cube jiangqie-cube-6">免费</view>
 			</view>
 		</view>
-		<!--加载框 start-->
-		<jiangqie-loading v-if="loading"></jiangqie-loading>
-		<!--加载框 end-->
+		<view class="jiangqie-content-box">
+			<view class="jiangqie-content">酱茄小程序开源版，基于WordPress开源程序和WordPress REST
+				API开发，实现WordPress网站数据与小程序数据同步共享，通过简单的配置就能搭建自己的小程序。项目免费开源，源码可在
+				<text class="jiangqie-content-email" @tap="copy"
+					data-text="https://github.com/longwenjunjie/jiangqie_kafei">GitHub</text>上下载，欢迎Watch & Star ★。
+			</view>
+			<view class="jiangqie-content">项目可能存在缺陷或者bug，如果您在使用过程中发现问题或者有更好的建议，可反馈给我们。</view>
+			<view class="jiangqie-content jiangqie-content-email" @tap="copy" data-text="www.zhuige.com">
+				技术支持：www.zhuige.com</view>
+			<view class="jiangqie-footer">
+				<image src="/static/images/qrcode.jpg" class="jiangqie-applets" mode="widthFix"></image>
+				<view class="jiangqie-footer-text">扫描二维码，体验酱茄开源小程序！</view>
+			</view>
+		</view>
 	</view>
 </template>
 
@@ -42,21 +37,13 @@
 	 * Copyright © 2020-2022 www.jiangqie.com All rights reserved.
 	 */
 	const Constant = require("@/utils/constants.js");
-	import JiangqieLoading from "@/components/loading/loading";
 
 	export default {
 		data() {
 			return {
 				version: Constant.JQ_VERSION,
-				loading: false,
 			};
 		},
-
-		components: {
-			JiangqieLoading
-		},
-
-		props: {},
 
 		onLoad(options) {},
 

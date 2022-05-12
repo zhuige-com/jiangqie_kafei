@@ -1,63 +1,58 @@
 <template>
-	<view>
-		<view :style="background?'background-image: url(' + background + ');':''"
-			style="background: no-repeat;background-size: 100% auto;">
-			<view class="jiangqie-login">
-				<view class="jiangqie-app-info">
-					<!--替换为小程序logo-->
-					<image src="/static/images/default_avatar.jpg" mode="aspectFill"></image>
-					<view class="jiangqie-app-name">{{title}}</view>
-					<view class="jiangqie-app-slogan">授权登录可查看更多内容</view>
-				</view>
-				<view class="jiangqie-login-btn">
-					<button @tap.stop="handlerCancelClick" class="jiangqie-login-btnl">取消</button>
+	<view :style="background?'background-image: url(' + background + ');':''"
+		style="background: no-repeat;background-size: 100% auto;">
+		<view class="jiangqie-login">
+			<view class="jiangqie-app-info">
+				<!--替换为小程序logo-->
+				<image src="/static/images/default_avatar.jpg" mode="aspectFill"></image>
+				<view class="jiangqie-app-name">{{title}}</view>
+				<view class="jiangqie-app-slogan">授权登录可查看更多内容</view>
+			</view>
+			<view class="jiangqie-login-btn">
+				<button @tap.stop="handlerCancelClick" class="jiangqie-login-btnl">取消</button>
 
-					<!-- #ifdef MP-WEIXIN -->
-					<button v-if="code" @tap.stop="clickLogin" class="jiangqie-login-btnr">确定</button>
-					<template v-else>
-						<button class="jiangqie-login-btnl">确定</button>
-						<view class="jiangqie-no-login-tip">
-							<view>请在后台配置微信Appid和微信AppSecret</view>
-						</view>
-					</template>
-					<!-- #endif -->
-
-					<!-- #ifdef MP-QQ -->
-					<button v-if="code" open-type="getUserInfo" class="jiangqie-login-btnr"
-						@getuserinfo="getuserinfo">确定</button>
-					<template v-else>
-						<button class="jiangqie-login-btnl">确定</button>
-						<view class="jiangqie-no-login-tip">
-							<view>请在后台配置QQAppid和QQAppSecret</view>
-						</view>
-					</template>
-					<!-- #endif -->
-
-					<!-- #ifdef MP-BAIDU -->
-					<button v-if="code" open-type="getUserInfo" class="jiangqie-login-btnr"
-						@getuserinfo="getuserinfo">确定</button>
-					<template v-else>
-						<button class="jiangqie-login-btnl">确定</button>
-						<view class="jiangqie-no-login-tip">
-							<view>请在后台配置百度AppKey和百度AppSecret</view>
-						</view>
-					</template>
-					<!-- #endif -->
-
-					<!-- #ifdef H5 -->
-					<button @tap.stop="clickLoginTest" class="jiangqie-login-btnr">确定</button>
+				<!-- #ifdef MP-WEIXIN -->
+				<button v-if="code" @tap.stop="clickLogin" class="jiangqie-login-btnr">确定</button>
+				<template v-else>
+					<button class="jiangqie-login-btnl">确定</button>
 					<view class="jiangqie-no-login-tip">
-						<view>微信/百度/QQ已接入</view>
-						<view>当前平台尚未接入账号体系</view>
-						<view>登录仅为演示</view>
+						<view>请在后台配置微信Appid和微信AppSecret</view>
 					</view>
-					<!-- #endif -->
+				</template>
+				<!-- #endif -->
+
+				<!-- #ifdef MP-QQ -->
+				<button v-if="code" open-type="getUserInfo" class="jiangqie-login-btnr"
+					@getuserinfo="getuserinfo">确定</button>
+				<template v-else>
+					<button class="jiangqie-login-btnl">确定</button>
+					<view class="jiangqie-no-login-tip">
+						<view>请在后台配置QQAppid和QQAppSecret</view>
+					</view>
+				</template>
+				<!-- #endif -->
+
+				<!-- #ifdef MP-BAIDU -->
+				<button v-if="code" open-type="getUserInfo" class="jiangqie-login-btnr"
+					@getuserinfo="getuserinfo">确定</button>
+				<template v-else>
+					<button class="jiangqie-login-btnl">确定</button>
+					<view class="jiangqie-no-login-tip">
+						<view>请在后台配置百度AppKey和百度AppSecret</view>
+					</view>
+				</template>
+				<!-- #endif -->
+
+				<!-- #ifdef H5 -->
+				<button @tap.stop="clickLoginTest" class="jiangqie-login-btnr">确定</button>
+				<view class="jiangqie-no-login-tip">
+					<view>微信/百度/QQ已接入</view>
+					<view>当前平台尚未接入账号体系</view>
+					<view>登录仅为演示</view>
 				</view>
+				<!-- #endif -->
 			</view>
 		</view>
-		<!--加载框 start-->
-		<jiangqie-loading v-if="loading"></jiangqie-loading>
-		<!--加载框 end-->
 	</view>
 </template>
 
@@ -74,24 +69,16 @@
 	const Auth = require("@/utils/auth.js");
 	const Api = require("@/utils/api.js");
 	const Rest = require("@/utils/rest.js");
-	import JiangqieLoading from "@/components/loading/loading";
 
 	export default {
 		data() {
 			return {
 				background: '',
 				title: '',
-				loading: false,
 
 				code: undefined,
 			};
 		},
-
-		components: {
-			JiangqieLoading
-		},
-
-		props: {},
 
 		onLoad(options) {
 			this.title = getApp().globalData.appName;

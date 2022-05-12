@@ -1,224 +1,219 @@
 <template>
-	<view>
-		<view class="jiangqie-top-bg" :style="background?'background-image: url(' + background + ');':''">
+	<view class="jiangqie-top-bg" :style="background?'background-image: url(' + background + ');':''">
 
-			<uni-nav-bar :fixed="true" :statusBar="true" backgroundColor="#E0301F">
-				<template slot="left">
-					<view class="jiangqie-logo">
-						<image :src="logo"></image>
-					</view>
-				</template>
-				<view class="jiangqie-btn-search" @click="handlerSearchClick">
-					<uni-icons class="input-uni-icon" type="search" size="18" color="#f8b8b8" />
-					<text>点我搜索</text>
+		<uni-nav-bar :fixed="true" :statusBar="true" backgroundColor="#E0301F">
+			<template slot="left">
+				<view class="jiangqie-logo">
+					<image :src="logo"></image>
 				</view>
-			</uni-nav-bar>
-
-			<scroll-view scroll-x scroll-with-animation class="tab-view" :scroll-left="scrollLeft">
-				<view v-for="(item, index) in topNav" :key="index"
-					:class="'tab-bar-item ' + (currentTab==index ? 'active' : '')" :data-current="index"
-					@tap.stop="swichNav">
-					<text class="tab-bar-title">{{item.name}}</text>
-				</view>
-				<view class="tab-bar-item">
-					<text class="tab-bar-title">.</text>
-				</view>
-			</scroll-view>
-
-			<view class="tab-more" @tap.stop="handlerTabMoreClick">
-				<image src="/static/images/tabmorered.png" mode="aspectFill"></image>
+			</template>
+			<view class="jiangqie-btn-search" @click="handlerSearchClick">
+				<uni-icons class="input-uni-icon" type="search" size="18" color="#f8b8b8" />
+				<text>点我搜索</text>
 			</view>
+		</uni-nav-bar>
 
-			<view class="tab-content" style="padding-top: 120rpx;">
-				<template v-if="currentTab==0">
-
-					<!--banner-->
-					<view v-if="slide && slide.length>0" class="jiangqie-banner-box">
-						<swiper indicator-dots="true" autoplay="true" interval="5000" duration="150"
-							class="jiangqie-banner-swiper" :circular="true" previous-margin="15rpx" next-margin="15rpx"
-							@change="handlerSlideChange">
-							<swiper-item v-for="(item, index) in slide" :key="index" class="jiangqie-banner-item"
-								:data-id="item.id" @tap.stop="handlerArticleClick">
-								<image :src="item.thumbnail"
-									:class="'jiangqie-slide-image ' + ((current==index || (current==undefined && index==0))?'':'jiangqie-banner-scale')"
-									mode="aspectFill"></image>
-							</swiper-item>
-						</swiper>
-					</view>
-					<!--banner-->
-
-					<view class="container">
-						<!--图标模块 可单独设置背景色、背景图、图标图-->
-						<view v-if="iconNav && iconNav.length>0" class="jiangqie-news-icon">
-							<view v-for="(item, index) in iconNav" :key="index" class="jiangqie-news-iconbox"
-								:data-link="item.link" @tap.stop="handlerIconNavClick">
-								<view class="jiangqie-news-iconbg">
-									<image class="jiangqie-news-iconimg" :src="item.icon"></image>
-								</view>
-								<text>{{item.title}}</text>
-							</view>
-						</view>
-
-						<!--推荐模块-->
-						<view v-if="actives" class="jiangqie-news-view">
-							<view class="jiangqie-news-lightbox jiangqie-news-lightbox-main"
-								:data-link="actives.left.link" @tap.stop="handlerActiveClick">
-								<image class="jiangqie-news-lightimg" :src="actives.left.image" mode="aspectFill">
-								</image>
-								<view class="jiangqie-news-lighttext">
-									<text class="jiangqie-news-lihgttitle">{{actives.left.title}}</text>
-								</view>
-							</view>
-							<view class="jiangqie-news-lightbox jiangqie-news-lightbox-side"
-								:data-link="actives.right_top.link" @tap.stop="handlerActiveClick">
-								<image class="jiangqie-news-lightimg" :src="actives.right_top.image" mode="aspectFill">
-								</image>
-								<view class="jiangqie-news-lighttext">
-									<text class="jiangqie-news-lihgttitle">{{actives.right_top.title}}</text>
-								</view>
-							</view>
-							<view class="jiangqie-news-lightbox jiangqie-news-lightbox-side2"
-								:data-link="actives.right_down.link" @tap.stop="handlerActiveClick">
-								<image class="jiangqie-news-lightimg" :src="actives.right_down.image" mode="aspectFill">
-								</image>
-								<view class="jiangqie-news-lighttext">
-									<text class="jiangqie-news-lihgttitle">{{actives.right_down.title}}</text>
-								</view>
-							</view>
-						</view>
-
-						<!--新闻列表——热门-->
-						<view v-if="hot && hot.length>0" class="jiangqie-news-view jiangqie-news-hot">
-							<view class="jiangqie-news-type">
-								热门推荐<text>滑动查看</text>
-							</view>
-							<scroll-view class="jiangqie-news-scroll-x-box" scroll-x="true">
-								<view v-for="(item, index) in hot" :key="index" class="jiangqie-hot-scroll-box"
-									:data-id="item.id" @tap.stop="handlerArticleClick">
-									<image :src="item.thumbnail" mode="aspectFill" class="jiangqie-hot-scroll-image">
-									</image>
-									<view class="jiangqie-hot-scroll-title">{{item.title}}</view>
-								</view>
-							</scroll-view>
-						</view>
-
-						<!--新闻列表——常规-->
-						<view class="jiangqie-news-view">
-							<view v-if="postsLast && postsLast.length>0" class="jiangqie-news-type">
-								最新文章
-							</view>
-							<template v-for="(item, index) in postsLast">
-								<view v-if="(listMode==1 && false) || (listMode==2) || (listMode==3 && index%5==4)"
-									:key="index" class="jiangqie-news-block image-wide" :data-id="item.id"
-									@tap.stop="handlerArticleClick">
-									<image :src="item.thumbnail" mode="aspectFill" class="jiangqie-news-image"></image>
-									<view class="jiangqie-news-text">
-										<view
-											:class="'jiangqie-news-title ' + (item.excerpt?'':'jiangqie-news-no-excerpt')">
-											<text v-if="item.stick==1">置顶</text>
-											{{item.title}}
-										</view>
-										<view v-if="item.excerpt" class="jiangqie-news-describe">{{item.excerpt}}</view>
-										<view class="jiangqie-news-info">
-											<view class="jiangqie-news-cmt">
-												<image src="/static/images/ctm2.png" mode="aspectFill"></image>
-												{{item.views}}
-											</view>
-											<text v-for="(item, index2) in item.tags" :key="index2"
-												class="jiangqie-news-tag">{{item.name}}</text>
-											<text class="jiangqie-news-time">{{item.time}}</text>
-										</view>
-									</view>
-									<!-- <image wx:if="{{item.stick==1}}" src="../../images/set_top.png" mode="aspectFill" class="jiangqie-news-stick-image"></image> -->
-								</view>
-								<view v-else :key="index" class="jiangqie-news-block" :data-id="item.id"
-									@tap.stop="handlerArticleClick">
-									<image :src="item.thumbnail" mode="aspectFill" class="jiangqie-news-image"></image>
-									<view class="jiangqie-news-text">
-										<view
-											:class="'jiangqie-news-title ' + (item.excerpt?'':'jiangqie-news-no-excerpt')">
-											<text v-if="item.stick==1">置顶</text>
-											{{item.title}}
-										</view>
-										<view v-if="item.excerpt" class="jiangqie-news-describe">{{item.excerpt}}</view>
-										<view class="jiangqie-news-info">
-											<view class="jiangqie-news-cmt">
-												<image src="/static/images/ctm2.png" mode="aspectFill"></image>
-												{{item.views}}
-											</view>
-											<text v-for="(item, index2) in item.tags" :key="index2"
-												class="jiangqie-news-tag">{{item.name}}</text>
-											<text class="jiangqie-news-time">{{item.time}}</text>
-										</view>
-									</view>
-								</view>
-							</template>
-						</view>
-					</view>
-					<!--加载loadding-->
-					<jiangqie-loadmore :visible="loaddingLast"></jiangqie-loadmore>
-					<jiangqie-nomore :visible="!pullUpOnLast"></jiangqie-nomore>
-					<!--加载loadding-->
-				</template>
-
-				<template v-else>
-					<view class="container">
-						<view class="jiangqie-news-view">
-							<template v-for="(item, index) in posts">
-								<view v-if="(listMode==1 && false) || (listMode==2) || (listMode==3 && index%5==4)"
-									:key="index" class="jiangqie-news-block image-wide" :data-id="item.id"
-									@tap.stop="handlerArticleClick">
-									<image :src="item.thumbnail" mode="aspectFill" class="jiangqie-news-image"></image>
-									<view class="jiangqie-news-text">
-										<view
-											:class="'jiangqie-news-title ' + (item.excerpt?'':'jiangqie-news-no-excerpt')">
-											{{item.title}}
-										</view>
-										<view v-if="item.excerpt" class="jiangqie-news-describe">{{item.excerpt}}</view>
-										<view class="jiangqie-news-info">
-											<view class="jiangqie-news-cmt">
-												<image src="/static/images/ctm2.png" mode="aspectFill"></image>
-												{{item.views}}
-											</view>
-											<text v-for="(item, index2) in item.tags" :key="index2"
-												class="jiangqie-news-tag">{{item.name}}</text>
-											<text class="jiangqie-news-time">{{item.time}}</text>
-										</view>
-									</view>
-								</view>
-								<view v-else :key="index" class="jiangqie-news-block" :data-id="item.id"
-									@tap.stop="handlerArticleClick">
-									<image :src="item.thumbnail" mode="aspectFill" class="jiangqie-news-image"></image>
-									<view class="jiangqie-news-text">
-										<view
-											:class="'jiangqie-news-title ' + (item.excerpt?'':'jiangqie-news-no-excerpt')">
-											{{item.title}}
-										</view>
-										<view v-if="item.excerpt" class="jiangqie-news-describe">{{item.excerpt}}</view>
-										<view class="jiangqie-news-info">
-											<view class="jiangqie-news-cmt">
-												<image src="/static/images/ctm2.png" mode="aspectFill"></image>
-												{{item.views}}
-											</view>
-											<text v-for="(item, index2) in item.tags" :key="index2"
-												class="jiangqie-news-tag">{{item.name}}</text>
-											<text class="jiangqie-news-time">{{item.time}}</text>
-										</view>
-									</view>
-								</view>
-							</template>
-						</view>
-					</view>
-					<!--加载loadding-->
-					<jiangqie-loadmore :visible="loadding"></jiangqie-loadmore>
-					<jiangqie-nomore :visible="!pullUpOn"></jiangqie-nomore>
-					<!--加载loadding-->
-				</template>
+		<scroll-view scroll-x scroll-with-animation class="tab-view" :scroll-left="scrollLeft">
+			<view v-for="(item, index) in topNav" :key="index"
+				:class="'tab-bar-item ' + (currentTab==index ? 'active' : '')" :data-current="index"
+				@tap.stop="swichNav">
+				<text class="tab-bar-title">{{item.name}}</text>
 			</view>
+			<view class="tab-bar-item">
+				<text class="tab-bar-title">.</text>
+			</view>
+		</scroll-view>
+
+		<view class="tab-more" @tap.stop="handlerTabMoreClick">
+			<image src="/static/images/tabmorered.png" mode="aspectFill"></image>
 		</view>
-		<!--加载框 start-->
-		<jiangqie-loading v-if="loading"></jiangqie-loading>
-		<!--加载框 end-->
+
+		<view class="tab-content" style="padding-top: 120rpx;">
+			<template v-if="currentTab==0">
+
+				<!--banner-->
+				<view v-if="slide && slide.length>0" class="jiangqie-banner-box">
+					<swiper indicator-dots="true" autoplay="true" interval="5000" duration="150"
+						class="jiangqie-banner-swiper" :circular="true" previous-margin="15rpx" next-margin="15rpx"
+						@change="handlerSlideChange">
+						<swiper-item v-for="(item, index) in slide" :key="index" class="jiangqie-banner-item"
+							:data-id="item.id" @tap.stop="handlerArticleClick">
+							<image :src="item.thumbnail"
+								:class="'jiangqie-slide-image ' + ((current==index || (current==undefined && index==0))?'':'jiangqie-banner-scale')"
+								mode="aspectFill"></image>
+						</swiper-item>
+					</swiper>
+				</view>
+				<!--banner-->
+
+				<view class="container">
+					<!--图标模块 可单独设置背景色、背景图、图标图-->
+					<view v-if="iconNav && iconNav.length>0" class="jiangqie-news-icon">
+						<view v-for="(item, index) in iconNav" :key="index" class="jiangqie-news-iconbox"
+							:data-link="item.link" @tap.stop="handlerIconNavClick">
+							<view class="jiangqie-news-iconbg">
+								<image class="jiangqie-news-iconimg" :src="item.icon"></image>
+							</view>
+							<text>{{item.title}}</text>
+						</view>
+					</view>
+
+					<!--推荐模块-->
+					<view v-if="actives" class="jiangqie-news-view">
+						<view class="jiangqie-news-lightbox jiangqie-news-lightbox-main"
+							:data-link="actives.left.link" @tap.stop="handlerActiveClick">
+							<image class="jiangqie-news-lightimg" :src="actives.left.image" mode="aspectFill">
+							</image>
+							<view class="jiangqie-news-lighttext">
+								<text class="jiangqie-news-lihgttitle">{{actives.left.title}}</text>
+							</view>
+						</view>
+						<view class="jiangqie-news-lightbox jiangqie-news-lightbox-side"
+							:data-link="actives.right_top.link" @tap.stop="handlerActiveClick">
+							<image class="jiangqie-news-lightimg" :src="actives.right_top.image" mode="aspectFill">
+							</image>
+							<view class="jiangqie-news-lighttext">
+								<text class="jiangqie-news-lihgttitle">{{actives.right_top.title}}</text>
+							</view>
+						</view>
+						<view class="jiangqie-news-lightbox jiangqie-news-lightbox-side2"
+							:data-link="actives.right_down.link" @tap.stop="handlerActiveClick">
+							<image class="jiangqie-news-lightimg" :src="actives.right_down.image" mode="aspectFill">
+							</image>
+							<view class="jiangqie-news-lighttext">
+								<text class="jiangqie-news-lihgttitle">{{actives.right_down.title}}</text>
+							</view>
+						</view>
+					</view>
+
+					<!--新闻列表——热门-->
+					<view v-if="hot && hot.length>0" class="jiangqie-news-view jiangqie-news-hot">
+						<view class="jiangqie-news-type">
+							热门推荐<text>滑动查看</text>
+						</view>
+						<scroll-view class="jiangqie-news-scroll-x-box" scroll-x="true">
+							<view v-for="(item, index) in hot" :key="index" class="jiangqie-hot-scroll-box"
+								:data-id="item.id" @tap.stop="handlerArticleClick">
+								<image :src="item.thumbnail" mode="aspectFill" class="jiangqie-hot-scroll-image">
+								</image>
+								<view class="jiangqie-hot-scroll-title">{{item.title}}</view>
+							</view>
+						</scroll-view>
+					</view>
+
+					<!--新闻列表——常规-->
+					<view class="jiangqie-news-view">
+						<view v-if="postsLast && postsLast.length>0" class="jiangqie-news-type">
+							最新文章
+						</view>
+						<template v-for="(item, index) in postsLast">
+							<view v-if="(listMode==1 && false) || (listMode==2) || (listMode==3 && index%5==4)"
+								:key="index" class="jiangqie-news-block image-wide" :data-id="item.id"
+								@tap.stop="handlerArticleClick">
+								<image :src="item.thumbnail" mode="aspectFill" class="jiangqie-news-image"></image>
+								<view class="jiangqie-news-text">
+									<view
+										:class="'jiangqie-news-title ' + (item.excerpt?'':'jiangqie-news-no-excerpt')">
+										<text v-if="item.stick==1">置顶</text>
+										{{item.title}}
+									</view>
+									<view v-if="item.excerpt" class="jiangqie-news-describe">{{item.excerpt}}</view>
+									<view class="jiangqie-news-info">
+										<view class="jiangqie-news-cmt">
+											<image src="/static/images/ctm2.png" mode="aspectFill"></image>
+											{{item.views}}
+										</view>
+										<text v-for="(item, index2) in item.tags" :key="index2"
+											class="jiangqie-news-tag">{{item.name}}</text>
+										<text class="jiangqie-news-time">{{item.time}}</text>
+									</view>
+								</view>
+								<!-- <image wx:if="{{item.stick==1}}" src="../../images/set_top.png" mode="aspectFill" class="jiangqie-news-stick-image"></image> -->
+							</view>
+							<view v-else :key="index" class="jiangqie-news-block" :data-id="item.id"
+								@tap.stop="handlerArticleClick">
+								<image :src="item.thumbnail" mode="aspectFill" class="jiangqie-news-image"></image>
+								<view class="jiangqie-news-text">
+									<view
+										:class="'jiangqie-news-title ' + (item.excerpt?'':'jiangqie-news-no-excerpt')">
+										<text v-if="item.stick==1">置顶</text>
+										{{item.title}}
+									</view>
+									<view v-if="item.excerpt" class="jiangqie-news-describe">{{item.excerpt}}</view>
+									<view class="jiangqie-news-info">
+										<view class="jiangqie-news-cmt">
+											<image src="/static/images/ctm2.png" mode="aspectFill"></image>
+											{{item.views}}
+										</view>
+										<text v-for="(item, index2) in item.tags" :key="index2"
+											class="jiangqie-news-tag">{{item.name}}</text>
+										<text class="jiangqie-news-time">{{item.time}}</text>
+									</view>
+								</view>
+							</view>
+						</template>
+					</view>
+				</view>
+				<!--加载loadding-->
+				<jiangqie-loadmore :visible="loaddingLast"></jiangqie-loadmore>
+				<jiangqie-nomore :visible="!pullUpOnLast"></jiangqie-nomore>
+				<!--加载loadding-->
+			</template>
+
+			<template v-else>
+				<view class="container">
+					<view class="jiangqie-news-view">
+						<template v-for="(item, index) in posts">
+							<view v-if="(listMode==1 && false) || (listMode==2) || (listMode==3 && index%5==4)"
+								:key="index" class="jiangqie-news-block image-wide" :data-id="item.id"
+								@tap.stop="handlerArticleClick">
+								<image :src="item.thumbnail" mode="aspectFill" class="jiangqie-news-image"></image>
+								<view class="jiangqie-news-text">
+									<view
+										:class="'jiangqie-news-title ' + (item.excerpt?'':'jiangqie-news-no-excerpt')">
+										{{item.title}}
+									</view>
+									<view v-if="item.excerpt" class="jiangqie-news-describe">{{item.excerpt}}</view>
+									<view class="jiangqie-news-info">
+										<view class="jiangqie-news-cmt">
+											<image src="/static/images/ctm2.png" mode="aspectFill"></image>
+											{{item.views}}
+										</view>
+										<text v-for="(item, index2) in item.tags" :key="index2"
+											class="jiangqie-news-tag">{{item.name}}</text>
+										<text class="jiangqie-news-time">{{item.time}}</text>
+									</view>
+								</view>
+							</view>
+							<view v-else :key="index" class="jiangqie-news-block" :data-id="item.id"
+								@tap.stop="handlerArticleClick">
+								<image :src="item.thumbnail" mode="aspectFill" class="jiangqie-news-image"></image>
+								<view class="jiangqie-news-text">
+									<view
+										:class="'jiangqie-news-title ' + (item.excerpt?'':'jiangqie-news-no-excerpt')">
+										{{item.title}}
+									</view>
+									<view v-if="item.excerpt" class="jiangqie-news-describe">{{item.excerpt}}</view>
+									<view class="jiangqie-news-info">
+										<view class="jiangqie-news-cmt">
+											<image src="/static/images/ctm2.png" mode="aspectFill"></image>
+											{{item.views}}
+										</view>
+										<text v-for="(item, index2) in item.tags" :key="index2"
+											class="jiangqie-news-tag">{{item.name}}</text>
+										<text class="jiangqie-news-time">{{item.time}}</text>
+									</view>
+								</view>
+							</view>
+						</template>
+					</view>
+				</view>
+				<!--加载loadding-->
+				<jiangqie-loadmore :visible="loadding"></jiangqie-loadmore>
+				<jiangqie-nomore :visible="!pullUpOn"></jiangqie-nomore>
+				<!--加载loadding-->
+			</template>
+		</view>
 	</view>
 </template>
 
@@ -236,7 +231,6 @@
 	const Util = require("@/utils/util.js");
 	const Rest = require("@/utils/rest.js");
 
-	import JiangqieLoading from "@/components/loading/loading";
 	import JiangqieLoadmore from "@/components/loadmore/loadmore";
 	import JiangqieNomore from "@/components/nomore/nomore";
 	import uniNavBar from '@/components/uni-nav-bar/uni-nav-bar.vue'
@@ -288,7 +282,6 @@
 				current: "",
 				undefined: "",
 				actives: undefined,
-				loading: false,
 				
 				interstitialAd: undefined,
 				wx_ad: undefined,
@@ -296,13 +289,10 @@
 		},
 
 		components: {
-			JiangqieLoading,
 			JiangqieLoadmore,
 			JiangqieNomore,
 			uniNavBar
 		},
-
-		props: {},
 
 		onLoad(options) {
 			Rest.get(Api.JIANGQIE_SETTING_HOME).then(res => {

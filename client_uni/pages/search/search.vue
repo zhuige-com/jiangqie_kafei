@@ -1,50 +1,45 @@
 <template>
-	<view>
-		<view class="container">
-			<view class="jiangqie-searchbox">
-				<view class="jiangqie-search-input">
-					<icon type="search" size="13" color="#999"></icon>
-					<input confirm-type="search" :placeholder="'大家都在搜：' + placeholder" auto-focus="ture"
-						placeholder-class="jiangqie-input-plholder" class="jiangqie-input"
-						@confirm="handerSearchConfirm" @input="handlerSearchInput">
-				</view>
-
-				<view v-if="canSearch" class="jiangqie-search" @tap="handerSearchClick">搜索</view>
-				<view v-else class="jiangqie-cancle" @tap="handerCancelClick">取消</view>
+	<view class="container">
+		<view class="jiangqie-searchbox">
+			<view class="jiangqie-search-input">
+				<icon type="search" size="13" color="#999"></icon>
+				<input confirm-type="search" :placeholder="'大家都在搜：' + placeholder" auto-focus="ture"
+					placeholder-class="jiangqie-input-plholder" class="jiangqie-input"
+					@confirm="handerSearchConfirm" @input="handlerSearchInput">
 			</view>
 
-			<!--搜索模块-->
-			<view v-if="historySearch.length>0" class="jiangqie-search-box">
-				<view class="jiangqie-search-head">
-					<text class="jiangqie-search-clear" @tap.stop="handlerClearHistory">清除历史</text>
-					<image src="/static/images/time.png" mode="widthFix" class="jiangqie-search-icon"></image>历史搜索
-				</view>
-				<view class="jiangqie-search-list">
-					<view v-for="(item, index) in historySearch" :key="index" class="jiangqie-search-tag"
-						:data-item="item" @tap.stop="handlerSearchItemClick">
-						<image src="/static/images/del.png" mode="widthFix" class="jiangqie-search-del"
-							:data-item="item" @tap.stop="handlerSearchItemDelete"></image>
-						<text>{{item}}</text>
-					</view>
-				</view>
-			</view>
+			<view v-if="canSearch" class="jiangqie-search" @tap="handerSearchClick">搜索</view>
+			<view v-else class="jiangqie-cancle" @tap="handerCancelClick">取消</view>
+		</view>
 
-			<!--热门模块-->
-			<view v-if="hotSearch.length>0" class="jiangqie-search-box">
-				<view class="jiangqie-search-head">
-					<image src="/static/images/hot.png" mode="widthFix" class="jiangqie-search-icon"></image>热门
-				</view>
-				<view class="jiangqie-search-list jiangqie-search-hot">
-					<view v-for="(item, index) in hotSearch" :key="index" class="jiangqie-search-tag" :data-item="item"
-						@tap.stop="handlerSearchItemClick">
-						<text>{{item}}</text>
-					</view>
+		<!--搜索模块-->
+		<view v-if="historySearch.length>0" class="jiangqie-search-box">
+			<view class="jiangqie-search-head">
+				<text class="jiangqie-search-clear" @tap.stop="handlerClearHistory">清除历史</text>
+				<image src="/static/images/time.png" mode="widthFix" class="jiangqie-search-icon"></image>历史搜索
+			</view>
+			<view class="jiangqie-search-list">
+				<view v-for="(item, index) in historySearch" :key="index" class="jiangqie-search-tag"
+					:data-item="item" @tap.stop="handlerSearchItemClick">
+					<image src="/static/images/del.png" mode="widthFix" class="jiangqie-search-del"
+						:data-item="item" @tap.stop="handlerSearchItemDelete"></image>
+					<text>{{item}}</text>
 				</view>
 			</view>
 		</view>
-		<!--加载框 start-->
-		<jiangqie-loading v-if="loading"></jiangqie-loading>
-		<!--加载框 end-->
+
+		<!--热门模块-->
+		<view v-if="hotSearch.length>0" class="jiangqie-search-box">
+			<view class="jiangqie-search-head">
+				<image src="/static/images/hot.png" mode="widthFix" class="jiangqie-search-icon"></image>热门
+			</view>
+			<view class="jiangqie-search-list jiangqie-search-hot">
+				<view v-for="(item, index) in hotSearch" :key="index" class="jiangqie-search-tag" :data-item="item"
+					@tap.stop="handlerSearchItemClick">
+					<text>{{item}}</text>
+				</view>
+			</view>
+		</view>
 	</view>
 </template>
 
@@ -61,7 +56,6 @@
 	const Util = require("@/utils/util.js");
 	const Api = require("@/utils/api.js");
 	const Rest = require("@/utils/rest.js");
-	import JiangqieLoading from "@/components/loading/loading";
 
 	export default {
 		data() {
@@ -74,12 +68,6 @@
 				loading: false,
 			};
 		},
-
-		components: {
-			JiangqieLoading
-		},
-
-		props: {},
 
 		onLoad(options) {
 			uni.getStorage({

@@ -171,11 +171,7 @@
 		<view class="jiangqie-goback-btn" @tap="jumpBtn">
 			<image src="/static/images/goback.png" mode="widthFix"></image>
 		</view>
-
-		<!--加载框 start-->
-		<jiangqie-loading v-if="loading"></jiangqie-loading>
-		<!--加载框 end-->
-
+		
 		<!-- #ifdef MP-BAIDU -->
 		<view v-if="isShowPainter" isRenderImage style="position: fixed; top: 0;" @longpress="longTapPainter"
 			@click="clickPainter()">
@@ -199,7 +195,7 @@
 	 * gitee: https://gitee.com/longwenjunj/jiangqie_kafei
 	 * Copyright © 2020-2022 www.jiangqie.com All rights reserved.
 	 */
-	import JiangqieLoading from "@/components/loading/loading";
+	
 	import JiangqieLoadmore from "@/components/loadmore/loadmore";
 	import jiangqieNomore from "@/components/nomore/nomore";
 	import JiangqieNoData from "@/components/nodata/nodata";
@@ -260,7 +256,6 @@
 		},
 
 		components: {
-			JiangqieLoading,
 			JiangqieLoadmore,
 			jiangqieNomore,
 			JiangqieNoData,

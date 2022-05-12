@@ -69,9 +69,6 @@
 				<jiangqie-no-data></jiangqie-no-data>
 			</template>
 		</view>
-		<!--加载框 start-->
-		<jiangqie-loading v-if="loading"></jiangqie-loading>
-		<!--加载框 end-->
 	</view>
 </template>
 
@@ -87,7 +84,6 @@
 	const Constants = require("@/utils/constants.js");
 	const Api = require("@/utils/api.js");
 	const Rest = require("@/utils/rest.js");
-	import JiangqieLoading from "@/components/loading/loading";
 	import JiangqieLoadmore from "@/components/loadmore/loadmore";
 	import JiangqieNomore from "@/components/nomore/nomore";
 	import JiangqieNoData from "@/components/nodata/nodata";
@@ -112,19 +108,15 @@
 					title: '热门标题，请在后台修改',
 					description: '热门描述，请在后台修改'
 				},
-				sorts: ['views', 'likes', 'favorites', 'comments'],
-				loading: false,
+				sorts: ['views', 'likes', 'favorites', 'comments']
 			};
 		},
 
 		components: {
-			JiangqieLoading,
 			JiangqieLoadmore,
 			JiangqieNomore,
 			JiangqieNoData
 		},
-
-		props: {},
 
 		onLoad(options) {
 			//获取配置

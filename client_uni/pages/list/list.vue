@@ -1,65 +1,57 @@
 <template>
-	<view>
-		<!--新闻列表——常规-->
-		<view class="container">
-			<view class="jiangqie-news-view">
+	<!--新闻列表——常规-->
+	<view class="container">
 
-				<template v-if="posts.length > 0">
-					<template v-for="(item, index) in posts">
-						<view v-if="index%5==4" :key="index" class="jiangqie-news-block image-wide" :data-id="item.id"
-							@tap.stop="handlerArticleClick">
-							<image :src="item.thumbnail" mode="aspectFill" class="jiangqie-news-image"></image>
-							<view class="jiangqie-news-text">
-								<view :class="'jiangqie-news-title ' + (item.excerpt?'':'jiangqie-news-no-excerpt')">
-									{{item.title}}
-								</view>
-								<view v-if="item.excerpt" class="jiangqie-news-describe">{{item.excerpt}}</view>
-								<view class="jiangqie-news-info">
-									<view class="jiangqie-news-cmt">
-										<image src="/static/images/ctm2.png" mode="aspectFill"></image>{{item.views}}
-									</view>
-									<text v-for="(item, index2) in item.tags" :key="index2"
-										class="jiangqie-news-tag">{{item.name}}</text>
-									<text class="jiangqie-news-time">{{item.time}}</text>
-								</view>
-							</view>
+		<template v-if="posts.length > 0">
+			<template v-for="(item, index) in posts">
+				<view v-if="index%5==4" :key="index" class="jiangqie-news-block image-wide" :data-id="item.id"
+					@tap.stop="handlerArticleClick">
+					<image :src="item.thumbnail" mode="aspectFill" class="jiangqie-news-image"></image>
+					<view class="jiangqie-news-text">
+						<view :class="'jiangqie-news-title ' + (item.excerpt?'':'jiangqie-news-no-excerpt')">
+							{{item.title}}
 						</view>
-						<view v-else :key="index" class="jiangqie-news-block" :data-id="item.id"
-							@tap.stop="handlerArticleClick">
-							<image :src="item.thumbnail" mode="aspectFill" class="jiangqie-news-image"></image>
-							<view class="jiangqie-news-text">
-								<view :class="'jiangqie-news-title ' + (item.excerpt?'':'jiangqie-news-no-excerpt')">
-									{{item.title}}
-								</view>
-								<view v-if="item.excerpt" class="jiangqie-news-describe">{{item.excerpt}}</view>
-								<view class="jiangqie-news-info">
-									<view class="jiangqie-news-cmt">
-										<image src="/static/images/ctm2.png" mode="aspectFill"></image>{{item.views}}
-									</view>
-									<text v-for="(item, index2) in item.tags" :key="index2"
-										class="jiangqie-news-tag">{{item.name}}</text>
-									<text class="jiangqie-news-time">{{item.time}}</text>
-								</view>
+						<view v-if="item.excerpt" class="jiangqie-news-describe">{{item.excerpt}}</view>
+						<view class="jiangqie-news-info">
+							<view class="jiangqie-news-cmt">
+								<image src="/static/images/ctm2.png" mode="aspectFill"></image>{{item.views}}
 							</view>
+							<text v-for="(item, index2) in item.tags" :key="index2"
+								class="jiangqie-news-tag">{{item.name}}</text>
+							<text class="jiangqie-news-time">{{item.time}}</text>
 						</view>
-					</template>
+					</view>
+				</view>
+				<view v-else :key="index" class="jiangqie-news-block" :data-id="item.id"
+					@tap.stop="handlerArticleClick">
+					<image :src="item.thumbnail" mode="aspectFill" class="jiangqie-news-image"></image>
+					<view class="jiangqie-news-text">
+						<view :class="'jiangqie-news-title ' + (item.excerpt?'':'jiangqie-news-no-excerpt')">
+							{{item.title}}
+						</view>
+						<view v-if="item.excerpt" class="jiangqie-news-describe">{{item.excerpt}}</view>
+						<view class="jiangqie-news-info">
+							<view class="jiangqie-news-cmt">
+								<image src="/static/images/ctm2.png" mode="aspectFill"></image>{{item.views}}
+							</view>
+							<text v-for="(item, index2) in item.tags" :key="index2"
+								class="jiangqie-news-tag">{{item.name}}</text>
+							<text class="jiangqie-news-time">{{item.time}}</text>
+						</view>
+					</view>
+				</view>
+			</template>
 
-					<!--加载loadding-->
-					<jiangqie-loadmore :visible="loadding"></jiangqie-loadmore>
-					<jiangqie-nomore :visible="!pullUpOn"></jiangqie-nomore>
-					<!--加载loadding-->
+			<!--加载loadding-->
+			<jiangqie-loadmore :visible="loadding"></jiangqie-loadmore>
+			<jiangqie-nomore :visible="!pullUpOn"></jiangqie-nomore>
+			<!--加载loadding-->
 
-				</template>
-				<template v-else-if="loaded">
-					<jiangqie-no-data></jiangqie-no-data>
-				</template>
+		</template>
+		<template v-else-if="loaded">
+			<jiangqie-no-data></jiangqie-no-data>
+		</template>
 
-			</view>
-		</view>
-
-		<!--加载框 start-->
-		<jiangqie-loading v-if="loading"></jiangqie-loading>
-		<!--加载框 end-->
 	</view>
 </template>
 
@@ -76,7 +68,6 @@
 	const Util = require("@/utils/util.js");
 	const Api = require("@/utils/api.js");
 	const Rest = require("@/utils/rest.js");
-	import JiangqieLoading from "@/components/loading/loading";
 	import JiangqieLoadmore from "@/components/loadmore/loadmore";
 	import JiangqieNomore from "@/components/nomore/nomore";
 	import JiangqieNoData from "@/components/nodata/nodata";
@@ -99,13 +90,10 @@
 		},
 
 		components: {
-			JiangqieLoading,
 			JiangqieLoadmore,
 			JiangqieNomore,
 			JiangqieNoData,
 		},
-
-		props: {},
 
 		/**
 		 * 生命周期函数--监听页面加载

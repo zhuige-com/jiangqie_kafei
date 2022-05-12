@@ -1,12 +1,6 @@
 <template>
-	<view>
-		<view class="jiangqie-page-body">
-			<mp-html :content="article"></mp-html>
-		</view>
-
-		<!--加载框 start-->
-		<jiangqie-loading v-if="loading"></jiangqie-loading>
-		<!--加载框 end-->
+	<view class="jiangqie-page-body">
+		<mp-html :content="article"></mp-html>
 	</view>
 </template>
 
@@ -22,23 +16,14 @@
 	const Api = require("@/utils/api.js");
 	const Rest = require("@/utils/rest.js");
 
-	import JiangqieLoading from "@/components/loading/loading";
-
 	export default {
 		data() {
 			return {
 				page_id: '',
 				title: '',
 				article: "",
-				loading: false,
 			};
 		},
-
-		components: {
-			JiangqieLoading
-		},
-
-		props: {},
 
 		onLoad(options) {
 			Rest.get(Api.JIANGQIE_POST_PAGE, {

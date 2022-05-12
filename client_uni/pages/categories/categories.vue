@@ -1,39 +1,33 @@
 <template>
-	<view>
-		<view class="container">
-			<view class="categorie-header">
-				<view class="categorie-text">
-					<text>{{setting.title}}</text>
-					<view>{{setting.description}}</view>
-				</view>
-				<image v-if="setting.background && setting.background.length>0" :src="setting.background"
-					mode="aspectFill"></image>
+	<view class="container">
+		<view class="categorie-header">
+			<view class="categorie-text">
+				<text>{{setting.title}}</text>
+				<view>{{setting.description}}</view>
 			</view>
-			
-			<!-- #ifdef MP-WEIXIN -->
-			<template v-if="wx_ad">
-				<ad :unit-id="wx_ad"></ad>
-			</template>
-			<!-- #endif -->
-			
-			<view class="right-box">
-
-				<view v-for="(item, index) in categories" :key="index" class="sortbox" :data-id="item.id"
-					:data-name="item.name" @tap.stop="handlerCategoryClick">
-					<image :src="item.cover" mode="aspectFill" class="sortimage"></image>
-					<view class="sorttitle">{{item.name}}</view>
-					<view class="sortsummary">{{item.description}}</view>
-				</view>
-
-			</view>
+			<image v-if="setting.background && setting.background.length>0" :src="setting.background"
+				mode="aspectFill"></image>
 		</view>
-		<!--加载框 start-->
-		<jiangqie-loading v-if="loading"></jiangqie-loading>
-		<!--加载框 end-->
-		<view class="jiangqie-nomore-class jiangqie-loadmore">
-			<view class="jiangqie-nomore">
-				<view class="jiangqie-text" style="background: #FFF;">© 酱茄 jiangqie.com</view>
+		
+		<!-- #ifdef MP-WEIXIN -->
+		<template v-if="wx_ad">
+			<ad :unit-id="wx_ad"></ad>
+		</template>
+		<!-- #endif -->
+		
+		<view class="right-box">
+
+			<view v-for="(item, index) in categories" :key="index" class="sortbox" :data-id="item.id"
+				:data-name="item.name" @tap.stop="handlerCategoryClick">
+				<image :src="item.cover" mode="aspectFill" class="sortimage"></image>
+				<view class="sorttitle">{{item.name}}</view>
+				<view class="sortsummary">{{item.description}}</view>
 			</view>
+
+		</view>
+		
+		<view class="jiangqie-nomore">
+			<view class="jiangqie-text">© 酱茄 jiangqie.com</view>
 		</view>
 	</view>
 </template>
@@ -49,7 +43,6 @@
 	 */
 	const Api = require("@/utils/api.js");
 	const Rest = require("@/utils/rest.js");
-	import JiangqieLoading from "@/components/loading/loading";
 
 	export default {
 		data() {
@@ -65,15 +58,8 @@
 					title: '分类标题，请在后台修改',
 					description: '分类描述，请在后台修改'
 				},
-				loading: false,
 			};
 		},
-
-		components: {
-			JiangqieLoading
-		},
-
-		props: {},
 
 		onLoad(options) {
 			//获取配置

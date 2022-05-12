@@ -1,152 +1,144 @@
 <template>
-	<view>
-		<view v-if="setting" class="jiangqie-top-bg" :style="'background-image: url(' + setting.background + ');'">
-			<view class="jiangqie-userbox">
-				<view class="jiangqie-usersetup">
-					<image src="/static/images/setup.png"></image>
-				</view>
-				<view class="jiangqie-userinfo">
-					<template v-if="user">
-						<view class="jiangqie-useravatar">
-							<image :src="user.avatar" mode="aspectFill"></image>
-						</view>
-						<view class="jiangqie-username">
-							<text>{{user.nickname}}</text>
-						</view>
-					</template>
-					<template v-else>
-						<view class="jiangqie-useravatar">
-							<image src="/static/images/default_avatar.jpg" mode="aspectFill"></image>
-							<view class="jiangqie-useralogin">
-								<navigator url="../login/login">立即登录</navigator>
-							</view>
-						</view>
-					</template>
-				</view>
+	<view v-if="setting" class="jiangqie-top-bg" :style="'background-image: url(' + setting.background + ');'">
+		<view class="jiangqie-userbox">
+			<view class="jiangqie-usersetup">
+				<image src="/static/images/setup.png"></image>
 			</view>
-			<view class="jiangqie-listbox jiangqie-postcount">
-				<template v-for="(item, index) in menu">
-					<view v-if="item.tp=='views'" :key="index"
-						:class="'jiangqie-listblock ' + (item.line=='yes'?'jiangqie-listblock-line':'')"
-						data-track="views" @tap.stop="handlerPostTrack">
-						<view class="jiangqie-listcont">
-							<image src="/static/images/more.png" mode="aspectFill"></image>
-						</view>
-						<view class="jiangqie-listtitle">
-							<text>{{item.title}}</text>
-							<image v-if="item.icon" :src="item.icon" mode="aspectFill"></image>
+			<view class="jiangqie-userinfo">
+				<template v-if="user">
+					<view class="jiangqie-useravatar">
+						<image :src="user.avatar" mode="aspectFill"></image>
+					</view>
+					<view class="jiangqie-username">
+						<text>{{user.nickname}}</text>
+					</view>
+				</template>
+				<template v-else>
+					<view class="jiangqie-useravatar">
+						<image src="/static/images/default_avatar.jpg" mode="aspectFill"></image>
+						<view class="jiangqie-useralogin">
+							<navigator url="../login/login">立即登录</navigator>
 						</view>
 					</view>
-					<view v-if="item.tp=='likes'" :key="index"
-						:class="'jiangqie-listblock ' + (item.line=='yes'?'jiangqie-listblock-line':'')"
-						data-track="likes" @tap.stop="handlerPostTrack">
-						<view class="jiangqie-listcont">
-							<image src="/static/images/more.png" mode="aspectFill"></image>
-						</view>
-						<view class="jiangqie-listtitle">
-							<text>{{item.title}}</text>
-							<image v-if="item.icon" :src="item.icon" mode="aspectFill"></image>
-						</view>
-					</view>
-					<view v-if="item.tp=='favorites'" :key="index"
-						:class="'jiangqie-listblock ' + (item.line=='yes'?'jiangqie-listblock-line':'')"
-						data-track="favorites" @tap.stop="handlerPostTrack">
-						<view class="jiangqie-listcont">
-							<image src="/static/images/more.png" mode="aspectFill"></image>
-						</view>
-						<view class="jiangqie-listtitle">
-							<text>{{item.title}}</text>
-							<image v-if="item.icon" :src="item.icon" mode="aspectFill"></image>
-						</view>
-					</view>
-					<view v-if="item.tp=='comments'" :key="index"
-						:class="'jiangqie-listblock ' + (item.line=='yes'?'jiangqie-listblock-line':'')"
-						data-track="comments" @tap.stop="handlerPostTrack">
-						<view class="jiangqie-listcont">
-							<image src="/static/images/more.png" mode="aspectFill"></image>
-						</view>
-						<view class="jiangqie-listtitle">
-							<text>{{item.title}}</text>
-							<image v-if="item.icon" :src="item.icon" mode="aspectFill"></image>
-						</view>
-					</view>
-					<view v-if="item.tp=='about'" :key="index"
-						:class="'jiangqie-listblock ' + (item.line=='yes'?'jiangqie-listblock-line':'')"
-						@tap.stop="handlerAbout">
-						<view class="jiangqie-listcont">
-							<image src="/static/images/more.png" mode="aspectFill"></image>
-						</view>
-						<view class="jiangqie-listtitle">
-							<text>{{item.title}}</text>
-							<image v-if="item.icon" :src="item.icon" mode="aspectFill"></image>
-						</view>
-					</view>
-					<view v-if="item.tp=='feedback'" :key="index"
-						:class="'jiangqie-listblock ' + (item.line=='yes'?'jiangqie-listblock-line':'')">
-						<view class="jiangqie-listcont">
-							<image src="/static/images/more.png" mode="aspectFill"></image>
-						</view>
-						<button open-type="feedback" class="jiangqie-listtitle">
-							<text>{{item.title}}</text>
-							<image v-if="item.icon" :src="item.icon" mode="aspectFill"></image>
-						</button>
-					</view>
-					<view v-if="item.tp=='contact'" :key="index"
-						:class="'jiangqie-listblock ' + (item.line=='yes'?'jiangqie-listblock-line':'')">
-						<view class="jiangqie-listcont">
-							<image src="/static/images/more.png" mode="aspectFill"></image>
-						</view>
-						<button open-type="contact" class="jiangqie-listtitle">
-							<text>{{item.title}}</text>
-							<image v-if="item.icon" :src="item.icon" mode="aspectFill"></image>
-						</button>
-					</view>
-					<view v-if="item.tp=='clear'" :key="index"
-						:class="'jiangqie-listblock ' + (item.line=='yes'?'jiangqie-listblock-line':'')"
-						@tap.stop="handlerClearCache">
-						<view class="jiangqie-listcont">
-							<image src="/static/images/more.png" mode="aspectFill"></image>
-						</view>
-						<view class="jiangqie-listtitle">
-							<text>{{item.title}}</text>
-							<image v-if="item.icon" :src="item.icon" mode="aspectFill"></image>
-						</view>
-					</view>
-					<view v-if="item.tp=='page'" :key="index"
-						:class="'jiangqie-listblock ' + (item.line=='yes'?'jiangqie-listblock-line':'')"
-						:data-page_id="item.page_id" @tap.stop="handlerPageClick">
-						<view class="jiangqie-listcont">
-							<image src="/static/images/more.png" mode="aspectFill"></image>
-						</view>
-						<view class="jiangqie-listtitle">
-							<text>{{item.title}}</text>
-							<image v-if="item.icon" :src="item.icon" mode="aspectFill"></image>
-						</view>
-					</view>
-					<view v-if="item.tp=='link'" :key="index"
-						:class="'jiangqie-listblock ' + (item.line=='yes'?'jiangqie-listblock-line':'')"
-						:data-link="item.link" @tap.stop="handlerLinkClick">
-						<view class="jiangqie-listcont">
-							<image src="/static/images/more.png" mode="aspectFill"></image>
-						</view>
-						<view class="jiangqie-listtitle">
-							<text>{{item.title}}</text>
-							<image v-if="item.icon" :src="item.icon" mode="aspectFill"></image>
-						</view>
-					</view>
-					<view v-else-if="item.tp=='split'" :key="index" class="jiangqie-list-split"></view>
 				</template>
 			</view>
 		</view>
-
-		<!--加载框 start-->
-		<jiangqie-loading v-if="loading"></jiangqie-loading>
-		<!--加载框 end-->
-
-		<view class="jiangqie-nomore-class jiangqie-loadmore">
-			<view class="jiangqie-nomore">
-				<view @click="clickJiangQie" class="jiangqie-text" style="background: #FFF;">© 酱茄 jiangqie.com</view>
-			</view>
+		<view class="jiangqie-listbox jiangqie-postcount">
+			<template v-for="(item, index) in menu">
+				<view v-if="item.tp=='views'" :key="index"
+					:class="'jiangqie-listblock ' + (item.line=='yes'?'jiangqie-listblock-line':'')"
+					data-track="views" @tap.stop="handlerPostTrack">
+					<view class="jiangqie-listcont">
+						<image src="/static/images/more.png" mode="aspectFill"></image>
+					</view>
+					<view class="jiangqie-listtitle">
+						<text>{{item.title}}</text>
+						<image v-if="item.icon" :src="item.icon" mode="aspectFill"></image>
+					</view>
+				</view>
+				<view v-if="item.tp=='likes'" :key="index"
+					:class="'jiangqie-listblock ' + (item.line=='yes'?'jiangqie-listblock-line':'')"
+					data-track="likes" @tap.stop="handlerPostTrack">
+					<view class="jiangqie-listcont">
+						<image src="/static/images/more.png" mode="aspectFill"></image>
+					</view>
+					<view class="jiangqie-listtitle">
+						<text>{{item.title}}</text>
+						<image v-if="item.icon" :src="item.icon" mode="aspectFill"></image>
+					</view>
+				</view>
+				<view v-if="item.tp=='favorites'" :key="index"
+					:class="'jiangqie-listblock ' + (item.line=='yes'?'jiangqie-listblock-line':'')"
+					data-track="favorites" @tap.stop="handlerPostTrack">
+					<view class="jiangqie-listcont">
+						<image src="/static/images/more.png" mode="aspectFill"></image>
+					</view>
+					<view class="jiangqie-listtitle">
+						<text>{{item.title}}</text>
+						<image v-if="item.icon" :src="item.icon" mode="aspectFill"></image>
+					</view>
+				</view>
+				<view v-if="item.tp=='comments'" :key="index"
+					:class="'jiangqie-listblock ' + (item.line=='yes'?'jiangqie-listblock-line':'')"
+					data-track="comments" @tap.stop="handlerPostTrack">
+					<view class="jiangqie-listcont">
+						<image src="/static/images/more.png" mode="aspectFill"></image>
+					</view>
+					<view class="jiangqie-listtitle">
+						<text>{{item.title}}</text>
+						<image v-if="item.icon" :src="item.icon" mode="aspectFill"></image>
+					</view>
+				</view>
+				<view v-if="item.tp=='about'" :key="index"
+					:class="'jiangqie-listblock ' + (item.line=='yes'?'jiangqie-listblock-line':'')"
+					@tap.stop="handlerAbout">
+					<view class="jiangqie-listcont">
+						<image src="/static/images/more.png" mode="aspectFill"></image>
+					</view>
+					<view class="jiangqie-listtitle">
+						<text>{{item.title}}</text>
+						<image v-if="item.icon" :src="item.icon" mode="aspectFill"></image>
+					</view>
+				</view>
+				<view v-if="item.tp=='feedback'" :key="index"
+					:class="'jiangqie-listblock ' + (item.line=='yes'?'jiangqie-listblock-line':'')">
+					<view class="jiangqie-listcont">
+						<image src="/static/images/more.png" mode="aspectFill"></image>
+					</view>
+					<button open-type="feedback" class="jiangqie-listtitle">
+						<text>{{item.title}}</text>
+						<image v-if="item.icon" :src="item.icon" mode="aspectFill"></image>
+					</button>
+				</view>
+				<view v-if="item.tp=='contact'" :key="index"
+					:class="'jiangqie-listblock ' + (item.line=='yes'?'jiangqie-listblock-line':'')">
+					<view class="jiangqie-listcont">
+						<image src="/static/images/more.png" mode="aspectFill"></image>
+					</view>
+					<button open-type="contact" class="jiangqie-listtitle">
+						<text>{{item.title}}</text>
+						<image v-if="item.icon" :src="item.icon" mode="aspectFill"></image>
+					</button>
+				</view>
+				<view v-if="item.tp=='clear'" :key="index"
+					:class="'jiangqie-listblock ' + (item.line=='yes'?'jiangqie-listblock-line':'')"
+					@tap.stop="handlerClearCache">
+					<view class="jiangqie-listcont">
+						<image src="/static/images/more.png" mode="aspectFill"></image>
+					</view>
+					<view class="jiangqie-listtitle">
+						<text>{{item.title}}</text>
+						<image v-if="item.icon" :src="item.icon" mode="aspectFill"></image>
+					</view>
+				</view>
+				<view v-if="item.tp=='page'" :key="index"
+					:class="'jiangqie-listblock ' + (item.line=='yes'?'jiangqie-listblock-line':'')"
+					:data-page_id="item.page_id" @tap.stop="handlerPageClick">
+					<view class="jiangqie-listcont">
+						<image src="/static/images/more.png" mode="aspectFill"></image>
+					</view>
+					<view class="jiangqie-listtitle">
+						<text>{{item.title}}</text>
+						<image v-if="item.icon" :src="item.icon" mode="aspectFill"></image>
+					</view>
+				</view>
+				<view v-if="item.tp=='link'" :key="index"
+					:class="'jiangqie-listblock ' + (item.line=='yes'?'jiangqie-listblock-line':'')"
+					:data-link="item.link" @tap.stop="handlerLinkClick">
+					<view class="jiangqie-listcont">
+						<image src="/static/images/more.png" mode="aspectFill"></image>
+					</view>
+					<view class="jiangqie-listtitle">
+						<text>{{item.title}}</text>
+						<image v-if="item.icon" :src="item.icon" mode="aspectFill"></image>
+					</view>
+				</view>
+				<view v-else-if="item.tp=='split'" :key="index" class="jiangqie-list-split"></view>
+			</template>
+		</view>
+		
+		<view class="jiangqie-nomore">
+			<view @click="clickJiangQie" class="jiangqie-text">© 酱茄 jiangqie.com</view>
 		</view>
 	</view>
 </template>
@@ -164,7 +156,6 @@
 	const Api = require("@/utils/api.js");
 	const Util = require("@/utils/util.js");
 	const Rest = require("@/utils/rest.js");
-	import JiangqieLoading from "@/components/loading/loading";
 
 	export default {
 		data() {
@@ -219,15 +210,8 @@
 						}
 					]
 				},
-				loading: false,
 			};
 		},
-
-		components: {
-			JiangqieLoading,
-		},
-
-		props: {},
 
 		onShow(options) {
 			this.user = Auth.getUser();
@@ -478,5 +462,9 @@
 	.jiangqie-list-split {
 		height: 16rpx;
 		background-color: #F3F3F3;
+	}
+	
+	.jiangqie-nomore {
+		margin: 50rpx 0;
 	}
 </style>
