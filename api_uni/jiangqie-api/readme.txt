@@ -71,9 +71,9 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 官网下载：[www.jiangqie.com](https://www.jiangqie.com/)
 
-github下载：https://github.com/longwenjunjie/jiangqie_kafei
+github下载：https://github.com/zhuige-com/jiangqie_kafei
 
-gitee下载（优先更新）：https://gitee.com/longwenjunj/jiangqie_kafei
+gitee下载（优先更新）：https://gitee.com/zhuige_com/jiangqie_kafei
 
 
 == Screenshots ==

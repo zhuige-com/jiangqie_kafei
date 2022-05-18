@@ -14,7 +14,7 @@
 			<view class="jiangqie-content">酱茄小程序开源版，基于WordPress开源程序和WordPress REST
 				API开发，实现WordPress网站数据与小程序数据同步共享，通过简单的配置就能搭建自己的小程序。项目免费开源，源码可在
 				<text class="jiangqie-content-email" @tap="copy"
-					data-text="https://github.com/longwenjunjie/jiangqie_kafei">GitHub</text>上下载，欢迎Watch & Star ★。
+					data-text="https://github.com/zhuige-com/jiangqie_kafei">GitHub</text>上下载，欢迎Watch & Star ★。
 			</view>
 			<view class="jiangqie-content">项目可能存在缺陷或者bug，如果您在使用过程中发现问题或者有更好的建议，可反馈给我们。</view>
 			<view class="jiangqie-content jiangqie-content-email" @tap="copy" data-text="www.zhuige.com">
@@ -32,8 +32,8 @@
 	 * 酱茄小程序开源版
 	 * Author: 酱茄
 	 * Help document: https://www.jiangqie.com/ky
-	 * github: https://github.com/longwenjunjie/jiangqie_kafei
-	 * gitee: https://gitee.com/longwenjunj/jiangqie_kafei
+	 * github: https://github.com/zhuige-com/jiangqie_kafei
+	 * gitee: https://gitee.com/zhuige_com/jiangqie_kafei
 	 * Copyright © 2020-2022 www.jiangqie.com All rights reserved.
 	 */
 	const Constant = require("@/utils/constants.js");

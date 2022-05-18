@@ -3,9 +3,9 @@
 /*
  * 酱茄小程序开源版
  * Author: 酱茄
- * Help document: https://www.jiangqie.com/docs/kaiyuan/id1
- * github: https://github.com/longwenjunjie/jiangqie_kafei
- * gitee: https://gitee.com/longwenjunj/jiangqie_kafei
+ * Help document: https://www.zhuige.com/docs/zxfree.html
+ * github: https://github.com/zhuige-com/jiangqie_kafei
+ * gitee: https://gitee.com/zhuige_com/jiangqie_kafei
  * Copyright ️© 2020-2022 www.jiangqie.com All rights reserved.
  */
 
@@ -46,7 +46,8 @@ class JiangQie_API_Admin
 			'menu_position' => 2,
             'show_bar_menu' => false,
             'show_sub_menu' => false,
-            'footer_credit' => 'Thank you for creating with <a href="https://www.jiangqie.com/" target="_blank">酱茄</a>'
+            'footer_credit' => 'Thank you for creating with <a href="https://www.jiangqie.com/" target="_blank">酱茄</a>',
+            'menu_icon' => 'dashicons-layout',
 		));
 
 		$base_dir = plugin_dir_path(__FILE__);
