@@ -1,7 +1,7 @@
 <template>
 	<view class="container">
 		<view class="categorie-header">
-			<view class="categorie-text">
+			<view v-if="setting.title || setting.description" class="categorie-text">
 				<text>{{setting.title}}</text>
 				<view>{{setting.description}}</view>
 			</view>
@@ -35,11 +35,11 @@
 <script>
 	/*
 	 * 酱茄小程序开源版
-	 * Author: 酱茄
-	 * Help document: https://www.jiangqie.com/ky
+	 * 作者: 追格
+	 * 文档：https://www.zhuige.com/docs/zxfree.html
 	 * github: https://github.com/zhuige-com/jiangqie_kafei
 	 * gitee: https://gitee.com/zhuige_com/jiangqie_kafei
-	 * Copyright © 2020-2022 www.jiangqie.com All rights reserved.
+	 * Copyright © 2020-2022 www.zhuige.com All rights reserved.
 	 */
 	const Api = require("@/utils/api.js");
 	const Rest = require("@/utils/rest.js");
