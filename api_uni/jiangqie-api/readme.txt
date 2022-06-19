@@ -4,8 +4,8 @@ Contributors: jiangqie
 Donate link: https://www.jiangqie.com/
 Tags: 追格,酱茄,小程序
 Requires at least: 5.6
-Tested up to: 5.9
-Stable tag: 1.8.1
+Tested up to: 6.0
+Stable tag: 1.8.5
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -82,6 +82,26 @@ gitee下载（优先更新）：https://gitee.com/zhuige_com/jiangqie_kafei
 
 
 == Changelog ==
+
+= 1.8.5 =
+
+1. 减少不必要的数据绑定
+
+
+= 1.8.4 =
+
+1. 代码精简优化
+
+
+= 1.8.3 =
+
+1. 修复百度小程序登录问题
+
+
+= 1.8.2 =
+
+1. 代码整理，清理无用的注释
+
 
 = 1.8.1 =
 
