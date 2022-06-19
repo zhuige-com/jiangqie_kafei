@@ -5,16 +5,16 @@
 				<text>{{setting.title}}</text>
 				<view>{{setting.description}}</view>
 			</view>
-			<image v-if="setting.background && setting.background.length>0" :src="setting.background"
-				mode="aspectFill"></image>
+			<image v-if="setting.background && setting.background.length>0" :src="setting.background" mode="aspectFill">
+			</image>
 		</view>
-		
+
 		<!-- #ifdef MP-WEIXIN -->
 		<template v-if="wx_ad">
 			<ad :unit-id="wx_ad"></ad>
 		</template>
 		<!-- #endif -->
-		
+
 		<view class="right-box">
 
 			<view v-for="(item, index) in categories" :key="index" class="sortbox" :data-id="item.id"
@@ -25,7 +25,7 @@
 			</view>
 
 		</view>
-		
+
 		<view class="jiangqie-nomore">
 			<view class="jiangqie-text">© 酱茄 jiangqie.com</view>
 		</view>
@@ -46,6 +46,11 @@
 
 	export default {
 		data() {
+			this.default = {
+				title: '分类标题，请在后台修改',
+				description: '分类描述，请在后台修改'
+			};
+			
 			return {
 				setting: {
 					title: "",
@@ -53,11 +58,7 @@
 					background: ""
 				},
 				wx_ad: undefined,
-				categories: [],
-				default: {
-					title: '分类标题，请在后台修改',
-					description: '分类描述，请在后台修改'
-				},
+				categories: []
 			};
 		},
 
@@ -70,7 +71,7 @@
 					description: res.data.description ? res.data.description : this.default.description
 				};
 				this.wx_ad = res.data.wx_ad;
-				
+
 				// #ifdef MP-BAIDU
 				swan.setPageInfo({
 					title: this.setting.title,
@@ -78,14 +79,14 @@
 					keywords: '文章分类',
 				});
 				// #endif
-			}); 
+			});
 
 			//获取一级分类
 			Rest.get(Api.JIANGQIE_CATEGORY_INDEX).then(res => {
 				this.categories = res.data
 			});
 		},
-		
+
 		onShow() {
 			// #ifdef MP-BAIDU
 			swan.setPageInfo({

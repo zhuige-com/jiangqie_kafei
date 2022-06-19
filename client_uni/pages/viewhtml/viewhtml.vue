@@ -18,9 +18,9 @@
 
 	export default {
 		data() {
+			this.page_id = '';
+			this.title = '';
 			return {
-				page_id: '',
-				title: '',
 				article: "",
 			};
 		},

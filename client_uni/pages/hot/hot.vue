@@ -35,19 +35,19 @@
 									<view class="jiangqie-timeline-cmt">
 										<template v-if="currentTab==0">
 											<image src="/static/images/ctm2.png" mode="aspectFill"></image>
-											{{item.views}}
+											{{item.views?item.views:''}}
 										</template>
 										<template v-else-if="currentTab==1">
 											<image src="/static/images/laud.png" mode="aspectFill"></image>
-											{{item.likes}}
+											{{item.likes?item.likes:''}}
 										</template>
 										<template v-else-if="currentTab==2">
 											<image src="/static/images/ctm3.png" mode="aspectFill"></image>
-											{{item.favorites}}
+											{{item.favorites?item.favorites:''}}
 										</template>
 										<template v-else-if="currentTab==3">
 											<image src="/static/images/ctm.png" mode="aspectFill"></image>
-											{{item.comment_count}}
+											{{item.comment_count?item.comment_count:''}}
 										</template>
 									</view>
 									<text v-for="(item, index2) in item.tags" :key="index2"
@@ -90,25 +90,29 @@
 
 	export default {
 		data() {
+			this.default = {
+				background: '',
+				title: '热门标题，请在后台修改',
+				description: '热门描述，请在后台修改'
+			};
+			this.sorts = ['views', 'likes', 'favorites', 'comments'];
+			
 			return {
 				setting: {
 					background: "",
 					title: "",
 					description: ""
 				},
+				
 				tabbar: ['浏览数', '点赞数', '收藏数', '评论数'],
 				currentTab: 0,
 				posts: [],
+				
 				loadding: false,
 				pullUpOn: true,
 				loaded: false,
+				
 				tl_background: '',
-				default: {
-					background: '',
-					title: '热门标题，请在后台修改',
-					description: '热门描述，请在后台修改'
-				},
-				sorts: ['views', 'likes', 'favorites', 'comments']
 			};
 		},
 
@@ -183,7 +187,7 @@
 				}
 
 				this.currentTab = cur;
-				this.posts = [];
+				// this.posts = [];
 				this.loadPosts(true);
 			},
 

@@ -237,14 +237,12 @@
 
 	export default {
 		data() {
+			this.bd_title =  undefined;
+			this.bd_description = undefined;
+			this.bd_keywords = undefined;
+			this.interstitialAd = undefined;
+			
 			return {
-				bd_title: undefined,
-				bd_description: undefined,
-				bd_keywords: undefined,
-				
-				statusBarH: this.statusBar,
-				customBarH: 50,
-
 				logo: '',
 				background: undefined,
 
@@ -254,7 +252,6 @@
 					name: '头条'
 				}],
 				currentTab: 0,
-				//预设当前项的值
 
 				//幻灯片
 				slide: [],
@@ -280,11 +277,7 @@
 
 				scrollLeft: "",
 				current: "",
-				undefined: "",
 				actives: undefined,
-				
-				interstitialAd: undefined,
-				wx_ad: undefined,
 			};
 		},
 

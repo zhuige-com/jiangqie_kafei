@@ -209,6 +209,14 @@
 
 	export default {
 		data() {
+			this.comment_id = 0;
+			
+			//小程序码
+			this.acode = '';
+			
+			//返回页面是否需要刷新
+			this.needRefresh = true;
+			
 			return {
 				post: {
 					title: "",
@@ -229,7 +237,6 @@
 				comment_content: '',
 				comment_count_change: 0,
 				post_id: 0,
-				comment_id: 0,
 				
 				wx_ad_top: undefined,
 				wx_ad_bottom: undefined,
@@ -238,16 +245,11 @@
 				pre: undefined,
 				next: undefined,
 
-				//小程序码
-				acode: '',
-
-				//返回页面是否需要刷新
-				needRefresh: true,
 				article: "",
 				official: false,
 				like_list: [],
 				placeholder: "",
-				loading: false,
+				// loading: false,
 
 				isShowPainter: false,
 				painterImage: '',

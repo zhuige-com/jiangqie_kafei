@@ -74,6 +74,11 @@
 
 	export default {
 		data() {
+			this.tag_id = undefined;
+			this.cat_id = undefined;
+			this.search = undefined;
+			this.track = undefined;
+			
 			return {
 				title: undefined,
 				
@@ -81,11 +86,8 @@
 				loadding: false,
 				pullUpOn: true,
 				loaded: false,
-				tag_id: undefined,
-				cat_id: undefined,
-				search: undefined,
-				track: undefined,
-				loading: false,
+				
+				// loading: false,
 			};
 		},
 

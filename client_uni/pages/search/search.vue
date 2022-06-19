@@ -65,7 +65,7 @@
 				hotSearch: [],
 				placeholder: '',
 				keyword: '',
-				loading: false,
+				// loading: false,
 			};
 		},
 

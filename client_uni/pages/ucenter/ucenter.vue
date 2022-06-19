@@ -26,8 +26,8 @@
 		<view class="jiangqie-listbox jiangqie-postcount">
 			<template v-for="(item, index) in menu">
 				<view v-if="item.tp=='views'" :key="index"
-					:class="'jiangqie-listblock ' + (item.line=='yes'?'jiangqie-listblock-line':'')"
-					data-track="views" @tap.stop="handlerPostTrack">
+					:class="'jiangqie-listblock ' + (item.line=='yes'?'jiangqie-listblock-line':'')" data-track="views"
+					@tap.stop="handlerPostTrack">
 					<view class="jiangqie-listcont">
 						<image src="/static/images/more.png" mode="aspectFill"></image>
 					</view>
@@ -37,8 +37,8 @@
 					</view>
 				</view>
 				<view v-if="item.tp=='likes'" :key="index"
-					:class="'jiangqie-listblock ' + (item.line=='yes'?'jiangqie-listblock-line':'')"
-					data-track="likes" @tap.stop="handlerPostTrack">
+					:class="'jiangqie-listblock ' + (item.line=='yes'?'jiangqie-listblock-line':'')" data-track="likes"
+					@tap.stop="handlerPostTrack">
 					<view class="jiangqie-listcont">
 						<image src="/static/images/more.png" mode="aspectFill"></image>
 					</view>
@@ -136,7 +136,7 @@
 				<view v-else-if="item.tp=='split'" :key="index" class="jiangqie-list-split"></view>
 			</template>
 		</view>
-		
+
 		<view class="jiangqie-nomore">
 			<view @click="clickJiangQie" class="jiangqie-text">© 酱茄 jiangqie.com</view>
 		</view>
@@ -159,57 +159,58 @@
 
 	export default {
 		data() {
+			this.default = {
+				menu: [ //views,likes,favorites,comments,about,feedback,contact,clear,split,link,page
+					{
+						tp: 'views',
+						icon: "/static/images/icon_view.png",
+						title: '我的浏览',
+						line: 1
+					}, {
+						tp: 'likes',
+						icon: "/static/images/icon_like.png",
+						title: '我的点赞',
+						line: 1
+					}, {
+						tp: 'favorites',
+						icon: "/static/images/icon_fav.png",
+						title: '我的收藏',
+						line: 1
+					}, {
+						tp: 'comments',
+						icon: "/static/images/icon_com.png",
+						title: '我的评论',
+						line: 0
+					}, {
+						tp: 'split'
+					}, {
+						tp: 'about',
+						icon: '',
+						title: '关于我们',
+						line: 1
+					}, {
+						tp: 'feedback',
+						icon: '',
+						title: '意见反馈',
+						line: 1
+					}, {
+						tp: 'contact',
+						icon: '',
+						title: '在线客服',
+						line: 1
+					}, {
+						tp: 'clear',
+						icon: '',
+						title: '清除缓存',
+						line: 0
+					}
+				]
+			};
+
 			return {
 				setting: undefined,
 				user: undefined,
 				menu: {},
-				default: {
-					menu: [ //views,likes,favorites,comments,about,feedback,contact,clear,split,link,page
-						{
-							tp: 'views',
-							icon: "/static/images/icon_view.png",
-							title: '我的浏览',
-							line: 1
-						}, {
-							tp: 'likes',
-							icon: "/static/images/icon_like.png",
-							title: '我的点赞',
-							line: 1
-						}, {
-							tp: 'favorites',
-							icon: "/static/images/icon_fav.png",
-							title: '我的收藏',
-							line: 1
-						}, {
-							tp: 'comments',
-							icon: "/static/images/icon_com.png",
-							title: '我的评论',
-							line: 0
-						}, {
-							tp: 'split'
-						}, {
-							tp: 'about',
-							icon: '',
-							title: '关于我们',
-							line: 1
-						}, {
-							tp: 'feedback',
-							icon: '',
-							title: '意见反馈',
-							line: 1
-						}, {
-							tp: 'contact',
-							icon: '',
-							title: '在线客服',
-							line: 1
-						}, {
-							tp: 'clear',
-							icon: '',
-							title: '清除缓存',
-							line: 0
-						}
-					]
-				},
 			};
 		},
 
@@ -463,7 +464,7 @@
 		height: 16rpx;
 		background-color: #F3F3F3;
 	}
-	
+
 	.jiangqie-nomore {
 		margin: 50rpx 0;
 	}
