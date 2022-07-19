@@ -127,7 +127,7 @@ class JiangQie_API_Comment_Controller extends JiangQie_API_Base_Controller
 
 		$mobile = get_user_meta($user_id, 'jiangqie_mobile', true);
 		if (empty($mobile)) {
-			return $this->make_error('还没有登陆', -11);
+			return $this->make_error('还没有绑定手机号', -11);
 		}
 
 		$post_id = (int)($this->param_value($request, 'post_id', 0));
