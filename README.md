@@ -28,20 +28,20 @@ Hi，欢迎使用追格资讯小程序（酱茄小程序开源版 – 酱茄Free
 
 ### 演示
 
-![追格小程序二维码](https://gitee.com/zhuige_com/jiangqie_kafei/raw/master/screenshot/jiangqie.png) 
+![追格小程序二维码](https://xcx.jiangqie.com/img/jiangqie.png) 
 
 **小程序截图**
 
-![小程序截图1](https://gitee.com/zhuige_com/jiangqie_kafei/raw/master/screenshot/1.png)
-![小程序截图2](https://gitee.com/zhuige_com/jiangqie_kafei/raw/master/screenshot/2.png)
+![小程序截图1](https://xcx.jiangqie.com/img/1.png)
+![小程序截图2](https://xcx.jiangqie.com/img/2.png)
 
 **后台截图**
 
-![后台截图1](https://gitee.com/zhuige_com/jiangqie_kafei/raw/master/screenshot/11.png)
-![后台截图2](https://gitee.com/zhuige_com/jiangqie_kafei/raw/master/screenshot/12.png)
-![后台截图3](https://gitee.com/zhuige_com/jiangqie_kafei/raw/master/screenshot/13.png)
-![后台截图4](https://gitee.com/zhuige_com/jiangqie_kafei/raw/master/screenshot/14.png)
-![后台截图5](https://gitee.com/zhuige_com/jiangqie_kafei/raw/master/screenshot/15.png)
+![后台截图1](https://xcx.jiangqie.com/img/11.png)
+![后台截图2](https://xcx.jiangqie.com/img/12.png)
+![后台截图3](https://xcx.jiangqie.com/img/13.png)
+![后台截图4](https://xcx.jiangqie.com/img/14.png)
+![后台截图5](https://xcx.jiangqie.com/img/15.png)
 
 
 ### 后端代码下载

@@ -22,32 +22,6 @@ class JiangQie_API_User_Controller extends JiangQie_API_Base_Controller
 		/**
 		 * 用户登陆
 		 */
-		register_rest_route($this->namespace, '/' . $this->module . '/login', [
-			[
-				'callback' => [$this, 'user_login'],
-				'args' => [
-					'code' => [
-						'default' => '',
-						'description' => 'wx code',
-						'type' => 'string',
-					],
-					'encrypted_data' => [
-						'default' => '',
-						'description' => '加密数据',
-						'type' => 'string',
-					],
-					'iv' => [
-						'default' => '',
-						'description' => '数据向量',
-						'type' => 'string',
-					],
-				]
-			]
-		]);
-
-		/**
-		 * 用户登陆
-		 */
 		register_rest_route($this->namespace, '/' . $this->module . '/login2', [
 			[
 				'callback' => [$this, 'user_login2']
@@ -58,25 +32,13 @@ class JiangQie_API_User_Controller extends JiangQie_API_Base_Controller
 				'callback' => [$this, 'user_login3']
 			]
 		]);
-		register_rest_route($this->namespace, '/' . $this->module . '/logintest', [
-			[
-				'callback' => [$this, 'user_logintest']
-			]
-		]);
 
 		/**
 		 * 用户配置
 		 */
 		register_rest_route($this->namespace, '/' . $this->module . '/index', [
 			[
-				'callback' => [$this, 'user_index'],
-				'args' => [
-					'token' => [
-						'default' => '',
-						'description' => '用户token',
-						'type' => 'string',
-					],
-				]
+				'callback' => [$this, 'user_index']
 			]
 		]);
 
@@ -85,19 +47,7 @@ class JiangQie_API_User_Controller extends JiangQie_API_Base_Controller
 		 */
 		register_rest_route($this->namespace, '/' . $this->module . '/like', [
 			[
-				'callback' => [$this, 'user_like'],
-				'args' => [
-					'post_id' => [
-						'default' => 0,
-						'description' => '文章ID',
-						'type' => 'integer',
-					],
-					'token' => [
-						'default' => '',
-						'description' => '用户token',
-						'type' => 'string',
-					],
-				]
+				'callback' => [$this, 'user_like']
 			]
 		]);
 
@@ -106,112 +56,23 @@ class JiangQie_API_User_Controller extends JiangQie_API_Base_Controller
 		 */
 		register_rest_route($this->namespace, '/' . $this->module . '/favorite', [
 			[
-				'callback' => [$this, 'user_favorite'],
-				'args' => [
-					'post_id' => [
-						'default' => 0,
-						'description' => '文章ID',
-						'type' => 'integer',
-					],
-					'token' => [
-						'default' => '',
-						'description' => '用户token',
-						'type' => 'string',
-					],
-				]
+				'callback' => [$this, 'user_favorite']
+			]
+		]);
+
+		/**
+		 * 设置手机号
+		 */
+		register_rest_route($this->namespace, '/' . $this->module . '/set_mobile', [
+			[
+				'methods' => WP_REST_Server::CREATABLE,
+				'callback' => [$this, 'set_mobile'],
 			]
 		]);
 	}
 
 	/**
-	 *用户登录
-	 */
-	public function user_login($request)
-	{
-		$code = $this->param_value($request, 'code', '');
-		$encrypted_data = $this->param_value($request, 'encrypted_data', '');
-		$iv = $this->param_value($request, 'iv', '');
-
-		if (empty($code) || empty($encrypted_data) || empty($iv)) {
-			return $this->make_error('缺少参数');
-		}
-
-		$app_id = JiangQie_API::option_value('app_id');
-		$app_secret = JiangQie_API::option_value('app_secret');
-		$params = [
-			'appid' => $app_id,
-			'secret' => $app_secret,
-			'js_code' => $code,
-			'grant_type' => 'authorization_code'
-		];
-
-		$result = wp_remote_get(add_query_arg($params, 'https://api.weixin.qq.com/sns/jscode2session'));
-		if (!is_array($result) || is_wp_error($result) || $result['response']['code'] != '200') {
-			return $this->make_error('wx授权失败');
-		}
-
-		$body = stripslashes($result['body']);
-		$wx_session = json_decode($body, true);
-
-		$auth_code = $this->decryptData($app_id, $wx_session['session_key'], urldecode($encrypted_data), urldecode($iv), $data);
-		if ($auth_code != 0) {
-			return $this->make_error('wx授权失败');
-		}
-
-		$user_data = json_decode($data, true);
-
-		$open_id = $wx_session['openid'];
-
-		// $open_id = uniqid();
-		// $open_id = '5e4fc0f56e034';
-		// $user_data = [
-		// 	'nickName' => $this->param_value($request, 'nickName', ''),
-		// 	'avatarUrl' => $this->param_value($request, 'avatarUrl', ''),
-		// ];
-		if (!username_exists($open_id)) {
-			$user_id = wp_insert_user([
-				'user_login' => $open_id,
-				'nickname' => $user_data['nickName'],
-				'user_nicename' => $user_data['nickName'],
-				'display_name' => $user_data['nickName'],
-				'user_email' => $open_id . '@jiangqie.com',
-				'role' => 'subscriber',
-				'user_pass' => wp_generate_password(16, false),
-			]);
-
-			if (is_wp_error($user_id)) {
-				return $this->make_error('创建用户失败');
-			}
-		} else {
-			$user = get_user_by('login', $open_id);
-			$user_id = wp_update_user([
-				'ID' => $user->ID,
-				'nickname' => $user_data['nickName'],
-				'user_nicename' => $user_data['nickName'],
-				'display_name' => $user_data['nickName'],
-			]);
-
-			if (is_wp_error($user_id)) {
-				return $this->make_error('更新用户失败');
-			}
-		}
-
-		update_user_meta($user_id, 'jiangqie_avatar', $user_data['avatarUrl']);
-
-		$jiangqie_token = $this->generate_token();
-		update_user_meta($user_id, 'jiangqie_token', $jiangqie_token);
-
-		$user = array(
-			"nickname" => $user_data["nickName"],
-			"avatar" => $user_data["avatarUrl"],
-			"token" => $jiangqie_token,
-		);
-
-		return $this->make_success($user);
-	}
-
-	/**
-	 *用户登录
+	 *用户登录 - 已废弃
 	 */
 	public function user_login2($request)
 	{
@@ -310,7 +171,6 @@ class JiangQie_API_User_Controller extends JiangQie_API_Base_Controller
 			return $this->make_error('授权失败');
 		}
 
-
 		$user = get_user_by('login', $session['openid']);
 		if ($user) {
 			$user_id = $user->ID;
@@ -365,29 +225,15 @@ class JiangQie_API_User_Controller extends JiangQie_API_Base_Controller
 			'nickname' => $nickname,
 			'avatar' => get_user_meta($user_id, 'jiangqie_avatar', true),
 			'token' => $jiangqie_token,
+			'mobile' => get_user_meta($user_id, 'jiangqie_mobile', true),
 		);
 
 		return $this->make_success($user);	
 	}
 
-	public function user_logintest($request)
-	{
-		$jiangqie_token = $this->generate_token();
-
-		$user_id = 4;
-
-		$user = array(
-			'nickname' => '酱茄',
-			'avatar' => get_user_meta($user_id, 'jiangqie_avatar', true),
-			'token' => $jiangqie_token,
-		);
-
-		update_user_meta($user_id, 'jiangqie_token', $jiangqie_token);
-
-		return $this->make_success($user);
-	}
-
-	
+	/**
+	 * 微信 获取openid
+	 */
 	private function wx_code2openid($code)
 	{
 		$app_id = JiangQie_API::option_value('app_id');
@@ -408,18 +254,15 @@ class JiangQie_API_User_Controller extends JiangQie_API_Base_Controller
 			return false;
 		}
 
-		// file_put_contents('wx_login', json_encode($result));
-
 		$body = stripslashes($result['body']);
 		$session = json_decode($body, true);
-
-		// $openId = $wx_session['openid'];
-		// $unionId = $wx_session['unionid'];
-		// update_user_meta($user_id, 'jq_wx_session_key', $wx_session['session_key']);
 
 		return $session;
 	}
 
+	/**
+	 * QQ 获取openid
+	 */
 	private function qq_code2openid($code)
 	{
 		$app_id = JiangQie_API::option_value('qq_app_id');
@@ -440,14 +283,15 @@ class JiangQie_API_User_Controller extends JiangQie_API_Base_Controller
 			return false;
 		}
 
-		// file_put_contents('qq_login', json_encode($result));
-
 		$body = stripslashes($result['body']);
 		$session = json_decode($body, true);
 
 		return $session;
 	}
 
+	/**
+	 * 百度 获取openid
+	 */
 	private function bd_code2openid($code)
 	{
 		$app_id = JiangQie_API::option_value('bd_app_key');
@@ -466,8 +310,6 @@ class JiangQie_API_User_Controller extends JiangQie_API_Base_Controller
 		if (!is_array($result) || is_wp_error($result) || $result['response']['code'] != '200') {
 			return false;
 		}
-
-		// file_put_contents('bd_login', json_encode($result));
 
 		$body = stripslashes($result['body']);
 		$session = json_decode($body, true);
@@ -610,6 +452,52 @@ class JiangQie_API_User_Controller extends JiangQie_API_Base_Controller
 	}
 
 	/**
+	 * 设置手机号
+	 */
+	public function set_mobile($request)
+	{
+		$user_id = $this->check_login($request);
+		if (!$user_id) {
+			return $this->make_error('还没有登陆', -1);
+		}
+
+		$code = $this->param_value($request, 'code', '');
+		$encrypted_data = $this->param_value($request, 'encrypted_data', '');
+		$iv = $this->param_value($request, 'iv', '');
+		if (empty($code) || empty($encrypted_data) || empty($iv)) {
+			return $this->make_error('缺少参数');
+		}
+
+		$os = $this->param_value($request, 'os', '');
+
+		$mobile = '';
+		if ($os == 'wx') {
+			$app_id = JiangQie_API::option_value('app_id');
+			$app_secret = JiangQie_API::option_value('app_secret');
+			if (!$app_id || !$app_secret) {
+				return $this->make_error('未配置微信小程序信息');
+			}
+
+			$session = $this->wx_code2openid($code);
+			if (!$session) {
+				return $this->make_error('授权失败');
+			}
+
+			$res = $this->weixin_decryptData($app_id, $session['session_key'], $encrypted_data, $iv, $data);
+			if ($res != 0) {
+				return $this->make_error('系统异常');
+			}
+			$dataMobile = json_decode($data, true);
+			$mobile = $dataMobile['phoneNumber'];
+		} else {
+			return $this->make_error('暂不支持此平台');
+		}
+		update_user_meta($user_id, 'jiangqie_mobile', $mobile);
+
+		return $this->make_success($mobile);
+	}
+
+	/**
 	 * 检验数据的真实性，并且获取解密后的明文.
 	 * @param $encryptedData string 加密的用户数据
 	 * @param $iv string 与用户数据一同返回的初始向量
@@ -617,9 +505,8 @@ class JiangQie_API_User_Controller extends JiangQie_API_Base_Controller
 	 *
 	 * @return int 成功 0，失败返回对应的错误码
 	 */
-	private function decryptData($appid, $session, $encryptedData, $iv, &$data)
+	private function weixin_decryptData($appid, $session, $encryptedData, $iv, &$data)
 	{
-
 		$ErrorCode = array(
 			'OK'                => 0,
 			'IllegalAesKey'     => -41001,

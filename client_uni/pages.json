@@ -60,7 +60,7 @@
 		{
 			"path": "pages/login/login",
 			"style": {
-				"navigationBarTitleText": "登录",
+				"navigationBarTitleText": "",
 				"navigationBarBackgroundColor": "#DA291A"
 			}
 		},

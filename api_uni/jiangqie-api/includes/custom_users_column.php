@@ -20,6 +20,7 @@ function jiangqie_api_manage_user_columns($columns)
 	$new_columns['cb'] = $columns['cb'];
 	$new_columns['username'] = $columns['username'];
 	$new_columns['jqnickname'] = '昵称';
+	$new_columns['jqmobile'] = '手机号';
 
 	unset($columns['cb']);
 	unset($columns['username']);
@@ -31,6 +32,8 @@ function jiangqie_api_manage_user_custom_column($value, $column_name, $user_id)
 {
 	if ('jqnickname' == $column_name) {
 		$value = get_user_meta($user_id, 'nickname', true);
+	} else if ('jqmobile' == $column_name) {
+		$value = get_user_meta($user_id, 'jiangqie_mobile', true);
 	}
 
 	return $value;

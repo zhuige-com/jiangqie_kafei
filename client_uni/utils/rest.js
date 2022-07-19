@@ -50,6 +50,13 @@ function request(url, data = {}, method = "GET") {
 					})
 					return;
 				}
+				
+				if (res.data.code == -11) {
+					uni.navigateTo({
+						url: '/pages/login/login?type=mobile'
+					})
+					return;
+				}
 
 				if (res.data.code == 0) {
 					resolve(res.data);

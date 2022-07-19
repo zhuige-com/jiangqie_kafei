@@ -6,52 +6,71 @@
 				<!--替换为小程序logo-->
 				<image src="/static/images/default_avatar.jpg" mode="aspectFill"></image>
 				<view class="jiangqie-app-name">{{title}}</view>
-				<view class="jiangqie-app-slogan">授权登录可查看更多内容</view>
+				<view class="jiangqie-app-slogan">
+					{{type=='login' ? '授权登录可查看更多内容' : '绑定手机号后才能评论'}}
+				</view>
 			</view>
 			<view class="jiangqie-login-btn">
 				<button @tap.stop="handlerCancelClick" class="jiangqie-login-btnl">取消</button>
 
-				<!-- #ifdef MP-WEIXIN -->
-				<button v-if="code" @tap.stop="clickLogin" class="jiangqie-login-btnr">确定</button>
-				<template v-else>
-					<button class="jiangqie-login-btnl">确定</button>
-					<view class="jiangqie-no-login-tip">
-						<view>请在后台配置微信Appid和微信AppSecret</view>
-					</view>
-				</template>
-				<!-- #endif -->
+				<template v-if="type=='login'">
+					<!-- #ifdef MP-WEIXIN -->
+					<button v-if="code" @tap.stop="clickLogin" class="jiangqie-login-btnr">确定</button>
+					<template v-else>
+						<button class="jiangqie-login-btnl">确定</button>
+						<view class="jiangqie-no-login-tip">
+							<view>请在后台配置微信Appid和微信AppSecret</view>
+						</view>
+					</template>
+					<!-- #endif -->
 
-				<!-- #ifdef MP-QQ -->
-				<button v-if="code" open-type="getUserInfo" class="jiangqie-login-btnr"
-					@getuserinfo="getuserinfo">确定</button>
-				<template v-else>
-					<button class="jiangqie-login-btnl">确定</button>
-					<view class="jiangqie-no-login-tip">
-						<view>请在后台配置QQAppid和QQAppSecret</view>
-					</view>
-				</template>
-				<!-- #endif -->
+					<!-- #ifdef MP-QQ -->
+					<button v-if="code" open-type="getUserInfo" class="jiangqie-login-btnr"
+						@getuserinfo="getuserinfo">确定</button>
+					<template v-else>
+						<button class="jiangqie-login-btnl">确定</button>
+						<view class="jiangqie-no-login-tip">
+							<view>请在后台配置QQAppid和QQAppSecret</view>
+						</view>
+					</template>
+					<!-- #endif -->
 
-				<!-- #ifdef MP-BAIDU -->
-				<button v-if="code" open-type="getUserInfo" class="jiangqie-login-btnr"
-					@getuserinfo="getuserinfo">确定</button>
-				<template v-else>
-					<button class="jiangqie-login-btnl">确定</button>
-					<view class="jiangqie-no-login-tip">
-						<view>请在后台配置百度AppKey和百度AppSecret</view>
-					</view>
-				</template>
-				<!-- #endif -->
+					<!-- #ifdef MP-BAIDU -->
+					<button v-if="code" open-type="getUserInfo" class="jiangqie-login-btnr"
+						@getuserinfo="getuserinfo">确定</button>
+					<template v-else>
+						<button class="jiangqie-login-btnl">确定</button>
+						<view class="jiangqie-no-login-tip">
+							<view>请在后台配置百度AppKey和百度AppSecret</view>
+						</view>
+					</template>
+					<!-- #endif -->
 
-				<!-- #ifdef H5 -->
-				<button @tap.stop="clickLoginTest" class="jiangqie-login-btnr">确定</button>
-				<view class="jiangqie-no-login-tip">
-					<view>微信/百度/QQ已接入</view>
-					<view>当前平台尚未接入账号体系</view>
-					<view>登录仅为演示</view>
-				</view>
-				<!-- #endif -->
+					<!-- #ifdef H5 -->
+					<button @tap.stop="clickLoginTest" class="jiangqie-login-btnr">确定</button>
+					<view class="jiangqie-no-login-tip">
+						<view>微信/百度/QQ已接入</view>
+						<view>当前平台尚未接入账号体系</view>
+						<view>登录仅为演示</view>
+					</view>
+					<!-- #endif -->
+				</template>
+				<template v-if="type=='mobile'">
+					<!-- #ifdef MP-WEIXIN -->
+					<button type="default" class="jiangqie-login-btnl" open-type="getPhoneNumber"
+						@getphonenumber="getPhoneNumber">绑定手机号</button>
+					<!-- #endif -->
+					
+					<!-- #ifndef MP-WEIXIN -->
+					该平台下的手机绑定功能暂未实现
+					<!-- #endif -->
+				</template>
 			</view>
+		</view>
+		
+		<view class="bottom-copyright">
+			<view @click="clickLink('/pages/viewhtml/viewhtml?page_id=1192')">《免责声明》</view>
+			<view @click="clickLink('/pages/viewhtml/viewhtml?page_id=251')">《关于我们》</view>
 		</view>
 	</view>
 </template>
@@ -73,6 +92,8 @@
 	export default {
 		data() {
 			return {
+				type: 'login',
+
 				background: '',
 				title: '',
 
@@ -81,6 +102,15 @@
 		},
 
 		onLoad(options) {
+			if (options.type) {
+				this.type = options.type;
+			}
+			
+			let nav_title = (this.type == 'login' ? '登录' : '绑定手机号');
+			uni.setNavigationBarTitle({
+				title: nav_title
+			})
+
 			this.title = getApp().globalData.appName;
 
 			// #ifdef MP-WEIXIN || MP-QQ || MP-BAIDU
@@ -112,6 +142,10 @@
 		// #endif
 
 		methods: {
+			clickLink(link) {
+				Util.openLink(link)
+			},
+			
 			handlerCancelClick(e) {
 				Util.navigateBack();
 			},
@@ -129,8 +163,6 @@
 				wx.getUserProfile({
 					desc: '用于完善会员资料',
 					success: res => {
-						// console.log(res);
-
 						let userInfo = res.userInfo;
 						this.login(userInfo.nickName, userInfo.avatarUrl);
 					},
@@ -170,6 +202,17 @@
 				}, err => {
 					console.log(err)
 				});
+			},
+			
+			getPhoneNumber(e) {
+				Rest.post(Api.JIANGQIE_USER_SET_MOBILE, {
+					encrypted_data: e.detail.encryptedData,
+					iv: e.detail.iv,
+					code: this.code,
+				}).then(res => {
+					Alert.toast(res.msg)
+					Util.navigateBack();
+				})
 			}
 		}
 	};
@@ -202,7 +245,8 @@
 	}
 
 	.jiangqie-login-btn {
-		padding: 30rpx 160rpx;
+		margin-top: 160rpx;
+		padding: 0rpx 160rpx;
 	}
 
 
@@ -227,5 +271,14 @@
 		text-align: center;
 		font-size: 24rpx;
 		color: #999999;
+	}
+	
+	.bottom-copyright {
+		width: 100%;
+		position: fixed;
+		bottom: 100rpx;
+		color: blue;
+		line-height: 2rem;
+		text-align: center;
 	}
 </style>

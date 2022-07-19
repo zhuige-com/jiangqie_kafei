@@ -128,6 +128,11 @@ module.exports = {
 	 * 用户 收藏文章
 	 */
 	JIANGQIE_USER_FAVORITE: makeURL('user', 'favorite'),
+	
+	/**
+	 * 用户 设置手机号
+	 */
+	JIANGQIE_USER_SET_MOBILE: makeURL('user', 'set_mobile'),
 
 	/**
 	 * 文章评论

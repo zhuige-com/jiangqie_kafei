@@ -125,6 +125,11 @@ class JiangQie_API_Comment_Controller extends JiangQie_API_Base_Controller
 			return $this->make_error('评论功能未开启');
 		}
 
+		$mobile = get_user_meta($user_id, 'jiangqie_mobile', true);
+		if (empty($mobile)) {
+			return $this->make_error('还没有登陆', -11);
+		}
+
 		$post_id = (int)($this->param_value($request, 'post_id', 0));
 		$parent_id = (int)($this->param_value($request, 'parent_id', 0));
 		$content = $this->param_value($request, 'content', '');
