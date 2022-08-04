@@ -1,7 +1,7 @@
 {
     "id": "jiangqie-xcx-free",
     "name": "新闻资讯博客模板-酱茄Free小程序",
-    "version": "1.9.0",
+    "version": "1.9.1",
     "description": "酱茄小程序开源版，基于WordPress的微信小程序，适用于博客小程序和新闻资讯小程序。",
     "keywords": [
         "模板",
@@ -16,10 +16,6 @@
         "HBuilderX": "^3.2.16"
     },
     "dcloudext": {
-        "category": [
-            "前端页面模板",
-            "uni-app前端项目模板"
-        ],
         "sale": {
             "regular": {
                 "price": "0.00"
@@ -36,7 +32,8 @@
             "data": "无",
             "permissions": "无"
         },
-        "npmurl": ""
+        "npmurl": "",
+        "type": "uniapp-template-project"
     },
     "uni_modules": {
         "platforms": {

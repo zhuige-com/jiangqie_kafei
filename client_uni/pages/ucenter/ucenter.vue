@@ -14,10 +14,10 @@
 					</view>
 				</template>
 				<template v-else>
-					<view class="jiangqie-useravatar">
+					<view class="jiangqie-useravatar" @click="clickLogin">
 						<image src="/static/images/default_avatar.jpg" mode="aspectFill"></image>
 						<view class="jiangqie-useralogin">
-							<navigator url="../login/login">立即登录</navigator>
+							<view>立即登录</view>
 						</view>
 					</view>
 				</template>
@@ -245,6 +245,10 @@
 		// #endif
 
 		methods: {
+			clickLogin() {
+				Util.openLink('/pages/login/login')
+			},
+			
 			handlerPostTrack(e) {
 				if (!Auth.getUser()) {
 					uni.navigateTo({

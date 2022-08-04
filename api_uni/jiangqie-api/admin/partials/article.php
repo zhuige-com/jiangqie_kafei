@@ -33,11 +33,20 @@ CSF::createSection($prefix, array(
         ),
 
         array(
+            'id'    => 'switch_comment_mobile',
+            'type'  => 'switcher',
+            'title' => '评论要求',
+            'subtitle' => '绑定手机号才能评论?',
+            'default' => ''
+        ),
+
+        array(
             'id'    => 'switch_comment_verify',
             'type'  => 'switcher',
             'title' => '评论审核',
             'subtitle' => '评论是否需要审核?',
             'default' => '1'
         ),
+
     )
 ));

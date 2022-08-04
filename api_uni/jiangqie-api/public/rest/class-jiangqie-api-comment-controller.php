@@ -125,9 +125,11 @@ class JiangQie_API_Comment_Controller extends JiangQie_API_Base_Controller
 			return $this->make_error('评论功能未开启');
 		}
 
-		$mobile = get_user_meta($user_id, 'jiangqie_mobile', true);
-		if (empty($mobile)) {
-			return $this->make_error('还没有绑定手机号', -11);
+		if (JiangQie_API::option_value('switch_comment_mobile')) {
+			$mobile = get_user_meta($user_id, 'jiangqie_mobile', true);
+			if (empty($mobile)) {
+				return $this->make_error('还没有绑定手机号', -11);
+			}
 		}
 
 		$post_id = (int)($this->param_value($request, 'post_id', 0));
