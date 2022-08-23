@@ -36,13 +36,19 @@
 					<!-- #endif -->
 
 					<!-- #ifdef MP-BAIDU -->
-					<button v-if="code" open-type="getUserInfo" class="jiangqie-login-btnr"
-						@getuserinfo="getuserinfo">确定</button>
+					<template v-if="is_login_baidu">
+						<button v-if="code" open-type="getUserInfo" class="jiangqie-login-btnr"
+							@getuserinfo="getuserinfo">确定</button>
+						<template v-else>
+							<button class="jiangqie-login-btnl">确定</button>
+							<view class="jiangqie-no-login-tip">
+								<view>请在后台配置百度AppKey和百度AppSecret</view>
+							</view>
+						</template>
+					</template>
 					<template v-else>
-						<button class="jiangqie-login-btnl">确定</button>
-						<view class="jiangqie-no-login-tip">
-							<view>请在后台配置百度AppKey和百度AppSecret</view>
-						</view>
+						<button open-type="login" class="jiangqie-login-btnr"
+							@login="baiduAppLogin">点击登录百度App</button>
 					</template>
 					<!-- #endif -->
 
@@ -98,6 +104,9 @@
 				title: '',
 
 				code: undefined,
+				
+				// 会否已登录百度App
+				is_login_baidu: false,
 			};
 		},
 
@@ -113,12 +122,23 @@
 
 			this.title = getApp().globalData.appName;
 
-			// #ifdef MP-WEIXIN || MP-QQ || MP-BAIDU
+			// #ifdef MP-WEIXIN || MP-QQ
 			uni.login({
 				success: (res) => {
 					this.code = res.code;
 				}
 			});
+			// #endif
+			
+			// #ifdef MP-BAIDU
+			this.is_login_baidu = swan.isLoginSync().isLogin;
+			if (this.is_login_baidu) {
+				swan.getLoginCode({
+					success: res => {
+						this.code = res.code;
+					}
+				});
+			}
 			// #endif
 
 			Rest.get(Api.JIANGQIE_SETTING_LOGIN).then(res => {
@@ -170,6 +190,17 @@
 						console.log(err);
 					}
 				})
+			},
+			
+			baiduAppLogin(e) {
+				if (!e.detail.errCode) {
+					this.is_login_baidu = true;
+					swan.getLoginCode({
+						success: res => {
+							this.code = res.code;
+						}
+					});
+				}
 			},
 
 			getuserinfo(res) {

@@ -43,20 +43,6 @@ module.exports = {
 	//是否已登录
 	isLogin: getToken,
 
-	//获取用户信息
-	getWXUser() {
-		return new Promise(function(resolve, reject) {
-			uni.login({
-				success: (res) => {
-					resolve(res);
-				},
-				fail: (err) => {
-					reject(err);
-				}
-			});
-		});
-	},
-
 	setUser(user) {
 		uni.setStorageSync(Constant.JQ_USER_KEY, user);
 	},

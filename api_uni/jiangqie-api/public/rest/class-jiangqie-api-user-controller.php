@@ -167,7 +167,7 @@ class JiangQie_API_User_Controller extends JiangQie_API_Base_Controller
 			$session = $this->bd_code2openid($code);
 		}
 
-		if (!$session) {
+		if (!$session || empty($session['openid'])) {
 			return $this->make_error('授权失败');
 		}
 

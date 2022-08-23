@@ -83,6 +83,11 @@ gitee下载（优先更新）：https://gitee.com/zhuige_com/jiangqie_kafei
 
 == Changelog ==
 
+= 1.9.2 =
+
+1. 百度小程序登录兼容性问题
+
+
 = 1.9.1 =
 
 1. 绑定手机号可开关
