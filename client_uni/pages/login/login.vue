@@ -42,7 +42,7 @@
 						<template v-else>
 							<button class="jiangqie-login-btnl">确定</button>
 							<view class="jiangqie-no-login-tip">
-								<view>请在后台配置百度AppKey和百度AppSecret</view>
+								<view>请检查后台百度AppKey和AppSecret配置，及manifest.json中百度AppID配置</view>
 							</view>
 						</template>
 					</template>
@@ -231,7 +231,13 @@
 					Auth.setUser(res.data);
 					Util.navigateBack();
 				}, err => {
-					console.log(err)
+					// console.log(err)
+					if (err.msg) {
+						uni.showToast({
+							icon: 'none',
+							title: err.msg
+						});
+					}
 				});
 			},
 			
@@ -241,7 +247,10 @@
 					iv: e.detail.iv,
 					code: this.code,
 				}).then(res => {
-					Alert.toast(res.msg)
+					uni.showToast({
+						icon: 'none',
+						title: res.msg
+					});
 					Util.navigateBack();
 				})
 			}

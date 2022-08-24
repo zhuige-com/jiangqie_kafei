@@ -277,6 +277,7 @@
 						if (res.confirm) {
 							uni.clearStorageSync();
 							uni.showToast({
+								icon: 'none',
 								title: '清除完毕'
 							});
 							uni.reLaunch({

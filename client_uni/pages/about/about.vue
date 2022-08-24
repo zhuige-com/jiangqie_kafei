@@ -71,6 +71,7 @@
 						uni.getClipboardData({
 							success: (res) => {
 								uni.showToast({
+									icon: 'none',
 									title: '网址已复制'
 								});
 							}

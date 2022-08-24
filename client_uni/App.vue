@@ -1,6 +1,6 @@
 <script>
 	/*
-	 * 酱茄小程序开源版 v1.9.2
+	 * 酱茄小程序开源版 v1.9.3
 	 * 作者: 追格
 	 * 文档：https://www.zhuige.com/docs/zxfree.html
 	 * github: https://github.com/zhuige-com/jiangqie_kafei

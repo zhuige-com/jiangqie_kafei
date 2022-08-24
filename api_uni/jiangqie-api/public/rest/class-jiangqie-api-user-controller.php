@@ -168,7 +168,7 @@ class JiangQie_API_User_Controller extends JiangQie_API_Base_Controller
 		}
 
 		if (!$session || empty($session['openid'])) {
-			return $this->make_error('授权失败');
+			return $this->make_error('请检查前后端配置信息~');
 		}
 
 		$user = get_user_by('login', $session['openid']);

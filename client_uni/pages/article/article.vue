@@ -380,6 +380,7 @@
 									filePath: this.painterImage,
 									success: () => {
 										uni.showToast({
+											icon: 'none',
 											title: '已保存'
 										})
 									}
