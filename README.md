@@ -1,17 +1,36 @@
 
 ### 介绍
 
-Hi，欢迎使用追格资讯小程序（酱茄小程序开源版 – 酱茄Free）。
-
-追格资讯小程序基于WordPress开源程序和WordPress REST API开发，实现WordPress网站数据与小程序数据同步共享，通过简单的配置就能搭建自己的小程序。
+追格资讯小程序开源版（又称酱茄free），实现WordPress网站数据与小程序同步共享，简单的配置就能搭建自己的资讯/博客小程序。一套代码多端适用（微信端、百度端、QQ端、H5端）
 
 
-#### 微信：**jianbing2011**（加微信，进微信群交流）
+### 联系我们
+
+追格官网：https://www.zhuige.com
+
+安装文档：https://www.zhuige.com/docs
+
+微信客服：jianbing2011（加微信，进微信群交流）
 
 <img src="https://www.zhuige.com/uploads/20210828/2830bbe86eb2379d2f629dd125c6f9d7.jpg" alt="扫码加微信" width="300" height="300" />
 
 
-#### 追格（酱茄）开源产品：
+### 开源版演示
+
+![追格小程序二维码](https://www.zhuige.com/uploads/20210903/fd3713efab57e0bb5e686a4c4dad8109.png) 
+
+![追格小程序二维码](https://www.zhuige.com/uploads/20210826/caf072cd077242494ebbe7372c022e0b.jpg) 
+
+### 专业版演示
+
+![追格小程序二维码](https://www.zhuige.com/uploads/20220525/e9d90108578e7a1b3857865d6a4c62f1.jpg) 
+
+<img src="https://www.zhuige.com/uploads/20220525/f90d75fe933564349d71d5b294a97b2f.jpg" alt="微信扫一扫" width="300" height="300" />
+
+
+
+
+### 追格（酱茄）开源产品：
 
 1. 追格资讯小程序Free：[https://www.zhuige.com/product/zxfree.html](https://www.zhuige.com/product/zxfree.html)
 
@@ -26,9 +45,6 @@ Hi，欢迎使用追格资讯小程序（酱茄小程序开源版 – 酱茄Free
 6. 追格商城小程序：[https://www.zhuige.com/product/sc.html](https://www.zhuige.com/product/sc.html)
 
 
-### 演示
-
-![追格小程序二维码](https://xcx.jiangqie.com/img/jiangqie.png) 
 
 **小程序截图**
 
@@ -53,11 +69,13 @@ Hi，欢迎使用追格资讯小程序（酱茄小程序开源版 – 酱茄Free
 **最近github老是连不上，最新代码请到gitee下载。**
 
 
+
 ### 代码说明
 
 推荐使用client_uni（uniapp前端）和api_uni（WordPress插件）搭配使用。uniapp+WordPress开发，支持多端（微信小程序、百度小程序、QQ小程序等）。
 
 *api和client是之前的老版本，已不再维护*
+
 
 
 ### 安装教程
@@ -66,6 +84,7 @@ Hi，欢迎使用追格资讯小程序（酱茄小程序开源版 – 酱茄Free
 2. 使用HBuilderX导入client_uni目录，并修改client_uni/utils/config.js中的域名
 
 *本项目依赖 WordPress rest api 功能，请确保其正常*
+
 
 
 ### 功能清单
@@ -134,9 +153,11 @@ Hi，欢迎使用追格资讯小程序（酱茄小程序开源版 – 酱茄Free
 13. 文章详情Tag功能；
 
 
+
 ### 开源协议
 
 遵循GPL V2.0开源协议发布（协议连接 [www.gnu.org/licenses/gpl-2.0.html](http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)）
+
 
 
 ### 免责声明
@@ -144,11 +165,11 @@ Hi，欢迎使用追格资讯小程序（酱茄小程序开源版 – 酱茄Free
 用户在接受服务之前，请务必仔细阅读 [免责声明](https://www.zhuige.com/about/5.html) 并同意本声明
 
 
+
 ### 特别声明
 
-黑灰产请绕行！
+黑灰产请绕行！如果发现有人使用本程序从事违法活动，将即可向公安机关举报，并协助破案！
 
-如果发现有人使用本程序从事违法活动，将即可向公安机关举报，并协助破案！
 
 
 ### 鸣谢
@@ -164,3 +185,5 @@ Hi，欢迎使用追格资讯小程序（酱茄小程序开源版 – 酱茄Free
 5. https://github.com/JoeSz/Exopite-Simple-Options-Framework
 
 6. https://cn.wordpress.org
+
+其他（更新中）未标记的开源及创意； 
