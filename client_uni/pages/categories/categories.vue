@@ -27,7 +27,7 @@
 		</view>
 
 		<view class="jiangqie-nomore">
-			<view class="jiangqie-text">© 酱茄 jiangqie.com</view>
+			<view class="jiangqie-text">© 追格 zhuige.com</view>
 		</view>
 	</view>
 </template>
@@ -204,7 +204,7 @@
 		overflow: hidden;
 		padding: 20rpx 30rpx 0;
 		font-size: 32rpx;
-		font-weight: 400;
+		font-weight: 600;
 		color: #333;
 	}
 
@@ -212,7 +212,7 @@
 		overflow: hidden;
 		padding: 10rpx 30rpx 20rpx;
 		font-size: 24rpx;
-		font-weight: 200;
+		font-weight: 400;
 		color: #999;
 	}
 
@@ -252,7 +252,7 @@
 	.categorie-text view {
 		font-size: 24rpx;
 		color: #FFF;
-		font-weight: 200;
+		font-weight: 400;
 		line-height: 40rpx;
 	}
 </style>

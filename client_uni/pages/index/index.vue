@@ -110,7 +110,9 @@
 							<view v-if="(listMode==1 && false) || (listMode==2) || (listMode==3 && index%5==4)"
 								:key="index" class="jiangqie-news-block image-wide" :data-id="item.id"
 								@tap.stop="handlerArticleClick">
-								<image :src="item.thumbnail" mode="aspectFill" class="jiangqie-news-image"></image>
+								<view class="jiangqie-news-image">
+									<image :src="item.thumbnail" mode="aspectFill">
+								</view>
 								<view class="jiangqie-news-text">
 									<view
 										:class="'jiangqie-news-title ' + (item.excerpt?'':'jiangqie-news-no-excerpt')">
@@ -119,13 +121,13 @@
 									</view>
 									<view v-if="item.excerpt" class="jiangqie-news-describe">{{item.excerpt}}</view>
 									<view class="jiangqie-news-info">
-										<view class="jiangqie-news-cmt">
-											<image src="/static/images/ctm2.png" mode="aspectFill"></image>
-											{{item.views}}
-										</view>
 										<text v-for="(item, index2) in item.tags" :key="index2"
 											class="jiangqie-news-tag">{{item.name}}</text>
 										<text class="jiangqie-news-time">{{item.time}}</text>
+										<view class="jiangqie-news-cmt">
+											<image src="/static/images/ctm2.png" mode="aspectFill"></image>
+											<text>{{item.views}}</text>
+										</view>
 									</view>
 								</view>
 								<!-- <image wx:if="{{item.stick==1}}" src="../../images/set_top.png" mode="aspectFill" class="jiangqie-news-stick-image"></image> -->
@@ -141,13 +143,13 @@
 									</view>
 									<view v-if="item.excerpt" class="jiangqie-news-describe">{{item.excerpt}}</view>
 									<view class="jiangqie-news-info">
-										<view class="jiangqie-news-cmt">
-											<image src="/static/images/ctm2.png" mode="aspectFill"></image>
-											{{item.views}}
-										</view>
 										<text v-for="(item, index2) in item.tags" :key="index2"
 											class="jiangqie-news-tag">{{item.name}}</text>
 										<text class="jiangqie-news-time">{{item.time}}</text>
+										<view class="jiangqie-news-cmt">
+											<image src="/static/images/ctm2.png" mode="aspectFill"></image>
+											<text>{{item.views}}</text>
+										</view>
 									</view>
 								</view>
 							</view>
@@ -167,7 +169,9 @@
 							<view v-if="(listMode==1 && false) || (listMode==2) || (listMode==3 && index%5==4)"
 								:key="index" class="jiangqie-news-block image-wide" :data-id="item.id"
 								@tap.stop="handlerArticleClick">
-								<image :src="item.thumbnail" mode="aspectFill" class="jiangqie-news-image"></image>
+								<view class="jiangqie-news-image">
+									<image :src="item.thumbnail" mode="aspectFill">
+								</view>
 								<view class="jiangqie-news-text">
 									<view
 										:class="'jiangqie-news-title ' + (item.excerpt?'':'jiangqie-news-no-excerpt')">
@@ -175,19 +179,21 @@
 									</view>
 									<view v-if="item.excerpt" class="jiangqie-news-describe">{{item.excerpt}}</view>
 									<view class="jiangqie-news-info">
-										<view class="jiangqie-news-cmt">
-											<image src="/static/images/ctm2.png" mode="aspectFill"></image>
-											{{item.views}}
-										</view>
 										<text v-for="(item, index2) in item.tags" :key="index2"
 											class="jiangqie-news-tag">{{item.name}}</text>
 										<text class="jiangqie-news-time">{{item.time}}</text>
+										<view class="jiangqie-news-cmt">
+											<image src="/static/images/ctm2.png" mode="aspectFill"></image>
+											<text>{{item.views}}</text>
+										</view>
 									</view>
 								</view>
 							</view>
 							<view v-else :key="index" class="jiangqie-news-block" :data-id="item.id"
 								@tap.stop="handlerArticleClick">
-								<image :src="item.thumbnail" mode="aspectFill" class="jiangqie-news-image"></image>
+								<view class="jiangqie-news-image">
+									<image :src="item.thumbnail" mode="aspectFill">
+								</view>
 								<view class="jiangqie-news-text">
 									<view
 										:class="'jiangqie-news-title ' + (item.excerpt?'':'jiangqie-news-no-excerpt')">
@@ -195,13 +201,13 @@
 									</view>
 									<view v-if="item.excerpt" class="jiangqie-news-describe">{{item.excerpt}}</view>
 									<view class="jiangqie-news-info">
-										<view class="jiangqie-news-cmt">
-											<image src="/static/images/ctm2.png" mode="aspectFill"></image>
-											{{item.views}}
-										</view>
 										<text v-for="(item, index2) in item.tags" :key="index2"
 											class="jiangqie-news-tag">{{item.name}}</text>
 										<text class="jiangqie-news-time">{{item.time}}</text>
+										<view class="jiangqie-news-cmt">
+											<image src="/static/images/ctm2.png" mode="aspectFill"></image>
+											<text>{{item.views}}</text>
+										</view>
 									</view>
 								</view>
 							</view>
@@ -645,7 +651,7 @@
 	.jiangqie-news-lightimg {
 		height: 300rpx;
 		width: 320rpx;
-		border-radius: 20rpx;
+		border-radius: 8rpx;
 	}
 
 	.jiangqie-news-lightbox-side .jiangqie-news-lightimg,
@@ -661,11 +667,11 @@
 		left: 0rpx;
 		bottom: 0rpx;
 		text-align: left;
-		background: rgba(0, 0, 0, 0.3);
+		background: rgba(0, 0, 0, 0.5);
 		overflow: hidden;
 		z-index: 9;
 		width: 280rpx;
-		border-radius: 0 0 20rpx 20rpx;
+		border-radius: 0 0 8rpx 8rpx;
 		height: 60rpx;
 		padding: 0 20rpx;
 	}
@@ -702,10 +708,12 @@
 
 	.jiangqie-news-block {
 		position: relative;
-		padding: 30rpx 0;
-		min-height: 160rpx;
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
 		border-bottom: 1rpx solid #DDD;
-		padding-right: 260rpx;
+		padding: 24rpx 0;
+		flex-direction: row-reverse;
 	}
 
 	.jiangqie-news-block:last-child {
@@ -721,24 +729,32 @@
 	}
 
 	.jiangqie-news-image {
-		float: right;
-		height: 160rpx;
-		width: 240rpx;
-		margin-right: -260rpx;
-		border-radius: 20rpx;
-		box-shadow: 5rpx 5rpx 20rpx rgba(0, 0, 0, 0.2);
+		flex: 0 0 260rpx;
+		height: 200rpx;
+		width: 260rpx;
+		border-radius: 8rpx;
+	}
+	.jiangqie-news-image image {
+		height: 100%;
+		width: 100%;
+		border-radius: 8rpx;
 	}
 
 	.jiangqie-news-text {
 		text-align: left;
+		padding-right: 20rpx;
+		width: 100%;
+		overflow: hidden;
 	}
 
 	.jiangqie-news-title {
 		font-size: 32rpx;
 		color: #333;
-		font-weight: 400;
-		line-height: 50rpx;
+		font-weight: 600;
+		line-height: 44rpx;
+		max-height: 88rpx;
 		overflow: hidden;
+		margin-bottom: 12rpx;
 	}
 
 	.jiangqie-news-no-excerpt {
@@ -750,24 +766,28 @@
 		font-size: 26rpx;
 		color: #999;
 		line-height: 30rpx;
+		max-height: 30rpx;
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
 		margin-bottom: 18rpx;
 	}
 
 	.jiangqie-news-info {
 		font-size: 22rpx;
 		color: #BBB;
-		vertical-align: bottom;
 		height: 26rpx;
+		display: flex;
+		align-items: center;
 	}
 
 	.jiangqie-news-cmt {
-		float: right;
-		padding-right: 4rpx;
-
+		margin-right: 12rpx;
+		display: flex;
+		align-items: center;
 	}
 
 	.jiangqie-news-cmt image {
-		vertical-align: middle;
 		height: 24rpx;
 		width: 24rpx;
 		margin-right: 8rpx;
@@ -775,7 +795,6 @@
 	}
 
 	.jiangqie-news-tag {
-		float: left;
 		line-height: 32rpx;
 		height: 30rpx;
 		padding: 0 16rpx;
@@ -790,25 +809,26 @@
 		line-height: 30rpx;
 		height: 30rpx;
 		vertical-align: middle;
-		padding-left: 10rpx;
+		padding-right: 10rpx;
 	}
 
 	.image-wide {
 		padding-right: 0;
+		flex-wrap: wrap;
 	}
 
 	.image-wide .jiangqie-news-image {
+		flex: none;
 		height: 320rpx;
 		width: 690rpx;
 		margin-right: 0rpx;
 		margin-bottom: 10rpx;
-		clear: both;
-		float: none;
 	}
-
+	.image-wide .jiangqie-news-text {
+		padding-left: 0;
+	}
 	.image-wide .jiangqie-news-title {
 		height: auto;
-		margin-bottom: 10rpx;
 	}
 
 	.jiangqie-news-hot {
@@ -851,8 +871,7 @@
 	.jiangqie-hot-scroll-image {
 		width: 440rpx;
 		height: 220rpx;
-		border-radius: 16rpx;
-		box-shadow: 5rpx 5rpx 20rpx rgba(0, 0, 0, 0.2);
+		border-radius: 8rpx;
 		margin-bottom: 10rpx;
 	}
 
@@ -923,7 +942,7 @@
 		line-height: 100rpx;
 		font-size: 28rpx;
 		color: rgb(248, 184, 184);
-		font-weight: 300;
+		font-weight: 400;
 	}
 
 	.active {

@@ -138,7 +138,7 @@
 		</view>
 
 		<view class="jiangqie-nomore">
-			<view @click="clickJiangQie" class="jiangqie-text">© 酱茄 jiangqie.com</view>
+			<view @click="clickJiangQie" class="jiangqie-text">© 追格 zhuige.com</view>
 		</view>
 	</view>
 </template>

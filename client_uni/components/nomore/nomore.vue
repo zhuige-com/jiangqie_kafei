@@ -37,7 +37,7 @@
 			//isDot为false时生效
 			text: {
 				type: String,
-				default: "© 酱茄 jiangqie.com"
+				default: "© 追格 zhuige.com"
 			}
 		},
 		externalClasses: ['jiangqie-nomore-class'],

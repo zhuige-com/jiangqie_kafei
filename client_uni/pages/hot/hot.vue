@@ -244,7 +244,7 @@
 
 	.jiangqie-timeline-times text {
 		font-size: 24rpx;
-		font-weight: 200;
+		font-weight: 400;
 		color: #BBB;
 	}
 
@@ -260,7 +260,7 @@
 		height: 180rpx;
 		width: 180rpx;
 		border-radius: 16rpx;
-		box-shadow: 5rpx 5rpx 20rpx rgba(0, 0, 0, 0.2);
+		// box-shadow: 5rpx 5rpx 20rpx rgba(0, 0, 0, 0.2);
 	}
 
 	.jiangqie-timeline-text {
@@ -330,7 +330,7 @@
 	}
 
 	.jiangqie-news-tl-redlinebox text {
-		font-weight: 200;
+		font-weight: 400;
 		font-size: 22rpx;
 		color: #CC6565;
 		padding: 0 10rpx;
@@ -399,7 +399,7 @@
 
 	.timeline-head-describe {
 		color: #FFF;
-		font-weight: 200;
+		font-weight: 400;
 		font-size: 24rpx;
 	}
 
@@ -464,7 +464,7 @@
 		line-height: 100rpx;
 		font-size: 32rpx;
 		color: #999;
-		font-weight: 200;
+		font-weight: 400;
 	}
 
 	.active {

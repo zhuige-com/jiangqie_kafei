@@ -752,7 +752,7 @@
 	.jiangqie-page-cmt-info {
 		float: right;
 		font-size: 24rpx;
-		font-weight: 200;
+		font-weight: 400;
 		color: #999;
 	}
 
@@ -766,7 +766,7 @@
 
 	.jiangqie-page-cmt text {
 		font-size: 24rpx;
-		font-weight: 200;
+		font-weight: 400;
 		color: #999;
 		display: inline-block;
 		line-height: 80rpx;
@@ -785,8 +785,8 @@
 	.jiangqie-page-body {
 		padding: 30rpx 50rpx;
 		background: #FFF;
-		line-height: 2rem;
-		font-weight: 300;
+		line-height: 2.2rem;
+		font-weight: 400;
 		font-size: 30rpx;
 	}
 	.jiangqie-page-body rich-text {
@@ -859,7 +859,7 @@
 
 	.jiangqie-page-cmt-title text {
 		font-size: 20rpx;
-		font-weight: 200;
+		font-weight: 400;
 		color: #999;
 		padding: 6rpx 16rpx;
 		border-radius: 30rpx;
@@ -868,7 +868,7 @@
 	}
 
 	.jiangqie-page-cmt-content {
-		padding: 16rpx 0;
+		padding: 20rpx 0;
 		padding-left: 80rpx;
 		border-top: 1rpx solid #EEE;
 		overflow: hidden;
@@ -895,8 +895,8 @@
 	}
 
 	.jiangqie-page-cmt-time {
-		font-size: 20rpx;
-		font-weight: 200;
+		font-size: 22rpx;
+		font-weight: 400;
 		color: #888;
 		margin-left: 20rpx;
 	}
@@ -936,7 +936,7 @@
 
 	.jiangqie-page-cmt-replay-time {
 		font-size: 20rpx;
-		font-weight: 200;
+		font-weight: 400;
 		color: #BBB;
 		margin-left: 20rpx;
 	}
@@ -978,7 +978,7 @@
 
 	.jiangqie-page-laud-btn text {
 		font-size: 26rpx;
-		font-weight: 200;
+		font-weight: 400;
 		color: #999;
 	}
 
@@ -1228,7 +1228,7 @@
 	.jiangqie-pre-next-view {
 		display: flex;
 		justify-content: space-between;
-		padding-bottom: 30rpx;
+		padding: 0 30rpx 30rpx;
 		border-bottom: 1rpx solid #EEEEEE;
 		color: #333333;
 		.jiangqie-pre-view, .jiangqie-next-view  {
