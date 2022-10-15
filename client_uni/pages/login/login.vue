@@ -252,6 +252,11 @@
 						title: res.msg
 					});
 					Util.navigateBack();
+				}, err => {
+					uni.showToast({
+						icon: 'none',
+						title: err.msg
+					});
 				})
 			}
 		}
