@@ -30,18 +30,13 @@
 			})
 		},
 
-		onShareAppMessage() {
+		onShareAppMessage(options) {
 			return {
 				title: getApp().globalData.appName,
-				path: 'pages/webview/webview?src=' + encodeURIComponent(this.src)
+				path: 'pages/webview/webview?src=' + encodeURIComponent(options.webViewUrl)
 			};
-		},
-
-		onShareTimeline() {
-			return {
-				title: getApp().globalData.appName
-			};
-		},
+		}
+		
 	}
 </script>
 

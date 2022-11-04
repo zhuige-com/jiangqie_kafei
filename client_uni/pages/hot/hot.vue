@@ -28,7 +28,6 @@
 							<text>{{item.time}}</text>
 						</view>
 						<view class="jiangqie-timeline-box timeline-single">
-							<image :src="item.thumbnail" mode="aspectFill" class="jiangqie-timeline-image"></image>
 							<view class="jiangqie-timeline-text">
 								<view class="jiangqie-timeline-title">{{item.title}}</view>
 								<view class="jiangqie-timeline-info">
@@ -53,6 +52,9 @@
 									<text v-for="(item, index2) in item.tags" :key="index2"
 										class="jiangqie-timeline-tag">{{item.name}}</text>
 								</view>
+							</view>
+							<view class="jiangqie-timeline-image">
+								<image :src="item.thumbnail" mode="aspectFill"></image>
 							</view>
 						</view>
 					</view>
@@ -225,15 +227,16 @@
 
 	.jiangqie-timeline-block {
 		display: block;
-		padding-top: 40rpx;
+		position: relative;
+		padding-top: 20rpx;
 		margin-top: 30rpx;
 		border-bottom: 1rpx solid #DDD;
 	}
 
 	.jiangqie-timeline-times {
-		float: left;
-		margin-left: -40rpx;
-		margin-top: -60rpx;
+		position: absolute;
+		top: -18rpx;
+		left: -38rpx;
 	}
 
 	.jiangqie-timeline-times image {
@@ -249,38 +252,40 @@
 	}
 
 	.jiangqie-timeline-box {
-		padding: 30rpx 30rpx 30rpx 0;
-		min-height: 180rpx;
+		padding: 30rpx 0rpx;
 		background: #FFF;
-		border-radius: 16rpx;
 	}
 
 	.jiangqie-timeline-image {
-		float: right;
 		height: 180rpx;
 		width: 180rpx;
+	}
+	.jiangqie-timeline-image image {
+		height: 100%;
+		width: 100%;
 		border-radius: 16rpx;
-		// box-shadow: 5rpx 5rpx 20rpx rgba(0, 0, 0, 0.2);
 	}
 
 	.jiangqie-timeline-text {
 		text-align: left;
+		width: 440rpx;
+		overflow: hidden;		
 	}
 
 	.jiangqie-timeline-title {
 		font-size: 32rpx;
 		color: #333;
 		font-weight: 400;
-		line-height: 50rpx;
-		margin-bottom: 30rpx;
-		height: 120rpx;
+		line-height: 46rpx;
+		margin-bottom: 24rpx;
+		max-height: 92rpx;
+		overflow: hidden;
 	}
 
 	.jiangqie-timeline-describe {
 		font-size: 24rpx;
 		color: #999;
 		line-height: 30rpx;
-		margin-bottom: 18rpx;
 	}
 
 	.jiangqie-timeline-info {
@@ -337,15 +342,18 @@
 	}
 
 	.timeline-single {
-		padding-right: 200rpx;
 		padding-top: 10rpx;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		
+		// 开启该参数,可以调整图片，文字的左右浮动方式
+		// flex-direction: row-reverse;
 	}
 
 	.timeline-single .jiangqie-timeline-image {
 		height: 180rpx;
 		width: 180rpx;
-		margin-right: -205rpx;
-		margin-top: -4rpx;
 	}
 
 	.timeline-big .jiangqie-timeline-image {
