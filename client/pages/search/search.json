@@ -1,6 +1,0 @@
-{
-    "navigationBarTitleText": "搜索",
-    "usingComponents": {
-        "tui-loading": "../../components/loading/loading"
-    }
-}

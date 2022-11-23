@@ -23,6 +23,7 @@ class JiangQie_API_Category_Controller extends JiangQie_API_Base_Controller
 		register_rest_route($this->namespace, '/' . $this->module . '/index', [
 			[
 				'callback' => [$this, 'get_index'],
+				'permission_callback' => '__return_true',
 			]
 		]);
 	}

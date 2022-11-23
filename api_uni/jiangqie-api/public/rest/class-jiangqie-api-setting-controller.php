@@ -23,6 +23,7 @@ class JiangQie_API_Setting_Controller extends JiangQie_API_Base_Controller
 		register_rest_route($this->namespace, '/' . $this->module . '/home', [
 			[
 				'callback' => [$this, 'get_home'],
+				'permission_callback' => '__return_true',
 			]
 		]);
 
@@ -30,6 +31,7 @@ class JiangQie_API_Setting_Controller extends JiangQie_API_Base_Controller
 		register_rest_route($this->namespace, '/' . $this->module . '/hot', [
 			[
 				'callback' => [$this, 'get_hot'],
+				'permission_callback' => '__return_true',
 			]
 		]);
 
@@ -37,6 +39,7 @@ class JiangQie_API_Setting_Controller extends JiangQie_API_Base_Controller
 		register_rest_route($this->namespace, '/' . $this->module . '/category', [
 			[
 				'callback' => [$this, 'get_category'],
+				'permission_callback' => '__return_true',
 			]
 		]);
 
@@ -44,6 +47,7 @@ class JiangQie_API_Setting_Controller extends JiangQie_API_Base_Controller
 		register_rest_route($this->namespace, '/' . $this->module . '/ucenter', [
 			[
 				'callback' => [$this, 'get_ucenter'],
+				'permission_callback' => '__return_true',
 			]
 		]);
 
@@ -51,6 +55,7 @@ class JiangQie_API_Setting_Controller extends JiangQie_API_Base_Controller
 		register_rest_route($this->namespace, '/' . $this->module . '/login', [
 			[
 				'callback' => [$this, 'get_login'],
+				'permission_callback' => '__return_true',
 			]
 		]);
 	}

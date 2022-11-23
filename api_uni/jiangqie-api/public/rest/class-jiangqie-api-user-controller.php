@@ -24,12 +24,14 @@ class JiangQie_API_User_Controller extends JiangQie_API_Base_Controller
 		 */
 		register_rest_route($this->namespace, '/' . $this->module . '/login2', [
 			[
-				'callback' => [$this, 'user_login2']
+				'callback' => [$this, 'user_login2'],
+				'permission_callback' => '__return_true',
 			]
 		]);
 		register_rest_route($this->namespace, '/' . $this->module . '/login3', [
 			[
-				'callback' => [$this, 'user_login3']
+				'callback' => [$this, 'user_login3'],
+				'permission_callback' => '__return_true',
 			]
 		]);
 
@@ -38,7 +40,8 @@ class JiangQie_API_User_Controller extends JiangQie_API_Base_Controller
 		 */
 		register_rest_route($this->namespace, '/' . $this->module . '/index', [
 			[
-				'callback' => [$this, 'user_index']
+				'callback' => [$this, 'user_index'],
+				'permission_callback' => '__return_true',
 			]
 		]);
 
@@ -47,7 +50,8 @@ class JiangQie_API_User_Controller extends JiangQie_API_Base_Controller
 		 */
 		register_rest_route($this->namespace, '/' . $this->module . '/like', [
 			[
-				'callback' => [$this, 'user_like']
+				'callback' => [$this, 'user_like'],
+				'permission_callback' => '__return_true',
 			]
 		]);
 
@@ -56,7 +60,8 @@ class JiangQie_API_User_Controller extends JiangQie_API_Base_Controller
 		 */
 		register_rest_route($this->namespace, '/' . $this->module . '/favorite', [
 			[
-				'callback' => [$this, 'user_favorite']
+				'callback' => [$this, 'user_favorite'],
+				'permission_callback' => '__return_true',
 			]
 		]);
 
@@ -67,6 +72,7 @@ class JiangQie_API_User_Controller extends JiangQie_API_Base_Controller
 			[
 				'methods' => WP_REST_Server::CREATABLE,
 				'callback' => [$this, 'set_mobile'],
+				'permission_callback' => '__return_true',
 			]
 		]);
 	}

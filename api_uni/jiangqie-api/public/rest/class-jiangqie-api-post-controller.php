@@ -23,7 +23,8 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 		register_rest_route($this->namespace, '/' . $this->module . '/last', [
 			[
 				'callback' => [$this, 'get_last_posts'],
-				'args' => $this->params_paging()
+				'args' => $this->params_paging(),
+				'permission_callback' => '__return_true',
 			]
 		]);
 
@@ -31,7 +32,8 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 		register_rest_route($this->namespace, '/' . $this->module . '/category', [
 			[
 				'callback' => [$this, 'get_category_posts'],
-				'args' => $this->params_paging()
+				'args' => $this->params_paging(),
+				'permission_callback' => '__return_true',
 			]
 		]);
 
@@ -39,7 +41,8 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 		register_rest_route($this->namespace, '/' . $this->module . '/tag', [
 			[
 				'callback' => [$this, 'get_tag_posts'],
-				'args' => $this->params_paging()
+				'args' => $this->params_paging(),
+				'permission_callback' => '__return_true',
 			]
 		]);
 
@@ -47,7 +50,8 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 		register_rest_route($this->namespace, '/' . $this->module . '/search', [
 			[
 				'callback' => [$this, 'get_search_posts'],
-				'args' => $this->params_paging()
+				'args' => $this->params_paging(),
+				'permission_callback' => '__return_true',
 			]
 		]);
 
@@ -55,7 +59,8 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 		register_rest_route($this->namespace, '/' . $this->module . '/search/hot', [
 			[
 				'callback' => [$this, 'get_search_hot'],
-				'args' => $this->params_paging()
+				'args' => $this->params_paging(),
+				'permission_callback' => '__return_true',
 			]
 		]);
 
@@ -74,7 +79,8 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 						'description' => '用户token',
 						'type' => 'string',
 					],
-				]
+				],
+				'permission_callback' => '__return_true',
 			]
 		]);
 
@@ -88,7 +94,8 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 						'description' => '页面ID',
 						'type' => 'integer',
 					]
-				]
+				],
+				'permission_callback' => '__return_true',
 			]
 		]);
 
@@ -102,7 +109,8 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 						'description' => '热门 浏览数[views] 点赞数[likes] 评论数[commnets] 收藏[favorites]',
 						'type' => 'string',
 					]
-				])
+				]),
+				'permission_callback' => '__return_true',
 			]
 		]);
 
@@ -121,14 +129,16 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 						'description' => '用户token',
 						'type' => 'string',
 					],
-				])
+				]),
+				'permission_callback' => '__return_true',
 			]
 		]);
 
 		//微信二维码
 		register_rest_route($this->namespace, '/' . $this->module . '/wxacode', [
 			[
-				'callback' => [$this, 'get_wxacode']
+				'callback' => [$this, 'get_wxacode'],
+				'permission_callback' => '__return_true',
 			]
 		]);
 
@@ -136,14 +146,16 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 		//百度二维码
 		register_rest_route($this->namespace, '/' . $this->module . '/bdacode', [
 			[
-				'callback' => [$this, 'get_bdacode']
+				'callback' => [$this, 'get_bdacode'],
+				'permission_callback' => '__return_true',
 			]
 		]);
 
 		//QQ二维码
 		register_rest_route($this->namespace, '/' . $this->module . '/qqacode', [
 			[
-				'callback' => [$this, 'get_qqacode']
+				'callback' => [$this, 'get_qqacode'],
+				'permission_callback' => '__return_true',
 			]
 		]);
 	}

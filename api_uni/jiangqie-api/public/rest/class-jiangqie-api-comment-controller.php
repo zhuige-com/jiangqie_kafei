@@ -35,7 +35,8 @@ class JiangQie_API_Comment_Controller extends JiangQie_API_Base_Controller
 						'description' => '文章ID',
 						'type' => 'integer',
 					],
-				])
+				]),
+				'permission_callback' => '__return_true',
 			]
 		]);
 
@@ -64,7 +65,8 @@ class JiangQie_API_Comment_Controller extends JiangQie_API_Base_Controller
 						'description' => '评论内容',
 						'type' => 'string',
 					],
-				]
+				],
+				'permission_callback' => '__return_true',
 			]
 		]);
 
@@ -83,7 +85,8 @@ class JiangQie_API_Comment_Controller extends JiangQie_API_Base_Controller
 						'description' => '评论ID',
 						'type' => 'integer',
 					],
-				]
+				],
+				'permission_callback' => '__return_true',
 			]
 		]);
 	}

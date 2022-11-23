@@ -72,9 +72,7 @@
 
 ### 代码说明
 
-推荐使用client_uni（uniapp前端）和api_uni（WordPress插件）搭配使用。uniapp+WordPress开发，支持多端（微信小程序、百度小程序、QQ小程序等）。
-
-*api和client是之前的老版本，已不再维护*
+client_uni（uniapp前端）和api_uni（WordPress插件）需搭配使用。uniapp+WordPress开发，支持多端（微信小程序、百度小程序、QQ小程序等）。
 
 
 
