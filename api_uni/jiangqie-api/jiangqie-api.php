@@ -4,7 +4,7 @@
  * Plugin Name:		JiangQie Free Mini Program
  * Plugin URI:		https://www.jiangqie.com/ky/4639.html
  * Description:		为小程序提供定制化API，让Wordpress快速变身小程序。
- * Version:			1.9.2
+ * Version:			2.1.0
  * Author:			酱茄
  * Author URI:		https://www.jiangqie.com/
  * License:			GPLv2 or later
@@ -16,7 +16,7 @@ if (!defined('WPINC')) {
 	die;
 }
 
-define('JIANG_QIE_API_VERSION', '1.9.2');
+define('JIANG_QIE_API_VERSION', '2.1.0');
 define('JIANG_QIE_API_BASE_DIR', plugin_dir_path(__FILE__));
 define('JIANG_QIE_API_BASE_NAME', plugin_basename(__FILE__));
 define('JIANG_QIE_API_BASE_URL', plugin_dir_url(__FILE__));

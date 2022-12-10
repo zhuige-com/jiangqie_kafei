@@ -6,7 +6,7 @@
 			</view>
 			<view class="jiangqie-userinfo">
 				<template v-if="user">
-					<view class="jiangqie-useravatar">
+					<view class="jiangqie-useravatar" @click="clickVerify">
 						<image :src="user.avatar" mode="aspectFill"></image>
 					</view>
 					<view class="jiangqie-username">
@@ -247,6 +247,10 @@
 		methods: {
 			clickLogin() {
 				Util.openLink('/pages/login/login')
+			},
+			
+			clickVerify() {
+				Util.openLink('/pages/verify/verify')
 			},
 			
 			handlerPostTrack(e) {

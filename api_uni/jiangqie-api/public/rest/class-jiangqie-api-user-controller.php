@@ -75,6 +75,17 @@ class JiangQie_API_User_Controller extends JiangQie_API_Base_Controller
 				'permission_callback' => '__return_true',
 			]
 		]);
+
+		/**
+		 * 设置昵称头像
+		 */
+		register_rest_route($this->namespace, '/' . $this->module . '/set_info', [
+			[
+				'methods' => WP_REST_Server::CREATABLE,
+				'callback' => [$this, 'set_info'],
+				'permission_callback' => '__return_true',
+			]
+		]);
 	}
 
 	/**
@@ -158,9 +169,12 @@ class JiangQie_API_User_Controller extends JiangQie_API_Base_Controller
 	{
 		$code = $this->param_value($request, 'code', '');
 		$nickname = $this->param_value($request, 'nickname', '');
-		$avatar = $this->param_value($request, 'avatar', '');
+		// $avatar = $this->param_value($request, 'avatar', '');
 		$channel = $this->param_value($request, 'channel', '');
-		if (empty($code) || empty($nickname) || empty($avatar) || empty($channel)) {
+		// if (empty($code) || empty($nickname) || empty($avatar) || empty($channel)) {
+		// 	return $this->make_error('缺少参数');
+		// }
+		if (empty($code) || empty($nickname) || empty($channel)) {
 			return $this->make_error('缺少参数');
 		}
 
@@ -178,8 +192,10 @@ class JiangQie_API_User_Controller extends JiangQie_API_Base_Controller
 		}
 
 		$user = get_user_by('login', $session['openid']);
+		$first = 0;
 		if ($user) {
 			$user_id = $user->ID;
+			$nickname = get_user_meta($user_id, 'nickname');
 		} else {
 			$email_domain = '@jiangqie.com';
 			$user_id = wp_insert_user([
@@ -195,6 +211,8 @@ class JiangQie_API_User_Controller extends JiangQie_API_Base_Controller
 			if (is_wp_error($user_id)) {
 				return $this->make_error('创建用户失败');
 			}
+
+			$first = 1;
 		}
 		
 		update_user_meta($user_id, 'jq_channel', $channel);
@@ -206,22 +224,22 @@ class JiangQie_API_User_Controller extends JiangQie_API_Base_Controller
 		}
 
 		//如果每次都同步微信头像 会导致小程序设置的头像失效；所以没有头像时，才同步头像
-		$old_avatar = get_user_meta($user_id, 'jiangqie_avatar', true);
-		if (!$old_avatar || strstr($old_avatar, 'qlogo.cn')) {
-			$new_avatar = jiangqie_free_download_wx_avatar($avatar, $user_id);
+		// $old_avatar = get_user_meta($user_id, 'jiangqie_avatar', true);
+		// if (!$old_avatar || strstr($old_avatar, 'qlogo.cn')) {
+		// 	$new_avatar = jiangqie_free_download_wx_avatar($avatar, $user_id);
 			
-			if ($new_avatar) {
-				$new_avatar_url = $new_avatar['url'];
-				$dres = jiangqie_free_import_image2attachment($new_avatar['path']);
-				if (!is_wp_error($dres)) {
-					$upload_dir = wp_upload_dir();
-					$new_avatar_url = $upload_dir['url'] . '/' . $dres;
-				}
-				update_user_meta($user_id, 'jiangqie_avatar', $new_avatar_url);
-			} else {
-				update_user_meta($user_id, 'jiangqie_avatar', $avatar);
-			}
-		}
+		// 	if ($new_avatar) {
+		// 		$new_avatar_url = $new_avatar['url'];
+		// 		$dres = jiangqie_free_import_image2attachment($new_avatar['path']);
+		// 		if (!is_wp_error($dres)) {
+		// 			$upload_dir = wp_upload_dir();
+		// 			$new_avatar_url = $upload_dir['url'] . '/' . $dres;
+		// 		}
+		// 		update_user_meta($user_id, 'jiangqie_avatar', $new_avatar_url);
+		// 	} else {
+		// 		update_user_meta($user_id, 'jiangqie_avatar', $avatar);
+		// 	}
+		// }
 
 
 		$jiangqie_token = $this->generate_token();
@@ -229,10 +247,14 @@ class JiangQie_API_User_Controller extends JiangQie_API_Base_Controller
 
 		$user = array(
 			'nickname' => $nickname,
-			'avatar' => get_user_meta($user_id, 'jiangqie_avatar', true),
+			'avatar' => JiangQie_API::user_avatar($user_id),
 			'token' => $jiangqie_token,
 			'mobile' => get_user_meta($user_id, 'jiangqie_mobile', true),
 		);
+
+		if ($first == 1) {
+			$user['first'] = $first;
+		}
 
 		return $this->make_success($user);	
 	}
@@ -501,6 +523,33 @@ class JiangQie_API_User_Controller extends JiangQie_API_Base_Controller
 		update_user_meta($user_id, 'jiangqie_mobile', $mobile);
 
 		return $this->make_success($mobile);
+	}
+
+	/**
+	 * 设置头像昵称
+	 */
+	public function set_info($request)
+	{
+		$user_id = $this->check_login($request);
+		if (!$user_id) {
+			return $this->make_error('还没有登陆', -1);
+		}
+
+		$avatar = $this->param_value($request, 'avatar', '');
+		$nickname = $this->param_value($request, 'nickname', '');
+		if(!$this->msg_sec_check($nickname)) {
+			return $this->make_error('请勿发布敏感信息');
+		}
+
+		if (!empty($nickname)) {
+			update_user_meta($user_id, 'nickname', $nickname);
+		}
+
+		if (!empty($avatar)) {
+			update_user_meta($user_id, 'jiangqie_avatar', $avatar);
+		}
+
+		return $this->make_success();
 	}
 
 	/**

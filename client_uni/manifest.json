@@ -2,7 +2,7 @@
     "name" : "jiangqie_xcx_free",
     "appid" : "",
     "description" : "酱茄Free小程序",
-    "versionName" : "2.0.8",
+    "versionName" : "2.1.0",
     "versionCode" : "100",
     "transformPx" : false,
     "app-plus" : {
@@ -53,13 +53,7 @@
         "setting" : {
             "urlCheck" : false
         },
-        "usingComponents" : true,
-        "permission" : {
-            "scope.userLocation" : {
-                "desc" : "你的位置信息将用于小程序位置接口的效果展示"
-            }
-        },
-        "plugins" : {}
+        "usingComponents" : true
     },
     "mp-alipay" : {
         "usingComponents" : true

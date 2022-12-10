@@ -25,8 +25,9 @@
 					<!-- #endif -->
 
 					<!-- #ifdef MP-QQ -->
-					<button v-if="code" open-type="getUserInfo" class="jiangqie-login-btnr"
-						@getuserinfo="getuserinfo">确定</button>
+					<!-- <button v-if="code" open-type="getUserInfo" class="jiangqie-login-btnr"
+						@getuserinfo="getuserinfo">确定</button> -->
+					<button v-if="code" @tap.stop="clickLogin" class="jiangqie-login-btnr">确定</button>
 					<template v-else>
 						<button class="jiangqie-login-btnl">确定</button>
 						<view class="jiangqie-no-login-tip">
@@ -37,8 +38,9 @@
 
 					<!-- #ifdef MP-BAIDU -->
 					<template v-if="is_login_baidu">
-						<button v-if="code" open-type="getUserInfo" class="jiangqie-login-btnr"
-							@getuserinfo="getuserinfo">确定</button>
+						<!-- <button v-if="code" open-type="getUserInfo" class="jiangqie-login-btnr"
+							@getuserinfo="getuserinfo">确定</button> -->
+						<button v-if="code" @tap.stop="clickLogin" class="jiangqie-login-btnr">确定</button>
 						<template v-else>
 							<button class="jiangqie-login-btnl">确定</button>
 							<view class="jiangqie-no-login-tip">
@@ -74,10 +76,16 @@
 			</view>
 		</view>
 		
-		<view class="bottom-copyright">
-			<view @click="clickLink('/pages/viewhtml/viewhtml?page_id=1192')">《免责声明》</view>
-			<view @click="clickLink('/pages/viewhtml/viewhtml?page_id=251')">《关于我们》</view>
+		<view v-if="type!='mobile'" class="jiangqie-login-tip">
+			<label @click="clickAgreeLicense">
+				<radio :checked="argeeLicense" color="#ff4400" style="transform:scale(0.7)" />
+				我已阅读并同意
+			</label>
+			<text class="link" @click="clickLink('/pages/viewhtml/viewhtml?page_id=2035')">《隐私条款》</text>
+			<text>及</text>
+			<text class="link" @click="clickLink('/pages/viewhtml/viewhtml?page_id=2034')">《用户协议》</text>
 		</view>
+		
 	</view>
 </template>
 
@@ -107,6 +115,8 @@
 				
 				// 会否已登录百度App
 				is_login_baidu: false,
+				
+				argeeLicense: false,
 			};
 		},
 
@@ -166,11 +176,26 @@
 				Util.openLink(link)
 			},
 			
+			/**
+			 * 点击同意协议
+			 */
+			clickAgreeLicense() {
+				this.argeeLicense = !this.argeeLicense;
+			},
+			
 			handlerCancelClick(e) {
 				Util.navigateBack();
 			},
 
 			clickLoginTest(e) {
+				if (!this.argeeLicense) {
+					uni.showToast({
+						icon: 'none',
+						title: '请阅读并同意《用户协议》及《隐私条款》'
+					});
+					return;
+				}
+				
 				Rest.get(Api.JIANGQIE_USER_LOGIN_TEST, {}).then(res => {
 					Auth.setUser(res.data);
 					Util.navigateBack();
@@ -180,16 +205,38 @@
 			},
 
 			clickLogin(e) {
-				wx.getUserProfile({
-					desc: '用于完善会员资料',
-					success: res => {
-						let userInfo = res.userInfo;
-						this.login(userInfo.nickName, userInfo.avatarUrl);
-					},
-					fail: (err) => {
-						console.log(err);
-					}
-				})
+				if (!this.argeeLicense) {
+					uni.showToast({
+						icon: 'none',
+						title: '请阅读并同意《用户协议》及《隐私条款》'
+					});
+					return;
+				}
+				
+				// wx.getUserProfile({
+				// 	desc: '用于完善会员资料',
+				// 	success: res => {
+				// 		let userInfo = res.userInfo;
+				// 		this.login(userInfo.nickName, userInfo.avatarUrl);
+				// 	},
+				// 	fail: (err) => {
+				// 		console.log(err);
+				// 	}
+				// })
+				
+				
+				
+				// #ifdef MP-WEIXIN
+				this.login("微信用户", "");
+				// #endif
+				
+				// #ifdef MP-QQ
+				this.login("QQ用户", "");
+				// #endif
+				
+				// #ifdef MP-BAIDU
+				this.login("百度用户", "");
+				// #endif
 			},
 			
 			baiduAppLogin(e) {
@@ -203,10 +250,18 @@
 				}
 			},
 
-			getuserinfo(res) {
-				let userInfo = res.detail.userInfo;
-				this.login(userInfo.nickName, userInfo.avatarUrl);
-			},
+			// getuserinfo(res) {
+			// 	if (!this.argeeLicense) {
+			// 		uni.showToast({
+			// 			icon: 'none',
+			// 			title: '请阅读并同意《用户协议》及《隐私条款》'
+			// 		});
+			// 		return;
+			// 	}
+				
+			// 	let userInfo = res.detail.userInfo;
+			// 	this.login(userInfo.nickName, userInfo.avatarUrl);
+			// },
 
 			login(nickname, avatar) {
 				let params = {
@@ -230,8 +285,10 @@
 				Rest.get(Api.JIANGQIE_USER_LOGIN, params).then(res => {
 					Auth.setUser(res.data);
 					Util.navigateBack();
+					if (res.data.first) {
+						Util.openLink('/pages/verify/verify')
+					}
 				}, err => {
-					// console.log(err)
 					if (err.msg) {
 						uni.showToast({
 							icon: 'none',
@@ -252,11 +309,6 @@
 						title: res.msg
 					});
 					Util.navigateBack();
-				}, err => {
-					uni.showToast({
-						icon: 'none',
-						title: err.msg
-					});
 				})
 			}
 		}
@@ -318,12 +370,19 @@
 		color: #999999;
 	}
 	
-	.bottom-copyright {
+	.jiangqie-login-tip {
 		width: 100%;
 		position: fixed;
 		bottom: 100rpx;
-		color: blue;
 		line-height: 2rem;
 		text-align: center;
+		font-size: 22rpx;
+		color: #333333;
 	}
+
+	.jiangqie-login-tip text.link {
+		color: #111111;
+		text-decoration: underline;
+	}
+	
 </style>

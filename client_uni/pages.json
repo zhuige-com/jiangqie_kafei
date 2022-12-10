@@ -78,7 +78,16 @@
 		        "enablePullDownRefresh": false
 		    }
 		}
-	],
+	    ,{
+            "path" : "pages/verify/verify",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
 	"tabBar": {
 		"color": "#bfbfbf",
 		"selectedColor": "#e6372f",

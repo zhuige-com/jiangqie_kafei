@@ -133,6 +133,11 @@ module.exports = {
 	 * 用户 设置手机号
 	 */
 	JIANGQIE_USER_SET_MOBILE: makeURL('user', 'set_mobile'),
+	
+	/**
+	 * 用户 设置昵称头像
+	 */
+	JIANGQIE_USER_SET_INFO: makeURL('user', 'set_info'),
 
 	/**
 	 * 文章评论
@@ -148,4 +153,9 @@ module.exports = {
 	 * 删除评论
 	 */
 	JIANGQIE_COMMENT_DELETE: makeURL('comment', 'delete'),
+	
+	/**
+	 * 上传图片
+	 */
+	JIANGQIE_OTHER_UPLOAD: makeURL('other', 'upload'),
 };

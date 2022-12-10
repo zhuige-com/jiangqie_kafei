@@ -59,6 +59,18 @@ class JiangQie_API
 	}
 
 	/**
+	 * 用户头像
+	 */
+	public static function user_avatar($user_id)
+	{
+		$avatar = get_user_meta($user_id, 'jiangqie_avatar', true);
+		if (empty($avatar)) {
+			$avatar = ZHUIGE_SHOP_BASE_URL . 'public/images/default_avatar.jpg';
+		}
+		return $avatar;
+	}
+
+	/**
 	 * 微信token
 	 */
 	public static function get_wx_token()
@@ -184,6 +196,7 @@ class JiangQie_API
 		require_once JIANG_QIE_API_BASE_DIR . 'public/rest/class-jiangqie-api-base-controller.php';
 		require_once JIANG_QIE_API_BASE_DIR . 'public/rest/class-jiangqie-api-setting-controller.php';
 		require_once JIANG_QIE_API_BASE_DIR . 'public/rest/class-jiangqie-api-comment-controller.php';
+		require_once JIANG_QIE_API_BASE_DIR . 'public/rest/class-jiangqie-api-other-controller.php';
 		require_once JIANG_QIE_API_BASE_DIR . 'public/rest/class-jiangqie-api-post-controller.php';
 		require_once JIANG_QIE_API_BASE_DIR . 'public/rest/class-jiangqie-api-category-controller.php';
 		require_once JIANG_QIE_API_BASE_DIR . 'public/rest/class-jiangqie-api-user-controller.php';
@@ -232,6 +245,7 @@ class JiangQie_API
 
 		$controller = [
 			new JiangQie_API_Setting_Controller(),
+			new JiangQie_API_Other_Controller(),
 			new JiangQie_API_Comment_Controller(),
 			new JiangQie_API_Post_Controller(),
 			new JiangQie_API_Category_Controller(),
