@@ -4,8 +4,8 @@
 			<view class="jiangqie-search-input">
 				<icon type="search" size="13" color="#999"></icon>
 				<input confirm-type="search" :placeholder="'大家都在搜：' + placeholder" auto-focus="ture"
-					placeholder-class="jiangqie-input-plholder" class="jiangqie-input"
-					@confirm="handerSearchConfirm" @input="handlerSearchInput">
+					placeholder-class="jiangqie-input-plholder" class="jiangqie-input" @confirm="handerSearchConfirm"
+					@input="handlerSearchInput">
 			</view>
 
 			<view v-if="canSearch" class="jiangqie-search" @tap="handerSearchClick">搜索</view>
@@ -19,10 +19,10 @@
 				<image src="/static/images/time.png" mode="widthFix" class="jiangqie-search-icon"></image>历史搜索
 			</view>
 			<view class="jiangqie-search-list">
-				<view v-for="(item, index) in historySearch" :key="index" class="jiangqie-search-tag"
-					:data-item="item" @tap.stop="handlerSearchItemClick">
-					<image src="/static/images/del.png" mode="widthFix" class="jiangqie-search-del"
-						:data-item="item" @tap.stop="handlerSearchItemDelete"></image>
+				<view v-for="(item, index) in historySearch" :key="index" class="jiangqie-search-tag" :data-item="item"
+					@tap.stop="handlerSearchItemClick">
+					<image src="/static/images/del.png" mode="widthFix" class="jiangqie-search-del" :data-item="item"
+						@tap.stop="handlerSearchItemDelete"></image>
 					<text>{{item}}</text>
 				</view>
 			</view>
@@ -52,6 +52,7 @@
 	 * gitee: https://gitee.com/zhuige_com/jiangqie_kafei
 	 * Copyright © 2020-2023 www.zhuige.com All rights reserved.
 	 */
+	
 	const Constant = require("@/utils/constants.js");
 	const Util = require("@/utils/util.js");
 	const Api = require("@/utils/api.js");
@@ -98,28 +99,39 @@
 		// #endif
 
 		methods: {
-			//输入
+			/**
+			 * 输入 搜索词
+			 */
 			handlerSearchInput(e) {
 				this.keyword = e.detail.value;
 				this.canSearch = this.keyword.length > 0;
 			},
 
+			/**
+			 * 确认 搜索
+			 */
 			handerSearchConfirm(e) {
 				this.search();
 			},
 
-			//搜索
+			/**
+			 * 点击 搜索
+			 */
 			handerSearchClick(e) {
 				this.search();
 			},
 
+			/**
+			 * 搜索
+			 */
 			search() {
 				uni.getStorage({
 					key: Constant.JQ_SEARCH_KEY,
 					success: (res) => {
 						let keys = [this.keyword];
 
-						for (let i = 0; i < res.data.length && keys.length < Constant.JQ_SEARCH_MAX_COUNT; i++) {
+						for (let i = 0; i < res.data.length && keys.length < Constant
+							.JQ_SEARCH_MAX_COUNT; i++) {
 							if (this.keyword == res.data[i]) {
 								continue;
 							}
@@ -149,12 +161,16 @@
 				});
 			},
 
-			//取消搜索
+			/**
+			 * 取消搜索
+			 */
 			handerCancelClick(e) {
 				Util.navigateBack();
 			},
 
-			//清楚搜索历史
+			/**
+			 * 清除搜索历史
+			 */
 			handlerClearHistory(e) {
 				uni.showModal({
 					title: '提示',
@@ -173,15 +189,19 @@
 				});
 			},
 
-			//点击 搜索历史
+			/**
+			 * 点击 搜索历史
+			 */
 			handlerSearchItemClick(e) {
 				let item = e.currentTarget.dataset.item;
 				uni.navigateTo({
 					url: '/pages/list/list?search=' + item
 				});
 			},
-
-			//历史删除
+			
+			/**
+			 * 删除 搜索历史
+			 */
 			handlerSearchItemDelete(e) {
 				uni.showModal({
 					title: '提示',

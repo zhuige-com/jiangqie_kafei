@@ -68,6 +68,7 @@
 	 * gitee: https://gitee.com/zhuige_com/jiangqie_kafei
 	 * Copyright © 2020-2023 www.zhuige.com All rights reserved.
 	 */
+	
 	const Constants = require("@/utils/constants.js");
 	const Util = require("@/utils/util.js");
 	const Api = require("@/utils/api.js");
@@ -82,15 +83,15 @@
 			this.cat_id = undefined;
 			this.search = undefined;
 			this.track = undefined;
-			
+
 			return {
 				title: undefined,
-				
+
 				posts: [],
 				loadding: false,
 				pullUpOn: true,
 				loaded: false,
-				
+
 				// loading: false,
 			};
 		},
@@ -160,7 +161,7 @@
 				keywords: this.title,
 			});
 			// #endif
-			
+
 			this.loadPost(true);
 		},
 
@@ -190,6 +191,9 @@
 		// #endif
 
 		methods: {
+			/**
+			 * 点击打开文章
+			 */
 			handlerArticleClick(e) {
 				let post_id = e.currentTarget.dataset.id;
 				uni.navigateTo({
@@ -197,6 +201,9 @@
 				});
 			},
 
+			/**
+			 * 加载 文章列表
+			 */
 			loadPost(refresh) {
 				this.loadding = true;
 				let offset = 0;
@@ -288,6 +295,7 @@
 		width: 260rpx;
 		border-radius: 8rpx;
 	}
+
 	.jiangqie-news-image image {
 		height: 100%;
 		width: 100%;
@@ -378,11 +386,12 @@
 		margin-right: 0rpx;
 		margin-bottom: 10rpx;
 	}
+
 	.image-wide .jiangqie-news-text {
 		padding-left: 0;
 	}
+
 	.image-wide .jiangqie-news-title {
 		height: auto;
 	}
-
 </style>

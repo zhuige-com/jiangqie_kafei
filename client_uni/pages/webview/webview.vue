@@ -36,7 +36,7 @@
 				path: 'pages/webview/webview?src=' + encodeURIComponent(options.webViewUrl)
 			};
 		}
-		
+
 	}
 </script>
 

@@ -20,7 +20,6 @@
 			<!-- 底部大按钮 -->
 			<view class="jiangqie-verify-button">
 				<view @click="clickSubmit">提交</view>
-				<!-- <view @click="openLink('/pages/user/info/info')">完善详细资料</view> -->
 				<view @click="clickBack">跳过</view>
 			</view>
 		</view>

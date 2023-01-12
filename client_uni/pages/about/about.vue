@@ -63,6 +63,9 @@
 		// #endif
 
 		methods: {
+			/**
+			 * 点击复制网址
+			 */
 			copy(e) {
 				let text = e.currentTarget.dataset.text;
 				uni.setClipboardData({
@@ -80,7 +83,10 @@
 
 				});
 			},
-
+			
+			/**
+			 * 点击 提示
+			 */
 			tipClick() {
 				uni.showToast({
 					icon: 'none',

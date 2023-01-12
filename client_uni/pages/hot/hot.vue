@@ -180,7 +180,9 @@
 		// #endif
 
 		methods: {
-			// 点击标题切换当前页时改变样式
+			/**
+			 * 点击标题切换当前页时改变样式
+			 */
 			swichNav(e) {
 				let cur = e.currentTarget.dataset.current;
 
@@ -193,6 +195,9 @@
 				this.loadPosts(true);
 			},
 
+			/**
+			 * 点击 文章
+			 */
 			handlerHotArticle(e) {
 				let post_id = e.currentTarget.dataset.id;
 				uni.navigateTo({
@@ -200,7 +205,9 @@
 				});
 			},
 
-			//加载数据
+			/**
+			 * 加载数据
+			 */
 			loadPosts(refresh) {
 				this.loadding = true;
 				Rest.get(Api.JIANGQIE_POSTS_HOT, {

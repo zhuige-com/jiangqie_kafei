@@ -49,8 +49,7 @@
 						</template>
 					</template>
 					<template v-else>
-						<button open-type="login" class="jiangqie-login-btnr"
-							@login="baiduAppLogin">点击登录百度App</button>
+						<button open-type="login" class="jiangqie-login-btnr" @login="baiduAppLogin">点击登录百度App</button>
 					</template>
 					<!-- #endif -->
 
@@ -68,14 +67,14 @@
 					<button type="default" class="jiangqie-login-btnl" open-type="getPhoneNumber"
 						@getphonenumber="getPhoneNumber">绑定手机号</button>
 					<!-- #endif -->
-					
+
 					<!-- #ifndef MP-WEIXIN -->
 					该平台下的手机绑定功能暂未实现
 					<!-- #endif -->
 				</template>
 			</view>
 		</view>
-		
+
 		<view v-if="type!='mobile'" class="jiangqie-login-tip">
 			<label @click="clickAgreeLicense">
 				<radio :checked="argeeLicense" color="#ff4400" style="transform:scale(0.7)" />
@@ -85,7 +84,7 @@
 			<text>及</text>
 			<text class="link" @click="clickLink('/pages/viewhtml/viewhtml?page_id=2034')">《用户协议》</text>
 		</view>
-		
+
 	</view>
 </template>
 
@@ -98,6 +97,7 @@
 	 * gitee: https://gitee.com/zhuige_com/jiangqie_kafei
 	 * Copyright © 2020-2023 www.zhuige.com All rights reserved.
 	 */
+	
 	const Util = require("@/utils/util.js");
 	const Auth = require("@/utils/auth.js");
 	const Api = require("@/utils/api.js");
@@ -112,10 +112,10 @@
 				title: '',
 
 				code: undefined,
-				
+
 				// 会否已登录百度App
 				is_login_baidu: false,
-				
+
 				argeeLicense: false,
 			};
 		},
@@ -124,7 +124,7 @@
 			if (options.type) {
 				this.type = options.type;
 			}
-			
+
 			let nav_title = (this.type == 'login' ? '登录' : '绑定手机号');
 			uni.setNavigationBarTitle({
 				title: nav_title
@@ -139,7 +139,7 @@
 				}
 			});
 			// #endif
-			
+
 			// #ifdef MP-BAIDU
 			this.is_login_baidu = swan.isLoginSync().isLogin;
 			if (this.is_login_baidu) {
@@ -172,21 +172,30 @@
 		// #endif
 
 		methods: {
+			/**
+			 * 点击 打开链接
+			 */
 			clickLink(link) {
 				Util.openLink(link)
 			},
-			
+
 			/**
 			 * 点击同意协议
 			 */
 			clickAgreeLicense() {
 				this.argeeLicense = !this.argeeLicense;
 			},
-			
+
+			/**
+			 * 点击 取消
+			 */
 			handlerCancelClick(e) {
 				Util.navigateBack();
 			},
 
+			/**
+			 * 测试 登录功能
+			 */
 			clickLoginTest(e) {
 				if (!this.argeeLicense) {
 					uni.showToast({
@@ -195,7 +204,7 @@
 					});
 					return;
 				}
-				
+
 				Rest.get(Api.JIANGQIE_USER_LOGIN_TEST, {}).then(res => {
 					Auth.setUser(res.data);
 					Util.navigateBack();
@@ -204,6 +213,9 @@
 				});
 			},
 
+			/**
+			 * 点击 登录
+			 */
 			clickLogin(e) {
 				if (!this.argeeLicense) {
 					uni.showToast({
@@ -212,33 +224,23 @@
 					});
 					return;
 				}
-				
-				// wx.getUserProfile({
-				// 	desc: '用于完善会员资料',
-				// 	success: res => {
-				// 		let userInfo = res.userInfo;
-				// 		this.login(userInfo.nickName, userInfo.avatarUrl);
-				// 	},
-				// 	fail: (err) => {
-				// 		console.log(err);
-				// 	}
-				// })
-				
-				
-				
+
 				// #ifdef MP-WEIXIN
 				this.login("微信用户", "");
 				// #endif
-				
+
 				// #ifdef MP-QQ
 				this.login("QQ用户", "");
 				// #endif
-				
+
 				// #ifdef MP-BAIDU
 				this.login("百度用户", "");
 				// #endif
 			},
-			
+
+			/**
+			 * 百度小程序 登录
+			 */
 			baiduAppLogin(e) {
 				if (!e.detail.errCode) {
 					this.is_login_baidu = true;
@@ -250,19 +252,9 @@
 				}
 			},
 
-			// getuserinfo(res) {
-			// 	if (!this.argeeLicense) {
-			// 		uni.showToast({
-			// 			icon: 'none',
-			// 			title: '请阅读并同意《用户协议》及《隐私条款》'
-			// 		});
-			// 		return;
-			// 	}
-				
-			// 	let userInfo = res.detail.userInfo;
-			// 	this.login(userInfo.nickName, userInfo.avatarUrl);
-			// },
-
+			/**
+			 * 登录
+			 */
 			login(nickname, avatar) {
 				let params = {
 					code: this.code,
@@ -297,7 +289,10 @@
 					}
 				});
 			},
-			
+
+			/**
+			 * 获取手机号码
+			 */
 			getPhoneNumber(e) {
 				Rest.post(Api.JIANGQIE_USER_SET_MOBILE, {
 					encrypted_data: e.detail.encryptedData,
@@ -369,7 +364,7 @@
 		font-size: 24rpx;
 		color: #999999;
 	}
-	
+
 	.jiangqie-login-tip {
 		width: 100%;
 		position: fixed;
@@ -384,5 +379,4 @@
 		color: #111111;
 		text-decoration: underline;
 	}
-	
 </style>

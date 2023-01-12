@@ -414,6 +414,9 @@
 			//slide end----
 
 			//tab -- start
+			/**
+			 * 点击 切换分类
+			 */
 			swichNav(e) {
 				let cur = e.currentTarget.dataset.current;
 				if (this.currentTab == cur) {
@@ -428,6 +431,9 @@
 				}
 			},
 
+			/**
+			 * 点击 打开 分类页面
+			 */
 			handlerTabMoreClick(e) {
 				uni.switchTab({
 					url: '/pages/categories/categories'
@@ -435,16 +441,25 @@
 			},
 			//tab -- end
 
+			/**
+			 * 点击 ICON
+			 */
 			handlerIconNavClick(e) {
 				let link = e.currentTarget.dataset.link;
 				Util.openLink(link);
 			},
 
+			/**
+			 * 点击 活动图
+			 */
 			handlerActiveClick(e) {
 				let link = e.currentTarget.dataset.link;
 				Util.openLink(link);
 			},
 
+			/**
+			 * 点击文章
+			 */
 			handlerArticleClick(e) {
 				let post_id = e.currentTarget.dataset.id;
 				uni.navigateTo({
@@ -452,7 +467,9 @@
 				});
 			},
 
-			//加载数据
+			/**
+			 * 加载 最新文章
+			 */
 			loadPostLast(refresh) {
 				this.loaddingLast = true;
 				let offset = 0;
@@ -470,6 +487,9 @@
 				});
 			},
 
+			/**
+			 * 加载 分类文章
+			 */
 			loadPost(refresh) {
 				this.loadding = true;
 				let offset = 0;

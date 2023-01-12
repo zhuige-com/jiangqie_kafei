@@ -19,7 +19,7 @@
 			<view v-if="official" class="jiangqie-official-mod">
 				<official-account></official-account>
 			</view>
-			
+
 			<template v-if="wx_ad_top">
 				<ad :unit-id="wx_ad_top"></ad>
 			</template>
@@ -59,7 +59,7 @@
 					</view>
 				</view>
 			</view>
-			
+
 			<view v-if="pre_next" class="jiangqie-pre-next-view">
 				<view @click="clickNext" class="jiangqie-next-view">
 					<template v-if="next">
@@ -72,13 +72,13 @@
 					</template>
 				</view>
 			</view>
-			
+
 			<!-- #ifdef MP-WEIXIN -->
 			<template v-if="wx_ad_bottom">
 				<ad :unit-id="wx_ad_bottom"></ad>
 			</template>
 			<!-- #endif -->
-			
+
 			<view class="jiangqie-page-cmtbox">
 				<view class="jiangqie-page-cmt-title">
 					评论<text>{{comment_count + comment_count_change}}</text>
@@ -171,7 +171,7 @@
 		<view class="jiangqie-goback-btn" @tap="jumpBtn">
 			<image src="/static/images/goback.png" mode="widthFix"></image>
 		</view>
-		
+
 		<!-- #ifdef MP-BAIDU -->
 		<view v-if="isShowPainter" isRenderImage style="position: fixed; top: 0;" @longpress="longTapPainter"
 			@click="clickPainter()">
@@ -195,7 +195,7 @@
 	 * gitee: https://gitee.com/zhuige_com/jiangqie_kafei
 	 * Copyright © 2020-2023 www.zhuige.com All rights reserved.
 	 */
-	
+
 	import JiangqieLoadmore from "@/components/loadmore/loadmore";
 	import jiangqieNomore from "@/components/nomore/nomore";
 	import JiangqieNoData from "@/components/nodata/nodata";
@@ -210,13 +210,13 @@
 	export default {
 		data() {
 			this.comment_id = 0;
-			
+
 			//小程序码
 			this.acode = '';
-			
+
 			//返回页面是否需要刷新
 			this.needRefresh = true;
-			
+
 			return {
 				post: {
 					title: "",
@@ -237,10 +237,10 @@
 				comment_content: '',
 				comment_count_change: 0,
 				post_id: 0,
-				
+
 				wx_ad_top: undefined,
 				wx_ad_bottom: undefined,
-				
+
 				pre_next: undefined,
 				pre: undefined,
 				next: undefined,
@@ -304,7 +304,7 @@
 				this.like_list = res.data.like_list;
 
 				this.article = res.data.content;
-				
+
 				this.wx_ad_top = res.data.wx_ad_top;
 				this.wx_ad_bottom = res.data.wx_ad_bottom;
 				this.pre_next = res.data.pre_next;
@@ -312,7 +312,7 @@
 					this.pre = res.data.pre;
 					this.next = res.data.next;
 				}
-				
+
 				// #ifdef MP-BAIDU
 				let keywords = [];
 				this.post.tags.forEach(tag => {
@@ -628,7 +628,7 @@
 					this.post_favorite = (this.post_favorite == 1 ? 0 : 1);
 				});
 			},
-			
+
 			/**
 			 * 上一篇
 			 */
@@ -637,7 +637,7 @@
 					Util.openLink('/pages/article/article?post_id=' + this.pre)
 				}
 			},
-			
+
 			/**
 			 * 下一篇
 			 */
@@ -789,6 +789,7 @@
 		font-weight: 400;
 		font-size: 30rpx;
 	}
+
 	.jiangqie-page-body rich-text {
 		line-height: 2rem;
 		min-height: 2rem;
@@ -1224,14 +1225,16 @@
 	.jiangqie-official-mod {
 		padding: 10rpx 0;
 	}
-	
+
 	.jiangqie-pre-next-view {
 		display: flex;
 		justify-content: space-between;
 		padding: 0 30rpx 30rpx;
 		border-bottom: 1rpx solid #EEEEEE;
 		color: #333333;
-		.jiangqie-pre-view, .jiangqie-next-view  {
+
+		.jiangqie-pre-view,
+		.jiangqie-next-view {
 			display: flex;
 			align-items: center;
 		}

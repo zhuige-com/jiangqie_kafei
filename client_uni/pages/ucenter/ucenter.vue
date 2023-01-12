@@ -152,6 +152,7 @@
 	 * gitee: https://gitee.com/zhuige_com/jiangqie_kafei
 	 * Copyright © 2020-2023 www.zhuige.com All rights reserved.
 	 */
+	
 	const Auth = require("@/utils/auth.js");
 	const Api = require("@/utils/api.js");
 	const Util = require("@/utils/util.js");
@@ -245,14 +246,23 @@
 		// #endif
 
 		methods: {
+			/**
+			 * 点击 登录
+			 */
 			clickLogin() {
 				Util.openLink('/pages/login/login')
 			},
-			
+
+			/**
+			 * 点击 认证
+			 */
 			clickVerify() {
 				Util.openLink('/pages/verify/verify')
 			},
-			
+
+			/**
+			 * 点击 文章浏览历史
+			 */
 			handlerPostTrack(e) {
 				if (!Auth.getUser()) {
 					uni.navigateTo({
@@ -267,12 +277,18 @@
 				});
 			},
 
+			/**
+			 * 点击 关于
+			 */
 			handlerAbout(e) {
 				uni.navigateTo({
 					url: '/pages/about/about'
 				});
 			},
 
+			/**
+			 * 点击 清除缓存
+			 */
 			handlerClearCache(e) {
 				uni.showModal({
 					title: '提示',
@@ -293,6 +309,9 @@
 				});
 			},
 
+			/**
+			 * 点击 打开链接
+			 */
 			handlerLinkClick(e) {
 				let link = e.currentTarget.dataset.link;
 
@@ -315,6 +334,9 @@
 				}
 			},
 
+			/**
+			 * 点击 打开页面
+			 */
 			handlerPageClick(e) {
 				let page_id = e.currentTarget.dataset.page_id;
 				uni.navigateTo({

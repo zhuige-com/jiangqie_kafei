@@ -113,6 +113,9 @@
 		// #endif
 
 		methods: {
+			/**
+			 * 点击分类
+			 */
 			handlerCategoryClick(e) {
 				let cat_id = e.currentTarget.dataset.id;
 				let cat_name = e.currentTarget.dataset.name;

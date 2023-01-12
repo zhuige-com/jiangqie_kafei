@@ -83,6 +83,11 @@ gitee下载（优先更新）：https://gitee.com/zhuige_com/jiangqie_kafei
 
 == Changelog ==
 
+= 2.1.1 =
+
+1. 新年快乐
+2. 已知细节优化
+
 = 2.1.0 =
 
 1. 适配微信登录的新规定
