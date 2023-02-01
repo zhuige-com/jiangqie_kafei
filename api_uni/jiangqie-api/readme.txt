@@ -83,6 +83,10 @@ gitee下载（优先更新）：https://gitee.com/zhuige_com/jiangqie_kafei
 
 == Changelog ==
 
+= 2.1.2 =
+
+1. 评论防抖重复
+
 = 2.1.1 =
 
 1. 新年快乐
