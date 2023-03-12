@@ -2,11 +2,11 @@
 
 /*
  * 酱茄小程序开源版
- * Author: 酱茄
+ * Author: 追格
  * Help document: https://www.zhuige.com/docs/zxfree.html
  * github: https://github.com/zhuige-com/jiangqie_kafei
  * gitee: https://gitee.com/zhuige_com/jiangqie_kafei
- * Copyright ️© 2020-2022 www.jiangqie.com All rights reserved.
+ * Copyright ️© 2020-2023 www.zhuige.com All rights reserved.
  */
 
 class JiangQie_API_Admin
@@ -40,13 +40,13 @@ class JiangQie_API_Admin
 		$prefix = 'jiangqie-api';
 
 		CSF::createOptions($prefix, array(
-            'framework_title' => '酱茄Free小程序 <small>by <a href="https://www.jiangqie.com" target="_blank" title="酱茄Free小程序">www.jiangqie.com</a></small>',
+            'framework_title' => '酱茄Free小程序 <small>by <a href="https://www.zhuige.com" target="_blank" title="酱茄Free小程序">www.zhuige.com</a></small>',
 			'menu_title' => '酱茄Free小程序',
 			'menu_slug'  => 'jiangqie-api',
 			'menu_position' => 2,
             'show_bar_menu' => false,
             'show_sub_menu' => false,
-            'footer_credit' => 'Thank you for creating with <a href="https://www.jiangqie.com/" target="_blank">酱茄</a>',
+            'footer_credit' => 'Thank you for creating with <a href="https://www.zhuige.com/" target="_blank">酱茄</a>',
             'menu_icon' => 'dashicons-layout',
 		));
 
@@ -124,12 +124,12 @@ class JiangQie_API_Admin
       }
 
       if ('jiangqie_xcx_free_setup' === $_GET['page']) {
-        wp_redirect('https://www.jiangqie.com/ky/4655.html');
+        wp_redirect('https://www.zhuige.com/docs/zxfree.html');
         die;
       }
 
       if ('jiangqie_xcx_free_upgrade' === $_GET['page']) {
-        wp_redirect('https://www.jiangqie.com/ky/4639.html');
+        wp_redirect('https://www.zhuige.com/product/zxfree.html');
         die;
       }
     }

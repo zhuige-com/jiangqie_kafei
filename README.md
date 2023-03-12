@@ -8,7 +8,7 @@
 
 追格官网：https://www.zhuige.com
 
-安装文档：https://www.zhuige.com/docs
+安装文档：https://www.zhuige.com/docs/zxfree.html
 
 微信客服：jianbing2011（加微信，进微信群交流）
 

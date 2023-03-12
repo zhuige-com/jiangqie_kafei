@@ -60,8 +60,8 @@
 
 					<!--推荐模块-->
 					<view v-if="actives" class="jiangqie-news-view">
-						<view class="jiangqie-news-lightbox jiangqie-news-lightbox-main"
-							:data-link="actives.left.link" @tap.stop="handlerActiveClick">
+						<view class="jiangqie-news-lightbox jiangqie-news-lightbox-main" :data-link="actives.left.link"
+							@tap.stop="handlerActiveClick">
 							<image class="jiangqie-news-lightimg" :src="actives.left.image" mode="aspectFill">
 							</image>
 							<view class="jiangqie-news-lighttext">
@@ -243,11 +243,11 @@
 
 	export default {
 		data() {
-			this.bd_title =  undefined;
+			this.bd_title = undefined;
 			this.bd_description = undefined;
 			this.bd_keywords = undefined;
 			this.interstitialAd = undefined;
-			
+
 			return {
 				logo: '',
 				background: undefined,
@@ -311,7 +311,7 @@
 
 				if (res.data.title && res.data.title.length > 0) {
 					getApp().globalData.appName = res.data.title;
-					
+
 					// #ifdef MP-BAIDU
 					this.bd_title = res.data.title;
 					this.bd_description = res.data.description;
@@ -323,12 +323,14 @@
 					});
 					// #endif
 				}
-				
+
 				//插屏广告
 				// #ifdef MP-WEIXIN
-				if(res.data.wx_ad && wx.createInterstitialAd) {
+				if (res.data.wx_ad && wx.createInterstitialAd) {
 					setTimeout(() => {
-						this.interstitialAd = wx.createInterstitialAd({ adUnitId: res.data.wx_ad })
+						this.interstitialAd = wx.createInterstitialAd({
+							adUnitId: res.data.wx_ad
+						})
 						this.interstitialAd.onLoad(() => {
 							// console.log('onLoad event emit')
 							this.interstitialAd.show().catch((err) => {
@@ -348,7 +350,7 @@
 
 			this.loadPostLast(true);
 		},
-		
+
 		onShow() {
 			// #ifdef MP-BAIDU
 			if (this.bd_title) {
@@ -422,7 +424,7 @@
 				if (this.currentTab == cur) {
 					return false;
 				}
-				
+
 				this.background = (cur == 0 && this.slide && this.slide.length > 0 ? Api.JIANGQIE_BG_INDEX : '');
 				this.currentTab = cur;
 
@@ -754,6 +756,7 @@
 		width: 260rpx;
 		border-radius: 8rpx;
 	}
+
 	.jiangqie-news-image image {
 		height: 100%;
 		width: 100%;
@@ -844,9 +847,11 @@
 		margin-right: 0rpx;
 		margin-bottom: 10rpx;
 	}
+
 	.image-wide .jiangqie-news-text {
 		padding-left: 0;
 	}
+
 	.image-wide .jiangqie-news-title {
 		height: auto;
 	}

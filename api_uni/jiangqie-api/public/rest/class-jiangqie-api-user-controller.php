@@ -2,11 +2,11 @@
 
 /*
  * 酱茄小程序开源版
- * Author: 酱茄
+ * Author: 追格
  * Help document: https://www.zhuige.com/docs/zxfree.html
  * github: https://github.com/zhuige-com/jiangqie_kafei
  * gitee: https://gitee.com/zhuige_com/jiangqie_kafei
- * Copyright ️© 2020-2022 www.jiangqie.com All rights reserved.
+ * Copyright ️© 2020-2023 www.zhuige.com All rights reserved.
  */
 
 class JiangQie_API_User_Controller extends JiangQie_API_Base_Controller
@@ -22,12 +22,6 @@ class JiangQie_API_User_Controller extends JiangQie_API_Base_Controller
 		/**
 		 * 用户登陆
 		 */
-		register_rest_route($this->namespace, '/' . $this->module . '/login2', [
-			[
-				'callback' => [$this, 'user_login2'],
-				'permission_callback' => '__return_true',
-			]
-		]);
 		register_rest_route($this->namespace, '/' . $this->module . '/login3', [
 			[
 				'callback' => [$this, 'user_login3'],
@@ -86,80 +80,6 @@ class JiangQie_API_User_Controller extends JiangQie_API_Base_Controller
 				'permission_callback' => '__return_true',
 			]
 		]);
-	}
-
-	/**
-	 *用户登录 - 已废弃
-	 */
-	public function user_login2($request)
-	{
-		$code = $this->param_value($request, 'code', '');
-		$nickname = $this->param_value($request, 'nickName', '');
-		$avatarUrl = $this->param_value($request, 'avatarUrl', '');
-		if (empty($code) || empty($nickname) || empty($avatarUrl)) {
-			return $this->make_error('缺少参数');
-		}
-
-		$app_id = JiangQie_API::option_value('app_id');
-		$app_secret = JiangQie_API::option_value('app_secret');
-		$params = [
-			'appid' => $app_id,
-			'secret' => $app_secret,
-			'js_code' => $code,
-			'grant_type' => 'authorization_code'
-		];
-
-		$result = wp_remote_get(add_query_arg($params, 'https://api.weixin.qq.com/sns/jscode2session'));
-		if (!is_array($result) || is_wp_error($result) || $result['response']['code'] != '200') {
-			return $this->make_error('wx授权失败');
-		}
-
-		$body = stripslashes($result['body']);
-		$wx_session = json_decode($body, true);
-
-		$openId = $wx_session['openid'];
-		$user = get_user_by('login', $openId);
-
-		if ($user) {
-			$user_id = wp_update_user([
-				'ID' => $user->ID,
-				'nickname' => $nickname,
-				'user_nicename' => $nickname,
-				'display_name' => $nickname,
-				'user_email' => $openId . '@jiangqie.com',
-			]);
-
-			if (is_wp_error($user_id)) {
-				return $this->make_error('更新用户失败');
-			}
-		} else {
-			$user_id = wp_insert_user([
-				'user_login' => $openId,
-				'nickname' => $nickname,
-				'user_nicename' => $nickname,
-				'display_name' => $nickname,
-				'user_email' => $openId . '@jiangqie.com',
-				'role' => 'subscriber',
-				'user_pass' => wp_generate_password(16, false),
-			]);
-
-			if (is_wp_error($user_id)) {
-				return $this->make_error('创建用户失败');
-			}
-		}
-
-		update_user_meta($user_id, 'jiangqie_avatar', $avatarUrl);
-
-		$jiangqie_token = $this->generate_token();
-		update_user_meta($user_id, 'jiangqie_token', $jiangqie_token);
-
-		$user = array(
-			"nickname" => $nickname,
-			"avatar" => $avatarUrl,
-			"token" => $jiangqie_token,
-		);
-
-		return $this->make_success($user);
 	}
 
 	/**

@@ -1,11 +1,11 @@
 === JiangQie Free Mini Program ===
 
 Contributors: jiangqie
-Donate link: https://www.jiangqie.com/
+Donate link: https://www.zhuige.com/
 Tags: 追格,酱茄,小程序
 Requires at least: 5.6
 Tested up to: 6.0
-Stable tag: 2.1.1
+Stable tag: 2.1.3
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -53,7 +53,7 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 **微信客服：jianbing2011 （如要加入微信群请说明）**
 
-**技术支持：www.jiangqie.com**
+**技术支持：www.zhuige.com**
 
 
 == Installation ==
@@ -69,7 +69,7 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 = 前端代码从哪里获取 =
 
-官网下载：[www.jiangqie.com](https://www.jiangqie.com/)
+官网下载：[www.www.com](https://www.zhuige.com/product/zxfree.html)
 
 github下载：https://github.com/zhuige-com/jiangqie_kafei
 
@@ -82,6 +82,10 @@ gitee下载（优先更新）：https://gitee.com/zhuige_com/jiangqie_kafei
 
 
 == Changelog ==
+
+= 2.1.3 =
+
+1. 常规维护更新
 
 = 2.1.2 =
 

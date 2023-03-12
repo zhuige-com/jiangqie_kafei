@@ -2,11 +2,11 @@
 
 /*
  * 酱茄小程序开源版
- * Author: 酱茄
+ * Author: 追格
  * Help document: https://www.zhuige.com/docs/zxfree.html
  * github: https://github.com/zhuige-com/jiangqie_kafei
  * gitee: https://gitee.com/zhuige_com/jiangqie_kafei
- * Copyright ️© 2020-2022 www.jiangqie.com All rights reserved.
+ * Copyright ️© 2020-2023 www.zhuige.com All rights reserved.
  */
 
 // 首页设置
@@ -67,7 +67,7 @@ CSF::createSection($prefix, array(
                     'id'       => 'link',
                     'type'     => 'text',
                     'title'    => '链接',
-                    'default'  => 'https://www.jiangqie.com',
+                    'default'  => 'https://www.zhuige.com',
                 ),
                 array(
                     'id'    => 'switch',
@@ -109,7 +109,7 @@ CSF::createSection($prefix, array(
                             'id'    => 'left_link',
                             'type'  => 'text',
                             'title' => '链接',
-                            'after' => '<a href="https://www.jiangqie.com/ky/4673.html" target="_blank" title="页面路径怎么写？">页面路径</a>或小程序appid'
+                            'after' => '<a href="https://www.zhuige.com/bbs/59.html" target="_blank" title="页面路径怎么写？">页面路径</a>或小程序appid'
                         ),
                     )
                 ),
@@ -132,7 +132,7 @@ CSF::createSection($prefix, array(
                             'id'    => 'right_top_link',
                             'type'  => 'text',
                             'title' => '链接',
-                            'after' => '<a href="https://www.jiangqie.com/ky/4673.html" target="_blank" title="页面路径怎么写？">页面路径</a>或小程序appid'
+                            'after' => '<a href="https://www.zhuige.com/bbs/59.html" target="_blank" title="页面路径怎么写？">页面路径</a>或小程序appid'
                         ),
                     )
                 ),
@@ -155,7 +155,7 @@ CSF::createSection($prefix, array(
                             'id'    => 'right_down_link',
                             'type'  => 'text',
                             'title' => '链接',
-                            'after' => '<a href="https://www.jiangqie.com/ky/4673.html" target="_blank" title="页面路径怎么写？">页面路径</a>或小程序appid'
+                            'after' => '<a href="https://www.zhuige.com/bbs/59.html" target="_blank" title="页面路径怎么写？">页面路径</a>或小程序appid'
                         ),
                     )
                 ),
