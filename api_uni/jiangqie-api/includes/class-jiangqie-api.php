@@ -202,6 +202,11 @@ class JiangQie_API
 		require_once JIANG_QIE_API_BASE_DIR . 'public/rest/class-jiangqie-api-user-controller.php';
 
 		/**
+		 * AJAX
+		 */
+		require_once JIANG_QIE_API_BASE_DIR . 'includes/class-jiangqie-api-ajax.php';
+
+		/**
 		 * 后台管理
 		 */
 		require_once JIANG_QIE_API_BASE_DIR . 'admin/codestar-framework/codestar-framework.php';

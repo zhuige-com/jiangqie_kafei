@@ -11,7 +11,7 @@ jQuery(document).ready(function ($) {
         var loading = layer.load();
         $.post("/wp-admin/admin-ajax.php",
             {
-                action: 'zhuige_market_event',
+                action: 'admin_frontend_call',
                 zgaction: 'get_list',
                 init: $('.zhuige-param-init').val(),
                 cat: $('.zhuige-market-cat.activ').data('id'),
@@ -19,8 +19,6 @@ jQuery(document).ready(function ($) {
             },
             function (res, status) {
                 layer.close(loading);
-
-                console.log(res);
 
                 if (status != 'success' || !res.success) {
                     return;
@@ -70,55 +68,6 @@ jQuery(document).ready(function ($) {
 
                 $('.zhuige-theme-list').append(content);
                 $('.zhuige-theme-list').addClass('slide-in');
-
-
-                // let index = 0;
-                // setInterval(() => {
-                //     if (index < products.length) {
-                //         let product = products[index];
-
-                //         let content = '';
-                //         content += '<div class="zhuige-theme-view">';
-                //         content += '<div class="zhuige-theme-cover">';
-                //         content += '<a href="' + product.url + '" target="_blank">';
-                //         content += '<img src="' + product.cover + '" />';
-                //         content += '</a>';
-                //         content += '</div>';
-                //         content += '<div class="zhuige-theme-info">';
-                //         content += '<div class="zhuige-theme-text">';
-                //         content += '<div>';
-                //         content += '<a href="' + product.url + '" target="_blank" class="theme-title">' + product.title + '</a>';
-                //         content += '<text>版本 ' + product.version + '</text>';
-                //         content += '</div>';
-                //         content += '<div>';
-                //         for (let j = 0; j < product['tags'].length; j++) {
-                //             content += '<span class="zhuige-theme-tag">' + product['tags'][j] + '</span>';
-                //         }
-                //         content += '</div>';
-                //         content += '<div>';
-
-                //         if (product['promote'].length > 0) {
-                //             content += '<text>' + product['promote'] + '</text>';
-                //         }
-
-                //         if (product['free'] == '1') {
-                //             content += '<strong>免费</strong>';
-                //         } else {
-                //             content += '<text>￥</text>';
-                //             content += '<strong>' + product['price'] + '</strong>';
-                //             content += '<cite>原价' + product['original'] + '</cite>';
-                //         }
-
-                //         content += '</div>';
-                //         content += '</div>';
-                //         content += '</div>';
-                //         content += '</div>';
-
-                //         $('.zhuige-theme-list').append(content);
-                //     }
-                //     index++;
-                // }, 100)
-
 
 
                 if (res.data.categories) {
