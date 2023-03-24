@@ -4,7 +4,7 @@
  * Plugin Name:		JiangQie Free Mini Program
  * Plugin URI:		https://www.zhuige.com/product/zxfree.html
  * Description:		为小程序提供定制化API，让Wordpress快速变身小程序。
- * Version:			2.1.3
+ * Version:			2.2.0
  * Author:			酱茄
  * Author URI:		https://www.zhuige.com/
  * License:			GPLv2 or later
@@ -45,6 +45,7 @@ function jiangqie_api_action_links($actions)
 add_filter('plugin_action_links_' . JIANG_QIE_API_BASE_NAME, 'jiangqie_api_action_links');
 
 require JIANG_QIE_API_BASE_DIR . 'includes/class-jiangqie-api.php';
+require JIANG_QIE_API_BASE_DIR . 'includes/zhuige-market.php';
 require JIANG_QIE_API_BASE_DIR . 'includes/jiangqie-function.php';
 require JIANG_QIE_API_BASE_DIR . 'includes/categories-images.php';
 require JIANG_QIE_API_BASE_DIR . 'includes/custom_users_column.php';

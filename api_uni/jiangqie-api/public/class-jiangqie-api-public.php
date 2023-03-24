@@ -125,6 +125,9 @@ class JiangQie_API_Public
 			}
 
 			$thumbnails = JiangQie_API::option_image_url(JiangQie_API::option_value('default_thumbnail'));
+			if (empty($thumbnails)) {
+				$thumbnails = JIANG_QIE_API_BASE_URL . 'public/images/cat_cover.png';
+			}
 			return $thumbnails;
 		}
 
@@ -137,6 +140,9 @@ class JiangQie_API_Public
 		}
 
 		$thumbnails = JiangQie_API::option_image_url(JiangQie_API::option_value('default_thumbnail'));
+		if (empty($thumbnails)) {
+			$thumbnails = JIANG_QIE_API_BASE_URL . 'public/images/cat_cover.png';
+		}
 		return $thumbnails;
 	}
 }
