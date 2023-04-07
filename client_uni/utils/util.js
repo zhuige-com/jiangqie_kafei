@@ -120,9 +120,15 @@ function openLink(link) {
 		let params = {
 			finderUserName: finder,
 			fail: res => {
-				uni.setClipboardData({
-					data: link
-				});
+				// uni.setClipboardData({
+				// 	data: link
+				// });
+				if (res.errMsg && res.errMsg.indexOf('cancel') < 0) {
+					uni.showToast({
+						icon: 'none',
+						title: res.errMsg
+					});
+				}
 			}
 		};
 		
@@ -140,7 +146,7 @@ function openLink(link) {
 	uni.navigateToMiniProgram({
 		appId: link,
 		fail: res => {
-			if (res.errMsg && res.errMsg.indexOf('fail cancel') < 0) {
+			if (res.errMsg && res.errMsg.indexOf('cancel') < 0) {
 				uni.showToast({
 					icon: 'none',
 					title: res.errMsg

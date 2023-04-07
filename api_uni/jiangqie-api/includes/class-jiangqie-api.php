@@ -65,7 +65,7 @@ class JiangQie_API
 	{
 		$avatar = get_user_meta($user_id, 'jiangqie_avatar', true);
 		if (empty($avatar)) {
-			$avatar = ZHUIGE_SHOP_BASE_URL . 'public/images/default_avatar.jpg';
+			$avatar = JIANG_QIE_API_BASE_URL . 'public/images/default_avatar.jpg';
 		}
 		return $avatar;
 	}

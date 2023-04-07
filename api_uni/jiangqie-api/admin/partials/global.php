@@ -129,5 +129,12 @@ CSF::createSection($prefix, array(
             'default' => '1'
         ),
         
+        array(
+            'id'    => 'jiangqie_switch_oss',
+            'type'  => 'switcher',
+            'title' => '小程序码导入媒体库',
+            'subtitle' => '使用七牛/阿里/腾讯OSS的需要开启',
+            'default' => ''
+        ),
     )
 ));

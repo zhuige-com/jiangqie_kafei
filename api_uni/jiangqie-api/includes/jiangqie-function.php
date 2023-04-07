@@ -63,6 +63,10 @@ if (!function_exists('jiangqie_free_import_image2attachment')) {
     //把图片添加到媒体库
     function jiangqie_free_import_image2attachment($file, $post_id = 0, $import_date = 'current')
     {
+        if (!JiangQie_API::option_value('jiangqie_switch_oss')) {
+            return new WP_Error('jiangqie', 'jiangqie');
+        }
+
         set_time_limit(0);
 
         // Initially, Base it on the -current- time.

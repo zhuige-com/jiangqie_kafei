@@ -11,7 +11,7 @@ jQuery(document).ready(function ($) {
         var loading = layer.load();
         $.post("/wp-admin/admin-ajax.php",
             {
-                action: 'admin_frontend_call',
+                action: 'jqapi_admin_zhuige_market',
                 zgaction: 'get_list',
                 init: $('.zhuige-param-init').val(),
                 cat: $('.zhuige-market-cat.activ').data('id'),

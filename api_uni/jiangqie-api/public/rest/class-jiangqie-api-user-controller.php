@@ -89,11 +89,7 @@ class JiangQie_API_User_Controller extends JiangQie_API_Base_Controller
 	{
 		$code = $this->param_value($request, 'code', '');
 		$nickname = $this->param_value($request, 'nickname', '');
-		// $avatar = $this->param_value($request, 'avatar', '');
 		$channel = $this->param_value($request, 'channel', '');
-		// if (empty($code) || empty($nickname) || empty($avatar) || empty($channel)) {
-		// 	return $this->make_error('缺少参数');
-		// }
 		if (empty($code) || empty($nickname) || empty($channel)) {
 			return $this->make_error('缺少参数');
 		}
@@ -143,24 +139,8 @@ class JiangQie_API_User_Controller extends JiangQie_API_Base_Controller
 			update_user_meta($user_id, 'jq_unionid', $session['unionid']);
 		}
 
-		//如果每次都同步微信头像 会导致小程序设置的头像失效；所以没有头像时，才同步头像
-		// $old_avatar = get_user_meta($user_id, 'jiangqie_avatar', true);
-		// if (!$old_avatar || strstr($old_avatar, 'qlogo.cn')) {
-		// 	$new_avatar = jiangqie_free_download_wx_avatar($avatar, $user_id);
-			
-		// 	if ($new_avatar) {
-		// 		$new_avatar_url = $new_avatar['url'];
-		// 		$dres = jiangqie_free_import_image2attachment($new_avatar['path']);
-		// 		if (!is_wp_error($dres)) {
-		// 			$upload_dir = wp_upload_dir();
-		// 			$new_avatar_url = $upload_dir['url'] . '/' . $dres;
-		// 		}
-		// 		update_user_meta($user_id, 'jiangqie_avatar', $new_avatar_url);
-		// 	} else {
-		// 		update_user_meta($user_id, 'jiangqie_avatar', $avatar);
-		// 	}
-		// }
-
+		// 设置头像未默认头像
+		update_user_meta($user_id, 'jiangqie_avatar', JiangQie_API::user_avatar($user_id));
 
 		$jiangqie_token = $this->generate_token();
 		update_user_meta($user_id, 'jiangqie_token', $jiangqie_token);

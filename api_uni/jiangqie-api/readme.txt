@@ -4,8 +4,8 @@ Contributors: jiangqie
 Donate link: https://www.zhuige.com/
 Tags: 追格,酱茄,小程序
 Requires at least: 5.6
-Tested up to: 6.0
-Stable tag: 2.2.0
+Tested up to: 6.2
+Stable tag: 2.2.1
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -82,6 +82,12 @@ gitee下载（优先更新）：https://gitee.com/zhuige_com/jiangqie_kafei
 
 
 == Changelog ==
+
+= 2.2.1 =
+
+1. 增加小程序是否导入媒体库的配置
+2. 修复默认头像的问题
+3. 修复跳转小程序提示的问题
 
 = 2.2.0 =
 
