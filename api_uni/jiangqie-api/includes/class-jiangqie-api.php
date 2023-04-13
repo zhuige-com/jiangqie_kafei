@@ -75,13 +75,17 @@ class JiangQie_API
 	 */
 	public static function get_wx_token()
 	{
-		$path_token = JIANG_QIE_API_BASE_DIR . 'wx_access_token.data';
-		if (file_exists($path_token)) {
-			$str_token = file_get_contents($path_token);
-			$access_token = json_decode($str_token, TRUE);
-			if ($access_token['expires_in'] > time()) {
-				return $access_token;
-			}
+		// $path_token = JIANG_QIE_API_BASE_DIR . 'wx_access_token.data';
+		// if (file_exists($path_token)) {
+		// 	$str_token = file_get_contents($path_token);
+		// 	$access_token = json_decode($str_token, TRUE);
+		// 	if ($access_token['expires_in'] > time()) {
+		// 		return $access_token;
+		// 	}
+		// }
+		$access_token = get_option('jiangqie-api-wx-access-token');
+		if ($access_token && isset($access_token['expires_in']) && $access_token['expires_in'] > time()) {
+			return $access_token;
 		}
 
 		$app_id = JiangQie_API::option_value('app_id');
@@ -98,7 +102,8 @@ class JiangQie_API
 		$access_token = json_decode($body['body'], TRUE);
 
 		$access_token['expires_in'] = $access_token['expires_in'] + time() - 200;
-		file_put_contents($path_token, json_encode($access_token));
+		// file_put_contents($path_token, json_encode($access_token));
+		update_option('jiangqie-api-wx-access-token', $access_token);
 
 		return $access_token;
 	}
@@ -108,13 +113,17 @@ class JiangQie_API
 	 */
 	public static function get_qq_token()
 	{
-		$path_token = JIANG_QIE_API_BASE_DIR . 'qq_access_token.data';
-		if (file_exists($path_token)) {
-			$str_token = file_get_contents($path_token);
-			$access_token = json_decode($str_token, TRUE);
-			if ($access_token['expires_in'] > time()) {
-				return $access_token;
-			}
+		// $path_token = JIANG_QIE_API_BASE_DIR . 'qq_access_token.data';
+		// if (file_exists($path_token)) {
+		// 	$str_token = file_get_contents($path_token);
+		// 	$access_token = json_decode($str_token, TRUE);
+		// 	if ($access_token['expires_in'] > time()) {
+		// 		return $access_token;
+		// 	}
+		// }
+		$access_token = get_option('jiangqie-api-qq-access-token');
+		if ($access_token && isset($access_token['expires_in']) && $access_token['expires_in'] > time()) {
+			return $access_token;
 		}
 
 		$app_id = JiangQie_API::option_value('qq_app_id');
@@ -131,7 +140,8 @@ class JiangQie_API
 		$access_token = json_decode($body['body'], TRUE);
 
 		$access_token['expires_in'] = $access_token['expires_in'] + time() - 200;
-		file_put_contents($path_token, json_encode($access_token));
+		// file_put_contents($path_token, json_encode($access_token));
+		update_option('jiangqie-api-qq-access-token', $access_token);
 
 		return $access_token;
 	}
@@ -141,13 +151,17 @@ class JiangQie_API
 	 */
 	public static function get_bd_token()
 	{
-		$path_token = JIANG_QIE_API_BASE_DIR . 'bd_access_token.data';
-		if (file_exists($path_token)) {
-			$str_token = file_get_contents($path_token);
-			$access_token = json_decode($str_token, TRUE);
-			if ($access_token['expires_in'] > time()) {
-				return $access_token;
-			}
+		// $path_token = JIANG_QIE_API_BASE_DIR . 'bd_access_token.data';
+		// if (file_exists($path_token)) {
+		// 	$str_token = file_get_contents($path_token);
+		// 	$access_token = json_decode($str_token, TRUE);
+		// 	if ($access_token['expires_in'] > time()) {
+		// 		return $access_token;
+		// 	}
+		// }
+		$access_token = get_option('jiangqie-api-bd-access-token');
+		if ($access_token && isset($access_token['expires_in']) && $access_token['expires_in'] > time()) {
+			return $access_token;
 		}
 
 		$app_id = JiangQie_API::option_value('bd_app_key');
@@ -165,7 +179,8 @@ class JiangQie_API
 		$access_token = json_decode($body['body'], TRUE);
 
 		$access_token['expires_in'] = $access_token['expires_in'] + time() - 200;
-		file_put_contents($path_token, json_encode($access_token));
+		// file_put_contents($path_token, json_encode($access_token));
+		update_option('jiangqie-api-bd-access-token', $access_token);
 
 		return $access_token;
 	}
