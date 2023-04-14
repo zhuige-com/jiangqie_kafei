@@ -83,19 +83,30 @@ class JiangQie_API_Other_Controller extends JiangQie_API_Base_Controller
 			case 7:
 				return ['error' => '服务器错误！'];
 		}
+
 		//判定文件类型
-		if (!in_array($file['type'], array('image/jpg', 'image/jpeg', 'image/pjpeg', 'image/png'))) {
+		if (!in_array($file['type'], array('image/jpg', 'image/jpeg', 'image/pjpeg', 'image/png', 'image/gif'))) {
 			return ['error' => '当前上传的文件类型不允许！'];
 		}
+
 		//判定业务大小
 		if ($file['size'] > $max) {
 			return ['error' => '当前上传的文件超过允许的大小！当前允许的大小是：' . (string) ($max / 1000000) . 'M'];
 		}
+
 		//获取随机名字
 		$filename = $this->getRandomName($file['name']);
+
 		//移动上传的临时文件到指定目录
 		$filepath = $path . '/' . $filename;
 		if (move_uploaded_file($file['tmp_name'], $filepath)) {
+
+			// 导入媒体库
+			$res = jiangqie_free_import_image2attachment($filepath);
+			if (!is_wp_error($res)) {
+				$filename = $res;
+			}
+
 			//成功
 			return ['file' => $filename];
 		} else {

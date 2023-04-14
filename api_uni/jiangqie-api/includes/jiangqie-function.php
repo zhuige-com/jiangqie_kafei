@@ -9,61 +9,11 @@
  * Copyright ️© 2020-2023 www.zhuige.com All rights reserved.
  */
 
-
-/* PHP远程下载微信头像存到本地,本地图片转base64
- * $url 微信头像链接
- * $path 要保存图片的目录
- * $user_id 用户唯一标识
- */
-if (!function_exists('jiangqie_free_download_wx_avatar')) {
-    function jiangqie_free_download_wx_avatar($url, $user_id)
-    {
-        // $header = [
-        //     'User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:45.0) Gecko/20100101 Firefox/45.0',
-        //     'Accept-Language: zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3',
-        //     'Accept-Encoding: gzip, deflate',
-        // ];
-        // $curl = curl_init();
-        // curl_setopt($curl, CURLOPT_URL, $url);
-        // curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        // curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
-        // curl_setopt($curl, CURLOPT_ENCODING, 'gzip');
-        // curl_setopt($curl, CURLOPT_HTTPHEADER, $header);
-        // $data = curl_exec($curl);
-        // $code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-        // curl_close($curl);
-
-        $response = wp_remote_get($url);
-        $http_code = wp_remote_retrieve_response_code($response);
-        
-
-        if ($http_code == 200) { //把URL格式的图片转成base64_encode格式的！     
-            $data = wp_remote_retrieve_body($response); 
-            $imgBase64Code = "data:image/jpeg;base64," . base64_encode($data);
-        }
-        $img_content = $imgBase64Code; //图片内容  
-        if (preg_match('/^(data:\s*image\/(\w+);base64,)/', $img_content, $result)) {
-            $type = $result[2]; //得到图片类型png jpg gif
-
-            $upload_dir = wp_upload_dir();
-            $filename = 'jiangqie_avatar_' . $user_id . ".{$type}";
-            $filepath = $upload_dir['path'] . '/' . $filename;
-            if (file_put_contents($filepath, base64_decode(str_replace($result[1], '', $img_content)))) {
-                return ['path' => $filepath, 'url' => $upload_dir['url'] . '/' . $filename];
-            } else {
-                return false;
-            }
-        } else {
-            return false;
-        }
-    }
-}
-
 if (!function_exists('jiangqie_free_import_image2attachment')) {
     //把图片添加到媒体库
-    function jiangqie_free_import_image2attachment($file, $post_id = 0, $import_date = 'current')
+    function jiangqie_free_import_image2attachment($file, $post_id = 0, $import_date = 'current', $qrcode = false)
     {
-        if (!JiangQie_API::option_value('jiangqie_switch_oss')) {
+        if ($qrcode && !JiangQie_API::option_value('jiangqie_switch_oss')) {
             return new WP_Error('jiangqie', 'jiangqie');
         }
 
