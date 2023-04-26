@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<web-view :src="src"></web-view>
+		<web-view v-if="src" :src="src"></web-view>
 	</view>
 </template>
 
@@ -17,14 +17,20 @@
 	export default {
 		data() {
 			return {
-				src: 'https://www.zhuige.com/'
+				src: ''
 			};
 		},
 
 		onLoad(options) {
-			if (options.src) {
-				this.src = decodeURIComponent(options.src);
+			if (!options.src) {
+				uni.reLaunch({
+					url: '/pages/index/index'
+				})
+				return;
 			}
+			
+			this.src = decodeURIComponent(options.src);
+			
 			uni.setNavigationBarTitle({
 				title: getApp().globalData.appName
 			})
