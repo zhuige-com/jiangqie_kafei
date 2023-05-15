@@ -5,7 +5,7 @@ Donate link: https://www.zhuige.com/
 Tags: 追格,酱茄,小程序
 Requires at least: 5.6
 Tested up to: 6.2
-Stable tag: 2.2.2
+Stable tag: 2.2.3
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -83,7 +83,12 @@ gitee下载（优先更新）：https://gitee.com/zhuige_com/jiangqie_kafei
 
 == Changelog ==
 
-= 2.2.2 =）
+= 2.2.3 =
+
+1. 增加首页分享标题图自定义
+2. UI细节优化
+
+= 2.2.2 =
 
 1. 修复iOS上webview兼容性问题
 

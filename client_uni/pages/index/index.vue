@@ -284,6 +284,11 @@
 				scrollLeft: "",
 				current: "",
 				actives: undefined,
+				
+				// 分享标题
+				share_title: undefined,
+				// 分享缩略图
+				share_thumb: undefined,
 			};
 		},
 
@@ -346,8 +351,17 @@
 					}, 1000 * parseInt(res.data.wx_ad_delay))
 				}
 				// #endif
-			}); //加载文章
+				
+				if (res.data.share_title) {
+					this.share_title = res.data.share_title;
+				}
+				
+				if (res.data.share_thumb) {
+					this.share_thumb = res.data.share_thumb;
+				}
+			}); 
 
+			//加载文章
 			this.loadPostLast(true);
 		},
 
@@ -380,16 +394,30 @@
 		},
 
 		onShareAppMessage() {
-			return {
+			let params = {
 				title: getApp().globalData.appName,
 				path: 'pages/index/index'
 			};
+			
+			if (this.share_title) {
+				params.title = this.share_title;
+			}
+			
+			if (this.share_thumb) {
+				params.imageUrl = this.share_thumb;
+			}
+			
+			return params;
 		},
 
 		// #ifdef MP-WEIXIN
 		onShareTimeline() {
+			let title = getApp().globalData.appName;
+			if (this.share_title) {
+				title = this.share_title;
+			}
 			return {
-				title: getApp().globalData.appName
+				title: title
 			};
 		},
 		// #endif

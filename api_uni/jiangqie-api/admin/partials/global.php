@@ -15,28 +15,6 @@ CSF::createSection($prefix, array(
     'title' => '基础设置',
     'icon'  => 'fas fa-cubes',
     'fields' => array(
-
-        array(
-            'id'          => 'title',
-            'type'        => 'text',
-            'title'       => '标题',
-            'placeholder' => '标题'
-        ),
-
-        array(
-            'id'          => 'description',
-            'type'        => 'text',
-            'title'       => '描述',
-            'placeholder' => '描述'
-        ),
-
-        array(
-            'id'          => 'keywords',
-            'type'        => 'text',
-            'title'       => '关键字',
-            'placeholder' => '关键字，英文逗号分隔'
-        ),
-
         array(
             'id'      => 'logo',
             'type'    => 'media',

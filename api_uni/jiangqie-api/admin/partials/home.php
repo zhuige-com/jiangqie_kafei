@@ -17,6 +17,31 @@ CSF::createSection($prefix, array(
     'fields' => array(
 
         array(
+            'id'          => 'title',
+            'type'        => 'text',
+            'title'       => '标题',
+            'placeholder' => '标题',
+            'after'       => '仅百度小程序使用'
+        ),
+
+        array(
+            'id'          => 'description',
+            'type'        => 'text',
+            'title'       => '描述',
+            'placeholder' => '描述',
+            'after'       => '仅百度小程序使用'
+        ),
+
+        array(
+            'id'          => 'keywords',
+            'type'        => 'text',
+            'title'       => '关键字',
+            'placeholder' => '关键字，英文逗号分隔',
+            'after'       => '仅百度小程序使用'
+        ),
+
+
+        array(
             'id'          => 'home_hot_search',
             'type'        => 'text',
             'title'       => '热门搜索词',
@@ -68,6 +93,7 @@ CSF::createSection($prefix, array(
                     'type'     => 'text',
                     'title'    => '链接',
                     'default'  => 'https://www.zhuige.com',
+                    'after' => '<a href="https://www.zhuige.com/bbs/59.html" target="_blank" title="页面路径怎么写？">页面路径</a>或小程序appid'
                 ),
                 array(
                     'id'    => 'switch',
@@ -188,6 +214,20 @@ CSF::createSection($prefix, array(
                 '2'         => '大图模式',
             ),
             'default'     => '3'
+        ),
+
+
+        array(
+            'id'      => 'home_title',
+            'type'    => 'text',
+            'title'   => '首页分享标题',
+        ),
+
+        array(
+            'id'      => 'home_thumb',
+            'type'    => 'media',
+            'title'   => '首页分享图',
+            'library' => 'image',
         ),
 
     )

@@ -497,6 +497,11 @@
 	}
 
 	.jiangqie-nomore {
-		margin: 50rpx 0;
+		margin-top: 50rpx;
+		padding-bottom: 100rpx;
+	}
+	
+	.jiangqie-text {
+		background-color: #FFF;
 	}
 </style>

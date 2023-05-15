@@ -68,13 +68,13 @@ class JiangQie_API_Setting_Controller extends JiangQie_API_Base_Controller
 		//LOGO
 		$data['logo'] = JiangQie_API::option_image_url(JiangQie_API::option_value('logo'));
 
-		//小程序名称
+		//小程序名称-仅百度小程序使用
 		$data['title'] = JiangQie_API::option_value('title');
 		
-		//描述
+		//描述-仅百度小程序使用
 		$data['description'] = JiangQie_API::option_value('description');
 		
-		//关键字
+		//关键字-仅百度小程序使用
 		$data['keywords'] = JiangQie_API::option_value('keywords');
 
 		//顶部分类
@@ -203,6 +203,15 @@ class JiangQie_API_Setting_Controller extends JiangQie_API_Base_Controller
 			$data['wx_ad_delay'] = $wx_ad['delay'];
 		} else {
 			$data['wx_ad'] = false;
+		}
+
+		// 分享标题
+		$data['share_title'] = JiangQie_API::option_value('home_title');
+
+		//分享缩略图
+		$home_thumb = JiangQie_API::option_value('home_thumb');
+		if ($home_thumb && $home_thumb['url']) {
+			$data['share_thumb'] = $home_thumb['url'];
 		}
 
 		return $this->make_success($data);
