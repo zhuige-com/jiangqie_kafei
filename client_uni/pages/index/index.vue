@@ -130,7 +130,6 @@
 										</view>
 									</view>
 								</view>
-								<!-- <image wx:if="{{item.stick==1}}" src="../../images/set_top.png" mode="aspectFill" class="jiangqie-news-stick-image"></image> -->
 							</view>
 							<view v-else :key="index" class="jiangqie-news-block" :data-id="item.id"
 								@tap.stop="handlerArticleClick">
@@ -579,7 +578,6 @@
 	}
 
 	/*banner*/
-
 	.jiangqie-banner-box {
 		width: 100%;
 	}

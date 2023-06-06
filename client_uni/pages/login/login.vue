@@ -25,8 +25,6 @@
 					<!-- #endif -->
 
 					<!-- #ifdef MP-QQ -->
-					<!-- <button v-if="code" open-type="getUserInfo" class="jiangqie-login-btnr"
-						@getuserinfo="getuserinfo">确定</button> -->
 					<button v-if="code" @tap.stop="clickLogin" class="jiangqie-login-btnr">确定</button>
 					<template v-else>
 						<button class="jiangqie-login-btnl">确定</button>
@@ -38,8 +36,6 @@
 
 					<!-- #ifdef MP-BAIDU -->
 					<template v-if="is_login_baidu">
-						<!-- <button v-if="code" open-type="getUserInfo" class="jiangqie-login-btnr"
-							@getuserinfo="getuserinfo">确定</button> -->
 						<button v-if="code" @tap.stop="clickLogin" class="jiangqie-login-btnr">确定</button>
 						<template v-else>
 							<button class="jiangqie-login-btnl">确定</button>
@@ -276,9 +272,7 @@
 
 				Rest.get(Api.JIANGQIE_USER_LOGIN, params).then(res => {
 					Auth.setUser(res.data);
-					// Util.navigateBack();
 					if (res.data.first) {
-						// Util.openLink('/pages/verify/verify')
 						uni.redirectTo({
 							url: '/pages/verify/verify'
 						})
