@@ -120,9 +120,6 @@ function openLink(link) {
 		let params = {
 			finderUserName: finder,
 			fail: res => {
-				// uni.setClipboardData({
-				// 	data: link
-				// });
 				if (res.errMsg && res.errMsg.indexOf('cancel') < 0) {
 					uni.showToast({
 						icon: 'none',

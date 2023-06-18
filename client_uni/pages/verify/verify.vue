@@ -12,7 +12,7 @@
 				<view class="jiangqie-verify-line">
 					<view class="jiangqie-verify-text">你这么帅，不换个昵称吗</view>
 					<view>
-						<input type="nickname" v-model="nickname" placeholder="请输入昵称" />
+						<input type="nickname" v-model="nickname" @blur="onNicknameBlur" placeholder="请输入昵称" />
 					</view>
 				</view>
 			</view>
@@ -68,6 +68,13 @@
 				}, err => {
 					console.log(err);
 				});
+			},
+			
+			/**
+			 * 设置昵称
+			 */
+			onNicknameBlur(e) {
+				this.nickname = e.detail.value;
 			},
 
 			/**
