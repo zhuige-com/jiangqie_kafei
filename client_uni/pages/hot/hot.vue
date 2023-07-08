@@ -11,13 +11,13 @@
 
 		<scroll-view scroll-x scroll-with-animation class="tab-view" :scroll-left="0">
 			<view v-for="(item, index) in tabbar" :key="index" class="tab-bar-item"
-				:class="(currentTab==index ? 'active' : '')" :data-current="index"
-				@tap.stop="swichNav">
+				:class="(currentTab==index ? 'active' : '')" :data-current="index" @tap.stop="swichNav">
 				<text class="tab-bar-title">{{item}}</text>
 			</view>
 		</scroll-view>
 
-		<view :style="tl_background?'background: url(' + tl_background + ') repeat-y; background-position: -30rpx 0;':''">
+		<view
+			:style="tl_background?'background: url(' + tl_background + ') repeat-y; background-position: -30rpx 0;':''">
 			<template v-if="posts.length > 0">
 				<view class="jiangqie-timeline-view">
 
@@ -98,22 +98,22 @@
 				description: '热门描述，请在后台修改'
 			};
 			this.sorts = ['views', 'likes', 'favorites', 'comments'];
-			
+
 			return {
 				setting: {
 					background: "",
 					title: "",
 					description: ""
 				},
-				
+
 				tabbar: ['浏览数', '点赞数', '收藏数', '评论数'],
 				currentTab: 0,
 				posts: [],
-				
+
 				loadding: false,
 				pullUpOn: true,
 				loaded: false,
-				
+
 				tl_background: '',
 			};
 		},
@@ -134,7 +134,7 @@
 						.description
 				};
 				this.tl_background = res.data.tl_background;
-				
+
 				// #ifdef MP-BAIDU
 				swan.setPageInfo({
 					title: this.setting.title,
@@ -145,7 +145,7 @@
 			});
 			this.loadPosts(true);
 		},
-		
+
 		onShow() {
 			// #ifdef MP-BAIDU
 			swan.setPageInfo({
@@ -191,7 +191,6 @@
 				}
 
 				this.currentTab = cur;
-				// this.posts = [];
 				this.loadPosts(true);
 			},
 
@@ -213,11 +212,11 @@
 				Rest.get(Api.JIANGQIE_POSTS_HOT, {
 					'offset': refresh ? 0 : this.posts.length,
 					'sort': this.sorts[this.currentTab]
-				}).then(res => {					
+				}).then(res => {
 					this.loaded = true;
 					this.loadding = false;
 					this.posts = (refresh ? res.data : this.posts.concat(res.data)),
-					this.pullUpOn = (res.data.length >= Constants.JQ_PER_PAGE_COUNT)
+						this.pullUpOn = (res.data.length >= Constants.JQ_PER_PAGE_COUNT)
 				});
 			}
 
@@ -267,6 +266,7 @@
 		height: 180rpx;
 		width: 180rpx;
 	}
+
 	.jiangqie-timeline-image image {
 		height: 100%;
 		width: 100%;
@@ -276,7 +276,7 @@
 	.jiangqie-timeline-text {
 		text-align: left;
 		width: 440rpx;
-		overflow: hidden;		
+		overflow: hidden;
 	}
 
 	.jiangqie-timeline-title {
@@ -353,7 +353,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		
+
 		// 开启该参数,可以调整图片，文字的左右浮动方式
 		// flex-direction: row-reverse;
 	}
@@ -451,7 +451,7 @@
 		position: -webkit-sticky;
 		position: sticky;
 		top: var(--window-top);
-		
+
 		width: 100%;
 		height: 100rpx;
 		overflow: hidden;

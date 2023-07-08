@@ -216,7 +216,7 @@
 
 			//返回页面是否需要刷新
 			this.needRefresh = true;
-			
+
 			// 是否正在提交评论
 			this.comment_submiting = false;
 
@@ -329,7 +329,7 @@
 				// #endif
 			});
 			this.loadComments(true);
-			
+
 			this.comment_submiting = false;
 		},
 
@@ -578,7 +578,7 @@
 					return;
 				}
 				this.comment_submiting = true;
-				
+
 				Rest.get(Api.JIANGQIE_COMMENT_ADD, {
 					post_id: this.post_id,
 					parent_id: this.comment_id,
@@ -588,7 +588,7 @@
 						1 ? 0 : 1);
 					this.show_comment_submit = false;
 					this.loadComments(true);
-					
+
 					this.comment_submiting = false;
 				});
 			},
@@ -619,7 +619,6 @@
 							});
 						}
 					}
-
 				});
 			},
 

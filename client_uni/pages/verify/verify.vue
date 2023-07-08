@@ -69,7 +69,7 @@
 					console.log(err);
 				});
 			},
-			
+
 			/**
 			 * 设置昵称
 			 */
@@ -90,12 +90,12 @@
 							icon: 'none',
 							title: res.msg
 						});
-						
+
 						let user = Auth.getUser();
 						user.nickname = this.nickname;
 						user.avatar = this.avatar;
 						Auth.setUser(user);
-						
+
 						setTimeout(() => {
 							Util.navigateBack();
 						}, 1500)

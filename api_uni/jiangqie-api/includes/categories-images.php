@@ -18,20 +18,22 @@ if (!defined('JIANGQIE_API_PLUGIN_URL'))
 define('JIANGQIE_IMAGE_PLACEHOLDER', "/images/placeholder.png");
 
 add_action('admin_init', 'jiangqie_api_init');
-function jiangqie_api_init() {
+function jiangqie_api_init()
+{
 	$z_taxonomies = get_taxonomies();
 	if (is_array($z_taxonomies)) {
-        $jiangqie_api_ci_options['excluded_taxonomies'] = ['post_tag'];
-	    foreach ($z_taxonomies as $z_taxonomy) {
+		$jiangqie_api_ci_options['excluded_taxonomies'] = ['post_tag'];
+		foreach ($z_taxonomies as $z_taxonomy) {
 			if (in_array($z_taxonomy, $jiangqie_api_ci_options['excluded_taxonomies']))
 				continue;
-	        add_action($z_taxonomy.'_add_form_fields', 'jiangqie_api_add_texonomy_field');
-			add_action($z_taxonomy.'_edit_form_fields', 'jiangqie_api_edit_texonomy_field');
-	    }
+			add_action($z_taxonomy . '_add_form_fields', 'jiangqie_api_add_texonomy_field');
+			add_action($z_taxonomy . '_edit_form_fields', 'jiangqie_api_edit_texonomy_field');
+		}
 	}
 }
 
-function jiangqie_api_add_style() {
+function jiangqie_api_add_style()
+{
 	echo '<style type="text/css" media="screen">
 		th.column-thumb {width:60px;}
 		.form-field img.taxonomy-image {border:1px solid #eee;max-width:300px;max-height:300px;}
@@ -42,48 +44,52 @@ function jiangqie_api_add_style() {
 }
 
 // add image field in add form
-function jiangqie_api_add_texonomy_field() {
+function jiangqie_api_add_texonomy_field()
+{
 	if (get_bloginfo('version') >= 3.5)
 		wp_enqueue_media();
 	else {
 		wp_enqueue_style('thickbox');
 		wp_enqueue_script('thickbox');
 	}
-	
+
 	echo '<div class="form-field">
 		<label for="taxonomy_image">' . __('封面', 'zci') . '</label>
 		<input type="text" name="taxonomy_image" id="taxonomy_image" value="" />
 		<br/>
 		<button class="z_upload_image_button button">' . __('上传/添加封面', 'zci') . '</button>
-	</div>'.jiangqie_api_script();
+	</div>' . jiangqie_api_script();
 }
 
 // add image field in edit form
-function jiangqie_api_edit_texonomy_field($taxonomy) {
+function jiangqie_api_edit_texonomy_field($taxonomy)
+{
 	if (get_bloginfo('version') >= 3.5)
 		wp_enqueue_media();
 	else {
 		wp_enqueue_style('thickbox');
 		wp_enqueue_script('thickbox');
 	}
-	
-	if (jiangqie_api_taxonomy_image_url( $taxonomy->term_id, NULL, TRUE ) == JIANGQIE_IMAGE_PLACEHOLDER) 
+
+	if (jiangqie_api_taxonomy_image_url($taxonomy->term_id, NULL, TRUE) == JIANGQIE_IMAGE_PLACEHOLDER)
 		$image_text = "";
 	else
-		$image_text = jiangqie_api_taxonomy_image_url( $taxonomy->term_id, NULL, TRUE );
+		$image_text = jiangqie_api_taxonomy_image_url($taxonomy->term_id, NULL, TRUE);
 	echo '<tr class="form-field">
 		<th scope="row" valign="top"><label for="taxonomy_image">' . __('封面', 'zci') . '</label></th>
-		<td><img class="taxonomy-image" width=120 height=60 src="' . jiangqie_api_taxonomy_image_url( $taxonomy->term_id, NULL, TRUE ) . '"/><br/><input type="text" name="taxonomy_image" id="taxonomy_image" value="'.$image_text.'" /><br />
+		<td><img class="taxonomy-image" width=120 height=60 src="' . jiangqie_api_taxonomy_image_url($taxonomy->term_id, NULL, TRUE) . '"/><br/><input type="text" name="taxonomy_image" id="taxonomy_image" value="' . $image_text . '" /><br />
 		<button class="z_upload_image_button button">' . __('上传/添加', 'zci') . '</button>
 		<button class="z_remove_image_button button">' . __('删除封面', 'zci') . '</button>
 		</td>
-	</tr>'.jiangqie_api_script();
+	</tr>' . jiangqie_api_script();
 }
+
 // upload using wordpress upload
-function jiangqie_api_script() {
+function jiangqie_api_script()
+{
 	return '<script type="text/javascript">
 	    jQuery(document).ready(function($) {
-			var wordpress_ver = "'.get_bloginfo("version").'", upload_button;
+			var wordpress_ver = "' . get_bloginfo("version") . '", upload_button;
 			$(".z_upload_image_button").click(function(event) {
 				upload_button = $(this);
 				var frame;
@@ -149,23 +155,26 @@ function jiangqie_api_script() {
 }
 
 // save our taxonomy image while edit or save term
-add_action('edit_term','jiangqie_api_save_taxonomy_image');
-add_action('create_term','jiangqie_api_save_taxonomy_image');
-function jiangqie_api_save_taxonomy_image($term_id) {
-    if(isset($_POST['taxonomy_image']))
-        update_option('z_taxonomy_image'.$term_id, sanitize_text_field(wp_unslash($_POST['taxonomy_image'])));
+add_action('edit_term', 'jiangqie_api_save_taxonomy_image');
+add_action('create_term', 'jiangqie_api_save_taxonomy_image');
+function jiangqie_api_save_taxonomy_image($term_id)
+{
+	if (isset($_POST['taxonomy_image']))
+		update_option('z_taxonomy_image' . $term_id, sanitize_text_field(wp_unslash($_POST['taxonomy_image'])));
 }
 
 // get attachment ID by image url
-function jiangqie_api_get_attachment_id_by_url($image_src) {
-    global $wpdb;
-    $query = "SELECT ID FROM {$wpdb->posts} WHERE guid = '$image_src'";
-    $id = $wpdb->get_var($query);
-    return (!empty($id)) ? $id : NULL;
+function jiangqie_api_get_attachment_id_by_url($image_src)
+{
+	global $wpdb;
+	$query = "SELECT ID FROM {$wpdb->posts} WHERE guid = '$image_src'";
+	$id = $wpdb->get_var($query);
+	return (!empty($id)) ? $id : NULL;
 }
 
 // get taxonomy image url for the given term_id (Place holder image by default)
-function jiangqie_api_taxonomy_image_url($term_id = NULL, $size = NULL, $return_placeholder = FALSE) {
+function jiangqie_api_taxonomy_image_url($term_id = NULL, $size = NULL, $return_placeholder = FALSE)
+{
 	if (!$term_id) {
 		if (is_category())
 			$term_id = get_query_var('cat');
@@ -174,26 +183,27 @@ function jiangqie_api_taxonomy_image_url($term_id = NULL, $size = NULL, $return_
 			$term_id = $current_term->term_id;
 		}
 	}
-	
-    $taxonomy_image_url = get_option('z_taxonomy_image'.$term_id);
-    if(!empty($taxonomy_image_url)) {
-	    $attachment_id = jiangqie_api_get_attachment_id_by_url($taxonomy_image_url);
-	    if(!empty($attachment_id)) {
-	    	if (empty($size))
-	    		$size = 'full';
-	    	$taxonomy_image_url = wp_get_attachment_image_src($attachment_id, $size);
-		    $taxonomy_image_url = $taxonomy_image_url[0];
-	    }
+
+	$taxonomy_image_url = get_option('z_taxonomy_image' . $term_id);
+	if (!empty($taxonomy_image_url)) {
+		$attachment_id = jiangqie_api_get_attachment_id_by_url($taxonomy_image_url);
+		if (!empty($attachment_id)) {
+			if (empty($size))
+				$size = 'full';
+			$taxonomy_image_url = wp_get_attachment_image_src($attachment_id, $size);
+			$taxonomy_image_url = $taxonomy_image_url[0];
+		}
 	}
 
-    if ($return_placeholder)
+	if ($return_placeholder)
 		return ($taxonomy_image_url != '') ? $taxonomy_image_url : JIANGQIE_IMAGE_PLACEHOLDER;
 	else
 		return $taxonomy_image_url;
 }
 
-function jiangqie_api_quick_edit_custom_box($column_name, $screen, $name) {
-	if ($column_name == 'thumb') 
+function jiangqie_api_quick_edit_custom_box($column_name, $screen, $name)
+{
+	if ($column_name == 'thumb')
 		echo '<fieldset>
 		<div class="thumb inline-edit-col">
 			<label>
@@ -215,14 +225,15 @@ function jiangqie_api_quick_edit_custom_box($column_name, $screen, $name) {
  * @param mixed $columns
  * @return void
  */
-function jiangqie_api_taxonomy_columns( $columns ) {
+function jiangqie_api_taxonomy_columns($columns)
+{
 	$new_columns = array();
 	$new_columns['cb'] = $columns['cb'];
 	$new_columns['thumb'] = __('封面', 'zci');
 
-	unset( $columns['cb'] );
+	unset($columns['cb']);
 
-	return array_merge( $new_columns, $columns );
+	return array_merge($new_columns, $columns);
 }
 
 /**
@@ -234,21 +245,23 @@ function jiangqie_api_taxonomy_columns( $columns ) {
  * @param mixed $id
  * @return void
  */
-function jiangqie_api_taxonomy_column( $columns, $column, $id ) {
-	if ( $column == 'thumb' )
+function jiangqie_api_taxonomy_column($columns, $column, $id)
+{
+	if ($column == 'thumb')
 		$columns = '<span><img src="' . jiangqie_api_taxonomy_image_url($id, NULL, TRUE) . '" alt="' . __('Thumbnail', 'zci') . '" class="wp-post-image" /></span>';
-	
+
 	return $columns;
 }
 
 // change 'insert into post' to 'use this image'
-function jiangqie_api_change_insert_button_text($safe_text, $text) {
-    return str_replace("Insert into Post", "Use this image", $text);
+function jiangqie_api_change_insert_button_text($safe_text, $text)
+{
+	return str_replace("Insert into Post", "Use this image", $text);
 }
 
 // style the image in category list
-if ( strpos( $_SERVER['SCRIPT_NAME'], 'edit-tags.php' ) > 0 ) {
-	add_action( 'admin_head', 'jiangqie_api_add_style' );
+if (strpos($_SERVER['SCRIPT_NAME'], 'edit-tags.php') > 0) {
+	add_action('admin_head', 'jiangqie_api_add_style');
 	add_action('quick_edit_custom_box', 'jiangqie_api_quick_edit_custom_box', 10, 3);
 	add_filter("attribute_escape", "jiangqie_api_change_insert_button_text", 10, 2);
 }

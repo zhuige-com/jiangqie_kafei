@@ -142,7 +142,7 @@ class JiangQie_API_Comment_Controller extends JiangQie_API_Base_Controller
 			return $this->make_error('缺少参数');
 		}
 
-		if(!$this->msg_sec_check($content)) {
+		if (!$this->msg_sec_check($content)) {
 			return $this->make_error('请勿发布敏感信息');
 		}
 

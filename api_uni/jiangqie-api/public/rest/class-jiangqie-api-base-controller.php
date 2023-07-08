@@ -108,7 +108,8 @@ class JiangQie_API_Base_Controller extends WP_REST_Controller
 		$table_usermeta = $wpdb->prefix . 'usermeta';
 		$user_id = $wpdb->get_var(
 			$wpdb->prepare(
-				"SELECT user_id FROM `$table_usermeta` WHERE  meta_key='jiangqie_token' AND meta_value='%s'", $token
+				"SELECT user_id FROM `$table_usermeta` WHERE  meta_key='jiangqie_token' AND meta_value='%s'",
+				$token
 			)
 		);
 
@@ -155,5 +156,4 @@ class JiangQie_API_Base_Controller extends WP_REST_Controller
 
 		return false;
 	}
-
 }

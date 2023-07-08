@@ -93,7 +93,7 @@
 	 * gitee: https://gitee.com/zhuige_com/jiangqie_kafei
 	 * Copyright © 2020-2023 www.zhuige.com All rights reserved.
 	 */
-	
+
 	const Util = require("@/utils/util.js");
 	const Auth = require("@/utils/auth.js");
 	const Api = require("@/utils/api.js");
@@ -109,7 +109,7 @@
 
 				code: undefined,
 
-				// 会否已登录百度App
+				// 是否已登录百度App
 				is_login_baidu: false,
 
 				argeeLicense: false,

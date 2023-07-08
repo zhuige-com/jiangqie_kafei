@@ -68,7 +68,7 @@
 	 * gitee: https://gitee.com/zhuige_com/jiangqie_kafei
 	 * Copyright © 2020-2023 www.zhuige.com All rights reserved.
 	 */
-	
+
 	const Constants = require("@/utils/constants.js");
 	const Util = require("@/utils/util.js");
 	const Api = require("@/utils/api.js");
@@ -91,8 +91,6 @@
 				loadding: false,
 				pullUpOn: true,
 				loaded: false,
-
-				// loading: false,
 			};
 		},
 
@@ -164,8 +162,6 @@
 
 			this.loadPost(true);
 		},
-
-		onPullDownRefresh() {},
 
 		onReachBottom() {
 			if (!this.pullUpOn) {

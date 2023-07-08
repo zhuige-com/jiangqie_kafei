@@ -15,7 +15,7 @@ CSF::createSection($prefix, array(
     'title' => '分类设置',
     'icon'  => 'fas fa-coins',
     'fields' => array(
-        
+
         array(
             'id'      => 'category_background',
             'type'    => 'media',
@@ -37,6 +37,6 @@ CSF::createSection($prefix, array(
             'title'       => '分类描述',
             'placeholder' => '请输入分类描述'
         ),
-        
+
     )
 ));

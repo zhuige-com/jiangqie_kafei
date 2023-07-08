@@ -15,7 +15,7 @@ CSF::createSection($prefix, array(
     'title' => '热榜设置',
     'icon'  => 'fas fa-fire',
     'fields' => array(
-        
+
         array(
             'id'      => 'hot_background',
             'type'    => 'media',

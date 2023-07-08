@@ -83,6 +83,11 @@ gitee下载（优先更新）：https://gitee.com/zhuige_com/jiangqie_kafei
 
 == Changelog ==
 
+= 2.2.6 =
+
+1. 代码整理优化
+2. 天气炎热，注意避暑
+
 = 2.2.5 =
 
 1. 修复昵称设置bug

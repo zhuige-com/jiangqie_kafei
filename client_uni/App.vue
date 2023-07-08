@@ -1,6 +1,6 @@
 <script>
 	/*
-	 * 酱茄小程序开源版 v2.2.5
+	 * 酱茄小程序开源版 v2.2.6
 	 * 作者: 追格
 	 * 文档：https://www.zhuige.com/docs/zxfree.html
 	 * github: https://github.com/zhuige-com/jiangqie_kafei
@@ -8,18 +8,18 @@
 	 * Copyright © 2020-2023 www.zhuige.com All rights reserved.
 	 */
 	import Vue from 'vue';
-	
+
 	const Auth = require("./utils/auth.js");
 
 	export default {
 		globalData: {
 			appName: '酱茄Free'
 		},
-		
+
 		onLaunch() {
-			
+
 		},
-		
+
 		methods: {
 
 		}

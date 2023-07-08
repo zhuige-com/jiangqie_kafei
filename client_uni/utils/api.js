@@ -33,7 +33,7 @@ module.exports = {
 	 * 获取我的配置
 	 */
 	JIANGQIE_SETTING_UCENTER: makeURL('setting', 'ucenter'),
-	
+
 	/**
 	 * 获取登录配置
 	 */
@@ -93,12 +93,12 @@ module.exports = {
 	 * 获取微信小程序码
 	 */
 	JIANGQIE_POST_WX_ACODE: makeURL('posts', 'wxacode'),
-	
+
 	/**
 	 * 获取百度小程序码
 	 */
 	JIANGQIE_POST_BD_ACODE: makeURL('posts', 'bdacode'),
-	
+
 	/**
 	 * 获取QQ小程序码
 	 */
@@ -108,7 +108,7 @@ module.exports = {
 	 * 用户登录
 	 */
 	JIANGQIE_USER_LOGIN: makeURL('user', 'login3'),
-	
+
 	/**
 	 * 用户登录 演示
 	 */
@@ -128,12 +128,12 @@ module.exports = {
 	 * 用户 收藏文章
 	 */
 	JIANGQIE_USER_FAVORITE: makeURL('user', 'favorite'),
-	
+
 	/**
 	 * 用户 设置手机号
 	 */
 	JIANGQIE_USER_SET_MOBILE: makeURL('user', 'set_mobile'),
-	
+
 	/**
 	 * 用户 设置昵称头像
 	 */
@@ -153,7 +153,7 @@ module.exports = {
 	 * 删除评论
 	 */
 	JIANGQIE_COMMENT_DELETE: makeURL('comment', 'delete'),
-	
+
 	/**
 	 * 上传图片
 	 */

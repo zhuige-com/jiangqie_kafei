@@ -15,7 +15,7 @@ CSF::createSection($prefix, array(
     'title' => '文章设置',
     'icon'  => 'fas fa-file',
     'fields' => array(
-        
+
         array(
             'id'    => 'switch_pre_next',
             'type'  => 'switcher',

@@ -70,10 +70,10 @@ class JiangQie_API_Setting_Controller extends JiangQie_API_Base_Controller
 
 		//小程序名称-仅百度小程序使用
 		$data['title'] = JiangQie_API::option_value('title');
-		
+
 		//描述-仅百度小程序使用
 		$data['description'] = JiangQie_API::option_value('description');
-		
+
 		//关键字-仅百度小程序使用
 		$data['keywords'] = JiangQie_API::option_value('keywords');
 
@@ -138,11 +138,13 @@ class JiangQie_API_Setting_Controller extends JiangQie_API_Base_Controller
 
 		//活动区域
 		$home_active = JiangQie_API::option_value('home_active');
-		if (JiangQie_API::option_value('home_active_switch')
-			&& !empty($home_active) 
-			&& !empty($home_active['left_image']) 
-			&& !empty($home_active['right_top_image']) 
-			&& !empty($home_active['right_down_image'])) {
+		if (
+			JiangQie_API::option_value('home_active_switch')
+			&& !empty($home_active)
+			&& !empty($home_active['left_image'])
+			&& !empty($home_active['right_top_image'])
+			&& !empty($home_active['right_down_image'])
+		) {
 			$data['actives'] = [
 				'left' => [
 					'image' => JiangQie_API::option_image_url($home_active['left_image']),
@@ -168,7 +170,6 @@ class JiangQie_API_Setting_Controller extends JiangQie_API_Base_Controller
 		$hot_ids = JiangQie_API::option_value('home_hot');
 		$hots = [];
 		if (!empty($hot_ids)) {
-			// $hot_ids = explode(',', $hot_ids);
 			$args = [
 				'post__in' => $hot_ids,
 				'orderby' => 'post__in',
@@ -276,7 +277,7 @@ class JiangQie_API_Setting_Controller extends JiangQie_API_Base_Controller
 				}
 			}
 		}
-		
+
 		$data = [
 			'background' => JiangQie_API::option_image_url(JiangQie_API::option_value('profile_background'), 'my_bg.png'),
 			'menu' => $menu,
@@ -284,7 +285,7 @@ class JiangQie_API_Setting_Controller extends JiangQie_API_Base_Controller
 
 		return $this->make_success($data);
 	}
-	
+
 	/**
 	 * 获取配置 登录
 	 */

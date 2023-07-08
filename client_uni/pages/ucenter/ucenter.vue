@@ -152,7 +152,7 @@
 	 * gitee: https://gitee.com/zhuige_com/jiangqie_kafei
 	 * Copyright © 2020-2023 www.zhuige.com All rights reserved.
 	 */
-	
+
 	const Auth = require("@/utils/auth.js");
 	const Api = require("@/utils/api.js");
 	const Util = require("@/utils/util.js");
@@ -500,7 +500,7 @@
 		margin-top: 50rpx;
 		padding-bottom: 100rpx;
 	}
-	
+
 	.jiangqie-text {
 		background-color: #FFF;
 	}

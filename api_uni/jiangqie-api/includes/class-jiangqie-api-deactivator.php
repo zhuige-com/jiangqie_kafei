@@ -9,10 +9,10 @@
  * Copyright ️© 2020-2023 www.zhuige.com All rights reserved.
  */
 
-class JiangQie_API_Deactivator {
+class JiangQie_API_Deactivator
+{
 
-	public static function deactivate() {
-
+	public static function deactivate()
+	{
 	}
-
 }

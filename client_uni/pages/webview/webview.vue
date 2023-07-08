@@ -28,9 +28,9 @@
 				})
 				return;
 			}
-			
+
 			this.src = decodeURIComponent(options.src);
-			
+
 			uni.setNavigationBarTitle({
 				title: getApp().globalData.appName
 			})
@@ -46,6 +46,6 @@
 	}
 </script>
 
-<style lang="scss" scoped>
+<style>
 
 </style>

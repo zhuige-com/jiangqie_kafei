@@ -175,7 +175,6 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 
 		$hide_cat = JiangQie_API::option_value('hide_cat');
 		if (!empty($hide_cat)) {
-			//$args['category__not_in'] = explode(',', $hide_cat);
 			$args['category__not_in'] = $hide_cat;
 		}
 
@@ -203,7 +202,8 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 		$table_post_search = $wpdb->prefix . 'jiangqie_post_search';
 		$times = $wpdb->get_var(
 			$wpdb->prepare(
-				"SELECT times FROM `$table_post_search` WHERE search=%s", $search
+				"SELECT times FROM `$table_post_search` WHERE search=%s",
+				$search
 			)
 		);
 		if (empty($times)) {
@@ -214,7 +214,7 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 		} else {
 			$wpdb->update($table_post_search, ['times' => $times + 1], ['search' => $search]);
 		}
-		
+
 		$args = [
 			'posts_per_page' => JiangQie_API::POSTS_PER_PAGE,
 			'offset' => $offset,
@@ -225,7 +225,6 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 
 		$hide_cat = JiangQie_API::option_value('hide_cat');
 		if (!empty($hide_cat)) {
-			//$args['category__not_in'] = explode(',', $hide_cat);
 			$args['category__not_in'] = $hide_cat;
 		}
 
@@ -244,7 +243,9 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 			$table_post_search = $wpdb->prefix . 'jiangqie_post_search';
 			$result = $wpdb->get_results(
 				$wpdb->prepare(
-					"SELECT search FROM `$table_post_search` ORDER BY times DESC LIMIT %d, %d", 0, 10
+					"SELECT search FROM `$table_post_search` ORDER BY times DESC LIMIT %d, %d",
+					0,
+					10
 				)
 			);
 			$searchs = array_column($result, 'search');
@@ -254,7 +255,7 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 
 		return $this->make_success($searchs);
 	}
-	
+
 	/**
 	 * 获取文章详情
 	 */
@@ -274,7 +275,7 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 			'comment_count' => $postObj->comment_count,
 			'thumbnail' => apply_filters('jiangqie_post_thumbnail', $postObj->ID)
 		];
-		
+
 		if ($postObj->post_excerpt) {
 			$post['excerpt'] = html_entity_decode(wp_trim_words($postObj->post_excerpt, 100, '...'));
 		} else {
@@ -317,7 +318,8 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 		$table_post_like = $wpdb->prefix . 'jiangqie_post_like';
 		$users = $wpdb->get_results(
 			$wpdb->prepare(
-				"SELECT user_id FROM `$table_post_like` WHERE post_id=%d ORDER BY id DESC", $post_id
+				"SELECT user_id FROM `$table_post_like` WHERE post_id=%d ORDER BY id DESC",
+				$post_id
 			)
 		);
 		$post['like_list'] = [];
@@ -340,7 +342,9 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 			$table_post_like = $wpdb->prefix . 'jiangqie_post_like';
 			$post_like_id = $wpdb->get_var(
 				$wpdb->prepare(
-					"SELECT id FROM `$table_post_like` WHERE user_id=%d AND post_id=%d", $user_id, $post_id
+					"SELECT id FROM `$table_post_like` WHERE user_id=%d AND post_id=%d",
+					$user_id,
+					$post_id
 				)
 			);
 			$user['islike'] = $post_like_id ? 1 : 0;
@@ -348,7 +352,9 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 			$table_post_favorite = $wpdb->prefix . 'jiangqie_post_favorite';
 			$post_favorite_id = $wpdb->get_var(
 				$wpdb->prepare(
-					"SELECT id FROM `$table_post_favorite` WHERE user_id=%d AND post_id=%d", $user_id, $post_id
+					"SELECT id FROM `$table_post_favorite` WHERE user_id=%d AND post_id=%d",
+					$user_id,
+					$post_id
 				)
 			);
 			$user['isfavorite'] = $post_favorite_id ? 1 : 0;
@@ -357,7 +363,9 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 			$table_post_view = $wpdb->prefix . 'jiangqie_post_view';
 			$post_view_id = $wpdb->get_var(
 				$wpdb->prepare(
-					"SELECT id FROM `$table_post_view` WHERE user_id=%d AND post_id=%d", $user_id, $post_id
+					"SELECT id FROM `$table_post_view` WHERE user_id=%d AND post_id=%d",
+					$user_id,
+					$post_id
 				)
 			);
 			if (!$post_view_id) {
@@ -391,7 +399,7 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 			$pre_post = get_previous_post();
 			$post['pre'] = $pre_post ? $pre_post->ID : false;
 			$next_post = get_next_post();
-			$post['next'] = $next_post ? $next_post->ID: false;
+			$post['next'] = $next_post ? $next_post->ID : false;
 		} else {
 			$post['pre_next'] = false;
 		}
@@ -413,7 +421,8 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 		$table_post = $wpdb->prefix . 'posts';
 		$result = $wpdb->get_row(
 			$wpdb->prepare(
-				"SELECT post_title, post_content FROM `$table_post` WHERE ID=%d", $page_id
+				"SELECT post_title, post_content FROM `$table_post` WHERE ID=%d",
+				$page_id
 			)
 		);
 		if (!$result) {
@@ -480,7 +489,6 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 
 		$hide_cat = JiangQie_API::option_value('hide_cat');
 		if (!empty($hide_cat)) {
-			//$args['category__not_in'] = explode(',', $hide_cat);
 			$args['category__not_in'] = $hide_cat;
 		}
 
@@ -551,12 +559,14 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 			$field = 'post_id';
 			$orderby = 'id';
 		}
-		
+
 		$per_page_count = JiangQie_API::POSTS_PER_PAGE;
 		$post_ids = $wpdb->get_results(
 			$wpdb->prepare(
 				"SELECT distinct $field FROM `$table_name` WHERE user_id=%d ORDER BY $orderby DESC LIMIT %d, %d",
-				$user_id, $offset, $per_page_count
+				$user_id,
+				$offset,
+				$per_page_count
 			)
 		);
 		if (empty($post_ids)) {
@@ -577,7 +587,7 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 	/**
 	 * 处理文章
 	 */
-	private function get_posts($args, $qstick=false)
+	private function get_posts($args, $qstick = false)
 	{
 		if ($qstick && JiangQie_API::option_value('jiangqie_switch_stick')) {
 			//第一页获取置顶帖子
@@ -862,5 +872,4 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 		$posts = $query->query($args);
 		return $posts;
 	}
-
 }

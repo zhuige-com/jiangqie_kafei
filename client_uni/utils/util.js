@@ -26,21 +26,21 @@ function jiangqie() {
 		appId: 'wxb0b82c1a4e82a353'
 	})
 	// #endif
-	
+
 	// #ifdef MP-BAIDU
 	os = 'baidu';
 	uni.navigateToMiniProgram({
 		appId: 'UBGY8eyZqGooUziDVAz27P0KuMWj0eR1'
 	})
 	// #endif
-	
+
 	// #ifdef MP-QQ
 	os = 'qq';
 	uni.navigateToMiniProgram({
 		appId: '1111804134'
 	})
 	// #endif
-	
+
 	if (!os) {
 		uni.navigateTo({
 			url: '/pages/webview/webview'
@@ -92,7 +92,7 @@ function openLink(link) {
 	if (!link) {
 		return;
 	}
-	
+
 	if (link.startsWith('/pages/')) {
 		link = htmlRestore(link);
 		uni.navigateTo({
@@ -105,7 +105,7 @@ function openLink(link) {
 		});
 		return;
 	}
-	
+
 	// #ifdef MP-WEIXIN
 	if (link.startsWith('finder:')) {
 		let finder = '';
@@ -128,18 +128,18 @@ function openLink(link) {
 				}
 			}
 		};
-		
+
 		if (feedId != '') {
 			params.feedId = feedId;
 			wx.openChannelsActivity(params);
 		} else {
 			wx.openChannelsUserProfile(params);
 		}
-		
+
 		return;
 	}
 	// #endif
-	
+
 	uni.navigateToMiniProgram({
 		appId: link,
 		fail: res => {

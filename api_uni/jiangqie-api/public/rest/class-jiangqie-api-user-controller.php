@@ -123,14 +123,14 @@ class JiangQie_API_User_Controller extends JiangQie_API_Base_Controller
 				'role' => 'subscriber',
 				'user_pass' => wp_generate_password(16, false),
 			]);
-			
+
 			if (is_wp_error($user_id)) {
 				return $this->make_error('创建用户失败');
 			}
 
 			$first = 1;
 		}
-		
+
 		update_user_meta($user_id, 'jq_channel', $channel);
 
 		update_user_meta($user_id, 'jq_session_key', $session['session_key']);
@@ -156,7 +156,7 @@ class JiangQie_API_User_Controller extends JiangQie_API_Base_Controller
 			$user['first'] = $first;
 		}
 
-		return $this->make_success($user);	
+		return $this->make_success($user);
 	}
 
 	/**
@@ -260,28 +260,32 @@ class JiangQie_API_User_Controller extends JiangQie_API_Base_Controller
 		$table_post_view = $wpdb->prefix . 'jiangqie_post_view';
 		$view_count = $wpdb->get_var(
 			$wpdb->prepare(
-				"SELECT COUNT(id) FROM `$table_post_view` WHERE user_id=%d", $user_id
+				"SELECT COUNT(id) FROM `$table_post_view` WHERE user_id=%d",
+				$user_id
 			)
 		);
 
 		$table_post_like = $wpdb->prefix . 'jiangqie_post_like';
 		$like_count = $wpdb->get_var(
 			$wpdb->prepare(
-				"SELECT COUNT(id) FROM `$table_post_like` WHERE user_id=%d", $user_id
+				"SELECT COUNT(id) FROM `$table_post_like` WHERE user_id=%d",
+				$user_id
 			)
 		);
 
 		$table_post_favorite = $wpdb->prefix . 'jiangqie_post_favorite';
 		$favorite_count = $wpdb->get_var(
 			$wpdb->prepare(
-				"SELECT COUNT(id) FROM `$table_post_favorite` WHERE user_id=%d", $user_id
+				"SELECT COUNT(id) FROM `$table_post_favorite` WHERE user_id=%d",
+				$user_id
 			)
 		);
 
 		$table_comments = $wpdb->prefix . 'comments';
 		$comment_count = $wpdb->get_var(
 			$wpdb->prepare(
-				"SELECT COUNT(distinct comment_post_ID) FROM `$table_comments` WHERE user_id=%d", $user_id
+				"SELECT COUNT(distinct comment_post_ID) FROM `$table_comments` WHERE user_id=%d",
+				$user_id
 			)
 		);
 
@@ -312,7 +316,9 @@ class JiangQie_API_User_Controller extends JiangQie_API_Base_Controller
 		$table_post_like = $wpdb->prefix . 'jiangqie_post_like';
 		$post_like_id = $wpdb->get_var(
 			$wpdb->prepare(
-				"SELECT id FROM `$table_post_like` WHERE user_id=%d AND post_id=%d", $user_id, $post_id
+				"SELECT id FROM `$table_post_like` WHERE user_id=%d AND post_id=%d",
+				$user_id,
+				$post_id
 			)
 		);
 
@@ -355,7 +361,9 @@ class JiangQie_API_User_Controller extends JiangQie_API_Base_Controller
 		$table_post_favorite = $wpdb->prefix . 'jiangqie_post_favorite';
 		$post_favorite_id = $wpdb->get_var(
 			$wpdb->prepare(
-				"SELECT id FROM `$table_post_favorite` WHERE user_id=%d AND post_id=%d", $user_id, $post_id
+				"SELECT id FROM `$table_post_favorite` WHERE user_id=%d AND post_id=%d",
+				$user_id,
+				$post_id
 			)
 		);
 
@@ -437,7 +445,7 @@ class JiangQie_API_User_Controller extends JiangQie_API_Base_Controller
 
 		$avatar = $this->param_value($request, 'avatar', '');
 		$nickname = $this->param_value($request, 'nickname', '');
-		if(!$this->msg_sec_check($nickname)) {
+		if (!$this->msg_sec_check($nickname)) {
 			return $this->make_error('请勿发布敏感信息');
 		}
 

@@ -50,7 +50,7 @@
 				title: '分类标题，请在后台修改',
 				description: '分类描述，请在后台修改'
 			};
-			
+
 			return {
 				setting: {
 					title: "",
@@ -126,6 +126,7 @@
 		}
 	};
 </script>
+
 <style lang="scss" scoped>
 	.jiangqie-searchbox {
 		width: 100%;

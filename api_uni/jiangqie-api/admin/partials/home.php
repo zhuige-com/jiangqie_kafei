@@ -40,7 +40,6 @@ CSF::createSection($prefix, array(
             'after'       => '仅百度小程序使用'
         ),
 
-
         array(
             'id'          => 'home_hot_search',
             'type'        => 'text',
@@ -215,7 +214,6 @@ CSF::createSection($prefix, array(
             ),
             'default'     => '3'
         ),
-
 
         array(
             'id'      => 'home_title',
