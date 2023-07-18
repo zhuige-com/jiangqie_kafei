@@ -83,6 +83,10 @@ gitee下载（优先更新）：https://gitee.com/zhuige_com/jiangqie_kafei
 
 == Changelog ==
 
+= 2.2.7 =
+
+1. 增加文章内链接点击处理方法
+
 = 2.2.6 =
 
 1. 代码整理优化

@@ -206,6 +206,7 @@
 	const Api = require("@/utils/api.js");
 	const Rest = require("@/utils/rest.js");
 	const Auth = require("@/utils/auth.js");
+	const Extend = require("@/utils/extend.js");
 
 	export default {
 		data() {
@@ -285,6 +286,8 @@
 			// #ifdef MP-BAIDU || H5
 			this.loadBdacode();
 			// #endif
+			
+			uni.$on('linktap', this.onMPHtmlLink);
 		},
 
 		onShow() {
@@ -332,6 +335,10 @@
 
 			this.comment_submiting = false;
 		},
+		
+		onUnload() {
+			uni.$off('linktap', this.onMPHtmlLink);
+		},
 
 		onReachBottom() {
 			if (!this.pullUpOn) {
@@ -360,6 +367,13 @@
 		// #endif
 
 		methods: {
+			/**
+			 * 点击文章内链接
+			 */
+			onMPHtmlLink(data) {
+				Extend.clickHref(data);
+			},
+			
 			//海报分享-百度
 			// #ifdef MP-BAIDU
 			clickPainter() {
@@ -497,15 +511,6 @@
 					urls: [e]
 				});
 				// #endif
-			},
-
-			/**
-			 * 文章中a标签点击
-			 */
-			wxParseTagATap(e) {
-				uni.setClipboardData({
-					data: e.currentTarget.dataset.src
-				});
 			},
 
 			/**

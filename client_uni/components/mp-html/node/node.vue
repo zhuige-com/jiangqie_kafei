@@ -334,42 +334,42 @@ myAudio,
       uni.$emit('linktap', Object.assign({
         innerText: this.root.getText(node.children || []) // 链接内的文本内容
       }, attrs))
-      if (href) {
-        if (href[0] === '#') {
-          // 跳转锚点
-          this.root.navigateTo(href.substring(1)).catch(() => { })
-        } else if (href.split('?')[0].includes('://')) {
-          // 复制外部链接
-          if (this.root.copyLink) {
-            // #ifdef H5
-            window.open(href)
-            // #endif
-            // #ifdef MP
-            uni.setClipboardData({
-              data: href,
-              success: () =>
-                uni.showToast({
-                  title: '链接已复制'
-                })
-            })
-            // #endif
-            // #ifdef APP-PLUS
-            plus.runtime.openWeb(href)
-            // #endif
-          }
-        } else {
-          // 跳转页面
-          uni.navigateTo({
-            url: href,
-            fail () {
-              uni.switchTab({
-                url: href,
-                fail () { }
-              })
-            }
-          })
-        }
-      }
+      // if (href) {
+      //   if (href[0] === '#') {
+      //     // 跳转锚点
+      //     this.root.navigateTo(href.substring(1)).catch(() => { })
+      //   } else if (href.split('?')[0].includes('://')) {
+      //     // 复制外部链接
+      //     if (this.root.copyLink) {
+      //       // #ifdef H5
+      //       window.open(href)
+      //       // #endif
+      //       // #ifdef MP
+      //       uni.setClipboardData({
+      //         data: href,
+      //         success: () =>
+      //           uni.showToast({
+      //             title: '链接已复制'
+      //           })
+      //       })
+      //       // #endif
+      //       // #ifdef APP-PLUS
+      //       plus.runtime.openWeb(href)
+      //       // #endif
+      //     }
+      //   } else {
+      //     // 跳转页面
+      //     uni.navigateTo({
+      //       url: href,
+      //       fail () {
+      //         uni.switchTab({
+      //           url: href,
+      //           fail () { }
+      //         })
+      //       }
+      //     })
+      //   }
+      // }
     },
 
     /**
