@@ -228,6 +228,7 @@ class JiangQie_API
 	private function define_public_hooks()
 	{
 		$this->public = new JiangQie_API_Public($this->get_jiangqie_api(), $this->get_version(), $this->main);
+
 		$this->loader->add_action('wp_enqueue_scripts', $this->public, 'enqueue_styles');
 		$this->loader->add_action('wp_enqueue_scripts', $this->public, 'enqueue_scripts');
 
@@ -235,6 +236,11 @@ class JiangQie_API
 		$this->loader->add_filter('jiangqie_post_for_list', $this->public, 'filter_post_for_list');
 		$this->loader->add_filter('jiangqie_tag_for_list', $this->public, 'filter_tag_for_list');
 		$this->loader->add_filter('jiangqie_tag_for_detail', $this->public, 'filter_tag_for_detail');
+
+		$search_columns = JiangQie_API::option_value('search_columns');
+		if (is_array($search_columns) && count($search_columns) > 0) {
+			$this->loader->add_filter('post_search_columns', $this->public, 'post_search_columns');
+		}
 
 		$controller = [
 			new JiangQie_API_Setting_Controller(),

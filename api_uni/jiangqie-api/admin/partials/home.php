@@ -41,14 +41,6 @@ CSF::createSection($prefix, array(
         ),
 
         array(
-            'id'          => 'home_hot_search',
-            'type'        => 'text',
-            'title'       => '热门搜索词',
-            'subtitle'    => '搜索词,英文逗号分隔',
-            'placeholder' => '酱茄,美食'
-        ),
-
-        array(
             'id'          => 'home_top_nav',
             'type'        => 'select',
             'title'       => '顶部导航',

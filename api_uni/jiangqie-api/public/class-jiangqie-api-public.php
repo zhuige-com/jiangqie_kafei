@@ -145,4 +145,9 @@ class JiangQie_API_Public
 		}
 		return $thumbnails;
 	}
+
+	public function post_search_columns($search_columns) {
+		return JiangQie_API::option_value('search_columns');
+	}
+
 }

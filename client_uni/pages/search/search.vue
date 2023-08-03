@@ -268,7 +268,7 @@
 	.jiangqie-search-list {
 		flex-direction: column;
 		box-sizing: border-box;
-		padding: 10rpx 0;
+		padding-top: 30rpx;
 	}
 
 	.jiangqie-search-tag {
