@@ -338,6 +338,7 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 		//用户数据
 		$user = [];
 		$user_id = $this->check_login($request);
+		$table_post_favorite = $wpdb->prefix . 'jiangqie_post_favorite';
 		if ($user_id) {
 			$table_post_like = $wpdb->prefix . 'jiangqie_post_like';
 			$post_like_id = $wpdb->get_var(
@@ -349,7 +350,6 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 			);
 			$user['islike'] = $post_like_id ? 1 : 0;
 
-			$table_post_favorite = $wpdb->prefix . 'jiangqie_post_favorite';
 			$post_favorite_id = $wpdb->get_var(
 				$wpdb->prepare(
 					"SELECT id FROM `$table_post_favorite` WHERE user_id=%d AND post_id=%d",
@@ -376,6 +376,11 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 			}
 		}
 		$post['user'] = $user;
+
+		// 收藏数量
+		$post['favorite_count'] = $wpdb->get_var(
+			$wpdb->prepare("SELECT COUNT(`id`) FROM `$table_post_favorite` WHERE `post_id`=%d", $post_id)
+		);
 
 		//广告设置
 		$wx_ad_top = JiangQie_API::option_value('wx_ad_article_top');

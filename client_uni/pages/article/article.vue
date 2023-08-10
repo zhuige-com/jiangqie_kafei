@@ -37,7 +37,7 @@
 				</view>
 				<view class="jiangqie-page-laud">
 					<view class="jiangqie-page-laud-contrl">
-						<view v-if="post_like==1" class="jiangqie-page-laud-btn" @tap.stop="handlerLikeClick">
+						<view v-if="islike==1" class="jiangqie-page-laud-btn" @tap.stop="handlerLikeClick">
 							<image src="/static/images/laud_on.png" mode="widthFix"></image>
 							<text>已赞过</text>
 						</view>
@@ -138,12 +138,13 @@
 					<text>{{comment_count + comment_count_change}}</text>
 				</view>
 				<view class="jiangqie-operation-item" @tap.stop="handlerFavoriteClick">
-					<template v-if="post_favorite==1">
+					<template v-if="isfavorite==1">
 						<image src="/static/images/btn_fav_on.png" mode="widthFix"></image>
 					</template>
 					<template v-else>
 						<image src="/static/images/btn_fav.png" mode="widthFix"></image>
 					</template>
+					<text>{{favorite_count}}</text>
 				</view>
 				<button open-type="share" class="jiangqie-operation-item" hover-class="opcity" hover-stay-time="150">
 					<image src="/static/images/btn_share.png" mode="widthFix"></image>
@@ -230,8 +231,9 @@
 					tags: [],
 					switch_comment: 0
 				},
-				post_like: 0,
-				post_favorite: 0,
+				islike: 0,
+				isfavorite: 0,
+				favorite_count: 0,
 				comment_count: 0,
 				comments: [],
 				loadding: false,
@@ -253,7 +255,6 @@
 				official: false,
 				like_list: [],
 				placeholder: "",
-				// loading: false,
 
 				isShowPainter: false,
 				painterImage: '',
@@ -304,8 +305,9 @@
 				});
 
 				this.post = res.data;
-				this.post_like = res.data.user.islike;
-				this.post_favorite = res.data.user.isfavorite;
+				this.islike = res.data.user.islike;
+				this.isfavorite = res.data.user.isfavorite;
+				this.favorite_count = res.data.favorite_count;
 				this.comment_count = Number(res.data.comment_count);
 				this.like_list = res.data.like_list;
 
@@ -547,7 +549,7 @@
 						this.like_list.unshift(avatar);
 					}
 
-					this.post_like = (this.post_like == 1 ? 0 : 1);
+					this.islike = (this.islike == 1 ? 0 : 1);
 					this.like_list = this.like_list;
 				});
 			},
@@ -641,7 +643,7 @@
 				Rest.get(Api.JIANGQIE_USER_FAVORITE, {
 					post_id: this.post.id
 				}).then(res => {
-					this.post_favorite = (this.post_favorite == 1 ? 0 : 1);
+					this.isfavorite = (this.isfavorite == 1 ? 0 : 1);
 				});
 			},
 
