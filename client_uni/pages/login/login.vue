@@ -330,7 +330,7 @@
 
 	.jiangqie-app-slogan {
 		font-size: 28rpx;
-		color: rgb(248, 184, 184);
+		color: #F8B8B8;
 		font-weight: 400;
 		line-height: 40rpx;
 	}

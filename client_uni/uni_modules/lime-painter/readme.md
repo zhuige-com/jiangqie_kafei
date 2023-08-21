@@ -164,7 +164,7 @@ data() {
                         width: '120rpx',
                         height: '120rpx',
                         radius: '50%',
-                        border: '2rpx dashed rgb(7,193,96)'
+                        border: '2rpx dashed #07C160'
                     }
                 },
                 {

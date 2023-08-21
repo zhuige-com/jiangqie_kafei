@@ -4,8 +4,8 @@ Contributors: jiangqie
 Donate link: https://www.zhuige.com/
 Tags: 追格,酱茄,小程序
 Requires at least: 5.6
-Tested up to: 6.2
-Stable tag: 2.2.9
+Tested up to: 6.3
+Stable tag: 2.3.0
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -82,6 +82,16 @@ gitee下载（优先更新）：https://gitee.com/zhuige_com/jiangqie_kafei
 
 
 == Changelog ==
+
+= 2.3.0 =
+1. 优化：菜单导航从4个改5个；
+2. 优化：活动区域样式调整；
+3. 优化：热门推荐标题位置调整；
+4. 优化：单页内容行距问题；
+5. 优化：首页Tab导航去掉下划线；
+6. 优化：点赞头像行数量调整；
+7. 优化：页面头部红色颜色值统一问题；
+8. 其他：已知细节优化。
 
 = 2.2.9 =
 

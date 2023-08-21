@@ -154,7 +154,7 @@ export default {
   width: 20px;
   height: 20px;
   overflow: hidden;
-  background-color: rgb(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.2);
   border: 1px solid white;
   border-radius: 50%;
   opacity: 0.9;

@@ -638,7 +638,7 @@
 	}
 
 	.jiangqie-news-iconbox {
-		width: 25%;
+		width: 20%;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
@@ -709,12 +709,13 @@
 		left: 0rpx;
 		bottom: 0rpx;
 		text-align: left;
-		background: rgba(0, 0, 0, 0.5);
+		background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(55,55,55,0.6));
 		overflow: hidden;
 		z-index: 9;
 		width: 280rpx;
 		border-radius: 0 0 8rpx 8rpx;
-		height: 60rpx;
+		height: 90rpx;
+		line-height: 110rpx;
 		padding: 0 20rpx;
 	}
 
@@ -726,7 +727,7 @@
 	.jiangqie-news-lihgttitle {
 		color: #FFF;
 		font-size: 26rpx;
-		font-weight: 300;
+		font-weight: 400;
 		line-height: 70rpx;
 	}
 
@@ -903,6 +904,7 @@
 		height: 290rpx;
 		margin-left: 20rpx;
 		display: inline-block;
+		position: relative;
 	}
 
 	.jiangqie-hot-scroll-box:first-child {
@@ -921,13 +923,21 @@
 	}
 
 	.jiangqie-hot-scroll-title {
-		font-size: 32rpx;
-		color: #333;
-		font-weight: 400;
-		line-height: 36rpx;
-		height: 36rpx;
+		position: absolute;
+		left: 0rpx;
+		bottom: 0rpx;
+		text-align: left;
+		background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(22,22,22,0.6));
+		z-index: 9;
+		width: 400rpx;
+		border-radius: 0 0 8rpx 8rpx;
+		height: 90rpx;
+		line-height: 110rpx;
+		padding: 0 20rpx;
+		color: #FFFFFF;
 		white-space: normal;
 		overflow: hidden;
+		position: absolute;
 	}
 
 	.tab-more {
@@ -986,13 +996,11 @@
 		height: 100rpx;
 		line-height: 100rpx;
 		font-size: 28rpx;
-		color: rgb(248, 184, 184);
+		color: #F8B8B8;
 		font-weight: 400;
 	}
 
-	.active {
-		border-bottom: 6rpx solid #FFF;
-	}
+
 
 	.active .tab-bar-title {
 		color: #FFF !important;

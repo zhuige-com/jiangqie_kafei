@@ -20,8 +20,10 @@
 			<view v-for="(item, index) in categories" :key="index" class="sortbox" :data-id="item.id"
 				:data-name="item.name" @tap.stop="handlerCategoryClick">
 				<image :src="item.cover" mode="aspectFill" class="sortimage"></image>
-				<view class="sorttitle">{{item.name}}</view>
-				<view class="sortsummary">{{item.description}}</view>
+				<view class="sorttext">
+					<view class="sorttitle">{{item.name}}</view>
+					<view class="sortsummary">{{item.description}}</view>
+				</view>
 			</view>
 
 		</view>
@@ -191,19 +193,22 @@
 		width: 100%;
 		box-sizing: border-box;
 		border-radius: 12rpx;
-		padding: 20rpx 20rpx 20rpx 180rpx;
+		padding: 20rpx;
+		display: flex;
+		align-items: center;
 		overflow: hidden;
 		border-bottom: 1rpx solid #DDD;
 	}
 
 	.sortimage {
+		flex: 0 0 160rpx;
 		height: 120rpx;
 		width: 160rpx;
 		float: left;
 		border-radius: 12rpx;
-		margin-left: -160rpx;
 	}
 
+	.sorttext {}
 	.sorttitle {
 		overflow: hidden;
 		padding: 20rpx 30rpx 0;
