@@ -37,7 +37,7 @@
 			//isDot为false时生效
 			text: {
 				type: String,
-				default: "© 追格 zhuige.com"
+				default: "本小程序基于追格（zhuige.com）搭建"
 			}
 		},
 		externalClasses: ['jiangqie-nomore-class'],
@@ -47,11 +47,12 @@
 
 <style lang="scss" scoped>
 	.jiangqie-loadmore {
-		width: 48%;
+		width: 78%;
 		margin: 1.5em auto;
 		line-height: 1.5em;
 		font-size: 24rpx;
 		text-align: center;
+		padding-bottom: 30px;
 	}
 
 	.jiangqie-nomore {
@@ -69,7 +70,7 @@
 		border-bottom: 1rpx solid #e5e5e5;
 		-webkit-transform: scaleY(0.5);
 		transform: scaleY(0.5);
-		width: 360rpx;
+		width: 720rpx;
 		top: 18rpx;
 	}
 
@@ -116,4 +117,7 @@
 		z-index: 1;
 	}
 
+	.jiangqie-nomore-class .jiangqie-text {
+		white-space: nowrap;
+	}
 </style>

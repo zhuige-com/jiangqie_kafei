@@ -283,6 +283,15 @@ class JiangQie_API_Setting_Controller extends JiangQie_API_Base_Controller
 			'menu' => $menu,
 		];
 
+		// 备案信息
+		$beian_icp = JiangQie_API::option_value('beian_icp');
+		if ($beian_icp && $beian_icp['switch']) {
+			$data['beian_icp'] = [
+				'sn' => $beian_icp['sn'],
+				'link' => $beian_icp['link'],
+			];
+		}
+
 		return $this->make_success($data);
 	}
 

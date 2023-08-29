@@ -138,8 +138,16 @@
 		</view>
 
 		<view class="jiangqie-nomore">
-			<view @click="clickJiangQie" class="jiangqie-text">© 追格 zhuige.com</view>
+			<view @click="clickJiangQie" class="jiangqie-text">本小程序基于追格（zhuige.com）搭建</view>
 		</view>
+		
+		<!-- 备案信息 -->
+		<view class="zhuige-recordinfo" v-if="beian_icp" @click="clickLink(beian_icp.link)">
+			<text>
+				{{beian_icp.sn}}
+			</text>
+		</view>
+		
 	</view>
 </template>
 
@@ -212,6 +220,8 @@
 				setting: undefined,
 				user: undefined,
 				menu: {},
+				
+				beian_icp: undefined,
 			};
 		},
 
@@ -227,6 +237,10 @@
 					background: res.data.background
 				};
 				this.menu = menu;
+				
+				if (res.data.beian_icp) {
+					this.beian_icp = res.data.beian_icp;
+				}
 			});
 		},
 
@@ -246,6 +260,24 @@
 		// #endif
 
 		methods: {
+			/**
+			 * 点击打开链接
+			 */
+			clickLink(link) {
+				if (!link) {
+					return;
+				}
+				
+				uni.navigateTo({
+					url: '/pages/webview/webview?src=' + encodeURIComponent(link),
+					fail: () => {
+						uni.redirectTo({
+							url: '/pages/webview/webview?src=' + encodeURIComponent(link)
+						})
+					}
+				});
+			},
+			
 			/**
 			 * 点击 登录
 			 */
@@ -503,5 +535,22 @@
 
 	.jiangqie-text {
 		background-color: #FFF;
+	}
+	
+	/* 备案信息 */
+	.zhuige-recordinfo {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 32rpx;
+		// margin-bottom: 60rpx;
+		line-height: 32rpx;
+		font-size: 24rpx;
+		font-weight: 400;
+		color: #999999;
+		
+		text {
+			padding-bottom: 20rpx;
+		}
 	}
 </style>

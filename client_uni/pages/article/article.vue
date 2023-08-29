@@ -1002,7 +1002,7 @@
 	}
 
 	.jiangqie-page-laud-list {
-		padding: 20rpx 40rpx 10rpx;
+		padding: 20rpx 0rpx 10rpx;
 	}
 
 	.jiangqie-page-laud-list-title {
@@ -1014,7 +1014,7 @@
 	}
 
 	.jiangqie-page-laud-list-block {
-		padding: 20rpx;
+		padding: 20rpx 0;
 		overflow: hidden;
 		text-align: center;
 	}
@@ -1022,8 +1022,8 @@
 	.jiangqie-page-laud-list-block image {
 		height: 64rpx;
 		width: 64rpx;
-		margin-right: 24rpx;
-		border-radius: 96rpx;
+		margin: 8rpx 2rpx;
+		border-radius: 64rpx;
 	}
 
 	.jiangqie-operation {

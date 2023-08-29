@@ -29,7 +29,7 @@
 		</view>
 
 		<view class="jiangqie-nomore">
-			<view class="jiangqie-text">© 追格 zhuige.com</view>
+			<view class="jiangqie-text">本小程序基于追格（zhuige.com）搭建</view>
 		</view>
 	</view>
 </template>

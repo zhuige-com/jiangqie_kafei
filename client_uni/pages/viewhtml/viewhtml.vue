@@ -78,6 +78,7 @@
 		line-height: 70rpx;
 	}
 
+	.jiangqie-page-body,
 	.jiangqie-page-body rich-text,
 	.jiangqie-page-body uni-view {
 		line-height: 2.2rem;

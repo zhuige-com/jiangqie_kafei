@@ -709,7 +709,7 @@
 		left: 0rpx;
 		bottom: 0rpx;
 		text-align: left;
-		background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(55,55,55,0.6));
+		background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(55,55,55,0.4));
 		overflow: hidden;
 		z-index: 9;
 		width: 280rpx;
@@ -927,7 +927,7 @@
 		left: 0rpx;
 		bottom: 0rpx;
 		text-align: left;
-		background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(22,22,22,0.6));
+		background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(22,22,22,0.4));
 		z-index: 9;
 		width: 400rpx;
 		border-radius: 0 0 8rpx 8rpx;
