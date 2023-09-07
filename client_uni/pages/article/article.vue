@@ -643,7 +643,9 @@
 				Rest.get(Api.JIANGQIE_USER_FAVORITE, {
 					post_id: this.post.id
 				}).then(res => {
-					this.isfavorite = (this.isfavorite == 1 ? 0 : 1);
+					// this.isfavorite = (this.isfavorite == 1 ? 0 : 1);
+					this.isfavorite = res.data.isfavorite;
+					this.favorite_count = res.data.favorite_count;
 				});
 			},
 

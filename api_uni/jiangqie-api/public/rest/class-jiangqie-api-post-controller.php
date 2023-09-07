@@ -330,7 +330,7 @@ class JiangQie_API_Post_Controller extends JiangQie_API_Base_Controller
 		}
 
 		//收藏数
-		$post['favorites'] = (int) get_post_meta($post_id, "favorites", true);
+		// $post['favorites'] = (int) get_post_meta($post_id, "favorites", true);
 
 		//能否评论
 		$post['switch_comment'] = JiangQie_API::option_value('switch_comment') ? 1 : 0;

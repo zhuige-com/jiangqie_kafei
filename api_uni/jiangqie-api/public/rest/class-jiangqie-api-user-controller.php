@@ -367,24 +367,29 @@ class JiangQie_API_User_Controller extends JiangQie_API_Base_Controller
 			)
 		);
 
-		$post_favorites = (int) get_post_meta($post_id, "favorites", true);
+		// $post_favorites = (int) get_post_meta($post_id, "favorites", true);
 
 		if ($post_favorite_id) {
 			$wpdb->query("DELETE FROM `$table_post_favorite` WHERE id=$post_favorite_id");
 
-			update_post_meta($post_id, 'favorites', ($post_favorites - 1));
+			// update_post_meta($post_id, 'favorites', ($post_favorites - 1));
 		} else {
 			$wpdb->insert($table_post_favorite, [
 				'user_id' => $user_id,
 				'post_id' => $post_id,
 			]);
 
-			if (!update_post_meta($post_id, 'favorites', ($post_favorites + 1))) {
-				add_post_meta($post_id, 'favorites', 1, true);
-			}
+			// if (!update_post_meta($post_id, 'favorites', ($post_favorites + 1))) {
+			//	add_post_meta($post_id, 'favorites', 1, true);
+			// }
 		}
+		
+		$favorite_count = $wpdb->get_var(
+			$wpdb->prepare("SELECT COUNT(`id`) FROM `$table_post_favorite` WHERE `post_id`=%d", $post_id)
+		);
+		update_post_meta($post_id, 'favorites', $favorite_count);
 
-		return $this->make_success();
+		return $this->make_success(['isfavorite' => ($post_favorite_id ? 0 : 1), 'favorite_count' => $favorite_count]);
 	}
 
 	/**
