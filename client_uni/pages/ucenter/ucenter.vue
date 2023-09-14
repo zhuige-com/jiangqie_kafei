@@ -148,6 +148,7 @@
 			</text>
 		</view>
 		
+		<zhuige-privacy></zhuige-privacy>
 	</view>
 </template>
 
@@ -165,6 +166,8 @@
 	const Api = require("@/utils/api.js");
 	const Util = require("@/utils/util.js");
 	const Rest = require("@/utils/rest.js");
+	
+	import ZhuigePrivacy from "@/components/zhuige-privacy";
 
 	export default {
 		data() {
@@ -223,6 +226,10 @@
 				
 				beian_icp: undefined,
 			};
+		},
+		
+		components: {
+			ZhuigePrivacy
 		},
 
 		onShow(options) {

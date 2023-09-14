@@ -56,6 +56,7 @@
 			<jiangqie-no-data></jiangqie-no-data>
 		</template>
 
+		<zhuige-privacy></zhuige-privacy>
 	</view>
 </template>
 
@@ -76,6 +77,7 @@
 	import JiangqieLoadmore from "@/components/loadmore/loadmore";
 	import JiangqieNomore from "@/components/nomore/nomore";
 	import JiangqieNoData from "@/components/nodata/nodata";
+	import ZhuigePrivacy from "@/components/zhuige-privacy";
 
 	export default {
 		data() {
@@ -98,6 +100,7 @@
 			JiangqieLoadmore,
 			JiangqieNomore,
 			JiangqieNoData,
+			ZhuigePrivacy
 		},
 
 		/**

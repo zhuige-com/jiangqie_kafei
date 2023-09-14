@@ -1,6 +1,8 @@
 <template>
 	<view class="jiangqie-page-body">
 		<mp-html :content="article"></mp-html>
+		
+		<zhuige-privacy></zhuige-privacy>
 	</view>
 </template>
 
@@ -16,6 +18,8 @@
 
 	const Api = require("@/utils/api.js");
 	const Rest = require("@/utils/rest.js");
+	
+	import ZhuigePrivacy from "@/components/zhuige-privacy";
 
 	export default {
 		data() {
@@ -24,6 +28,10 @@
 			return {
 				article: "",
 			};
+		},
+		
+		components: {
+			ZhuigePrivacy
 		},
 
 		onLoad(options) {

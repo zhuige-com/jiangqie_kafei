@@ -40,6 +40,8 @@
 				</view>
 			</view>
 		</view>
+		
+		<zhuige-privacy></zhuige-privacy>
 	</view>
 </template>
 
@@ -57,6 +59,8 @@
 	const Util = require("@/utils/util.js");
 	const Api = require("@/utils/api.js");
 	const Rest = require("@/utils/rest.js");
+	
+	import ZhuigePrivacy from "@/components/zhuige-privacy";
 
 	export default {
 		data() {
@@ -67,6 +71,10 @@
 				placeholder: '',
 				keyword: '',
 			};
+		},
+		
+		components: {
+			ZhuigePrivacy
 		},
 
 		onLoad(options) {

@@ -31,6 +31,8 @@
 		<view class="jiangqie-nomore">
 			<view class="jiangqie-text">本小程序基于追格（zhuige.com）搭建</view>
 		</view>
+		
+		<zhuige-privacy></zhuige-privacy>
 	</view>
 </template>
 
@@ -45,6 +47,8 @@
 	 */
 	const Api = require("@/utils/api.js");
 	const Rest = require("@/utils/rest.js");
+	
+	import ZhuigePrivacy from "@/components/zhuige-privacy";
 
 	export default {
 		data() {
@@ -62,6 +66,10 @@
 				wx_ad: undefined,
 				categories: []
 			};
+		},
+		
+		components: {
+			ZhuigePrivacy
 		},
 
 		onLoad(options) {

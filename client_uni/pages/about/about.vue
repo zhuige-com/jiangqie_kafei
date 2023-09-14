@@ -24,6 +24,8 @@
 				<view class="jiangqie-footer-text">扫描二维码，体验酱茄开源小程序！</view>
 			</view>
 		</view>
+		
+		<zhuige-privacy></zhuige-privacy>
 	</view>
 </template>
 
@@ -37,12 +39,18 @@
 	 * Copyright © 2020-2023 www.zhuige.com All rights reserved.
 	 */
 	const Constant = require("@/utils/constants.js");
+	
+	import ZhuigePrivacy from "@/components/zhuige-privacy";
 
 	export default {
 		data() {
 			return {
 				version: Constant.JQ_VERSION,
 			};
+		},
+		
+		components: {
+			ZhuigePrivacy
 		},
 
 		onLoad(options) {},

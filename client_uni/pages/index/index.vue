@@ -219,6 +219,8 @@
 				<!--加载loadding-->
 			</template>
 		</view>
+		
+		<zhuige-privacy></zhuige-privacy>
 	</view>
 </template>
 
@@ -239,6 +241,7 @@
 	import JiangqieLoadmore from "@/components/loadmore/loadmore";
 	import JiangqieNomore from "@/components/nomore/nomore";
 	import uniNavBar from '@/components/uni-nav-bar/uni-nav-bar.vue'
+	import ZhuigePrivacy from "@/components/zhuige-privacy";
 
 	export default {
 		data() {
@@ -294,7 +297,8 @@
 		components: {
 			JiangqieLoadmore,
 			JiangqieNomore,
-			uniNavBar
+			uniNavBar,
+			ZhuigePrivacy
 		},
 
 		onLoad(options) {

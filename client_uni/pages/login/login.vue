@@ -81,6 +81,7 @@
 			<text class="link" @click="clickLink('/pages/viewhtml/viewhtml?page_id=2034')">《用户协议》</text>
 		</view>
 
+		<zhuige-privacy></zhuige-privacy>
 	</view>
 </template>
 
@@ -98,6 +99,8 @@
 	const Auth = require("@/utils/auth.js");
 	const Api = require("@/utils/api.js");
 	const Rest = require("@/utils/rest.js");
+	
+	import ZhuigePrivacy from "@/components/zhuige-privacy";
 
 	export default {
 		data() {
@@ -114,6 +117,10 @@
 
 				argeeLicense: false,
 			};
+		},
+		
+		components: {
+			ZhuigePrivacy
 		},
 
 		onLoad(options) {

@@ -2,7 +2,7 @@
     "name" : "jiangqie_xcx_free",
     "appid" : "",
     "description" : "酱茄Free小程序",
-    "versionName" : "2.3.2",
+    "versionName" : "2.3.3",
     "versionCode" : "100",
     "transformPx" : false,
     "app-plus" : {
@@ -53,7 +53,8 @@
         "setting" : {
             "urlCheck" : false
         },
-        "usingComponents" : true
+        "usingComponents" : true,
+		"__usePrivacyCheck__": true
     },
     "mp-alipay" : {
         "usingComponents" : true
