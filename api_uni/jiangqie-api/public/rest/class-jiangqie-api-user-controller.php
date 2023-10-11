@@ -172,9 +172,6 @@ class JiangQie_API_User_Controller extends JiangQie_API_Base_Controller
 	/**
 	 * 用户注销
 	 */
-	/**
-	 * 用户注销
-	 */
 	public function user_logout($request)
 	{
 		$user_id = $this->check_login($request);

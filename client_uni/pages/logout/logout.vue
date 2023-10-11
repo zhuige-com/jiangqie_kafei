@@ -26,12 +26,12 @@
 	 * gitee: https://gitee.com/zhuige_com/jiangqie_kafei
 	 * Copyright © 2020-2023 www.zhuige.com All rights reserved.
 	 */
-	
+
 	const Util = require("@/utils/util.js");
 	const Auth = require("@/utils/auth.js");
 	const Api = require("@/utils/api.js");
 	const Rest = require("@/utils/rest.js");
-	
+
 	export default {
 		data() {
 			return {
@@ -39,7 +39,7 @@
 				checkRead: false,
 			}
 		},
-		
+
 		onLoad(options) {
 			if (!Auth.getUser()) {
 				uni.reLaunch({
@@ -47,21 +47,21 @@
 				});
 				return;
 			}
-			
+
 			this.loadSetting()
 		},
-		
+
 		methods: {
 			clickCheckRead() {
 				this.checkRead = !this.checkRead;
 			},
-			
+
 			clickLogout() {
 				if (!this.checkRead) {
 					Util.toast('阅读并同意注销须知后，才能注销');
 					return;
 				}
-			
+
 				uni.showModal({
 					title: '提示',
 					content: '确定要注销吗？',
@@ -69,12 +69,12 @@
 						if (res.cancel) {
 							return;
 						}
-			
+
 						this.logout();
 					}
 				});
 			},
-			
+
 			/**
 			 * 加载配置
 			 */
@@ -85,7 +85,7 @@
 					console.log(err)
 				});
 			},
-			
+
 			/**
 			 * 注销
 			 */
@@ -101,5 +101,51 @@
 </script>
 
 <style>
+	/* =========== 账号注销 =========== */
+	.jiangqie-wide-box {
+		padding: 0 20px 20px;
+	}
 
+	.jiangqie-logout-info {
+		padding: 20px;
+		background: #FFFFFF;
+		border-radius: 12rpx;
+	}
+
+	.jiangqie-logout-info view {
+		line-height: 2.2em;
+		font-size: 28rpx;
+	}
+
+	.jiangqie-logout-info view image {
+		width: 100%;
+	}
+
+	.jiangqie-logout-info view.jiangqie-logout-title {
+		font-size: 33rpx;
+		font-weight: 500;
+	}
+
+	.jiangqie-logout-form {
+		text-align: center;
+		padding: 10px;
+	}
+
+	.jiangqie-logout-form label {
+		font-size: 26rpx;
+		font-weight: 300;
+	}
+
+	.jiangqie-logout-form view:nth-child(2) {
+		width: 60%;
+		text-align: center;
+		height: 96rpx;
+		line-height: 96rpx;
+		border-radius: 96rpx;
+		font-size: 32rpx;
+		font-weight: 400;
+		color: #FFFFFF;
+		background: #010101;
+		margin: 10px auto;
+	}
 </style>
