@@ -94,10 +94,7 @@
 					avatar: this.avatar
 				}).then(res => {
 					if (res.code == 0) {
-						uni.showToast({
-							icon: 'none',
-							title: res.msg
-						});
+						Util.toast(res.msg);
 
 						let user = Auth.getUser();
 						user.nickname = this.nickname;
@@ -108,10 +105,7 @@
 							Util.navigateBack();
 						}, 1500)
 					} else {
-						uni.showToast({
-							icon: 'none',
-							title: res.msg
-						});
+						Util.toast(res.msg);
 					}
 				}, err => {
 					console.log(err)

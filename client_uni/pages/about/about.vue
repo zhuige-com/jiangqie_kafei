@@ -39,6 +39,7 @@
 	 * Copyright © 2020-2023 www.zhuige.com All rights reserved.
 	 */
 	const Constant = require("@/utils/constants.js");
+	const Util = require("@/utils/util.js");
 	
 	import ZhuigePrivacy from "@/components/zhuige-privacy";
 
@@ -81,10 +82,7 @@
 					success: (res) => {
 						uni.getClipboardData({
 							success: (res) => {
-								uni.showToast({
-									icon: 'none',
-									title: '网址已复制'
-								});
+								Util.toast('网址已复制');
 							}
 						});
 					}
@@ -96,10 +94,7 @@
 			 * 点击 提示
 			 */
 			tipClick() {
-				uni.showToast({
-					icon: 'none',
-					title: '酱茄小程序开源版'
-				});
+				Util.toast('酱茄小程序开源版');
 			}
 		}
 	};

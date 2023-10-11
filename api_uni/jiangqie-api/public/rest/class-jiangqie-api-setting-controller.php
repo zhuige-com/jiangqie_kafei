@@ -58,6 +58,14 @@ class JiangQie_API_Setting_Controller extends JiangQie_API_Base_Controller
 				'permission_callback' => '__return_true',
 			]
 		]);
+
+		//注销
+		register_rest_route($this->namespace, '/' . $this->module . '/logout', [
+			[
+				'callback' => [$this, 'get_logout'],
+				'permission_callback' => '__return_true',
+			]
+		]);
 	}
 
 	/**
@@ -301,9 +309,25 @@ class JiangQie_API_Setting_Controller extends JiangQie_API_Base_Controller
 	public function get_login()
 	{
 		$data = [
-			'background' => plugins_url("images/id_bg.png", dirname(__FILE__))
+			'background' => plugins_url("images/id_bg.png", dirname(__FILE__)),
+			'ystk' => JiangQie_API::option_value('user_login_ystk'),
+			'yhxy' => JiangQie_API::option_value('user_login_yhxy')
 		];
 
 		return $this->make_success($data);
 	}
+
+	/**
+	 * 获取配置 注销
+	 */
+	public function get_logout()
+	{
+		$data = [];
+
+		// 奖项说明
+		$data['explain'] = apply_filters('the_content', JiangQie_API::option_value('user_logout_explain'));
+
+		return $this->make_success($data);
+	}
+
 }

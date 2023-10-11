@@ -38,6 +38,11 @@ module.exports = {
 	 * 获取登录配置
 	 */
 	JIANGQIE_SETTING_LOGIN: makeURL('setting', 'login'),
+	
+	/**
+	 * 获取注销配置
+	 */
+	JIANGQIE_SETTING_LOGOUT: makeURL('setting', 'logout'),
 
 	/**
 	 * 获取分类 只获取一级分类
@@ -108,6 +113,12 @@ module.exports = {
 	 * 用户登录
 	 */
 	JIANGQIE_USER_LOGIN: makeURL('user', 'login3'),
+	
+	/**
+	 * 用户注销
+	 */
+	JIANGQIE_USER_LOGOUT: makeURL('user', 'logout'),
+	
 
 	/**
 	 * 用户登录 演示

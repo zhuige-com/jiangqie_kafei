@@ -76,9 +76,9 @@
 				<radio :checked="argeeLicense" color="#ff4400" style="transform:scale(0.7)" />
 				我已阅读并同意
 			</label>
-			<text class="link" @click="clickLink('/pages/viewhtml/viewhtml?page_id=2035')">《隐私条款》</text>
+			<text class="link" @click="clickYSTK">《隐私条款》</text>
 			<text>及</text>
-			<text class="link" @click="clickLink('/pages/viewhtml/viewhtml?page_id=2034')">《用户协议》</text>
+			<text class="link" @click="clickYHXY">《用户协议》</text>
 		</view>
 
 		<zhuige-privacy></zhuige-privacy>
@@ -109,6 +109,9 @@
 
 				background: '',
 				title: '',
+				
+				ystk: undefined,
+				yhxy: undefined,
 
 				code: undefined,
 
@@ -156,6 +159,13 @@
 
 			Rest.get(Api.JIANGQIE_SETTING_LOGIN).then(res => {
 				this.background = res.data.background;
+				if (res.data.ystk) {
+					this.ystk = res.data.ystk;
+				}
+				
+				if (res.data.yhxy) {
+					this.yhxy = res.data.yhxy;
+				}
 			});
 		},
 
@@ -188,6 +198,28 @@
 			clickAgreeLicense() {
 				this.argeeLicense = !this.argeeLicense;
 			},
+			
+			/**
+			 * 点击 隐私条款
+			 */
+			clickYSTK() {
+				if (!this.ystk) {
+					Util.toast('请在后台设置隐私条款');
+					return;
+				}
+				Util.openLink('/pages/viewhtml/viewhtml?page_id=' + this.ystk)
+			},
+			
+			/**
+			 * 点击 用户协议
+			 */
+			clickYHXY() {
+				if (!this.yhxy) {
+					Util.toast('请在后台设置用户协议');
+					return;
+				}
+				Util.openLink('/pages/viewhtml/viewhtml?page_id=' + this.yhxy)
+			},
 
 			/**
 			 * 点击 取消
@@ -201,10 +233,7 @@
 			 */
 			clickLoginTest(e) {
 				if (!this.argeeLicense) {
-					uni.showToast({
-						icon: 'none',
-						title: '请阅读并同意《用户协议》及《隐私条款》'
-					});
+					Util.toast('请阅读并同意《用户协议》及《隐私条款》');
 					return;
 				}
 
@@ -221,10 +250,7 @@
 			 */
 			clickLogin(e) {
 				if (!this.argeeLicense) {
-					uni.showToast({
-						icon: 'none',
-						title: '请阅读并同意《用户协议》及《隐私条款》'
-					});
+					Util.toast('请阅读并同意《用户协议》及《隐私条款》');
 					return;
 				}
 
@@ -288,10 +314,7 @@
 					}
 				}, err => {
 					if (err.msg) {
-						uni.showToast({
-							icon: 'none',
-							title: err.msg
-						});
+						Util.toast(err.msg);
 					}
 				});
 			},
@@ -305,10 +328,8 @@
 					iv: e.detail.iv,
 					code: this.code,
 				}).then(res => {
-					uni.showToast({
-						icon: 'none',
-						title: res.msg
-					});
+					Util.toast(res.msg);
+					
 					Util.navigateBack();
 				})
 			}

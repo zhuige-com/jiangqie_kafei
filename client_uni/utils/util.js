@@ -7,6 +7,13 @@
  * Copyright © 2020-2023 www.zhuige.com All rights reserved.
  */
 
+function toast(msg) {
+	uni.showToast({
+		icon: 'none',
+		title: msg
+	});
+}
+
 function navigateBack() {
 	uni.navigateBack({
 		delta: 1,
@@ -154,6 +161,7 @@ function openLink(link) {
 }
 
 module.exports = {
+	toast,
 	navigateBack,
 	jiangqie,
 	openLink,

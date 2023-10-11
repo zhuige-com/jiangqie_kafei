@@ -1,6 +1,6 @@
 <script>
 	/*
-	 * 酱茄小程序开源版 v2.3.3
+	 * 酱茄小程序开源版 v2.4.0
 	 * 作者: 追格
 	 * 文档：https://www.zhuige.com/docs/zxfree.html
 	 * github: https://github.com/zhuige-com/jiangqie_kafei
@@ -103,5 +103,46 @@
 		transform: scale(0.8);
 		transform-origin: center center;
 		z-index: 1;
+	}
+	/* =========== 账号注销 =========== */
+	.jiangqie-wide-box {
+		padding: 0 20px 20px;
+	}
+	
+	.jiangqie-logout-info {
+		padding: 20px;
+		background: #FFFFFF;
+		border-radius: 12rpx;
+	}
+	.jiangqie-logout-info view {
+		line-height: 2.2em;
+		font-size: 28rpx;
+	}
+	.jiangqie-logout-info view image {
+		width: 100%;
+	}
+	.jiangqie-logout-info view.jiangqie-logout-title {
+		font-size: 33rpx;
+		font-weight: 500;
+	}
+	.jiangqie-logout-form {
+		text-align: center;
+		padding: 10px;
+	}
+	.jiangqie-logout-form label {
+		font-size: 26rpx;
+		font-weight: 300;
+	}
+	.jiangqie-logout-form view:nth-child(2) {
+		width: 60%;
+		text-align: center;
+		height: 96rpx;
+		line-height: 96rpx;
+		border-radius: 96rpx;
+		font-size: 32rpx;
+		font-weight: 400;
+		color: #FFFFFF;
+		background: #010101;
+		margin: 10px auto;
 	}
 </style>

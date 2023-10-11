@@ -83,7 +83,16 @@
 			}
 
 		}
-	],
+	    ,{
+            "path" : "pages/logout/logout",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
 	"tabBar": {
 		"color": "#bfbfbf",
 		"selectedColor": "#e6372f",

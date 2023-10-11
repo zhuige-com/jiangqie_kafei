@@ -405,10 +405,7 @@
 								uni.saveImageToPhotosAlbum({
 									filePath: this.painterImage,
 									success: () => {
-										uni.showToast({
-											icon: 'none',
-											title: '已保存'
-										})
+										Util.toast('已保存');
 									}
 								})
 							}, 500);
@@ -579,10 +576,7 @@
 			 */
 			handlerCommentSubmit(e) {
 				if (!this.comment_content) {
-					uni.showToast({
-						icon: 'none',
-						title: '请输入内容'
-					})
+					Util.toast('请输入内容');
 					return;
 				}
 

@@ -30,6 +30,16 @@ class JiangQie_API_User_Controller extends JiangQie_API_Base_Controller
 		]);
 
 		/**
+		 * 用户注销
+		 */
+		register_rest_route($this->namespace, '/' . $this->module . '/logout', [
+			[
+				'callback' => [$this, 'user_logout'],
+				'permission_callback' => '__return_true',
+			]
+		]);
+
+		/**
 		 * 用户配置
 		 */
 		register_rest_route($this->namespace, '/' . $this->module . '/index', [
@@ -157,6 +167,37 @@ class JiangQie_API_User_Controller extends JiangQie_API_Base_Controller
 		}
 
 		return $this->make_success($user);
+	}
+
+	/**
+	 * 用户注销
+	 */
+	/**
+	 * 用户注销
+	 */
+	public function user_logout($request)
+	{
+		$user_id = $this->check_login($request);
+		if (!$user_id) {
+			return $this->make_error('还没有登陆', -1);
+		}
+
+		$res = wp_delete_user($user_id);
+		if (!$res) {
+			return $this->make_error('请稍后再试~');
+		}
+
+		global $wpdb;
+
+		$wpdb->delete($wpdb->prefix . 'comments', ['user_id' => $user_id]);
+
+		$wpdb->delete($wpdb->prefix . 'jiangqie_post_view', ['user_id' => $user_id]);
+
+		$wpdb->delete($wpdb->prefix . 'jiangqie_post_like', ['user_id' => $user_id]);
+
+		$wpdb->delete($wpdb->prefix . 'jiangqie_post_favorite', ['user_id' => $user_id]);
+
+		return $this->make_success();
 	}
 
 	/**
