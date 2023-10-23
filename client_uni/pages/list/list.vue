@@ -55,8 +55,6 @@
 		<template v-else-if="loaded">
 			<jiangqie-no-data></jiangqie-no-data>
 		</template>
-
-		<zhuige-privacy></zhuige-privacy>
 	</view>
 </template>
 
@@ -77,9 +75,14 @@
 	import JiangqieLoadmore from "@/components/loadmore/loadmore";
 	import JiangqieNomore from "@/components/nomore/nomore";
 	import JiangqieNoData from "@/components/nodata/nodata";
-	import ZhuigePrivacy from "@/components/zhuige-privacy";
 
 	export default {
+		components: {
+			JiangqieLoadmore,
+			JiangqieNomore,
+			JiangqieNoData
+		},
+		
 		data() {
 			this.tag_id = undefined;
 			this.cat_id = undefined;
@@ -94,13 +97,6 @@
 				pullUpOn: true,
 				loaded: false,
 			};
-		},
-
-		components: {
-			JiangqieLoadmore,
-			JiangqieNomore,
-			JiangqieNoData,
-			ZhuigePrivacy
 		},
 
 		/**

@@ -103,7 +103,7 @@
 <style>
 	/* =========== 账号注销 =========== */
 	.jiangqie-wide-box {
-		padding: 0 20px 20px;
+		padding: 2px;
 	}
 
 	.jiangqie-logout-info {

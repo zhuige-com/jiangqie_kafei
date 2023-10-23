@@ -219,8 +219,6 @@
 				<!--加载loadding-->
 			</template>
 		</view>
-		
-		<zhuige-privacy></zhuige-privacy>
 	</view>
 </template>
 
@@ -241,9 +239,14 @@
 	import JiangqieLoadmore from "@/components/loadmore/loadmore";
 	import JiangqieNomore from "@/components/nomore/nomore";
 	import uniNavBar from '@/components/uni-nav-bar/uni-nav-bar.vue'
-	import ZhuigePrivacy from "@/components/zhuige-privacy";
 
 	export default {
+		components: {
+			JiangqieLoadmore,
+			JiangqieNomore,
+			uniNavBar
+		},
+		
 		data() {
 			this.bd_title = undefined;
 			this.bd_description = undefined;
@@ -292,13 +295,6 @@
 				// 分享缩略图
 				share_thumb: undefined,
 			};
-		},
-
-		components: {
-			JiangqieLoadmore,
-			JiangqieNomore,
-			uniNavBar,
-			ZhuigePrivacy
 		},
 
 		onLoad(options) {

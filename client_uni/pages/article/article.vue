@@ -184,8 +184,6 @@
 		<l-painter v-if="isShowPainter" isRenderImage custom-style="position: fixed; left: 200%;" :board="base"
 			@success="onPainterSuccess" />
 		<!-- #endif -->
-		
-		<zhuige-privacy></zhuige-privacy>
 	</view>
 </template>
 
@@ -203,8 +201,6 @@
 	import jiangqieNomore from "@/components/nomore/nomore";
 	import JiangqieNoData from "@/components/nodata/nodata";
 	import lPainter from '@/uni_modules/lime-painter/components/lime-painter/';
-	
-	import ZhuigePrivacy from "@/components/zhuige-privacy";
 
 	const Constants = require("@/utils/constants.js");
 	const Util = require("@/utils/util.js");
@@ -214,6 +210,13 @@
 	const Extend = require("@/utils/extend.js");
 
 	export default {
+		components: {
+			JiangqieLoadmore,
+			jiangqieNomore,
+			JiangqieNoData,
+			lPainter
+		},
+		
 		data() {
 			this.comment_id = 0;
 
@@ -264,14 +267,6 @@
 				painterImage: '',
 				base: undefined,
 			};
-		},
-
-		components: {
-			JiangqieLoadmore,
-			jiangqieNomore,
-			JiangqieNoData,
-			lPainter,
-			ZhuigePrivacy
 		},
 
 		onLoad(options) {

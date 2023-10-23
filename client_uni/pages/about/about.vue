@@ -24,8 +24,6 @@
 				<view class="jiangqie-footer-text">扫描二维码，体验酱茄开源小程序！</view>
 			</view>
 		</view>
-		
-		<zhuige-privacy></zhuige-privacy>
 	</view>
 </template>
 
@@ -40,18 +38,16 @@
 	 */
 	const Constant = require("@/utils/constants.js");
 	const Util = require("@/utils/util.js");
-	
-	import ZhuigePrivacy from "@/components/zhuige-privacy";
 
 	export default {
+		components: {
+			
+		},
+		
 		data() {
 			return {
 				version: Constant.JQ_VERSION,
 			};
-		},
-		
-		components: {
-			ZhuigePrivacy
 		},
 
 		onLoad(options) {},
