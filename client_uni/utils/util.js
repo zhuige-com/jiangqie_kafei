@@ -112,6 +112,19 @@ function openLink(link) {
 		});
 		return;
 	}
+	
+	if (link.startsWith('https://') || link.startsWith('http://')) {
+		link = htmlRestore(link);
+		uni.navigateTo({
+			url: '/pages/webview/webview?src=' + encodeURIComponent(link),
+			fail(res) {
+				uni.redirectTo({
+					url: '/pages/webview/webview?src=' + encodeURIComponent(link)
+				});
+			}
+		});
+		return;
+	} 
 
 	// #ifdef MP-WEIXIN
 	if (link.startsWith('finder:')) {
@@ -160,9 +173,31 @@ function openLink(link) {
 	});
 }
 
+/**
+ * 是否弹窗
+ */
+function getPopAd(pop_ad, key) {
+	if (!pop_ad) {
+		return false;
+	}
+
+	let lastTime = wx.getStorageSync(key);
+	if (!lastTime) {
+		lastTime = 0;
+	}
+
+	let now = new Date().getTime();
+	if ((now - lastTime) > pop_ad.interval * 3600000) {
+		return pop_ad;
+	}
+
+	return false;
+}
+
 module.exports = {
 	toast,
 	navigateBack,
 	jiangqie,
 	openLink,
+	getPopAd
 };

@@ -7,7 +7,7 @@
  * Copyright © 2020-2023 www.zhuige.com All rights reserved.
  */
 module.exports = {
-	JQ_VERSION: '2.4.1',
+	JQ_VERSION: '2.4.2',
 
 	//分页 每页 数量 需要与服务器一致
 	JQ_PER_PAGE_COUNT: 10,
@@ -19,5 +19,8 @@ module.exports = {
 	JQ_SEARCH_KEY: 'jiangqie_search',
 
 	//用户信息
-	JQ_USER_KEY: 'jiangqie_user'
+	JQ_USER_KEY: 'jiangqie_user',
+	
+	// 首页弹窗广告 上次时间
+	ZHUIGE_INDEX_MAXAD_LAST_TIME: 'zhuige_index_maxad_last_time',
 };

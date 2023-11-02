@@ -214,6 +214,16 @@ class JiangQie_API_Setting_Controller extends JiangQie_API_Base_Controller
 			$data['wx_ad'] = false;
 		}
 
+		//弹框广告
+		$home_ad_pop = JiangQie_API::option_value('home_ad_pop');
+		if ($home_ad_pop && $home_ad_pop['switch'] && $home_ad_pop['image'] && $home_ad_pop['image']['url']) {
+			$data['pop_ad'] = [
+				'image' => $home_ad_pop['image']['url'],
+				'link' => $home_ad_pop['link'],
+				'interval' => $home_ad_pop['interval'],
+			];
+		}
+
 		// 分享标题
 		$data['share_title'] = JiangQie_API::option_value('home_title');
 
