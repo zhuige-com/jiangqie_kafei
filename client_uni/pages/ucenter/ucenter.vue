@@ -111,6 +111,17 @@
 						<image v-if="item.icon" :src="item.icon" mode="aspectFill"></image>
 					</view>
 				</view>
+				<view v-if="item.tp=='score'" :key="index"
+					:class="'jiangqie-listblock ' + (item.line=='yes'?'jiangqie-listblock-line':'')"
+					@tap.stop="handlerClickScore">
+					<view class="jiangqie-listcont">
+						<image src="/static/images/more.png" mode="aspectFill"></image>
+					</view>
+					<view class="jiangqie-listtitle">
+						<text>{{item.title}}</text>
+						<image v-if="item.icon" :src="item.icon" mode="aspectFill"></image>
+					</view>
+				</view>
 				<view v-if="item.tp=='page'" :key="index"
 					:class="'jiangqie-listblock ' + (item.line=='yes'?'jiangqie-listblock-line':'')"
 					:data-page_id="item.page_id" @tap.stop="handlerPageClick">
@@ -341,6 +352,21 @@
 					}
 
 				});
+			},
+			
+			/**
+			 * 点击 评价打分
+			 */
+			handlerClickScore(e) {
+				var plugin = requirePlugin("wxacommentplugin");
+				plugin.openComment({
+					success: (res) => {
+						console.log('plugin.openComment success', res)
+					},
+					fail: (res) => {
+						console.log('plugin.openComment fail', res)
+					}
+				})
 			},
 
 			/**

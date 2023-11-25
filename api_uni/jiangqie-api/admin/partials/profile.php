@@ -45,6 +45,7 @@ CSF::createSection($prefix, array(
                         'feedback'  => '意见反馈',
                         'contact'   => '在线客服',
                         'clear'     => '清除缓存',
+                        'score'     => '评价打分',
                         'split'     => '段分割线',
                         'link'      => '自定义链接',
                         'page'      => '自定义页面',
