@@ -423,8 +423,13 @@
 					return;
 				}
 				// #endif
+				
+				uni.showLoading({
+					title: '海报生成中……'
+				})
 
 				this.isShowPainter = true;
+				
 				this.base = {
 					width: '750rpx',
 					height: '1334rpx',
@@ -510,6 +515,8 @@
 					urls: [e]
 				});
 				// #endif
+				
+				uni.hideLoading();
 			},
 
 			/**
