@@ -81,8 +81,12 @@
 								Util.toast('网址已复制');
 							}
 						});
+					},
+					fail: (res) => {
+						if (res.errMsg && res.errMsg.indexOf('cancel') < 0) {
+							Util.toast(res.errMsg);
+						}
 					}
-
 				});
 			},
 

@@ -310,7 +310,9 @@
 					}
 				}, err => {
 					if (err.msg) {
-						Util.toast(err.msg);
+						uni.showModal({
+							content: err.msg
+						})
 					}
 				});
 			},

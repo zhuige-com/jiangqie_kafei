@@ -19,11 +19,20 @@ function clickHref(data) {
 	// 1.复制链接
 	uni.setClipboardData({
 		data: data.href,
-		success: () =>
+		success: () => {
 			uni.showToast({
 				icon: 'none',
 				title: '链接已复制，请在浏览器中打开'
 			})
+		},
+		fail: (res) => {
+			if (res.errMsg && res.errMsg.indexOf('cancel') < 0) {
+				uni.showToast({
+					icon: 'none',
+					title: res.errMsg
+				})
+			}
+		}
 	})
 
 	// // 2.直接打开 - 只适用于业务域名下链接

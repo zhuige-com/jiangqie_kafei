@@ -113,8 +113,8 @@ class JiangQie_API_User_Controller extends JiangQie_API_Base_Controller
 			$session = $this->bd_code2openid($code);
 		}
 
-		if (!$session || empty($session['openid'])) {
-			return $this->make_error('请检查前后端配置信息~');
+		if (!is_array($session)) {
+			return $this->make_error($session);
 		}
 
 		$user = get_user_by('login', $session['openid']);
@@ -205,7 +205,7 @@ class JiangQie_API_User_Controller extends JiangQie_API_Base_Controller
 		$app_id = JiangQie_API::option_value('app_id');
 		$app_secret = JiangQie_API::option_value('app_secret');
 		if (!$app_id || !$app_secret) {
-			return false;
+			return '请在后台设置微信appid和secret';
 		}
 
 		$params = [
@@ -217,11 +217,15 @@ class JiangQie_API_User_Controller extends JiangQie_API_Base_Controller
 
 		$result = wp_remote_get(add_query_arg($params, 'https://api.weixin.qq.com/sns/jscode2session'));
 		if (!is_array($result) || is_wp_error($result) || $result['response']['code'] != '200') {
-			return false;
+			return '网络请求异常';
 		}
 
 		$body = stripslashes($result['body']);
 		$session = json_decode($body, true);
+
+		if (!isset($session['openid']) || empty($session['openid'])) {
+			return json_encode($session);
+		}
 
 		return $session;
 	}
@@ -234,7 +238,7 @@ class JiangQie_API_User_Controller extends JiangQie_API_Base_Controller
 		$app_id = JiangQie_API::option_value('qq_app_id');
 		$app_secret = JiangQie_API::option_value('qq_app_secret');
 		if (!$app_id || !$app_secret) {
-			return false;
+			return '请在后台设置QQ appid和secret';
 		}
 
 		$params = [
@@ -246,11 +250,15 @@ class JiangQie_API_User_Controller extends JiangQie_API_Base_Controller
 
 		$result = wp_remote_get(add_query_arg($params, 'https://api.q.qq.com/sns/jscode2session'));
 		if (!is_array($result) || is_wp_error($result) || $result['response']['code'] != '200') {
-			return false;
+			return '网络请求异常';
 		}
 
 		$body = stripslashes($result['body']);
 		$session = json_decode($body, true);
+
+		if (!isset($session['openid']) || empty($session['openid'])) {
+			return json_encode($session);
+		}
 
 		return $session;
 	}
@@ -263,7 +271,7 @@ class JiangQie_API_User_Controller extends JiangQie_API_Base_Controller
 		$app_id = JiangQie_API::option_value('bd_app_key');
 		$app_secret = JiangQie_API::option_value('bd_app_secret');
 		if (!$app_id || !$app_secret) {
-			return false;
+			return '请在后台设置百度 appid和secret';
 		}
 
 		$params = [
@@ -274,11 +282,15 @@ class JiangQie_API_User_Controller extends JiangQie_API_Base_Controller
 
 		$result = wp_remote_get(add_query_arg($params, 'https://spapi.baidu.com/oauth/jscode2sessionkey'));
 		if (!is_array($result) || is_wp_error($result) || $result['response']['code'] != '200') {
-			return false;
+			return '网络请求异常';
 		}
 
 		$body = stripslashes($result['body']);
 		$session = json_decode($body, true);
+
+		if (!isset($session['openid']) || empty($session['openid'])) {
+			return json_encode($session);
+		}
 
 		return $session;
 	}
@@ -458,8 +470,8 @@ class JiangQie_API_User_Controller extends JiangQie_API_Base_Controller
 			}
 
 			$session = $this->wx_code2openid($code);
-			if (!$session) {
-				return $this->make_error('授权失败');
+			if (!is_array($session)) {
+				return $this->make_error($session);
 			}
 
 			$res = $this->weixin_decryptData($app_id, $session['session_key'], $encrypted_data, $iv, $data);

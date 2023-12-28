@@ -401,6 +401,11 @@
 									filePath: this.painterImage,
 									success: () => {
 										Util.toast('已保存');
+									},
+									fail: (res) => {
+										if (res.errMsg && res.errMsg.indexOf('cancel') < 0) {
+											Util.toast(res.errMsg);
+										}
 									}
 								})
 							}, 500);
@@ -426,7 +431,7 @@
 				
 				uni.showLoading({
 					title: '海报生成中……'
-				})
+				});
 
 				this.isShowPainter = true;
 				
