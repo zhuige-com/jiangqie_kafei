@@ -62,7 +62,7 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 2. 在后台插件列表中启用"JiangQie Mini Program API "
 
-3. 设置微信（百度、QQ）小程序的appid，及其他配置信息
+3. 设置微信（及百度）小程序的appid，及其他配置信息
 
 
 == Frequently Asked Questions ==
@@ -290,7 +290,7 @@ gitee下载（优先更新）：https://gitee.com/zhuige_com/jiangqie_kafei
 
 = 1.5.0 =
 
-1. 支持多端（微信，百度，QQ）小程序；
+1. 支持多端（微信，百度）小程序；
 2. 修复了已知的bug
 
 = 1.4.0 =

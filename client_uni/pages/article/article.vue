@@ -180,7 +180,7 @@
 		</view>
 		<!-- #endif -->
 
-		<!-- #ifdef MP-WEIXIN || MP-QQ || H5 -->
+		<!-- #ifdef MP-WEIXIN || H5 -->
 		<l-painter v-if="isShowPainter" isRenderImage custom-style="position: fixed; left: 200%;" :board="base"
 			@success="onPainterSuccess" />
 		<!-- #endif -->
@@ -194,7 +194,7 @@
 	 * 文档：https://www.zhuige.com/docs/zxfree.html
 	 * github: https://github.com/zhuige-com/jiangqie_kafei
 	 * gitee: https://gitee.com/zhuige_com/jiangqie_kafei
-	 * Copyright © 2020-2023 www.zhuige.com All rights reserved.
+	 * Copyright © 2020-2024 www.zhuige.com All rights reserved.
 	 */
 
 	import JiangqieLoadmore from "@/components/loadmore/loadmore";
@@ -278,10 +278,6 @@
 
 			// #ifdef MP-WEIXIN
 			this.loadWxacode();
-			// #endif
-
-			// #ifdef MP-QQ
-			this.loadQqacode();
 			// #endif
 
 			// #ifdef MP-BAIDU || H5
@@ -678,19 +674,6 @@
 			 */
 			loadWxacode() {
 				Rest.get(Api.JIANGQIE_POST_WX_ACODE, {
-					post_id: this.post_id
-				}).then(res => {
-					this.acode = res.data;
-				}, err => {
-					console.log(err);
-				});
-			},
-
-			/**
-			 * 加载QQ小程序码
-			 */
-			loadQqacode() {
-				Rest.get(Api.JIANGQIE_POST_QQ_ACODE, {
 					post_id: this.post_id
 				}).then(res => {
 					this.acode = res.data;

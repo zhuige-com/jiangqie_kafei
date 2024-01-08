@@ -6,7 +6,7 @@
  * Help document: https://www.zhuige.com/docs/zxfree.html
  * github: https://github.com/zhuige-com/jiangqie_kafei
  * gitee: https://gitee.com/zhuige_com/jiangqie_kafei
- * Copyright ️© 2020-2023 www.zhuige.com All rights reserved.
+ * Copyright ️© 2020-2024 www.zhuige.com All rights reserved.
  */
 
 $content = '欢迎使用酱茄小程序! <br/><br/> 微信客服：jianbing2011 (加开源群、问题咨询、项目定制、购买咨询) <br/><br/> <a href="https://www.zhuige.com/download.html" target="_blank">更多免费产品</a>';

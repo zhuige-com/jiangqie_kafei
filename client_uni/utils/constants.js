@@ -4,10 +4,10 @@
  * 文档：https://www.zhuige.com/docs/zxfree.html
  * github: https://github.com/zhuige-com/jiangqie_kafei
  * gitee: https://gitee.com/zhuige_com/jiangqie_kafei
- * Copyright © 2020-2023 www.zhuige.com All rights reserved.
+ * Copyright © 2020-2024 www.zhuige.com All rights reserved.
  */
 module.exports = {
-	JQ_VERSION: '2.4.7',
+	JQ_VERSION: '2.4.8',
 
 	//分页 每页 数量 需要与服务器一致
 	JQ_PER_PAGE_COUNT: 10,

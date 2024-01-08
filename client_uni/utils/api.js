@@ -4,7 +4,7 @@
  * 文档：https://www.zhuige.com/docs/zxfree.html
  * github: https://github.com/zhuige-com/jiangqie_kafei
  * gitee: https://gitee.com/zhuige_com/jiangqie_kafei
- * Copyright © 2020-2023 www.zhuige.com All rights reserved.
+ * Copyright © 2020-2024 www.zhuige.com All rights reserved.
  */
 
 const Config = require("./config.js");
@@ -103,11 +103,6 @@ module.exports = {
 	 * 获取百度小程序码
 	 */
 	JIANGQIE_POST_BD_ACODE: makeURL('posts', 'bdacode'),
-
-	/**
-	 * 获取QQ小程序码
-	 */
-	JIANGQIE_POST_QQ_ACODE: makeURL('posts', 'qqacode'),
 
 	/**
 	 * 用户登录

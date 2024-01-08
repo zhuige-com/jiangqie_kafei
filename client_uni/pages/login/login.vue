@@ -24,16 +24,6 @@
 					</template>
 					<!-- #endif -->
 
-					<!-- #ifdef MP-QQ -->
-					<button v-if="code" @tap.stop="clickLogin" class="jiangqie-login-btnr">确定</button>
-					<template v-else>
-						<button class="jiangqie-login-btnl">确定</button>
-						<view class="jiangqie-no-login-tip">
-							<view>请在后台配置QQAppid和QQAppSecret</view>
-						</view>
-					</template>
-					<!-- #endif -->
-
 					<!-- #ifdef MP-BAIDU -->
 					<template v-if="is_login_baidu">
 						<button v-if="code" @tap.stop="clickLogin" class="jiangqie-login-btnr">确定</button>
@@ -52,7 +42,7 @@
 					<!-- #ifdef H5 -->
 					<button @tap.stop="clickLoginTest" class="jiangqie-login-btnr">确定</button>
 					<view class="jiangqie-no-login-tip">
-						<view>微信/百度/QQ已接入</view>
+						<view>微信/百度已接入</view>
 						<view>当前平台尚未接入账号体系</view>
 						<view>登录仅为演示</view>
 					</view>
@@ -90,7 +80,7 @@
 	 * 文档：https://www.zhuige.com/docs/zxfree.html
 	 * github: https://github.com/zhuige-com/jiangqie_kafei
 	 * gitee: https://gitee.com/zhuige_com/jiangqie_kafei
-	 * Copyright © 2020-2023 www.zhuige.com All rights reserved.
+	 * Copyright © 2020-2024 www.zhuige.com All rights reserved.
 	 */
 
 	const Util = require("@/utils/util.js");
@@ -134,7 +124,7 @@
 
 			this.title = getApp().globalData.appName;
 
-			// #ifdef MP-WEIXIN || MP-QQ
+			// #ifdef MP-WEIXIN
 			uni.login({
 				success: (res) => {
 					this.code = res.code;
@@ -254,10 +244,6 @@
 				this.login("微信用户", "");
 				// #endif
 
-				// #ifdef MP-QQ
-				this.login("QQ用户", "");
-				// #endif
-
 				// #ifdef MP-BAIDU
 				this.login("百度用户", "");
 				// #endif
@@ -289,10 +275,6 @@
 
 				// #ifdef MP-WEIXIN
 				params.channel = 'weixin';
-				// #endif
-
-				// #ifdef MP-QQ
-				params.channel = 'qq';
 				// #endif
 
 				// #ifdef MP-BAIDU
