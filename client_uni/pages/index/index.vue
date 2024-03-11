@@ -37,8 +37,8 @@
 						class="jiangqie-banner-swiper" :circular="true" previous-margin="15rpx" next-margin="15rpx"
 						@change="handlerSlideChange">
 						<swiper-item v-for="(item, index) in slide" :key="index" class="jiangqie-banner-item"
-							:data-id="item.id" @tap.stop="handlerArticleClick">
-							<image :src="item.thumbnail"
+							:data-id="item.id" @tap.stop="clickSlide(item.link)">
+							<image :src="item.image"
 								:class="'jiangqie-slide-image ' + ((current==index || (current==undefined && index==0))?'':'jiangqie-banner-scale')"
 								mode="aspectFill"></image>
 						</swiper-item>
@@ -318,12 +318,12 @@
 
 				this.logo = logo;
 				this.topNav = this.topNav.concat(res.data.top_nav);
-				this.slide = res.data.slide;
+				this.slide = res.data.home_slide;
 				this.iconNav = res.data.icon_nav;
 				this.actives = res.data.actives;
 				this.hot = res.data.hot;
 				this.listMode = res.data.list_mode;
-				this.background = (res.data.slide && res.data.slide.length > 0 ? res.data.background : '')
+				this.background = (this.slide && this.slide.length > 0 ? res.data.background : '')
 
 				if (res.data.title && res.data.title.length > 0) {
 					getApp().globalData.appName = res.data.title;
@@ -484,6 +484,13 @@
 			 */
 			handlerIconNavClick(e) {
 				let link = e.currentTarget.dataset.link;
+				Util.openLink(link);
+			},
+			
+			/**
+			 * 点击幻灯片
+			 */
+			clickSlide(link) {
 				Util.openLink(link);
 			},
 

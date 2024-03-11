@@ -12,7 +12,7 @@
 
 微信客服：jianbing2011（加微信，进微信群交流）
 
-<img src="https://www.zhuige.com/uploads/20210828/2830bbe86eb2379d2f629dd125c6f9d7.jpg" alt="扫码加微信" width="300" height="300" />
+<img src="https://www.zhuige.com/ad/qrcode.png" alt="扫码加微信/关注公众号" width="600" height="370" />
 
 
 ### 开源版演示

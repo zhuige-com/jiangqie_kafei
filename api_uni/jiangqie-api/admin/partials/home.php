@@ -50,16 +50,49 @@ CSF::createSection($prefix, array(
             'multiple'    => true,
         ),
 
-        array(
-            'id'          => 'top_slide',
-            'type'        => 'select',
+        // array(
+        //     'id'          => 'top_slide',
+        //     'type'        => 'select',
+        //     'title'       => '幻灯片',
+        //     'placeholder' => '请选择文章',
+        //     'chosen'      => true,
+        //     'multiple'    => true,
+        //     'sortable'    => true,
+        //     'ajax'        => true,
+        //     'options'     => 'posts',
+        // ),
+		
+		array(
+            'id'          => 'home_slide',
+            'type'        => 'group',
             'title'       => '幻灯片',
-            'placeholder' => '请选择文章',
-            'chosen'      => true,
-            'multiple'    => true,
-            'sortable'    => true,
-            'ajax'        => true,
-            'options'     => 'posts',
+            'fields' => array(
+                // array(
+                //     'id'          => 'title',
+                //     'type'        => 'text',
+                //     'title'       => '标题',
+                //     'placeholder' => '标题'
+                // ),
+                array(
+                    'id'      => 'image',
+                    'type'    => 'media',
+                    'title'   => '图片',
+                    'library' => 'image',
+                ),
+                array(
+                    'id'       => 'link',
+                    'type'     => 'text',
+                    'title'    => '链接',
+                    'default'  => 'https://www.zhuige.com',
+                    'after' => '<a href="https://www.zhuige.com/bbs/59.html" target="_blank" title="页面路径怎么写？">页面路径</a>或小程序appid'
+                ),
+                array(
+                    'id'    => 'switch',
+                    'type'  => 'switcher',
+                    'title' => '开启/停用',
+                    'default' => '1'
+                ),
+            ),
         ),
 
         array(

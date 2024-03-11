@@ -109,27 +109,40 @@ class JiangQie_API_Setting_Controller extends JiangQie_API_Base_Controller
 
 		$data['top_nav'] = $categories;
 
-		//幻灯片
-		$slide_ids = JiangQie_API::option_value('top_slide');
-		$slides = [];
-		if (!empty($slide_ids)) {
-			$args = [
-				'post__in' => $slide_ids,
-				'orderby' => 'post__in',
-				'posts_per_page' => -1,
-				'ignore_sticky_posts' => 1
-			];
+		// //幻灯片
+		// $slide_ids = JiangQie_API::option_value('top_slide');
+		// $slides = [];
+		// if (!empty($slide_ids)) {
+		// 	$args = [
+		// 		'post__in' => $slide_ids,
+		// 		'orderby' => 'post__in',
+		// 		'posts_per_page' => -1,
+		// 		'ignore_sticky_posts' => 1
+		// 	];
 
-			$query = new WP_Query();
-			$result = $query->query($args);
-			foreach ($result as $item) {
-				$slides[] = [
-					'id' => $item->ID,
-					'thumbnail' => apply_filters('jiangqie_post_thumbnail', $item->ID)
-				];
+		// 	$query = new WP_Query();
+		// 	$result = $query->query($args);
+		// 	foreach ($result as $item) {
+		// 		$slides[] = [
+		// 			'id' => $item->ID,
+		// 			'thumbnail' => apply_filters('jiangqie_post_thumbnail', $item->ID)
+		// 		];
+		// 	}
+		// }
+		// $data['slide'] = $slides;
+
+		//幻灯片
+		$home_slide_org = JiangQie_API::option_value('home_slide');
+		$home_slide = [];
+		if (is_array($home_slide_org)) {
+			foreach ($home_slide_org as &$item) {
+				if ($item && $item['switch']) {
+					$item['image'] = JiangQie_API::option_image_url($item['image']);
+					$home_slide[] = $item;
+				}
 			}
 		}
-		$data['slide'] = $slides;
+		$data['home_slide'] = $home_slide;
 
 		//图标导航
 		$icon_nav_org = JiangQie_API::option_value('home_icon_nav');

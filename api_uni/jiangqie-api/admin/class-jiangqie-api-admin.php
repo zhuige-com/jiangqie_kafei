@@ -102,7 +102,7 @@ class JiangQie_API_Admin
         {
             $data['hide_cat'] = jiangqie_api_sanitize_ids($data['hide_cat'], 'cat');
             $data['home_top_nav'] = jiangqie_api_sanitize_ids($data['home_top_nav'], 'cat');
-            $data['top_slide'] = jiangqie_api_sanitize_ids($data['top_slide'], 'post');
+            //$data['top_slide'] = jiangqie_api_sanitize_ids($data['top_slide'], 'post');
             $data['home_hot'] = jiangqie_api_sanitize_ids($data['home_hot'], 'post');
 
             return $data;
