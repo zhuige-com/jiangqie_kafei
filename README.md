@@ -15,11 +15,14 @@
 <img src="https://www.zhuige.com/ad/qrcode.png" alt="扫码加微信/关注公众号" width="600" height="370" />
 
 
-### 开源版演示
+
+### 开源版演示（演示已下架）
+
+![追格小程序二维码](https://www.zhuige.com/uploads/20210826/caf072cd077242494ebbe7372c022e0b.jpg) 
 
 ![追格小程序二维码](https://www.zhuige.com/uploads/20210903/fd3713efab57e0bb5e686a4c4dad8109.png) 
 
-![追格小程序二维码](https://www.zhuige.com/uploads/20210826/caf072cd077242494ebbe7372c022e0b.jpg) 
+
 
 ### 专业版演示
 
