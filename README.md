@@ -16,7 +16,7 @@
 
 
 
-### 开源版演示（演示已下架）
+### 开源版演示
 
 ![追格小程序二维码](https://www.zhuige.com/uploads/20210826/caf072cd077242494ebbe7372c022e0b.jpg) 
 
