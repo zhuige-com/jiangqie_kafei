@@ -361,10 +361,31 @@
 				var plugin = requirePlugin("wxacommentplugin");
 				plugin.openComment({
 					success: (res) => {
-						console.log('plugin.openComment success', res)
+						// console.log('plugin.openComment success', res)
+						let lastTime = wx.getStorageSync('zhuige_comment_plugin_last_time');
+						if (!lastTime) {
+							lastTime = 0;
+						}
+						
+						let now = new Date().getTime();
+						let legal = ((now - lastTime) > 30 * 86400000);
+						if (legal) {
+							wx.setStorageSync('zhuige_comment_plugin_last_time', now)
+						}
+						
+						uni.showToast({
+							icon: 'none',
+							title: (legal ? '感谢评价' : '您近期已评价过')
+						});
 					},
 					fail: (res) => {
-						console.log('plugin.openComment fail', res)
+						// console.log('plugin.openComment fail', res)
+						if (res.errCode != -3) {
+							uni.showToast({
+								icon: 'none',
+								title: '评价功能暂不可用'
+							});
+						}
 					}
 				})
 			},
