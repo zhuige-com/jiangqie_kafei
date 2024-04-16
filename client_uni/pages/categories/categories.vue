@@ -48,9 +48,9 @@
 
 	export default {
 		components: {
-			
+
 		},
-		
+
 		data() {
 			this.default = {
 				title: '分类标题，请在后台修改',
@@ -213,6 +213,7 @@
 	}
 
 	.sorttext {}
+
 	.sorttitle {
 		overflow: hidden;
 		padding: 20rpx 30rpx 0;

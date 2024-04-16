@@ -151,7 +151,7 @@
 		<view class="jiangqie-nomore">
 			<view @click="clickJiangQie" class="jiangqie-text">本小程序基于追格（zhuige.com）搭建</view>
 		</view>
-		
+
 		<!-- 备案信息 -->
 		<view class="zhuige-recordinfo" v-if="beian_icp" @click="clickLink(beian_icp.link)">
 			<text>
@@ -178,9 +178,9 @@
 
 	export default {
 		components: {
-			
+
 		},
-		
+
 		data() {
 			this.default = {
 				menu: [ //views,likes,favorites,comments,about,feedback,contact,clear,split,link,page
@@ -234,7 +234,7 @@
 				setting: undefined,
 				user: undefined,
 				menu: {},
-				
+
 				beian_icp: undefined,
 			};
 		},
@@ -251,7 +251,7 @@
 					background: res.data.background
 				};
 				this.menu = menu;
-				
+
 				if (res.data.beian_icp) {
 					this.beian_icp = res.data.beian_icp;
 				}
@@ -281,7 +281,7 @@
 				if (!link) {
 					return;
 				}
-				
+
 				uni.navigateTo({
 					url: '/pages/webview/webview?src=' + encodeURIComponent(link),
 					fail: () => {
@@ -291,7 +291,7 @@
 					}
 				});
 			},
-			
+
 			/**
 			 * 点击 登录
 			 */
@@ -342,9 +342,9 @@
 					success: (res) => {
 						if (res.confirm) {
 							uni.clearStorageSync();
-							
+
 							Util.toast('清除完毕');
-							
+
 							uni.reLaunch({
 								url: '/pages/index/index'
 							});
@@ -353,7 +353,7 @@
 
 				});
 			},
-			
+
 			/**
 			 * 点击 评价打分
 			 */
@@ -366,13 +366,13 @@
 						if (!lastTime) {
 							lastTime = 0;
 						}
-						
+
 						let now = new Date().getTime();
 						let legal = ((now - lastTime) > 30 * 86400000);
 						if (legal) {
 							wx.setStorageSync('zhuige_comment_plugin_last_time', now)
 						}
-						
+
 						uni.showToast({
 							icon: 'none',
 							title: (legal ? '感谢评价' : '您近期已评价过')
@@ -582,7 +582,7 @@
 	.jiangqie-text {
 		background-color: #FFF;
 	}
-	
+
 	/* 备案信息 */
 	.zhuige-recordinfo {
 		display: flex;
@@ -594,7 +594,7 @@
 		font-size: 24rpx;
 		font-weight: 400;
 		color: #999999;
-		
+
 		text {
 			padding-bottom: 20rpx;
 		}

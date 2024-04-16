@@ -60,9 +60,9 @@
 
 	export default {
 		components: {
-			
+
 		},
-		
+
 		data() {
 			return {
 				canSearch: false,

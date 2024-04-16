@@ -90,16 +90,16 @@
 
 	export default {
 		components: {
-			
+
 		},
-		
+
 		data() {
 			return {
 				type: 'login',
 
 				background: '',
 				title: '',
-				
+
 				ystk: undefined,
 				yhxy: undefined,
 
@@ -148,7 +148,7 @@
 				if (res.data.ystk) {
 					this.ystk = res.data.ystk;
 				}
-				
+
 				if (res.data.yhxy) {
 					this.yhxy = res.data.yhxy;
 				}
@@ -184,7 +184,7 @@
 			clickAgreeLicense() {
 				this.argeeLicense = !this.argeeLicense;
 			},
-			
+
 			/**
 			 * 点击 隐私条款
 			 */
@@ -195,7 +195,7 @@
 				}
 				Util.openLink('/pages/viewhtml/viewhtml?page_id=' + this.ystk)
 			},
-			
+
 			/**
 			 * 点击 用户协议
 			 */
@@ -309,7 +309,7 @@
 					code: this.code,
 				}).then(res => {
 					Util.toast(res.msg);
-					
+
 					Util.navigateBack();
 				})
 			}

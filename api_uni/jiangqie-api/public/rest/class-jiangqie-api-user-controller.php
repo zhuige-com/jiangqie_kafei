@@ -433,7 +433,7 @@ class JiangQie_API_User_Controller extends JiangQie_API_Base_Controller
 			//	add_post_meta($post_id, 'favorites', 1, true);
 			// }
 		}
-		
+
 		$favorite_count = $wpdb->get_var(
 			$wpdb->prepare("SELECT COUNT(`id`) FROM `$table_post_favorite` WHERE `post_id`=%d", $post_id)
 		);

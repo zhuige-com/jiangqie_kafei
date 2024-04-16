@@ -49,30 +49,12 @@ CSF::createSection($prefix, array(
             'chosen'      => true,
             'multiple'    => true,
         ),
-
-        // array(
-        //     'id'          => 'top_slide',
-        //     'type'        => 'select',
-        //     'title'       => '幻灯片',
-        //     'placeholder' => '请选择文章',
-        //     'chosen'      => true,
-        //     'multiple'    => true,
-        //     'sortable'    => true,
-        //     'ajax'        => true,
-        //     'options'     => 'posts',
-        // ),
 		
 		array(
             'id'          => 'home_slide',
             'type'        => 'group',
             'title'       => '幻灯片',
             'fields' => array(
-                // array(
-                //     'id'          => 'title',
-                //     'type'        => 'text',
-                //     'title'       => '标题',
-                //     'placeholder' => '标题'
-                // ),
                 array(
                     'id'      => 'image',
                     'type'    => 'media',

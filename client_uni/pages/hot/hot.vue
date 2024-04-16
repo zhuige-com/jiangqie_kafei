@@ -96,7 +96,7 @@
 			JiangqieNomore,
 			JiangqieNoData
 		},
-		
+
 		data() {
 			this.default = {
 				background: '',

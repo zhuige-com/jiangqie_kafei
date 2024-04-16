@@ -352,5 +352,4 @@ class JiangQie_API_Setting_Controller extends JiangQie_API_Base_Controller
 
 		return $this->make_success($data);
 	}
-
 }

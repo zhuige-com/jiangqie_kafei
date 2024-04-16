@@ -127,6 +127,6 @@ CSF::createSection($prefix, array(
                 ),
             ),
         ),
-        
+
     )
 ));

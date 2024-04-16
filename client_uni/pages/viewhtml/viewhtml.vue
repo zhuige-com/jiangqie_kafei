@@ -19,9 +19,9 @@
 
 	export default {
 		components: {
-			
+
 		},
-		
+
 		data() {
 			this.page_id = '';
 			this.title = '';

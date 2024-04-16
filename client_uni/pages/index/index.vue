@@ -219,7 +219,7 @@
 				<!--加载loadding-->
 			</template>
 		</view>
-		
+
 		<view v-if="pop_ad" class="zhugie-pop-cover">
 			<view class="" @click="clickPopAd" class="zhuige-pop-box">
 				<image mode="aspectFit" :src="pop_ad.image"></image>
@@ -255,7 +255,7 @@
 			JiangqieNomore,
 			uniNavBar
 		},
-		
+
 		data() {
 			this.bd_title = undefined;
 			this.bd_description = undefined;
@@ -298,7 +298,7 @@
 				scrollLeft: "",
 				current: "",
 				actives: undefined,
-				
+
 				// 弹窗广告
 				pop_ad: undefined,
 
@@ -362,7 +362,7 @@
 					}, 1000 * parseInt(res.data.wx_ad_delay))
 				}
 				// #endif
-				
+
 				// 弹框
 				this.pop_ad = Util.getPopAd(res.data.pop_ad, Constants.ZHUIGE_INDEX_MAXAD_LAST_TIME);
 
@@ -486,7 +486,7 @@
 				let link = e.currentTarget.dataset.link;
 				Util.openLink(link);
 			},
-			
+
 			/**
 			 * 点击幻灯片
 			 */
@@ -551,7 +551,7 @@
 					this.pullUpOn = res.data.length >= Constants.JQ_PER_PAGE_COUNT
 				});
 			},
-			
+
 			/**
 			 * 点击弹出窗口
 			 */
@@ -560,7 +560,7 @@
 				Util.openLink(this.pop_ad.link);
 				this.pop_ad = false;
 			},
-			
+
 			/**
 			 * 关闭弹出窗口
 			 */
@@ -748,7 +748,7 @@
 		left: 0rpx;
 		bottom: 0rpx;
 		text-align: left;
-		background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(55,55,55,0.4));
+		background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(55, 55, 55, 0.4));
 		overflow: hidden;
 		z-index: 9;
 		width: 280rpx;
@@ -966,7 +966,7 @@
 		left: 0rpx;
 		bottom: 0rpx;
 		text-align: left;
-		background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(22,22,22,0.4));
+		background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(22, 22, 22, 0.4));
 		z-index: 9;
 		width: 400rpx;
 		border-radius: 0 0 8rpx 8rpx;
@@ -1063,7 +1063,7 @@
 		border-radius: 8rpx;
 		margin-right: 12rpx;
 	}
-	
+
 	/**
 	 * 弹窗 start
 	 */
@@ -1079,19 +1079,19 @@
 		top: 0;
 		left: 0;
 	}
-	
+
 	.zhuige-pop-box {
 		width: 600rpx;
 		height: 600rpx;
 		position: relative;
 		text-align: center;
 	}
-	
+
 	.zhuige-pop-box image {
 		height: 100%;
 		width: 100%;
 	}
-	
+
 	.zhuige-pop-box view {
 		position: absolute;
 		bottom: -48rpx;
@@ -1101,6 +1101,7 @@
 		left: 50%;
 		margin-left: -24rpx;
 	}
+
 	/**
 	 * 弹窗 end
 	 */

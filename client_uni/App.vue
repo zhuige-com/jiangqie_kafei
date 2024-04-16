@@ -1,6 +1,6 @@
 <script>
 	/*
-	 * 酱茄小程序开源版 v2.4.11
+	 * 酱茄小程序开源版 v2.4.12
 	 * 作者: 追格
 	 * 文档：https://www.zhuige.com/docs/zxfree.html
 	 * github: https://github.com/zhuige-com/jiangqie_kafei
@@ -14,7 +14,7 @@
 	export default {
 		globalData: {
 			appName: '酱茄Free'
-		}, 
+		},
 
 		onLaunch() {
 			const updateManager = wx.getUpdateManager()

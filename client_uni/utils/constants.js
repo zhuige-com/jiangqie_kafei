@@ -7,7 +7,7 @@
  * Copyright © 2020-2024 www.zhuige.com All rights reserved.
  */
 module.exports = {
-	JQ_VERSION: '2.4.11',
+	JQ_VERSION: '2.4.12',
 
 	//分页 每页 数量 需要与服务器一致
 	JQ_PER_PAGE_COUNT: 10,

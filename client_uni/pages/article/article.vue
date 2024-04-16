@@ -216,7 +216,7 @@
 			JiangqieNoData,
 			lPainter
 		},
-		
+
 		data() {
 			this.comment_id = 0;
 
@@ -283,7 +283,7 @@
 			// #ifdef MP-BAIDU || H5
 			this.loadBdacode();
 			// #endif
-			
+
 			uni.$on('linktap', this.onMPHtmlLink);
 		},
 
@@ -333,7 +333,7 @@
 
 			this.comment_submiting = false;
 		},
-		
+
 		onUnload() {
 			uni.$off('linktap', this.onMPHtmlLink);
 		},
@@ -371,7 +371,7 @@
 			onMPHtmlLink(data) {
 				Extend.clickHref(data);
 			},
-			
+
 			//海报分享-百度
 			// #ifdef MP-BAIDU
 			clickPainter() {
@@ -424,13 +424,13 @@
 					return;
 				}
 				// #endif
-				
+
 				uni.showLoading({
 					title: '海报生成中……'
 				});
 
 				this.isShowPainter = true;
-				
+
 				this.base = {
 					width: '750rpx',
 					height: '1334rpx',
@@ -516,7 +516,7 @@
 					urls: [e]
 				});
 				// #endif
-				
+
 				uni.hideLoading();
 			},
 

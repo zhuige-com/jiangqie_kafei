@@ -5,7 +5,7 @@ Donate link: https://www.zhuige.com/
 Tags: 追格,酱茄,小程序
 Requires at least: 5.6
 Tested up to: 6.4
-Stable tag: 2.4.11
+Stable tag: 2.4.12
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -82,6 +82,9 @@ gitee下载（优先更新）：https://gitee.com/zhuige_com/jiangqie_kafei
 
 
 == Changelog ==
+
+== 2.4.12 =
+1. 代码整理
 
 == 2.4.11 =
 1. 优化评价打分功能

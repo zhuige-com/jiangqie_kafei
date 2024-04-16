@@ -41,9 +41,9 @@
 
 	export default {
 		components: {
-			
+
 		},
-		
+
 		data() {
 			return {
 				version: Constant.JQ_VERSION,

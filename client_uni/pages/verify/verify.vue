@@ -35,9 +35,9 @@
 
 	export default {
 		components: {
-			
+
 		},
-		
+
 		data() {
 			return {
 				nickname: '',
